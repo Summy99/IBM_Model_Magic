@@ -59,7 +59,7 @@ public class UI : MonoBehaviour
             }
         }
 
-        slowBar.GetComponent<Image>().fillAmount = player.GetComponent<Typing>().slowDown / 2;
+        slowBar.GetComponent<Image>().fillAmount = player.GetComponent<Typing>().slowDown / 3;
 
         type.SetActive(player.GetComponent<Typing>().mode == "typing");
 

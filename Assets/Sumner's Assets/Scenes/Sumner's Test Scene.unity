@@ -1049,8 +1049,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy1Prefab: {fileID: 8772168944573675394, guid: d7afda0b3e00eed41b9780376a57aed2, type: 3}
+  enemy2Prefab: {fileID: 4668731547465522363, guid: 1270d2d693132ad4491fce2f53ecc4e6, type: 3}
   spawnerHolder: {fileID: 58844657}
-  wave: 1
+  wave: 0
 --- !u!1 &270465884
 GameObject:
   m_ObjectHideFlags: 0
@@ -7217,6 +7218,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: slowDown
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4632542713897860138, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_Name
       value: Player

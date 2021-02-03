@@ -5,12 +5,16 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     private GameController gc;
+    private AudioSource sfx;
+    [SerializeField]
+    private AudioClip death;
 
     public bool shield = false;
 
     void Start()
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        sfx = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -18,13 +22,13 @@ public class PlayerHealth : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && !shield)
+        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && !shield)
         {
             Die();
         }
-        else if((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && shield)
+        else if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && shield)
         {
             Destroy(collision.gameObject);
         }
@@ -33,6 +37,8 @@ public class PlayerHealth : MonoBehaviour
     public void Die()
     {
         gc.lives--;
+
+        sfx.PlayOneShot(death);
 
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 

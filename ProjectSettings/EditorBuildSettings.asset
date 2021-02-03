@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Main Scenes/Title.unity
     guid: 450b58214374b654097128263262b989
   - enabled: 1
-    path: Assets/Sumner's Assets/Scenes/Sumner's Test Scene.unity
-    guid: ca73c37b3dd005f44a22b1c926260864
+    path: Assets/Main Scenes/Main.unity
+    guid: 9913adcfceeccb34593d520dd2ac3894
   m_configObjects: {}

@@ -8,11 +8,14 @@ public class Waves : MonoBehaviour
     private GameObject enemy1Prefab;
 
     [SerializeField]
+    private GameObject enemy2Prefab;
+
+    [SerializeField]
     private GameObject spawnerHolder;
 
     private GameObject[] topSpawns, bottomSpawns, rightSpawns, leftSpawns;
 
-    public int wave = 1;
+    public int wave = 0;
     private bool waveRunning = false;
     private bool waveIncrementing = false;
 
@@ -26,6 +29,11 @@ public class Waves : MonoBehaviour
 
     void Update()
     {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && !waveIncrementing && !waveRunning)
+        {
+            wave++;
+        }
+
         if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0)
         {
             switch (wave)
@@ -41,20 +49,12 @@ public class Waves : MonoBehaviour
                 case 3:
                     StartCoroutine("Wave3");
                     break;
+
+                case 4:
+                    wave = 0;
+                    break;
             }
         }
-
-        if(GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && !waveIncrementing && !waveRunning)
-        {
-            StartCoroutine("IncrementWave");
-        }
-    }
-
-    private void IncrementWave()
-    {
-        waveIncrementing = true;
-        wave++;
-        waveIncrementing = false;
     }
 
     private IEnumerator Wave1()
@@ -66,8 +66,8 @@ public class Waves : MonoBehaviour
             GameObject e1 = Instantiate(enemy1Prefab, topSpawns[2].transform.position, Quaternion.identity);
             GameObject e2 = Instantiate(enemy1Prefab, topSpawns[7].transform.position, Quaternion.identity);
 
-            e1.GetComponent<EnemyController>().wave = wave;
-            e2.GetComponent<EnemyController>().wave = wave;
+            e1.GetComponent<EnemyController>().pattern = 1;
+            e2.GetComponent<EnemyController>().pattern = 1;
 
             yield return new WaitForSeconds(0.5f);
         }
@@ -82,11 +82,11 @@ public class Waves : MonoBehaviour
 
         for (int i = 0; i < 11; i++)
         {
-            GameObject e1 = Instantiate(enemy1Prefab, topSpawns[1].transform.position, Quaternion.identity);
-            GameObject e2 = Instantiate(enemy1Prefab, topSpawns[8].transform.position, Quaternion.identity);
+            GameObject e1 = Instantiate(enemy2Prefab, rightSpawns[5].transform.position, Quaternion.identity);
+            GameObject e2 = Instantiate(enemy2Prefab, leftSpawns[5].transform.position, Quaternion.identity);
 
-            e1.GetComponent<EnemyController>().wave = wave;
-            e2.GetComponent<EnemyController>().wave = wave;
+            e1.GetComponent<EnemyController>().pattern = 2;
+            e2.GetComponent<EnemyController>().pattern = 3;
 
             yield return new WaitForSeconds(0.5f);
         }
@@ -104,8 +104,8 @@ public class Waves : MonoBehaviour
             GameObject e1 = Instantiate(enemy1Prefab, topSpawns[4].transform.position, Quaternion.identity);
             GameObject e2 = Instantiate(enemy1Prefab, topSpawns[5].transform.position, Quaternion.identity);
 
-            e1.GetComponent<EnemyController>().wave = wave;
-            e2.GetComponent<EnemyController>().wave = wave;
+            e1.GetComponent<EnemyController>().pattern = 1;
+            e2.GetComponent<EnemyController>().pattern = 1;
 
             yield return new WaitForSeconds(0.5f);
         }

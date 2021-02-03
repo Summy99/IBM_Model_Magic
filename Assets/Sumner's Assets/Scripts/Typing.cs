@@ -33,6 +33,11 @@ public class Typing : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            slowDown += 1;
+        }
+
         ShootingInput();
 
         if (Input.GetKeyDown(KeyCode.Tab) && mode == "shooting")
@@ -43,6 +48,7 @@ public class Typing : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.Tab) && mode == "typing")
         {
+            word = "";
             mode = "shooting";
         }
 
@@ -74,6 +80,11 @@ public class Typing : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && mode == "typing")
         {
             ConfirmWord();
+        }
+
+        if(slowDown > 3)
+        {
+            slowDown = 3;
         }
     }
 
@@ -442,14 +453,19 @@ public class Typing : MonoBehaviour
 
     private void Erase()
     {
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
 
+        for (int i = 0; i < bullets.Length; i++)
+        {
+            Destroy(bullets[i]);
+        }
     }
 
     private IEnumerator Shield()
     {
         gameObject.transform.Find("Shield").gameObject.SetActive(true);
         gameObject.GetComponent<PlayerHealth>().shield = true;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         gameObject.transform.Find("Shield").gameObject.SetActive(false);
         gameObject.GetComponent<PlayerHealth>().shield = false;
     }
