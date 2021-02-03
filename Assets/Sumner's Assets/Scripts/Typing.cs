@@ -389,11 +389,22 @@ public class Typing : MonoBehaviour
             case "BOOM":
                 Bomb();
                 break;
+
+            case "SHIELD":
+                StartCoroutine("Shield");
+                break;
+
+            case "ERASE":
+                Erase();
+                break;
+
+            case "SLOW":
+                Slow();
+                break;
         }
 
         if (gc.words.ContainsKey(word) && !gc.words[word])
         {
-            sfx.PlayOneShot(wordSuccess);
             gc.words[word] = true;
             ui.AddWord(word);
         }
@@ -401,6 +412,10 @@ public class Typing : MonoBehaviour
         if (!gc.words.ContainsKey(word))
         {
             sfx.PlayOneShot(wordFail);
+        }
+        else
+        {
+            sfx.PlayOneShot(wordSuccess);
         }
 
         mode = "shooting";
@@ -416,6 +431,30 @@ public class Typing : MonoBehaviour
     }
 
     private void Bomb()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            enemies[i].GetComponent<EnemyController>().TakeDamage(10);
+        }
+    }
+
+    private void Erase()
+    {
+
+    }
+
+    private IEnumerator Shield()
+    {
+        gameObject.transform.Find("Shield").gameObject.SetActive(true);
+        gameObject.GetComponent<PlayerHealth>().shield = true;
+        yield return new WaitForSeconds(2);
+        gameObject.transform.Find("Shield").gameObject.SetActive(false);
+        gameObject.GetComponent<PlayerHealth>().shield = false;
+    }
+
+    private void Slow()
     {
 
     }

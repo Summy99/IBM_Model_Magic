@@ -10,10 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 10;
     private float curSpeed = 10;
 
-    private float maxY = 46;
-    private float minY = -44;
-    private float maxX = 17.5f;
-    private float minX = -59.5f;
+    private float maxY = 47.5f;
+    private float minY = -45.5f;
+    private float maxX = 18.5f;
+    private float minX = -61f;
 
     void Start()
     {

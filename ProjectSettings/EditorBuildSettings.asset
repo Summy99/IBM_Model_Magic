@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Main Scenes/Title.unity
+    guid: 450b58214374b654097128263262b989
+  - enabled: 1
+    path: Assets/Sumner's Assets/Scenes/Sumner's Test Scene.unity
+    guid: ca73c37b3dd005f44a22b1c926260864
   m_configObjects: {}
