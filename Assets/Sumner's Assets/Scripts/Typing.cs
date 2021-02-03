@@ -40,19 +40,18 @@ public class Typing : MonoBehaviour
 
         ShootingInput();
 
-        if (Input.GetKeyDown(KeyCode.Tab) && mode == "shooting")
+        if (Input.GetKeyDown(KeyCode.Space) && mode == "shooting")
         {
             sfx.PlayOneShot(enterSlow);
             mode = "typing";
         }
 
-        else if (Input.GetKeyDown(KeyCode.Tab) && mode == "typing")
+        else if (Input.GetKeyDown(KeyCode.Space) && mode == "typing")
         {
-            word = "";
-            mode = "shooting";
+            ConfirmWord();
         }
 
-        if(mode == "typing")
+        if (mode == "typing")
         {
             Time.timeScale = 0.2f;
         }
@@ -75,11 +74,6 @@ public class Typing : MonoBehaviour
         if(curShootCooldown > 0)
         {
             curShootCooldown -= Time.deltaTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && mode == "typing")
-        {
-            ConfirmWord();
         }
 
         if(slowDown > 3)
