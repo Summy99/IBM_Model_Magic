@@ -68,6 +68,7 @@ public class Typing : MonoBehaviour
 
         if(mode == "typing" && slowDown <= 0)
         {
+            word = "";
             mode = "shooting";
         }
 
