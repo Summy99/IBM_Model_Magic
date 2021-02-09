@@ -19,9 +19,11 @@ public class Typing : MonoBehaviour
 
     public float shootCooldown = 0.1f;
     private float curShootCooldown = 0;
+    public float slowRecoveryRate = 0.1f;
 
     public string mode = "shooting";
     public float slowDown = 5;
+    public float maxSlowDown = 3;
     public string word = "";
 
     void Start()
@@ -33,9 +35,9 @@ public class Typing : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        if(slowDown < maxSlowDown && mode == "shooting")
         {
-            slowDown += 1;
+            slowDown += Time.deltaTime * slowRecoveryRate * maxSlowDown;
         }
 
         ShootingInput();
@@ -77,9 +79,9 @@ public class Typing : MonoBehaviour
             curShootCooldown -= Time.deltaTime;
         }
 
-        if(slowDown > 3)
+        if(slowDown > maxSlowDown)
         {
-            slowDown = 3;
+            slowDown = maxSlowDown;
         }
     }
 
@@ -221,165 +223,6 @@ public class Typing : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Z) && gc.letters[25])
             {
                 word += "Z";
-            }
-        }
-
-        if(mode == "shooting")
-        {
-            if (Input.GetKey(KeyCode.A) && curShootCooldown <= 0 && gc.letters[0])
-            {
-                Shoot(0);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.B) && curShootCooldown <= 0 && gc.letters[1])
-            {
-                Shoot(1);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.C) && curShootCooldown <= 0 && gc.letters[2])
-            {
-                Shoot(2);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.D) && curShootCooldown <= 0 && gc.letters[3])
-            {
-                Shoot(3);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.E) && curShootCooldown <= 0 && gc.letters[4])
-            {
-                Shoot(4);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.F) && curShootCooldown <= 0 && gc.letters[5])
-            {
-                Shoot(5);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.G) && curShootCooldown <= 0 && gc.letters[6])
-            {
-                Shoot(6);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.H) && curShootCooldown <= 0 && gc.letters[7])
-            {
-                Shoot(7);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.I) && curShootCooldown <= 0 && gc.letters[8])
-            {
-                Shoot(8);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.J) && curShootCooldown <= 0 && gc.letters[9])
-            {
-                Shoot(9);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.K) && curShootCooldown <= 0 && gc.letters[10])
-            {
-                Shoot(10);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.L) && curShootCooldown <= 0 && gc.letters[11])
-            {
-                Shoot(11);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.M) && curShootCooldown <= 0 && gc.letters[12])
-            {
-                Shoot(12);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.N) && curShootCooldown <= 0 && gc.letters[13])
-            {
-                Shoot(13);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.O) && curShootCooldown <= 0 && gc.letters[14])
-            {
-                Shoot(14);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.P) && curShootCooldown <= 0 && gc.letters[15])
-            {
-                Shoot(15);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.Q) && curShootCooldown <= 0 && gc.letters[16])
-            {
-                Shoot(16);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.R) && curShootCooldown <= 0 && gc.letters[17])
-            {
-                Shoot(17);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.S) && curShootCooldown <= 0 && gc.letters[18])
-            {
-                Shoot(18);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.T) && curShootCooldown <= 0 && gc.letters[19])
-            {
-                Shoot(19);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.U) && curShootCooldown <= 0 && gc.letters[20])
-            {
-                Shoot(20);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.V) && curShootCooldown <= 0 && gc.letters[21])
-            {
-                Shoot(21);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.W) && curShootCooldown <= 0 && gc.letters[22])
-            {
-                Shoot(22);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.X) && curShootCooldown <= 0 && gc.letters[23])
-            {
-                Shoot(23);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.Y) && curShootCooldown <= 0 && gc.letters[24])
-            {
-                Shoot(24);
-                curShootCooldown = shootCooldown;
-            }
-
-            if (Input.GetKey(KeyCode.Z) && curShootCooldown <= 0 && gc.letters[25])
-            {
-                Shoot(25);
-                curShootCooldown = shootCooldown;
             }
         }
     }

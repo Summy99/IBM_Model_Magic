@@ -1002,7 +1002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 6
-  letters: 0101000101000001010000010100010000010100000001000000
+  letters: 0101010101010101010101010101010101010101010101010101
 --- !u!4 &257336643
 Transform:
   m_ObjectHideFlags: 0
@@ -7220,7 +7220,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: slowDown
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: slowRecoveryRate
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: maxSlowDown
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4588334743085117519, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_Volume

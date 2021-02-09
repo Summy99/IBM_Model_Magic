@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     private AudioClip death;
     public float health = 3;
 
+    public int shooting = 0;
     public int pattern = 0;
     public float lifetime = 0;
     public float timeToShoot = 0;
@@ -20,6 +21,8 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        shooting = Mathf.FloorToInt(Random.Range(0, 2));
+
         timeToShoot = Random.Range(2, 4);
         sfx = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -34,7 +37,7 @@ public class EnemyController : MonoBehaviour
 
         lifetime += Time.deltaTime;
 
-        if(type == 2 && lifetime >= timeToShoot && !initialized)
+        if(type == 2 && lifetime >= timeToShoot && !initialized && shooting == 1)
         {
             initialized = true;
             gameObject.GetComponent<BulletSourceScript>().Initialize();
