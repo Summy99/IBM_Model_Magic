@@ -20,7 +20,12 @@
             <direction type="aim">0</direction>
             <term>30</term>
           </changeDirection>
-          <wait>30</wait>
+          <wait>20</wait>
+        <changeDirection>
+          <direction type="absolute">180</direction>
+          <term>30</term>
+        </changeDirection>
+          <wait>20</wait>
         </action>
       </repeat>
     </action>

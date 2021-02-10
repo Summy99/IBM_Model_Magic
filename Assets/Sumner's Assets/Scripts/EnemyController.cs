@@ -86,6 +86,15 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerShot"))
+        {
+            TakeDamage(collision.gameObject.GetComponent<LetterController>().damage);
+            Destroy(collision.gameObject);
+        }
+    }
+
     //private IEnumerator TurnUp()
     //{
 

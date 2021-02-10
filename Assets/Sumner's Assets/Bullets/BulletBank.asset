@@ -16,5 +16,10 @@ MonoBehaviour:
   - name: default
     prefab: {fileID: 1294520606847368362, guid: 3f432fb5aaa91734694b684ad19c877d, type: 3}
     sprite: {fileID: 21300000, guid: 07ac88dd91882224082674c3dc9193cc, type: 3}
+    TimeToLiveInSeconds: 10
+    DestroyWhenOutOfScreen: 1
+  - name: PlayerShot
+    prefab: {fileID: 7961246904097527017, guid: 2196dc6d2f140214b87dadc94cdbe339, type: 3}
+    sprite: {fileID: 0}
     TimeToLiveInSeconds: 4
     DestroyWhenOutOfScreen: 1

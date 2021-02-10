@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pixelnest.BulletML;
 
 public class Typing : MonoBehaviour
 {
+    [SerializeField]
+    private TextAsset[] patterns;
+
+    private BulletSourceScript bml;
     private GameController gc;
     private AudioSource sfx;
     private UI ui;
@@ -15,11 +20,12 @@ public class Typing : MonoBehaviour
     private GameObject letterPrefab;
 
     [SerializeField]
-    private Sprite[] letterSprites;
+    public Sprite[] letterSprites;
 
     public float shootCooldown = 0.1f;
     private float curShootCooldown = 0;
     public float slowRecoveryRate = 0.1f;
+    private bool patternRunning = false;
 
     public string mode = "shooting";
     public float slowDown = 5;
@@ -30,11 +36,17 @@ public class Typing : MonoBehaviour
     {
         gc = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         ui = GameObject.FindWithTag("GameController").GetComponent<UI>();
+        bml = gameObject.GetComponent<BulletSourceScript>();
         sfx = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
     {
+        if (bml.IsEnded)
+        {
+            patternRunning = false;
+        }
+
         if(slowDown < maxSlowDown && mode == "shooting")
         {
             slowDown += Time.deltaTime * slowRecoveryRate * maxSlowDown;
@@ -42,13 +54,13 @@ public class Typing : MonoBehaviour
 
         ShootingInput();
 
-        if (Input.GetKeyDown(KeyCode.Space) && mode == "shooting")
+        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && mode == "shooting")
         {
             sfx.PlayOneShot(enterSlow);
             mode = "typing";
         }
 
-        else if (Input.GetKeyDown(KeyCode.Space) && mode == "typing")
+        else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && mode == "typing")
         {
             ConfirmWord();
         }
@@ -231,6 +243,110 @@ public class Typing : MonoBehaviour
     {
         switch (word)
         {
+            case "A":
+                Shoot(0);
+                break;
+
+            case "B":
+                Shoot(1);
+                break;
+
+            case "C":
+                Shoot(2);
+                break;
+
+            case "D":
+                Shoot(3);
+                break;
+
+            case "E":
+                Shoot(4);
+                break;
+
+            case "F":
+                Shoot(5);
+                break;
+
+            case "G":
+                Shoot(6);
+                break;
+
+            case "H":
+                Shoot(7);
+                break;
+
+            case "I":
+                Shoot(8);
+                break;
+
+            case "J":
+                Shoot(9);
+                break;
+
+            case "K":
+                Shoot(10);
+                break;
+
+            case "L":
+                Shoot(11);
+                break;
+
+            case "M":
+                Shoot(12);
+                break;
+
+            case "N":
+                Shoot(13);
+                break;
+
+            case "O":
+                Shoot(14);
+                break;
+
+            case "P":
+                Shoot(15);
+                break;
+
+            case "Q":
+                Shoot(16);
+                break;
+
+            case "R":
+                Shoot(17);
+                break;
+
+            case "S":
+                Shoot(18);
+                break;
+
+            case "T":
+                Shoot(19);
+                break;
+
+            case "U":
+                Shoot(20);
+                break;
+
+            case "V":
+                Shoot(21);
+                break;
+
+            case "W":
+                Shoot(22);
+                break;
+
+            case "X":
+                Shoot(23);
+                break;
+
+            case "Y":
+                Shoot(24);
+                break;
+
+            case "Z":
+                Shoot(25);
+                break;
+
             case "BOMB":
                 Bomb();
                 break;
@@ -249,6 +365,13 @@ public class Typing : MonoBehaviour
 
             case "SLOW":
                 Slow();
+                break;
+
+            case "AUTO":
+                if (!patternRunning)
+                {
+                    AutoFire();
+                }
                 break;
         }
 
@@ -311,5 +434,12 @@ public class Typing : MonoBehaviour
     private void Slow()
     {
 
+    }
+
+    private void AutoFire()
+    {
+        patternRunning = true;
+        bml.xmlFile = patterns[0];
+        bml.Initialize();
     }
 }
