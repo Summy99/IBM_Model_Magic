@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+  <action label="top">
+    <repeat>
+      <times>3</times>
+      <action>
+        <repeat>
+          <times>11</times>
+          <action>
+            <fire>
+              <direction type="sequence">18</direction>
+              <speed>2</speed>
+              <bulletRef label="PlayerShot" />
+            </fire>
+          </action>
+        </repeat>
+        <wait>20</wait>
+      </action>
+    </repeat>  
+  </action>
+
+  <bullet label="PlayerShot">
+    <direction type="absolute">90</direction>
+  </bullet>
+  
+</bulletml>

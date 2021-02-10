@@ -42,6 +42,21 @@ public class Typing : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            maxSlowDown -= 0.5f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            maxSlowDown += 0.5f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            slowDown += 0.1f * maxSlowDown;
+        }
+
         if (bml.IsEnded)
         {
             patternRunning = false;
@@ -373,6 +388,13 @@ public class Typing : MonoBehaviour
                     AutoFire();
                 }
                 break;
+
+            case "SPREAD":
+                if (!patternRunning)
+                {
+                    SpreadShot();
+                }
+                break;
         }
 
         if (gc.words.ContainsKey(word) && !gc.words[word])
@@ -440,6 +462,13 @@ public class Typing : MonoBehaviour
     {
         patternRunning = true;
         bml.xmlFile = patterns[0];
+        bml.Initialize();
+    }
+
+    private void SpreadShot()
+    {
+        patternRunning = true;
+        bml.xmlFile = patterns[1];
         bml.Initialize();
     }
 }

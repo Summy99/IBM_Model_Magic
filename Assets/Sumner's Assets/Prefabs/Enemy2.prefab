@@ -177,7 +177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   death: {fileID: 8300000, guid: 21ec77cfbadd5774aa91405f8a64b682, type: 3}
+  slowCollectible: {fileID: 125156313247077267, guid: 427b431d75eac9046ad54d22bb59d4ed, type: 3}
   health: 3
+  shooting: 0
   pattern: 0
   lifetime: 0
   timeToShoot: 0

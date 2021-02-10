@@ -64,9 +64,9 @@ public class PlayerHealth : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
         }
 
         gameObject.GetComponent<SpriteRenderer>().enabled = true;

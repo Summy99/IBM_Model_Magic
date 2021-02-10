@@ -22,7 +22,8 @@ public class GameController : MonoBehaviour
         words.Add("ERASE", true);
         words.Add("SLOW", true);
         words.Add("BOOM", false);
-        words.Add("AUTO", false);
+        words.Add("AUTO", true);
+        words.Add("SPREAD", true);
     }
 
     void Update()

@@ -34,7 +34,7 @@ public class UI : MonoBehaviour
     [SerializeField]
     private GameObject type;
 
-    private int column = 2;
+    private int column = 3;
 
     void Start()
     {

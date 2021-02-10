@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class LetterController : MonoBehaviour
 {
-    private GameObject player;
+    private Rigidbody2D rb;
 
-    public float damage = 3;
+    public int damage = 3;
+
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        rb = gameObject.GetComponent<Rigidbody2D>();
 
-        gameObject.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Typing>().letterSprites[Mathf.FloorToInt(Random.Range(0, player.GetComponent<Typing>().letterSprites.Length))];
+        rb.velocity = Vector2.up * 50;
     }
 
+    
     void Update()
     {
-
+        
     }
 }

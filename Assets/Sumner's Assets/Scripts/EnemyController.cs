@@ -9,6 +9,10 @@ public class EnemyController : MonoBehaviour
     private AudioSource sfx;
     [SerializeField]
     private AudioClip death;
+
+    [SerializeField]
+    private GameObject slowCollectible;
+
     public float health = 3;
 
     public int shooting = 0;
@@ -90,6 +94,12 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerShot"))
         {
+            TakeDamage(collision.gameObject.GetComponent<ShotController>().damage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Letter"))
+        {
             TakeDamage(collision.gameObject.GetComponent<LetterController>().damage);
             Destroy(collision.gameObject);
         }
@@ -106,6 +116,7 @@ public class EnemyController : MonoBehaviour
 
         if(health <= 0)
         {
+            Instantiate(slowCollectible, transform.position, Quaternion.identity);
             sfx.PlayOneShot(death, 0.5f);
             Destroy(gameObject);
         }
