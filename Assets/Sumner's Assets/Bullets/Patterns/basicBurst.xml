@@ -4,31 +4,21 @@
 <bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
 
   <action label="top">
-    <fire>
-      <direction type="absolute">180</direction>
-      <speed>1</speed>
-      <bulletRef label="default" />
-    </fire>
+   <repeat>
+    <times>3</times>
+     <action>
+      <fire>
+       <direction type="sequence">15</direction>
+       <speed>1</speed>
+       <bulletRef label="default" />
+      </fire>
+     </action>
+    </repeat>
+    <wait>40</wait>
   </action>
 
   <bullet label="default">
-    <action>
-      <repeat>
-        <times>99</times>
-        <action>
-          <changeDirection>
-            <direction type="absolute">0</direction>
-            <term>30</term>
-          </changeDirection>
-          <wait>20</wait>
-        <changeDirection>
-          <direction type="absolute">180</direction>
-          <term>30</term>
-        </changeDirection>
-          <wait>20</wait>
-        </action>
-      </repeat>
-    </action>
+    <direction type="aim">-15</direction>
   </bullet>
 
 </bulletml>

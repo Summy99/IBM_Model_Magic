@@ -11,6 +11,9 @@ public class EnemyController : MonoBehaviour
     private AudioClip death;
 
     [SerializeField]
+    private TextAsset[] bulletmlScripts;
+
+    [SerializeField]
     private GameObject slowCollectible;
 
     [SerializeField]
@@ -31,6 +34,7 @@ public class EnemyController : MonoBehaviour
         shooting = Mathf.FloorToInt(Random.Range(0, 2));
 
         timeToShoot = Random.Range(2, 4);
+        lifetime = 0;
         sfx = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
@@ -47,6 +51,7 @@ public class EnemyController : MonoBehaviour
         if(type == 2 && lifetime >= timeToShoot && !initialized && shooting == 1)
         {
             initialized = true;
+            gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[1];
             gameObject.GetComponent<BulletSourceScript>().Initialize();
         }
     }
