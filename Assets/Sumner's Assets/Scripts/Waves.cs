@@ -15,12 +15,16 @@ public class Waves : MonoBehaviour
 
     private GameObject[] topSpawns, bottomSpawns, rightSpawns, leftSpawns;
 
+    private GameController gc;
+
     public int wave = 0;
     private bool waveRunning = false;
     private bool waveIncrementing = false;
 
     void Start()
     {
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
         topSpawns = GetAllChildren(spawnerHolder.transform.Find("Top"));
         rightSpawns = GetAllChildren(spawnerHolder.transform.Find("Right"));
         bottomSpawns = GetAllChildren(spawnerHolder.transform.Find("Bottom"));
@@ -29,7 +33,7 @@ public class Waves : MonoBehaviour
 
     void Update()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && !waveIncrementing && !waveRunning)
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && !waveIncrementing && !waveRunning && !gc.tutorial)
         {
             wave++;
         }

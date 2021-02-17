@@ -6,7 +6,7 @@ using Pixelnest.BulletML;
 public class Typing : MonoBehaviour
 {
     [SerializeField]
-    private TextAsset[] patterns;
+    public TextAsset[] patterns;
 
     private BulletSourceScript bml;
     private GameController gc;
@@ -57,9 +57,36 @@ public class Typing : MonoBehaviour
             slowDown += 0.1f * maxSlowDown;
         }
 
-        if (bml.IsEnded)
+        if (gc.tutorial)
         {
-            patternRunning = false;
+            if(gc.tutorialStage == 2 && slowDown <= 0)
+            {
+                slowDown = maxSlowDown;
+            }
+
+            if(gc.tutorialStage == 2 && word == "AUTO")
+            {
+                gc.tutorialStage = 3;
+            }
+        }
+
+        if (!gc.tutorial)
+        {
+            if (bml.IsEnded)
+            {
+                patternRunning = false;
+            }
+
+            if (slowDown > maxSlowDown)
+            {
+                slowDown = maxSlowDown;
+            }
+
+            if (mode == "typing" && slowDown <= 0)
+            {
+                word = "";
+                mode = "shooting";
+            }
         }
 
         if(slowDown < maxSlowDown && mode == "shooting")
@@ -95,20 +122,9 @@ public class Typing : MonoBehaviour
             slowDown -= Time.unscaledDeltaTime;
         }
 
-        if(mode == "typing" && slowDown <= 0)
-        {
-            word = "";
-            mode = "shooting";
-        }
-
         if(curShootCooldown > 0)
         {
             curShootCooldown -= Time.deltaTime;
-        }
-
-        if(slowDown > maxSlowDown)
-        {
-            slowDown = maxSlowDown;
         }
     }
 
@@ -256,6 +272,18 @@ public class Typing : MonoBehaviour
 
     private void ConfirmWord()
     {
+        if (gc.tutorial && gc.tutorialStage == 3)
+        {
+            if(word == "AUTO")
+            {
+                gc.tutorialStage = 4;
+            }
+            else
+            {
+                return;
+            }
+        }
+
         switch (word)
         {
             case "A":
@@ -383,14 +411,14 @@ public class Typing : MonoBehaviour
                 break;
 
             case "AUTO":
-                if (!patternRunning)
+                if (true)
                 {
                     AutoFire();
                 }
                 break;
 
             case "SPREAD":
-                if (!patternRunning)
+                if (true)
                 {
                     SpreadShot();
                 }
@@ -461,14 +489,14 @@ public class Typing : MonoBehaviour
     private void AutoFire()
     {
         patternRunning = true;
-        bml.xmlFile = patterns[0];
+        bml.xmlFile = patterns[1];
         bml.Initialize();
     }
 
     private void SpreadShot()
     {
         patternRunning = true;
-        bml.xmlFile = patterns[1];
+        bml.xmlFile = patterns[2];
         bml.Initialize();
     }
 }

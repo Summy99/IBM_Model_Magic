@@ -13,6 +13,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private GameObject slowCollectible;
 
+    [SerializeField]
+    private GameObject keycapCollectible;
+
     public float health = 3;
 
     public int shooting = 0;
@@ -112,11 +115,54 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        GameObject col;
+
         health -= damage;
 
         if(health <= 0)
         {
-            Instantiate(slowCollectible, transform.position, Quaternion.identity);
+            int pickup = Mathf.FloorToInt(Random.Range(0, 10));
+
+            switch (pickup)
+            {
+                case 0:
+                    break;
+
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    break;
+
+                case 4:
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    break;
+
+                case 5:
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    break;
+
+                case 6:
+                    Instantiate(slowCollectible, transform.position, Quaternion.identity);
+                    break;
+
+                case 7:
+                    Instantiate(slowCollectible, transform.position, Quaternion.identity);
+                    break;
+
+                case 8:
+                    Instantiate(slowCollectible, transform.position, Quaternion.identity);
+                    break;
+
+                case 9:
+                    Instantiate(slowCollectible, transform.position, Quaternion.identity);
+                    break;
+            }
+            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
             sfx.PlayOneShot(death, 0.5f);
             Destroy(gameObject);
         }

@@ -6,6 +6,8 @@ public class Collectibles : MonoBehaviour
 {
     private Rigidbody2D rb;
 
+    public string type = "slow";
+
     void Start()
     {
         float x = 0;
@@ -31,9 +33,15 @@ public class Collectibles : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && type == "slow")
         {
             collision.gameObject.GetComponent<Typing>().slowDown += 0.1f * collision.gameObject.GetComponent<Typing>().maxSlowDown;
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Player") && type == "keycap")
+        {
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().keycaps++;
             Destroy(gameObject);
         }
     }

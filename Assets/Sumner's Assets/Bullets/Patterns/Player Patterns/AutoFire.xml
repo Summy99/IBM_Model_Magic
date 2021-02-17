@@ -5,7 +5,7 @@
 
   <action label="top">
     <repeat>
-      <times>20</times>
+      <times>999</times>
       <action>
         <fire>
           <direction type="absolute">180</direction>

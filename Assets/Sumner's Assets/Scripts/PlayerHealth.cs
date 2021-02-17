@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pixelnest.BulletML;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class PlayerHealth : MonoBehaviour
     private AudioClip death;
 
     public bool shield = false;
+    private BulletSourceScript bml;
 
     void Start()
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         sfx = gameObject.GetComponent<AudioSource>();
+        bml = gameObject.GetComponent<BulletSourceScript>();
     }
 
     void Update()
@@ -39,6 +42,8 @@ public class PlayerHealth : MonoBehaviour
         gc.lives--;
 
         sfx.PlayOneShot(death);
+
+        bml.xmlFile = gameObject.GetComponent<Typing>().patterns[0];
 
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
