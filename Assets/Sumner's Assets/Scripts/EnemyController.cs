@@ -97,9 +97,33 @@ public class EnemyController : MonoBehaviour
                 break;
 
             case 4:
+                if(transform.position.x > -15)
+                {
+                    transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 45));
+                    rb.velocity = -(transform.right * moveSpeed);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.identity;
+
+                    rb.velocity = transform.up * moveSpeed;
+                }
+
                 break;
 
             case 5:
+                if (transform.position.x < -25)
+                {
+                    transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, -45));
+                    rb.velocity = (transform.right * moveSpeed);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.identity;
+
+                    rb.velocity = transform.up * moveSpeed;
+                }
+
                 break;
         }
     }

@@ -107,7 +107,7 @@ public class Waves : MonoBehaviour
         {
             GameObject e1 = Instantiate(enemy1Prefab, rightSpawns[3].transform.position, Quaternion.identity);
             GameObject e2 = Instantiate(enemy1Prefab, leftSpawns[3].transform.position, Quaternion.identity);
-            GameObject e3 = Instantiate(enemy2Prefab, topSpawns[6].transform.position, Quaternion.identity);
+            GameObject e3 = Instantiate(enemy2Prefab, topSpawns[10].transform.position, Quaternion.identity);
 
             e1.GetComponent<EnemyController>().pattern = 4;
             e2.GetComponent<EnemyController>().pattern = 5;
