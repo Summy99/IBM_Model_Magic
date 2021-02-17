@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308204042548456039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.2, y: 6.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 308204043209223943}
@@ -187,6 +187,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   death: {fileID: 8300000, guid: 21ec77cfbadd5774aa91405f8a64b682, type: 3}
+  bulletmlScripts:
+  - {fileID: 4900000, guid: 475f9161d0a7b684d976c7b284eec808, type: 3}
+  - {fileID: 4900000, guid: 0cd04cab02f5eee47935eaa7080ca97f, type: 3}
+  - {fileID: 4900000, guid: 443cb7c32763d374a8b7f8423ce47f5b, type: 3}
   slowCollectible: {fileID: 125156313247077267, guid: 427b431d75eac9046ad54d22bb59d4ed, type: 3}
   keycapCollectible: {fileID: 6826599825272669511, guid: 8d0cbadd924bf1f4aa572378f3922316, type: 3}
   health: 27
@@ -209,4 +213,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f4a59f56c098143a5b03310876907d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xmlFile: {fileID: 0}
+  xmlFile: {fileID: 4900000, guid: 475f9161d0a7b684d976c7b284eec808, type: 3}

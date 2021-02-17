@@ -105,11 +105,13 @@ public class Waves : MonoBehaviour
 
         for (int i = 0; i < 11; i++)
         {
-            GameObject e1 = Instantiate(enemy1Prefab, topSpawns[4].transform.position, Quaternion.identity);
-            GameObject e2 = Instantiate(enemy1Prefab, topSpawns[5].transform.position, Quaternion.identity);
+            GameObject e1 = Instantiate(enemy1Prefab, rightSpawns[3].transform.position, Quaternion.identity);
+            GameObject e2 = Instantiate(enemy1Prefab, leftSpawns[3].transform.position, Quaternion.identity);
+            GameObject e3 = Instantiate(enemy2Prefab, topSpawns[6].transform.position, Quaternion.identity);
 
-            e1.GetComponent<EnemyController>().pattern = 1;
-            e2.GetComponent<EnemyController>().pattern = 1;
+            e1.GetComponent<EnemyController>().pattern = 4;
+            e2.GetComponent<EnemyController>().pattern = 5;
+            e3.GetComponent<EnemyController>().pattern = 1;
 
             yield return new WaitForSeconds(0.5f);
         }
