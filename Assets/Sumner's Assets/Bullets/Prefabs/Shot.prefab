@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5439061845938284148}
   - component: {fileID: 891030854939336890}
   - component: {fileID: 5560528611603687788}
+  - component: {fileID: -54922977411259826}
   m_Layer: 0
   m_Name: Shot
   m_TagString: PlayerShot
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8a6b7de8953d3184cb2359a4cba16e3f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: efb67e5223663e24e95d0090b0f7fe44, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,7 +115,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.1875, y: 3.3753877}
+    oldSize: {x: 6, y: 6}
     newSize: {x: 3.1875, y: 3.3753877}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -123,3 +124,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2.5}
   m_EdgeRadius: 0
+--- !u!114 &-54922977411259826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961246904097527017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad38c2831182c1349969e43bec357fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoRotation: 0
+  autoRotationAngleBonus: 0

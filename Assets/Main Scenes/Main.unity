@@ -1659,7 +1659,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2137f5df47dfc124c9345cd23c93f173, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b745be583c194794d874234516a43c4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8706,22 +8706,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: patterns.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: patterns.Array.data[1]
-      value: 
-      objectReference: {fileID: 4900000, guid: d6aba05caba08af4a97ef4bf94867fa8, type: 3}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: patterns.Array.data[2]
-      value: 
-      objectReference: {fileID: 4900000, guid: 08b2bc15a10356a45801d751c4cd7716, type: 3}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: patterns.Array.data[0]
-      value: 
-      objectReference: {fileID: 4900000, guid: 475f9161d0a7b684d976c7b284eec808, type: 3}
     - target: {fileID: 4632542713897860138, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_Name
       value: Player
@@ -8770,10 +8754,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6129938679178597477, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: xmlFile
-      value: 
-      objectReference: {fileID: 4900000, guid: 475f9161d0a7b684d976c7b284eec808, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95875ed250946544bb5769cbf2194101, type: 3}
 --- !u!1 &884545956710923144 stripped
