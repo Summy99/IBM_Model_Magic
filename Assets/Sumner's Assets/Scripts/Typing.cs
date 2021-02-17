@@ -406,8 +406,8 @@ public class Typing : MonoBehaviour
                 Erase();
                 break;
 
-            case "SLOW":
-                Slow();
+            case "CLEAR":
+                Erase();
                 break;
 
             case "AUTO":
@@ -479,11 +479,6 @@ public class Typing : MonoBehaviour
         yield return new WaitForSeconds(3);
         gameObject.transform.Find("Shield").gameObject.SetActive(false);
         gameObject.GetComponent<PlayerHealth>().shield = false;
-    }
-
-    private void Slow()
-    {
-
     }
 
     private void AutoFire()

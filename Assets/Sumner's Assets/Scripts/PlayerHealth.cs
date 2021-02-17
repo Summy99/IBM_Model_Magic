@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     private GameController gc;
     private AudioSource sfx;
+    private UI ui;
     [SerializeField]
     private AudioClip death;
 
@@ -18,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         sfx = gameObject.GetComponent<AudioSource>();
         bml = gameObject.GetComponent<BulletSourceScript>();
+        ui = GameObject.FindGameObjectWithTag("GameController").GetComponent<UI>();
     }
 
     void Update()
@@ -34,6 +36,45 @@ public class PlayerHealth : MonoBehaviour
         else if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && shield)
         {
             Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.name == "SlowBarUpgrade" && gc.keycaps >= 25)
+        {
+            collision.gameObject.SetActive(false);
+            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPrice").gameObject.SetActive(false);
+            gc.keycaps -= 25;
+            gameObject.GetComponent<Typing>().maxSlowDown += 2;
+        }
+
+        if (collision.gameObject.name == "Heal" && gc.keycaps >= 15 && gc.lives < 6)
+        {
+            collision.gameObject.SetActive(false);
+            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("HealPrice").gameObject.SetActive(false);
+            gc.keycaps -= 15;
+            gc.lives++;
+        }
+
+        if (collision.gameObject.name == "NewWord" && gc.keycaps >= 40)
+        {
+            collision.gameObject.SetActive(false);
+            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("WordPrice").gameObject.SetActive(false);
+            gc.keycaps -= 40;
+
+            string[] words = new string[gc.words.Count];
+            gc.words.Keys.CopyTo(words, 0);
+
+            string wordToUnlock = "AUTO";
+
+            while (gc.words[wordToUnlock])
+            {
+                wordToUnlock = words[Mathf.FloorToInt(Random.Range(0, words.Length))];
+            }
+
+            if (!gc.words[wordToUnlock])
+            {
+                gc.words[wordToUnlock] = true;
+                ui.AddWord(wordToUnlock);
+            }
         }
     }
 

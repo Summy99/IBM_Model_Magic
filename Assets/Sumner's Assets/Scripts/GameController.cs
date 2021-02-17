@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
         words.Add("BOMB", false);
         words.Add("SHIELD", false);
         words.Add("ERASE", false);
-        words.Add("SLOW", false);
+        words.Add("CLEAR", false);
         words.Add("BOOM", false);
         words.Add("AUTO", false);
         words.Add("SPREAD", false);
@@ -43,6 +43,11 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        if(lives > 6)
+        {
+            lives = 6;
+        }
+
         if(tutorial)
         {
             if(tutorialStage == 0)

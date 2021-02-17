@@ -125,6 +125,14 @@ public class EnemyController : MonoBehaviour
                 }
 
                 break;
+
+            case 6:
+                rb.velocity = transform.right * moveSpeed;
+                break;
+
+            case 7:
+                rb.velocity = -(transform.right * moveSpeed);
+                break;
         }
     }
 

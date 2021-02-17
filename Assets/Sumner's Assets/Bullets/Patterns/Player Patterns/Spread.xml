@@ -5,7 +5,7 @@
 
   <action label="top">
     <repeat>
-      <times>3</times>
+      <times>9</times>
       <action>
         <repeat>
           <times>11</times>
