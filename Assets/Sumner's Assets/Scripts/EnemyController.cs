@@ -54,6 +54,13 @@ public class EnemyController : MonoBehaviour
             gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[1];
             gameObject.GetComponent<BulletSourceScript>().Initialize();
         }
+
+        if (type == 3 && lifetime >= 2 && !initialized)
+        {
+            initialized = true;
+            gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[2];
+            gameObject.GetComponent<BulletSourceScript>().Initialize();
+        }
     }
 
     void FixedUpdate()
@@ -132,6 +139,38 @@ public class EnemyController : MonoBehaviour
 
             case 7:
                 rb.velocity = -(transform.right * moveSpeed);
+                break;
+
+            case 8:
+                if (lifetime < 2)
+                {
+                    rb.velocity = -(transform.up * moveSpeed);
+                }
+
+                if(lifetime >= 2 && lifetime <= 10)
+                {
+                    rb.velocity = Vector2.zero;
+                }
+
+                if(lifetime > 10)
+                {
+                    rb.velocity = transform.up * moveSpeed;
+                }
+
+                break;
+
+            case 9:
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 45));
+                rb.velocity = -(transform.right * moveSpeed);
+                break;
+
+            case 10:
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, -45));
+                rb.velocity = (transform.right * moveSpeed);
+                break;
+
+            case 11:
+                rb.velocity = -(transform.up * moveSpeed * 2);
                 break;
         }
     }

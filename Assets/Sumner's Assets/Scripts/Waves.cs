@@ -24,6 +24,7 @@ public class Waves : MonoBehaviour
     public int wave = 0;
     public bool shop = false;
     private bool waveRunning = false;
+    private bool wave7PartTwoStarted = false;
     private bool waveIncrementing = false;
 
     void Start()
@@ -78,6 +79,18 @@ public class Waves : MonoBehaviour
                     break;
 
                 case 7:
+                    StartCoroutine("Wave7");
+                    break;
+
+                case 8:
+                    StartCoroutine("Wave8");
+                    break;
+
+                case 9:
+                    StartCoroutine("Wave9");
+                    break;
+
+                case 10:
                     wave = 0;
                     break;
             }
@@ -189,24 +202,144 @@ public class Waves : MonoBehaviour
     {
         waveRunning = true;
 
-        for (int i = 0; i < 11; i++)
+        if (!wave7PartTwoStarted)
         {
-            GameObject e1 = Instantiate(enemy1Prefab, rightSpawns[1].transform.position, Quaternion.identity);
-            GameObject e2 = Instantiate(enemy1Prefab, leftSpawns[2].transform.position, Quaternion.identity);
-            GameObject e3 = Instantiate(enemy1Prefab, rightSpawns[3].transform.position, Quaternion.identity);
-            GameObject e4 = Instantiate(enemy1Prefab, leftSpawns[4].transform.position, Quaternion.identity);
+            StartCoroutine("Wave7PartTwo");
+        }
 
-            e1.GetComponent<EnemyController>().pattern = 7;
-            e2.GetComponent<EnemyController>().pattern = 6;
-            e3.GetComponent<EnemyController>().pattern = 7;
-            e4.GetComponent<EnemyController>().pattern = 6;
+        for (int i = 0; i < 4; i++)
+        {
+            GameObject e1 = Instantiate(enemy3Prefab, topSpawns[10].transform.position, Quaternion.identity);
 
-            yield return new WaitForSeconds(0.5f);
+            e1.GetComponent<EnemyController>().pattern = 8;
+
+            yield return new WaitForSeconds(12f);
+        }
+        waveRunning = false;
+    }
+
+    private IEnumerator Wave7PartTwo()
+    {
+        wave7PartTwoStarted = true;
+
+        for (int i = 0; i < 36; i++)
+        {
+            GameObject e1 = enemy1Prefab;
+            GameObject e2 = enemy2Prefab;
+
+            if (i % 2 == 0)
+            {
+                if (Mathf.FloorToInt(Random.Range(0, 2)) == 0)
+                {
+                    e1 = Instantiate(enemy1Prefab, rightSpawns[Mathf.FloorToInt(Random.Range(0, 5))].transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    e2 = Instantiate(enemy1Prefab, leftSpawns[Mathf.FloorToInt(Random.Range(0, 5))].transform.position, Quaternion.identity);
+                }
+            }
+            else
+            {
+                if (Mathf.FloorToInt(Random.Range(0, 2)) == 0)
+                {
+                    e1 = Instantiate(enemy2Prefab, rightSpawns[Mathf.FloorToInt(Random.Range(0, 5))].transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    e2 = Instantiate(enemy2Prefab, leftSpawns[Mathf.FloorToInt(Random.Range(0, 5))].transform.position, Quaternion.identity);
+                }
+            }
+
+            e1.GetComponent<EnemyController>().pattern = 9;
+            e2.GetComponent<EnemyController>().pattern = 10;
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        yield return new WaitForSeconds(1);
+        wave7PartTwoStarted = false;
+    }
+
+    private IEnumerator Wave8()
+    {
+        waveRunning = true;
+
+        List<GameObject> enemies = new List<GameObject>();
+
+        for(int i = 1; i < 9; i++)
+        {
+            if(i != 3)
+            enemies.Add(Instantiate(enemy1Prefab, topSpawns[i].transform.position, Quaternion.identity));
+        }
+
+        for(int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].GetComponent<EnemyController>().pattern = 11;
+        }
+
+        enemies.Clear();
+        yield return new WaitForSeconds(1);
+
+        for (int i = 1; i < 9; i++)
+        {
+            if (i != 7)
+                enemies.Add(Instantiate(enemy1Prefab, topSpawns[i].transform.position, Quaternion.identity));
+        }
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].GetComponent<EnemyController>().pattern = 11;
+        }
+
+        enemies.Clear();
+        yield return new WaitForSeconds(1);
+
+        for (int i = 1; i < 9; i++)
+        {
+            if (i != 5)
+                enemies.Add(Instantiate(enemy1Prefab, topSpawns[i].transform.position, Quaternion.identity));
+        }
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].GetComponent<EnemyController>().pattern = 11;
+        }
+
+        enemies.Clear();
+        yield return new WaitForSeconds(1);
+
+        waveRunning = false;
+    }
+
+    private IEnumerator Wave9()
+    {
+        waveRunning = true;
+
+        for (int i = 0; i < 2; i++)
+        {
+            GameObject e1 = enemy1Prefab;
+            GameObject e2 = enemy1Prefab;
+
+            if(i % 2 == 0)
+            {
+                e1 = Instantiate(enemy3Prefab, leftSpawns[1].transform.position, Quaternion.identity);
+            }
+            else
+            {
+                e2 = Instantiate(enemy3Prefab, rightSpawns[2].transform.position, Quaternion.identity);
+            }
+
+            e1.GetComponent<EnemyController>().pattern = 6;
+            e2.GetComponent<EnemyController>().pattern = 7;
+
+            yield return new WaitForSeconds(2);
         }
 
         yield return new WaitForSeconds(1);
         waveRunning = false;
     }
+
+    // wave 10 is boss
 
     private GameObject[] GetAllChildren(Transform parent)
     {
