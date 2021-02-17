@@ -16,6 +16,9 @@ public class UI : MonoBehaviour
     private GameObject letterHolder;
 
     [SerializeField]
+    private TextMeshProUGUI keycapCounter;
+
+    [SerializeField]
     private GameObject wordBankL;
 
     [SerializeField]
@@ -69,6 +72,8 @@ public class UI : MonoBehaviour
         {
             column = 1;
         }
+
+        keycapCounter.text = "Keycaps: " + gc.keycaps;
     }
 
     public void AddWord(string word)
