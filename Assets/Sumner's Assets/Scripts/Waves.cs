@@ -14,6 +14,9 @@ public class Waves : MonoBehaviour
     private GameObject enemy3Prefab;
 
     [SerializeField]
+    private GameObject bossPrefab;
+
+    [SerializeField]
     private GameObject spawnerHolder;
 
     private GameObject[] topSpawns, bottomSpawns, rightSpawns, leftSpawns;
@@ -91,7 +94,7 @@ public class Waves : MonoBehaviour
                     break;
 
                 case 10:
-                    wave = 0;
+                    Instantiate(bossPrefab, topSpawns[10].transform.position, Quaternion.identity);
                     break;
             }
         }
