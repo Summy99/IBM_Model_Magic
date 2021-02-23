@@ -4,7 +4,7 @@
   <action label="top">
     <repeat>
       <!-- The main loop, until the boss is destroyed -->
-      <times>99999</times>
+      <times>2</times>
       <action>
 
         <!-- Fragmentation bullets-->
@@ -17,11 +17,11 @@
                 <!-- Launch 2 frag bullets-->
                 <fire>
                   <direction type="absolute">120 - (60 * $rand)</direction>
-                  <bulletRef label="boss2_frag" />
+                  <bulletRef label="bigGrow" />
                 </fire>
                 <fire>
                   <direction type="absolute">-120 - (60 * $rand)</direction>
-                  <bulletRef label="boss2_frag" />
+                  <bulletRef label="bigGrow" />
                 </fire>
               </action>
               <actionRef label="pause">
@@ -45,7 +45,7 @@
                 <action>
                   <fire>
                     <direction type="sequence">20</direction>
-                    <bulletRef label="boss2_wall"/>
+                    <bulletRef label="tear2"/>
                   </fire>
                 </action>
               </repeat>
@@ -67,20 +67,16 @@
     </repeat>
   </action>
 
-  <bullet label="boss2_wall">
+  <bullet label="tear2">
     <action>
       <changeSpeed>
-        <speed>0.5 + ($rank * 0.1) </speed>
+        <speed>1</speed>
         <term>200 - ($rank * 100)</term>
       </changeSpeed>
     </action>
-    <action>
-      <wait>360</wait>
-      <vanish></vanish>
-    </action>
   </bullet>
 
-  <bullet label="boss2_frag">
+  <bullet label="bigGrow">
     <speed>0.5</speed>
     <action>
       <wait>30</wait>
@@ -95,7 +91,7 @@
           <fire>
             <direction type="aim">0</direction>
             <speed>0.6 + (0.25 * $rand) + (1 * $rank)</speed>
-            <bullet label="boss2_frag_part"/>
+            <bullet label="spiral"/>
           </fire>
         </action>
       </repeat>
@@ -103,7 +99,7 @@
     </action>
   </bullet>
 
-  <bullet label="boss2_frag_part">
+  <bullet label="spiral">
     <action>
       <wait>360</wait>
       <vanish/>

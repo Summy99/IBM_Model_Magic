@@ -23,10 +23,10 @@
 <fire label="first">
  <direction type="sequence">$1</direction>
  <speed>0.54</speed>
- <bulletRef label="second"/>
+ <bulletRef label="tear2"/>
 </fire>
 
-<bullet label="second">
+<bullet label="tear2">
  <action>
   <wait>60</wait>
    <fireRef label="third">
@@ -56,8 +56,8 @@
 
 <fire label="third">
  <direction type="aim">$1</direction>
- <speed>0.4+$rand*1.4</speed>
- <bullet/>
+ <speed>$rand</speed>
+ <bullet label="tear"/>
 </fire>
 
 

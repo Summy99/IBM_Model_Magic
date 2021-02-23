@@ -19,7 +19,7 @@
   <fire>
    <direction type="absolute">120 + 120 * $rand</direction>
    <speed>0.6 - 0.5 * $rank + 0.15 * $rand</speed>
-   <bullet/>
+   <bullet label="bigGrow"/>
   </fire>
  <wait>2</wait>
  </action> </repeat>
@@ -29,55 +29,55 @@
  <fire>
   <direction type="absolute">70 + 40 * $rand</direction>
   <speed>0.6 - 0.3 * $rank</speed>
-  <bulletRef label="layer1"/>
+  <bulletRef label="tear2"/>
  </fire>
  <fire>
   <direction type="sequence">180</direction>
   <speed>0.6 - 0.3 * $rank</speed>
-  <bulletRef label="layer1"/>
+  <bulletRef label="tear2"/>
  </fire>
  <wait>600</wait>
 </action>
 
-<bullet label="layer1">
+<bullet label="tear2">
 <action>
  <wait>15</wait>
  <repeat> <times>100</times> <action>
   <fire>
    <direction type="relative">90</direction>
    <speed>0.8 - 0.4 * $rank</speed>
-   <bulletRef label="layer2"/>
+   <bulletRef label="tear"/>
   </fire>
   <fire>
    <direction type="relative">-90</direction>
    <speed>0.8 - 0.4 * $rank</speed>
-   <bulletRef label="layer2"/>
+   <bulletRef label="tear"/>
   </fire>
   <wait>60</wait>
  </action> </repeat>
 
 </action> </bullet>
 
-<bullet label="layer2">
+<bullet label="tear">
 <action>
  <wait>15</wait>
  <repeat> <times>100</times> <action>
   <fire>
    <direction type="relative">45</direction>
    <speed>1.0 - 0.5 * $rank</speed>
-   <bulletRef label="layer3"/>
+   <bulletRef label="default"/>
   </fire>
   <fire>
    <direction type="relative">-45</direction>
    <speed>1.0 - 0.5 * $rank</speed>
-   <bulletRef label="layer3"/>
+   <bulletRef label="default"/>
   </fire>
   <wait>60</wait>
  </action> </repeat>
 
 </action> </bullet>
 
-<bullet label="layer3">
+<bullet label="default">
 <action>
  <wait>15</wait>
  <repeat> <times>100</times> <action>

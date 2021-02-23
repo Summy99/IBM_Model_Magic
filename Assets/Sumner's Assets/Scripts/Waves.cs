@@ -24,11 +24,15 @@ public class Waves : MonoBehaviour
     private GameController gc;
     private GameObject player;
 
+    [SerializeField]
+    private AudioClip bosstheme;
+
     public int wave = 0;
     public bool shop = false;
     private bool waveRunning = false;
     private bool wave7PartTwoStarted = false;
     private bool waveIncrementing = false;
+    private bool bossSpawned = false;
 
     void Start()
     {
@@ -43,7 +47,7 @@ public class Waves : MonoBehaviour
 
     void Update()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && !waveIncrementing && !waveRunning && !gc.tutorial && !shop)
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && !waveIncrementing && !waveRunning && !gc.tutorial && !shop && !bossSpawned)
         {
             wave++;
         }
@@ -94,7 +98,13 @@ public class Waves : MonoBehaviour
                     break;
 
                 case 10:
-                    Instantiate(bossPrefab, topSpawns[10].transform.position, Quaternion.identity);
+                    if (!bossSpawned)
+                    {
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = bosstheme;
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+                        Instantiate(bossPrefab, topSpawns[10].transform.position, Quaternion.identity);
+                        bossSpawned = true;
+                    }
                     break;
             }
         }

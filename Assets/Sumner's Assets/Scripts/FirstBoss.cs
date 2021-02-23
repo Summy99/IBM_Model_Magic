@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Pixelnest.BulletML;
 
 public class FirstBoss : MonoBehaviour
@@ -9,10 +10,15 @@ public class FirstBoss : MonoBehaviour
     private Animator anim;
     private BulletSourceScript bmll;
     private BulletSourceScript bmlr;
+    private AudioSource plyrsrc;
 
     [SerializeField]
     private TextAsset[] patterns;
 
+    [SerializeField]
+    private AudioClip hit;
+
+    [SerializeField]
     private int attack = 0;
     public float health = 600;
     private bool activated = false;
@@ -26,6 +32,7 @@ public class FirstBoss : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         bmll = gameObject.transform.Find("left").GetComponent<BulletSourceScript>();
         bmlr = gameObject.transform.Find("right").GetComponent<BulletSourceScript>();
+        plyrsrc = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
     }
 
     void Update()
@@ -87,9 +94,12 @@ public class FirstBoss : MonoBehaviour
     {
         health -= damage;
 
+        plyrsrc.PlayOneShot(hit);
+
         if(health <= 0)
         {
             Destroy(gameObject);
+            SceneManager.LoadScene(2);
         }
     }
 
@@ -110,18 +120,30 @@ public class FirstBoss : MonoBehaviour
 
             case 2:
                 anim.SetBool("Crying", true);
-                bmll.xmlFile = patterns[0];
-                bmll.Initialize();
-                bmlr.xmlFile = patterns[0];
-                bmlr.Initialize();
+                if (Mathf.FloorToInt(Random.Range(0, 2)) == 0)
+                {
+                    bmll.xmlFile = patterns[0];
+                    bmll.Initialize();
+                }
+                else
+                {
+                    bmlr.xmlFile = patterns[0];
+                    bmlr.Initialize();
+                }
                 break;
 
             case 3:
                 anim.SetBool("Crying", true);
-                bmll.xmlFile = patterns[0];
-                bmll.Initialize();
-                bmlr.xmlFile = patterns[0];
-                bmlr.Initialize();
+                if (Mathf.FloorToInt(Random.Range(0, 2)) == 0)
+                {
+                    bmll.xmlFile = patterns[1];
+                    bmll.Initialize();
+                }
+                else
+                {
+                    bmlr.xmlFile = patterns[1];
+                    bmlr.Initialize();
+                }
                 break;
         }
         
