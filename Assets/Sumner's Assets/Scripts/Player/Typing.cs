@@ -17,7 +17,7 @@ public class Typing : MonoBehaviour
     private AudioClip shot, wordSuccess, wordFail, enterSlow;
 
     [SerializeField]
-    private GameObject letterPrefab;
+    private GameObject letterPrefab, explosionPrefab;
 
     [SerializeField]
     public Sprite[] letterSprites;
@@ -323,6 +323,45 @@ public class Typing : MonoBehaviour
                     SpreadShot();
                 }
                 break;
+
+            case "SHOTGUN":
+                if (true)
+                {
+                    SpreadShot();
+                }
+                break;
+
+            case "RAPID":
+                StartCoroutine("Speed");
+                break;
+
+            case "SPEED":
+                StartCoroutine("Speed");
+                break;
+
+            case "FAST":
+                StartCoroutine("Speed");
+                break;
+
+            case "OTHER":
+                RandomWord();
+                break;
+
+            case "SOMETHING":
+                RandomWord();
+                break;
+
+            case "RANDOM":
+                RandomWord();
+                break;
+
+            case "ANYTHING":
+                RandomWord();
+                break;
+
+            case "EXPLOSION":
+                ExplosionWord();
+                break;
         }
 
         if (gc.words.ContainsKey(word) && !gc.words[word])
@@ -354,12 +393,7 @@ public class Typing : MonoBehaviour
 
     private void Bomb()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            enemies[i].GetComponent<EnemyController>().TakeDamage(10);
-        }
+        Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
     }
 
     private void Erase()
@@ -376,7 +410,15 @@ public class Typing : MonoBehaviour
     {
         gameObject.transform.Find("Shield").gameObject.SetActive(true);
         gameObject.GetComponent<PlayerHealth>().shield = true;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2.5f);
+        gameObject.transform.Find("Shield").gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        gameObject.transform.Find("Shield").gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameObject.transform.Find("Shield").gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        gameObject.transform.Find("Shield").gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
         gameObject.transform.Find("Shield").gameObject.SetActive(false);
         gameObject.GetComponent<PlayerHealth>().shield = false;
     }
@@ -393,5 +435,58 @@ public class Typing : MonoBehaviour
         patternRunning = true;
         bml.xmlFile = patterns[2];
         bml.Initialize();
+    }
+
+    private IEnumerator Speed()
+    {
+        gameObject.GetComponent<PlayerMovement>().moveSpeed = 100f;
+        yield return new WaitForSeconds(5);
+        gameObject.GetComponent<PlayerMovement>().moveSpeed = 50f;
+    }
+
+    private void ExplosionWord()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(GameObject e in enemies)
+        {
+            e.GetComponent<EnemyController>().TakeDamage(10);
+        }
+    }
+
+    private void RandomWord()
+    {
+        int effect = Mathf.FloorToInt(Random.Range(0, 7));
+
+        switch (effect)
+        {
+            case 0:
+                Bomb();
+                break;
+
+            case 1:
+                StartCoroutine("Shield");
+                break;
+
+            case 2:
+                Erase();
+                break;
+
+            case 3:
+                AutoFire();
+                break;
+
+            case 4:
+                SpreadShot();
+                break;
+
+            case 5:
+                StartCoroutine("Speed");
+                break;
+
+            case 6:
+                ExplosionWord();
+                break;
+        }
     }
 }

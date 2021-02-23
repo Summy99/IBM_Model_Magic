@@ -17,7 +17,7 @@
             </fire>
           </action>
         </repeat>
-        <wait>20</wait>
+        <wait>30</wait>
       </action>
     </repeat>  
   </action>

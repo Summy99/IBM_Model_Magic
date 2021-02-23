@@ -3686,8 +3686,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4816,8 +4816,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6673,8 +6673,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7713,7 +7713,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.16862746, g: 0.2627451, b: 0.17140234, a: 0}
+  m_BackGroundColor: {r: 0.043137256, g: 0.3254902, b: 0.17254902, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -8464,34 +8464,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2095222743134975166, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: m_Offset.y
-      value: -1.1334991
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095222743134975166, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 13.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095222743134975166, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 13.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095222743134975166, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: m_Size.y
-      value: 3.0679016
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095222743134975166, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.19974422
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095222743134975166, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: m_Size.x
-      value: 2.3994884
-      objectReference: {fileID: 0}
-    - target: {fileID: 2439646645743251535, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: m_Sprite
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: explosionPrefab
       value: 
-      objectReference: {fileID: 21300000, guid: 3b287d364407ffb4da0d7e35638de7ed, type: 3}
+      objectReference: {fileID: 1917196599572790266, guid: e1c16e244342db24d9a931e4a9e6f860, type: 3}
     - target: {fileID: 4632542713897860138, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_Name
       value: Player

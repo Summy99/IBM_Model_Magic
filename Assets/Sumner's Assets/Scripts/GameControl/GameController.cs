@@ -34,6 +34,16 @@ public class GameController : MonoBehaviour
         words.Add("BOOM", false);
         words.Add("AUTO", false);
         words.Add("SPREAD", false);
+        words.Add("SHOTGUN", false);
+        words.Add("BLOCK", false);
+        words.Add("RAPID", false);
+        words.Add("SPEED", false);
+        words.Add("FAST", false);
+        words.Add("OTHER", false);
+        words.Add("SOMETHING", false);
+        words.Add("RANDOM", false);
+        words.Add("ANYTHING", false);
+        words.Add("EXPLOSION", false);
 
         tutorial = true;
         message.text = "Move with arrow keys";
