@@ -8,10 +8,10 @@
       <times>9</times>
       <action>
         <repeat>
-          <times>11</times>
+          <times>4</times>
           <action>
             <fire>
-              <direction type="sequence">18</direction>
+              <direction type="sequence">-15</direction>
               <speed>2</speed>
               <bulletRef label="PlayerShot" />
             </fire>
@@ -23,7 +23,7 @@
   </action>
 
   <bullet label="PlayerShot">
-    <direction type="absolute">90</direction>
+    <direction type="absolute">202.5</direction>
   </bullet>
   
 </bulletml>

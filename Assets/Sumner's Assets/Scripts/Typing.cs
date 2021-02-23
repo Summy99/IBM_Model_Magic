@@ -286,116 +286,16 @@ public class Typing : MonoBehaviour
 
         switch (word)
         {
-            case "A":
-                Shoot(0);
-                break;
-
-            case "B":
-                Shoot(1);
-                break;
-
-            case "C":
-                Shoot(2);
-                break;
-
-            case "D":
-                Shoot(3);
-                break;
-
-            case "E":
-                Shoot(4);
-                break;
-
-            case "F":
-                Shoot(5);
-                break;
-
-            case "G":
-                Shoot(6);
-                break;
-
-            case "H":
-                Shoot(7);
-                break;
-
-            case "I":
-                Shoot(8);
-                break;
-
-            case "J":
-                Shoot(9);
-                break;
-
-            case "K":
-                Shoot(10);
-                break;
-
-            case "L":
-                Shoot(11);
-                break;
-
-            case "M":
-                Shoot(12);
-                break;
-
-            case "N":
-                Shoot(13);
-                break;
-
-            case "O":
-                Shoot(14);
-                break;
-
-            case "P":
-                Shoot(15);
-                break;
-
-            case "Q":
-                Shoot(16);
-                break;
-
-            case "R":
-                Shoot(17);
-                break;
-
-            case "S":
-                Shoot(18);
-                break;
-
-            case "T":
-                Shoot(19);
-                break;
-
-            case "U":
-                Shoot(20);
-                break;
-
-            case "V":
-                Shoot(21);
-                break;
-
-            case "W":
-                Shoot(22);
-                break;
-
-            case "X":
-                Shoot(23);
-                break;
-
-            case "Y":
-                Shoot(24);
-                break;
-
-            case "Z":
-                Shoot(25);
-                break;
-
             case "BOMB":
                 Bomb();
                 break;
 
             case "BOOM":
                 Bomb();
+                break;
+
+            case "BLOCK":
+                StartCoroutine("Shield");
                 break;
 
             case "SHIELD":
