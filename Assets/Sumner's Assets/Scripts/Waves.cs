@@ -27,6 +27,9 @@ public class Waves : MonoBehaviour
     [SerializeField]
     private AudioClip bosstheme;
 
+    [SerializeField]
+    private AudioClip shoptheme;
+
     public int wave = 0;
     public bool shop = false;
     private bool waveRunning = false;
@@ -81,6 +84,8 @@ public class Waves : MonoBehaviour
                     {
                         player.transform.position = new Vector3(-20, -43, 0);
                         shop = true;
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = shoptheme;
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
                         gameObject.GetComponent<Shop>().OpenShop();
                     }
                     break;

@@ -13,6 +13,9 @@ public class Shop : MonoBehaviour
     [SerializeField]
     private GameObject prices;
 
+    [SerializeField]
+    private AudioClip theme;
+
     private GameObject gc;
 
     [SerializeField]
@@ -31,7 +34,7 @@ public class Shop : MonoBehaviour
             message.text = Mathf.FloorToInt(time).ToString();
         }
 
-        if(time <= 0)
+        if(time <= 0 && gc.GetComponent<Waves>().shop)
         {
             CloseShop();
         }
@@ -61,5 +64,7 @@ public class Shop : MonoBehaviour
         shopOptions.SetActive(false);
         prices.SetActive(false);
         gc.GetComponent<Waves>().shop = false;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = theme;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
     }
 }

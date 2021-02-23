@@ -1171,6 +1171,7 @@ MonoBehaviour:
   bossPrefab: {fileID: 339316896376044841, guid: 1e9542dbc75ef73499519b6a4bc1e024, type: 3}
   spawnerHolder: {fileID: 58844657}
   bosstheme: {fileID: 8300000, guid: 00a1e12a4f8fee348af52d5e39f02cfc, type: 3}
+  shoptheme: {fileID: 8300000, guid: 58e4e734d4bafe146b547893ab7ec354, type: 3}
   wave: 0
   shop: 0
 --- !u!114 &257336646
@@ -1188,6 +1189,7 @@ MonoBehaviour:
   time: 20
   shopOptions: {fileID: 1616662570}
   prices: {fileID: 1683269228}
+  theme: {fileID: 8300000, guid: 4865ae256f024de49ab13609fe5a4009, type: 3}
   message: {fileID: 1310974610}
 --- !u!114 &257336647
 MonoBehaviour:
