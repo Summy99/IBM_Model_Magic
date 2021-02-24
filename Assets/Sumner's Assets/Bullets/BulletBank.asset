@@ -26,7 +26,7 @@ MonoBehaviour:
   - name: spiral
     prefab: {fileID: 1294520606847368362, guid: 3f432fb5aaa91734694b684ad19c877d, type: 3}
     sprite: {fileID: 21300000, guid: 9e0de4cf16006874484f6dec5c4795b0, type: 3}
-    TimeToLiveInSeconds: 4
+    TimeToLiveInSeconds: 10
     DestroyWhenOutOfScreen: 1
   - name: bigGrow
     prefab: {fileID: 5705835735660088513, guid: 2295af9a1c54d694bb8dba5c753b9f8a, type: 3}

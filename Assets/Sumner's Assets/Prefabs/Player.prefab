@@ -279,11 +279,13 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 475f9161d0a7b684d976c7b284eec808, type: 3}
   - {fileID: 4900000, guid: d6aba05caba08af4a97ef4bf94867fa8, type: 3}
   - {fileID: 4900000, guid: 08b2bc15a10356a45801d751c4cd7716, type: 3}
+  - {fileID: 4900000, guid: 97912914e46e68840a4194e645de3845, type: 3}
   shot: {fileID: 8300000, guid: 89384fe7d713be24fb9021f344819522, type: 3}
   wordSuccess: {fileID: 8300000, guid: 4d4da9a424a48d542a3554bf08578453, type: 3}
   wordFail: {fileID: 8300000, guid: 8ffde8d4d0babbe4faf59a5479f1e9ef, type: 3}
   enterSlow: {fileID: 8300000, guid: f61b9f96b930c4843bf4c0f7ba9ba897, type: 3}
   letterPrefab: {fileID: 7320721367101697214, guid: 9c38c69c845a3bf458d13eec4404e755, type: 3}
+  explosionPrefab: {fileID: 1917196599572790266, guid: e1c16e244342db24d9a931e4a9e6f860, type: 3}
   letterSprites:
   - {fileID: 21300000, guid: 627ea1799212a6c4080de7429d26b782, type: 3}
   - {fileID: 21300000, guid: efb67e5223663e24e95d0090b0f7fe44, type: 3}

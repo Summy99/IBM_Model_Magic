@@ -10,6 +10,7 @@ public class FirstBoss : MonoBehaviour
     private Animator anim;
     private BulletSourceScript bmll;
     private BulletSourceScript bmlr;
+    private BulletSourceScript bml;
     private AudioSource plyrsrc;
 
     [SerializeField]
@@ -30,6 +31,7 @@ public class FirstBoss : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
+        bml = gameObject.GetComponent<BulletSourceScript>();
         bmll = gameObject.transform.Find("left").GetComponent<BulletSourceScript>();
         bmlr = gameObject.transform.Find("right").GetComponent<BulletSourceScript>();
         plyrsrc = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
@@ -64,12 +66,12 @@ public class FirstBoss : MonoBehaviour
             }
         }
 
-        if(bmll.IsEnded && bmlr.IsEnded)
+        if(bmll.IsEnded && bmlr.IsEnded && bml.IsEnded)
         {
             anim.SetBool("Crying", false);
         }
 
-        if (activated && (bmll.IsEnded && bmlr.IsEnded) && walkFinished && !switching)
+        if (activated && (bmll.IsEnded && bmlr.IsEnded && bml.IsEnded) && walkFinished && !switching && GameObject.FindGameObjectsWithTag("Bullet").Length == 0)
         {
             StartCoroutine("SwitchAttacks");
         }
@@ -129,20 +131,6 @@ public class FirstBoss : MonoBehaviour
                 anim.SetBool("Crying", true);
                 if (Mathf.FloorToInt(Random.Range(0, 2)) == 0)
                 {
-                    bmll.xmlFile = patterns[0];
-                    bmll.Initialize();
-                }
-                else
-                {
-                    bmlr.xmlFile = patterns[0];
-                    bmlr.Initialize();
-                }
-                break;
-
-            case 3:
-                anim.SetBool("Crying", true);
-                if (Mathf.FloorToInt(Random.Range(0, 2)) == 0)
-                {
                     bmll.xmlFile = patterns[1];
                     bmll.Initialize();
                 }
@@ -151,6 +139,12 @@ public class FirstBoss : MonoBehaviour
                     bmlr.xmlFile = patterns[1];
                     bmlr.Initialize();
                 }
+                break;
+
+            case 3:
+                anim.SetBool("Crying", true);
+                bml.xmlFile = patterns[0];
+                bml.Initialize();
                 break;
         }
         

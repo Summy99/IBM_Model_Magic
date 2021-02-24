@@ -6263,7 +6263,7 @@ Transform:
   - {fileID: 2069466719}
   - {fileID: 1979141363}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1638291294
 GameObject:
@@ -6355,7 +6355,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1643707641
 GameObject:
@@ -8464,18 +8464,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: patterns.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: explosionPrefab
-      value: 
-      objectReference: {fileID: 1917196599572790266, guid: e1c16e244342db24d9a931e4a9e6f860, type: 3}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: patterns.Array.data[3]
-      value: 
-      objectReference: {fileID: 4900000, guid: 97912914e46e68840a4194e645de3845, type: 3}
     - target: {fileID: 4632542713897860138, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_Name
       value: Player
@@ -8510,7 +8498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6085271676269471991, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6085271676269471991, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8629,7 +8617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7604416937972380133, guid: 2c969e63000a50d46b38f4724afc6cbb, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7604416937972380133, guid: 2c969e63000a50d46b38f4724afc6cbb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
