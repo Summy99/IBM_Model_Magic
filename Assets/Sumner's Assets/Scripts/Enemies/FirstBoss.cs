@@ -109,7 +109,8 @@ public class FirstBoss : MonoBehaviour
         {
             Destroy(gameObject);
             GameController.level = 2;
-            SceneManager.LoadScene(2);
+            LevelTracker.LevelToLoad = 2;
+            SceneManager.LoadScene(4);
         }
     }
 

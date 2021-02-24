@@ -5,7 +5,7 @@ using TMPro;
 
 public class Shop : MonoBehaviour
 {
-    public float time = 20f;
+    public float time = 30f;
 
     [SerializeField]
     private GameObject shopOptions;

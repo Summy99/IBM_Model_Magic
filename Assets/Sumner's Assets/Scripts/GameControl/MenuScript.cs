@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
-
     void Start()
     {
 
@@ -21,6 +20,8 @@ public class MenuScript : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        GameController.level = 1;
+        LevelTracker.LevelToLoad = 1;
+        SceneManager.LoadScene(4);
     }
 }
