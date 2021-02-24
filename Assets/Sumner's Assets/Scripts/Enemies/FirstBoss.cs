@@ -88,6 +88,13 @@ public class FirstBoss : MonoBehaviour
             TakeDamage(collision.gameObject.GetComponent<ShotController>().damage);
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("PlayerShotBig"))
+        {
+            float damageToDeal = collision.gameObject.GetComponent<BigShotController>().damage;
+            collision.gameObject.GetComponent<BigShotController>().damage -= health;
+            TakeDamage(damageToDeal);
+        }
     }
 
     private void TakeDamage(float damage)

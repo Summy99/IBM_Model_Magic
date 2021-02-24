@@ -186,7 +186,6 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("PlayerShotBig"))
         {
             float damageToDeal = collision.gameObject.GetComponent<BigShotController>().damage;
-            print("subbed");
             collision.gameObject.GetComponent<BigShotController>().damage -= health;
             TakeDamage(damageToDeal);
         }

@@ -1087,13 +1087,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeBarStates:
-  - {fileID: 21300000, guid: 56682c2dd24f7fa4d9e4f2c3295a925d, type: 3}
-  - {fileID: 21300000, guid: 38576f7bbb25c2942be0e2a945e828e9, type: 3}
-  - {fileID: 21300000, guid: 0325e37a7366d4745a815d4f477989a3, type: 3}
-  - {fileID: 21300000, guid: 23700f63c40515c4eabf847c079bce93, type: 3}
-  - {fileID: 21300000, guid: c338c04942993ee4b9d47d6c524e3ada, type: 3}
-  - {fileID: 21300000, guid: 9c74905bb885522419f355798d985706, type: 3}
-  - {fileID: 21300000, guid: d1d5f68316fe0a64cb6bf2c6eada1ea7, type: 3}
+  - {fileID: 21300000, guid: 496be3f022566f34bb4f0c5548669017, type: 3}
+  - {fileID: 21300000, guid: dbf2594d75c61574a959647c2d2188dc, type: 3}
+  - {fileID: 21300000, guid: 093cefc3b0dc9804f9c02a81ada63e16, type: 3}
+  - {fileID: 21300000, guid: ff39e40d36c1f7343a8a6c54e9acabd5, type: 3}
+  - {fileID: 21300000, guid: b6adab02713cab84694204bb330b5536, type: 3}
+  - {fileID: 21300000, guid: e10b3dd7da681f94ca53bb751540ba7c, type: 3}
+  - {fileID: 21300000, guid: 9ac90c2150fcbe54ebc393ee804b2388, type: 3}
   letterHolder: {fileID: 657767484}
   keycapCounter: {fileID: 725118688}
   wordBankL: {fileID: 987337604}
@@ -1263,7 +1263,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d1d5f68316fe0a64cb6bf2c6eada1ea7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9ac90c2150fcbe54ebc393ee804b2388, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

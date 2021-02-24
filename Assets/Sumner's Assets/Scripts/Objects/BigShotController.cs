@@ -26,6 +26,6 @@ public class BigShotController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        transform.localScale = new Vector3((damage / 10) * 5, (damage / 10) * 5, (damage / 10) * 5);
+        transform.localScale = new Vector3((damage / 20) * 5, (damage / 20) * 5, (damage / 20) * 5);
     }
 }
