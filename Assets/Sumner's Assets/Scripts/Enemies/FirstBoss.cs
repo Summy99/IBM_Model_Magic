@@ -103,11 +103,12 @@ public class FirstBoss : MonoBehaviour
     {
         health -= damage;
 
-        plyrsrc.PlayOneShot(hit);
+        plyrsrc.PlayOneShot(hit, 0.5f);
 
         if(health <= 0)
         {
             Destroy(gameObject);
+            GameController.level = 2;
             SceneManager.LoadScene(2);
         }
     }

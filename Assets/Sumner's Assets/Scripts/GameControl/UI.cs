@@ -48,7 +48,7 @@ public class UI : MonoBehaviour
 
     void Update()
     {
-        lifeBar.GetComponent<Image>().sprite = lifeBarStates[gc.lives];
+        lifeBar.GetComponent<Image>().sprite = lifeBarStates[GameController.lives];
 
         for(int i = 0; i < letterUI.Length; i++)
         {
@@ -67,11 +67,6 @@ public class UI : MonoBehaviour
         type.SetActive(player.GetComponent<Typing>().mode == "typing");
 
         type.transform.Find("PendingWord").GetComponent<TextMeshProUGUI>().text = player.GetComponent<Typing>().word;
-
-        if (column == 4)
-        {
-            column = 1;
-        }
 
         keycapCounter.text = "Keycaps: " + gc.keycaps;
     }
@@ -92,7 +87,7 @@ public class UI : MonoBehaviour
 
             case 3:
                 wordBankR.GetComponent<TextMeshProUGUI>().text += "\n\n" + word;
-                column++;
+                column = 1;
                 break;
         }
     }

@@ -134,7 +134,6 @@ public class Typing : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Backspace) && word.Length >= 1)
             {
-                print("test");
                 word = word.Substring(0, word.Length - 1);
             }
 
@@ -372,13 +371,13 @@ public class Typing : MonoBehaviour
                 break;
         }
 
-        if (gc.words.ContainsKey(word) && !gc.words[word])
+        if (GameController.words.ContainsKey(word) && !GameController.words[word])
         {
-            gc.words[word] = true;
+            GameController.words[word] = true;
             ui.AddWord(word);
         }
 
-        if (!gc.words.ContainsKey(word))
+        if (!GameController.words.ContainsKey(word))
         {
             sfx.PlayOneShot(wordFail);
         }

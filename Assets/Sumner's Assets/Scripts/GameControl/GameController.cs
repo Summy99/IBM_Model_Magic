@@ -6,7 +6,8 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    public int lives = 6;
+    public static int lives = 6;
+    public static int level = 1;
 
     public bool tutorial = false;
     private bool tutorialIncrementing = false;
@@ -16,7 +17,7 @@ public class GameController : MonoBehaviour
     private GameObject player;
     [SerializeField] private TextMeshProUGUI message;
 
-    public Dictionary<string, bool> words = new Dictionary<string, bool>();
+    public static Dictionary<string, bool> words = new Dictionary<string, bool>();
     public bool[] letters = new bool[] { 
         /*A*/true, /*B*/true, /*C*/true, /*D*/true, /*E*/true, /*F*/true, /*G*/true, 
         /*H*/true, /*I*/true, /*J*/true, /*K*/true, /*L*/true, /*M*/true, /*N*/true,  
@@ -27,30 +28,44 @@ public class GameController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        words.Add("BOMB", false);
-        words.Add("SHIELD", false);
-        words.Add("ERASE", false);
-        words.Add("CLEAR", false);
-        words.Add("BOOM", false);
-        words.Add("AUTO", false);
-        words.Add("SPREAD", false);
-        words.Add("SHOTGUN", false);
-        words.Add("BLOCK", false);
-        words.Add("RAPID", false);
-        words.Add("SPEED", false);
-        words.Add("FAST", false);
-        words.Add("OTHER", false);
-        words.Add("SOMETHING", false);
-        words.Add("RANDOM", false);
-        words.Add("ANYTHING", false);
-        words.Add("EXPLOSION", false);
-        words.Add("BIG", false);
-        words.Add("GIANT", false);
+        if(level == 1)
+        {
+            words.Add("BOMB", false);
+            words.Add("SHIELD", false);
+            words.Add("ERASE", false);
+            words.Add("CLEAR", false);
+            words.Add("BOOM", false);
+            words.Add("AUTO", false);
+            words.Add("SPREAD", false);
+            words.Add("SHOTGUN", false);
+            words.Add("BLOCK", false);
+            words.Add("RAPID", false);
+            words.Add("SPEED", false);
+            words.Add("FAST", false);
+            words.Add("OTHER", false);
+            words.Add("SOMETHING", false);
+            words.Add("RANDOM", false);
+            words.Add("ANYTHING", false);
+            words.Add("EXPLOSION", false);
+            words.Add("BIG", false);
+            words.Add("GIANT", false);
 
-        tutorial = true;
-        message.text = "Move with arrow keys";
-        player.GetComponent<Typing>().maxSlowDown = 15;
-        player.GetComponent<Typing>().slowDown = 15;
+            tutorial = true;
+            message.text = "Move with arrow keys";
+            player.GetComponent<Typing>().maxSlowDown = 15;
+            player.GetComponent<Typing>().slowDown = 15;
+        }
+
+        if(level == 2)
+        {
+            foreach(KeyValuePair<string, bool> entry in words)
+            {
+                if (entry.Value)
+                {
+                    gameObject.GetComponent<UI>().AddWord(entry.Key);
+                }
+            }
+        }
     }
 
     void Update()

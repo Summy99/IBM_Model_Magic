@@ -46,12 +46,12 @@ public class PlayerHealth : MonoBehaviour
             gameObject.GetComponent<Typing>().maxSlowDown += 2;
         }
 
-        if (collision.gameObject.name == "Heal" && gc.keycaps >= 15 && gc.lives < 6)
+        if (collision.gameObject.name == "Heal" && gc.keycaps >= 15 && GameController.lives < 6)
         {
             collision.gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("HealPrice").gameObject.SetActive(false);
             gc.keycaps -= 15;
-            gc.lives++;
+            GameController.lives++;
         }
 
         if (collision.gameObject.name == "NewWord" && gc.keycaps >= 40)
@@ -60,19 +60,19 @@ public class PlayerHealth : MonoBehaviour
             GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("WordPrice").gameObject.SetActive(false);
             gc.keycaps -= 40;
 
-            string[] words = new string[gc.words.Count];
-            gc.words.Keys.CopyTo(words, 0);
+            string[] words = new string[GameController.words.Count];
+            GameController.words.Keys.CopyTo(words, 0);
 
             string wordToUnlock = "AUTO";
 
-            while (gc.words[wordToUnlock])
+            while (GameController.words[wordToUnlock])
             {
                 wordToUnlock = words[Mathf.FloorToInt(Random.Range(0, words.Length))];
             }
 
-            if (!gc.words[wordToUnlock])
+            if (!GameController.words[wordToUnlock])
             {
-                gc.words[wordToUnlock] = true;
+                GameController.words[wordToUnlock] = true;
                 ui.AddWord(wordToUnlock);
             }
         }
@@ -80,7 +80,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Die()
     {
-        gc.lives--;
+        GameController.lives--;
 
         sfx.PlayOneShot(death);
 
@@ -88,7 +88,7 @@ public class PlayerHealth : MonoBehaviour
 
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
-        if(gc.lives <= 0)
+        if(GameController.lives <= 0)
         {
             gc.GameOver();
         }
