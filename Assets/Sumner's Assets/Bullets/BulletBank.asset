@@ -43,3 +43,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: c6344d679f17aef44a8c6ac1c584cedb, type: 3}
     TimeToLiveInSeconds: 10
     DestroyWhenOutOfScreen: 1
+  - name: PlayerShotBig
+    prefab: {fileID: 8843435949093901512, guid: 242fd0294a35ee342b08de0954db8e1e, type: 3}
+    sprite: {fileID: 0}
+    TimeToLiveInSeconds: 10
+    DestroyWhenOutOfScreen: 1

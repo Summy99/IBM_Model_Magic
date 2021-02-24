@@ -362,6 +362,14 @@ public class Typing : MonoBehaviour
             case "EXPLOSION":
                 ExplosionWord();
                 break;
+
+            case "BIG":
+                BigShot();
+                break;
+
+            case "GIANT":
+                BigShot();
+                break;
         }
 
         if (gc.words.ContainsKey(word) && !gc.words[word])
@@ -454,9 +462,16 @@ public class Typing : MonoBehaviour
         }
     }
 
+    private void BigShot()
+    {
+        patternRunning = true;
+        bml.xmlFile = patterns[3];
+        bml.Initialize();
+    }
+
     private void RandomWord()
     {
-        int effect = Mathf.FloorToInt(Random.Range(0, 7));
+        int effect = Mathf.FloorToInt(Random.Range(0, 8));
 
         switch (effect)
         {
@@ -486,6 +501,10 @@ public class Typing : MonoBehaviour
 
             case 6:
                 ExplosionWord();
+                break;
+
+            case 7:
+                BigShot();
                 break;
         }
     }

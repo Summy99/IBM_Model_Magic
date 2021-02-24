@@ -183,6 +183,14 @@ public class EnemyController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        if (collision.gameObject.CompareTag("PlayerShotBig"))
+        {
+            float damageToDeal = collision.gameObject.GetComponent<BigShotController>().damage;
+            print("subbed");
+            collision.gameObject.GetComponent<BigShotController>().damage -= health;
+            TakeDamage(damageToDeal);
+        }
+
         if (collision.gameObject.CompareTag("Letter"))
         {
             TakeDamage(collision.gameObject.GetComponent<LetterController>().damage);

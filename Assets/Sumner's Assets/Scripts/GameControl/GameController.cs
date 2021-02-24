@@ -44,6 +44,8 @@ public class GameController : MonoBehaviour
         words.Add("RANDOM", false);
         words.Add("ANYTHING", false);
         words.Add("EXPLOSION", false);
+        words.Add("BIG", false);
+        words.Add("GIANT", false);
 
         tutorial = true;
         message.text = "Move with arrow keys";
