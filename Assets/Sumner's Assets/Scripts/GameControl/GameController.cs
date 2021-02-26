@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour
 
             tutorial = true;
             message.text = "Move with arrow keys";
-            player.GetComponent<Typing>().maxSlowDown = 15;
+            Typing.maxSlowDown = 15;
             player.GetComponent<Typing>().slowDown = 15;
         }
 
@@ -124,7 +124,7 @@ public class GameController : MonoBehaviour
             if (tutorialStage == 7 && !tutorialIncrementing)
             {
                 message.text = "";
-                player.GetComponent<Typing>().maxSlowDown = 3;
+                Typing.maxSlowDown = 3;
                 tutorial = false;
             }
         }

@@ -55,7 +55,7 @@ public class Collectibles : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && type == "slow")
         {
-            collision.gameObject.GetComponent<Typing>().slowDown += 0.1f * collision.gameObject.GetComponent<Typing>().maxSlowDown;
+            collision.gameObject.GetComponent<Typing>().slowDown += 0.1f * Typing.maxSlowDown;
             Destroy(gameObject);
         }
 
