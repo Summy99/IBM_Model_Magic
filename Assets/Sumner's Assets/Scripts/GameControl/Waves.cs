@@ -55,7 +55,7 @@ public class Waves : MonoBehaviour
             wave++;
         }
 
-        if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0)
+        if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.level == 1)
         {
             switch (wave)
             {
@@ -77,6 +77,65 @@ public class Waves : MonoBehaviour
 
                 case 5:
                     StartCoroutine("Wave5");
+                    break;
+
+                case 6:
+                    if (!shop)
+                    {
+                        player.transform.position = new Vector3(-20, -43, 0);
+                        shop = true;
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = shoptheme;
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+                        gameObject.GetComponent<Shop>().OpenShop();
+                    }
+                    break;
+
+                case 7:
+                    StartCoroutine("Wave7");
+                    break;
+
+                case 8:
+                    StartCoroutine("Wave8");
+                    break;
+
+                case 9:
+                    StartCoroutine("Wave9");
+                    break;
+
+                case 10:
+                    if (!bossSpawned)
+                    {
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = bosstheme;
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+                        Instantiate(bossPrefab, topSpawns[10].transform.position, Quaternion.identity);
+                        bossSpawned = true;
+                    }
+                    break;
+            }
+        }
+
+        if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.level == 2)
+        {
+            switch (wave)
+            {
+                case 1:
+                    StartCoroutine("Wave11");
+                    break;
+
+                case 2:
+                    StartCoroutine("Wave12");
+                    break;
+
+                case 3:
+                    StartCoroutine("Wave13");
+                    break;
+
+                case 4:
+                    StartCoroutine("Wave14");
+                    break;
+
+                case 5:
+                    StartCoroutine("Wave15");
                     break;
 
                 case 6:
@@ -358,6 +417,17 @@ public class Waves : MonoBehaviour
     }
 
     // wave 10 is boss
+
+    private IEnumerator Wave11()
+    {
+        waveRunning = true;
+
+
+
+
+        yield return new WaitForSeconds(1);
+        waveRunning = false;
+    }
 
     private GameObject[] GetAllChildren(Transform parent)
     {

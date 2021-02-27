@@ -65,6 +65,8 @@ public class GameController : MonoBehaviour
                     gameObject.GetComponent<UI>().AddWord(entry.Key);
                 }
             }
+
+            message.text = "Level 2";
         }
     }
 
@@ -141,6 +143,12 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(time);
         tutorialStage++;
         tutorialIncrementing = false;
+    }
+
+    private IEnumerator BlankMessage()
+    {
+        yield return new WaitForSeconds(1);
+        message.text = "";
     }
 
     public void GameOver()

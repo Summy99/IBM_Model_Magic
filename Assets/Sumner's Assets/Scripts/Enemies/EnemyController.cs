@@ -29,9 +29,14 @@ public class EnemyController : MonoBehaviour
     public bool initialized = false;
     public float moveSpeed = 10;
 
+    private float distanceTraveled = 0f;
+    private string direction = "down";
+    [SerializeField]
+    private Vector2 initialPosition = Vector2.zero;
     void Start()
     {
         shooting = Mathf.FloorToInt(Random.Range(0, 2));
+        initialPosition = transform.position;
 
         timeToShoot = Random.Range(2, 4);
         lifetime = 0;
@@ -60,6 +65,11 @@ public class EnemyController : MonoBehaviour
             initialized = true;
             gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[2];
             gameObject.GetComponent<BulletSourceScript>().Initialize();
+        }
+
+        if (gameObject.GetComponent<BulletSourceScript>().IsEnded)
+        {
+            gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[0];
         }
     }
 
@@ -172,7 +182,71 @@ public class EnemyController : MonoBehaviour
             case 11:
                 rb.velocity = -(transform.up * moveSpeed * 2);
                 break;
+
+            case 12:
+                print(distanceTraveled);
+                if(direction == "down")
+                {
+                    if(distanceTraveled <= 10f)
+                    {
+                        rb.velocity = -(transform.up * moveSpeed);
+                        distanceTraveled = Vector2.Distance(initialPosition, transform.position);
+                    }
+                    else
+                    {
+                        direction = "shooting";
+                        distanceTraveled = 0;
+                        StartCoroutine("Vomit");
+                    }
+                }
+
+                if(direction == "right")
+                {
+                    if (distanceTraveled <= 10f)
+                    {
+                        rb.velocity = transform.right * moveSpeed;
+                        distanceTraveled += Vector2.Distance(initialPosition, transform.position);
+                        initialPosition = transform.position;
+                    }
+                    else
+                    {
+                        direction = "shooting";
+                        distanceTraveled = 0;
+                        StartCoroutine("VomitDown");
+                    }
+                }
+                break;
         }
+    }
+
+    private IEnumerator Vomit()
+    {
+        rb.velocity = Vector2.zero;
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[3];
+        gameObject.GetComponent<BulletSourceScript>().Initialize();
+        yield return new WaitForSeconds(0.5f);
+        initialPosition = transform.position;
+        if(pattern == 12)
+        {
+            direction = "right";
+        }
+
+        if (pattern == 13)
+        {
+            direction = "left";
+        }
+    }
+
+    private IEnumerator VomitDown()
+    {
+        rb.velocity = Vector2.zero;
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[3];
+        gameObject.GetComponent<BulletSourceScript>().Initialize();
+        yield return new WaitForSeconds(0.5f);
+        initialPosition = transform.position;
+        direction = "down";
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

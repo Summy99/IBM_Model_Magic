@@ -48,3 +48,8 @@ MonoBehaviour:
     sprite: {fileID: 0}
     TimeToLiveInSeconds: 10
     DestroyWhenOutOfScreen: 1
+  - name: Vomit
+    prefab: {fileID: 398087840592554452, guid: 32d9ad45d0debec4881294424d911c42, type: 3}
+    sprite: {fileID: 0}
+    TimeToLiveInSeconds: 10
+    DestroyWhenOutOfScreen: 1
