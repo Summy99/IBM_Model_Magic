@@ -67,7 +67,7 @@ public class EnemyController : MonoBehaviour
             gameObject.GetComponent<BulletSourceScript>().Initialize();
         }
 
-        if (gameObject.GetComponent<BulletSourceScript>().IsEnded)
+        if (type == 4 && gameObject.GetComponent<BulletSourceScript>().IsEnded)
         {
             gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[0];
         }
@@ -205,6 +205,40 @@ public class EnemyController : MonoBehaviour
                     if (distanceTraveled <= 10f)
                     {
                         rb.velocity = transform.right * moveSpeed;
+                        distanceTraveled += Vector2.Distance(initialPosition, transform.position);
+                        initialPosition = transform.position;
+                    }
+                    else
+                    {
+                        direction = "shooting";
+                        distanceTraveled = 0;
+                        StartCoroutine("VomitDown");
+                    }
+                }
+                break;
+
+            case 13:
+                print(distanceTraveled);
+                if (direction == "down")
+                {
+                    if (distanceTraveled <= 10f)
+                    {
+                        rb.velocity = -(transform.up * moveSpeed);
+                        distanceTraveled = Vector2.Distance(initialPosition, transform.position);
+                    }
+                    else
+                    {
+                        direction = "shooting";
+                        distanceTraveled = 0;
+                        StartCoroutine("Vomit");
+                    }
+                }
+
+                if (direction == "left")
+                {
+                    if (distanceTraveled <= 10f)
+                    {
+                        rb.velocity = -(transform.right * moveSpeed);
                         distanceTraveled += Vector2.Distance(initialPosition, transform.position);
                         initialPosition = transform.position;
                     }

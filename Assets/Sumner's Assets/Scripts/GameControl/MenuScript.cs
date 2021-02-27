@@ -16,12 +16,22 @@ public class MenuScript : MonoBehaviour
         {
             Application.Quit();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            StartGame(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            StartGame(2);
+        }
     }
 
-    public void StartGame()
+    public void StartGame(int level)
     {
-        GameController.level = 1;
-        LevelTracker.LevelToLoad = 1;
+        GameController.level = level;
+        LevelTracker.LevelToLoad = level;
         SceneManager.LoadScene(4);
     }
 }

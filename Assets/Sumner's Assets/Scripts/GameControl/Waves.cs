@@ -5,13 +5,7 @@ using UnityEngine;
 public class Waves : MonoBehaviour
 {
     [SerializeField]
-    private GameObject enemy1Prefab;
-
-    [SerializeField]
-    private GameObject enemy2Prefab;
-
-    [SerializeField]
-    private GameObject enemy3Prefab;
+    private GameObject enemy1Prefab, enemy2Prefab, enemy3Prefab, enemy4Prefab;
 
     [SerializeField]
     private GameObject bossPrefab;
@@ -119,23 +113,23 @@ public class Waves : MonoBehaviour
             switch (wave)
             {
                 case 1:
-                    StartCoroutine("Wave11");
+                    StartCoroutine("Wave21");
                     break;
 
                 case 2:
-                    StartCoroutine("Wave12");
+                    StartCoroutine("Wave22");
                     break;
 
                 case 3:
-                    StartCoroutine("Wave13");
+                    StartCoroutine("Wave23");
                     break;
 
                 case 4:
-                    StartCoroutine("Wave14");
+                    StartCoroutine("Wave24");
                     break;
 
                 case 5:
-                    StartCoroutine("Wave15");
+                    StartCoroutine("Wave25");
                     break;
 
                 case 6:
@@ -418,12 +412,31 @@ public class Waves : MonoBehaviour
 
     // wave 10 is boss
 
-    private IEnumerator Wave11()
+    // level 2 start
+    private IEnumerator Wave21()
     {
         waveRunning = true;
 
+        for(int i = 0; i < 3; i++)
+        {
+            GameObject e1 = Instantiate(enemy4Prefab, topSpawns[1].transform.position, Quaternion.identity);
+            GameObject e2 = Instantiate(enemy4Prefab, topSpawns[2].transform.position, Quaternion.identity);
+            GameObject e3 = Instantiate(enemy4Prefab, topSpawns[3].transform.position, Quaternion.identity);
 
+            GameObject e4 = Instantiate(enemy4Prefab, topSpawns[8].transform.position, Quaternion.identity);
+            GameObject e5 = Instantiate(enemy4Prefab, topSpawns[7].transform.position, Quaternion.identity);
+            GameObject e6 = Instantiate(enemy4Prefab, topSpawns[6].transform.position, Quaternion.identity);
 
+            e1.GetComponent<EnemyController>().pattern = 12;
+            e2.GetComponent<EnemyController>().pattern = 12;
+            e3.GetComponent<EnemyController>().pattern = 12;
+
+            e4.GetComponent<EnemyController>().pattern = 13;
+            e5.GetComponent<EnemyController>().pattern = 13;
+            e6.GetComponent<EnemyController>().pattern = 13;
+
+            yield return new WaitForSeconds(0.5f);
+        }
 
         yield return new WaitForSeconds(1);
         waveRunning = false;
