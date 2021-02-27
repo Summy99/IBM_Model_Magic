@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e7a61203ff5f64c97cdf2969f12cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  death: {fileID: 8300000, guid: 21ec77cfbadd5774aa91405f8a64b682, type: 3}
+  death: {fileID: 8300000, guid: 6f0b3ba028a18964d90a011e3b1b6b8c, type: 3}
   bulletmlScripts:
   - {fileID: 4900000, guid: 475f9161d0a7b684d976c7b284eec808, type: 3}
   - {fileID: 4900000, guid: 0cd04cab02f5eee47935eaa7080ca97f, type: 3}
@@ -144,6 +144,7 @@ MonoBehaviour:
   type: 1
   initialized: 0
   moveSpeed: 10
+  initialPosition: {x: 0, y: 0}
 --- !u!50 &621043435091661713
 Rigidbody2D:
   serializedVersion: 4

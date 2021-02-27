@@ -67,6 +67,7 @@ public class GameController : MonoBehaviour
             }
 
             message.text = "Level 2";
+            StartCoroutine("BlankMessage");
         }
     }
 

@@ -184,7 +184,6 @@ public class EnemyController : MonoBehaviour
                 break;
 
             case 12:
-                print(distanceTraveled);
                 if(direction == "down")
                 {
                     if(distanceTraveled <= 10f)
@@ -218,7 +217,6 @@ public class EnemyController : MonoBehaviour
                 break;
 
             case 13:
-                print(distanceTraveled);
                 if (direction == "down")
                 {
                     if (distanceTraveled <= 10f)
@@ -256,7 +254,6 @@ public class EnemyController : MonoBehaviour
     private IEnumerator Vomit()
     {
         rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(0.5f);
         gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[3];
         gameObject.GetComponent<BulletSourceScript>().Initialize();
         yield return new WaitForSeconds(0.5f);
@@ -275,7 +272,6 @@ public class EnemyController : MonoBehaviour
     private IEnumerator VomitDown()
     {
         rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(0.5f);
         gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[3];
         gameObject.GetComponent<BulletSourceScript>().Initialize();
         yield return new WaitForSeconds(0.5f);

@@ -45,6 +45,8 @@ public class Shop : MonoBehaviour
         shopOptions.SetActive(true);
         prices.SetActive(true);
 
+        time = 30f;
+
         for(int i = 0; i < shopOptions.transform.childCount; i++)
         {
             shopOptions.transform.GetChild(i).gameObject.SetActive(true);
