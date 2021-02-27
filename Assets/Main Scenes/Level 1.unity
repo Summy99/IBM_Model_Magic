@@ -1320,7 +1320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d1f9821e9cd734c8e5f2d7594cae91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 20
+  time: 35
   shopOptions: {fileID: 1616662570}
   prices: {fileID: 1683269228}
   theme: {fileID: 8300000, guid: 4865ae256f024de49ab13609fe5a4009, type: 3}

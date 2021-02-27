@@ -84,8 +84,7 @@ public class Typing : MonoBehaviour
 
             if (mode == "typing" && slowDown <= 0)
             {
-                word = "";
-                mode = "shooting";
+                ConfirmWord();
             }
         }
 
@@ -137,132 +136,132 @@ public class Typing : MonoBehaviour
                 word = word.Substring(0, word.Length - 1);
             }
 
-            if (Input.GetKeyDown(KeyCode.A) && gc.letters[0])
+            if (Input.GetKeyDown(KeyCode.A) && gc.letters[0] && word.Length < 22)
             {
                 word += "A";
             }
 
-            if (Input.GetKeyDown(KeyCode.B) && gc.letters[1])
+            if (Input.GetKeyDown(KeyCode.B) && gc.letters[1] && word.Length < 22)
             {
                 word += "B";
             }
 
-            if (Input.GetKeyDown(KeyCode.C) && gc.letters[2])
+            if (Input.GetKeyDown(KeyCode.C) && gc.letters[2] && word.Length < 22)
             {
                 word += "C";
             }
 
-            if (Input.GetKeyDown(KeyCode.D) && gc.letters[3])
+            if (Input.GetKeyDown(KeyCode.D) && gc.letters[3] && word.Length < 22)
             {
                 word += "D";
             }
 
-            if (Input.GetKeyDown(KeyCode.E) && gc.letters[4])
+            if (Input.GetKeyDown(KeyCode.E) && gc.letters[4] && word.Length < 22)
             {
                 word += "E";
             }
 
-            if (Input.GetKeyDown(KeyCode.F) && gc.letters[5])
+            if (Input.GetKeyDown(KeyCode.F) && gc.letters[5] && word.Length < 22)
             {
                 word += "F";
             }
 
-            if (Input.GetKeyDown(KeyCode.G) && gc.letters[6])
+            if (Input.GetKeyDown(KeyCode.G) && gc.letters[6] && word.Length < 22)
             {
                 word += "G";
             }
 
-            if (Input.GetKeyDown(KeyCode.H) && gc.letters[7])
+            if (Input.GetKeyDown(KeyCode.H) && gc.letters[7] && word.Length < 22)
             {
                 word += "H";
             }
 
-            if (Input.GetKeyDown(KeyCode.I) && gc.letters[8])
+            if (Input.GetKeyDown(KeyCode.I) && gc.letters[8] && word.Length < 22)
             {
                 word += "I";
             }
 
-            if (Input.GetKeyDown(KeyCode.J) && gc.letters[9])
+            if (Input.GetKeyDown(KeyCode.J) && gc.letters[9] && word.Length < 22)
             {
                 word += "J";
             }
 
-            if (Input.GetKeyDown(KeyCode.K) && gc.letters[10])
+            if (Input.GetKeyDown(KeyCode.K) && gc.letters[10] && word.Length < 22)
             {
                 word += "K";
             }
 
-            if (Input.GetKeyDown(KeyCode.L) && gc.letters[11])
+            if (Input.GetKeyDown(KeyCode.L) && gc.letters[11] && word.Length < 22)
             {
                 word += "L";
             }
 
-            if (Input.GetKeyDown(KeyCode.M) && gc.letters[12])
+            if (Input.GetKeyDown(KeyCode.M) && gc.letters[12] && word.Length < 22)
             {
                 word += "M";
             }
 
-            if (Input.GetKeyDown(KeyCode.N) && gc.letters[13])
+            if (Input.GetKeyDown(KeyCode.N) && gc.letters[13] && word.Length < 22)
             {
                 word += "N";
             }
 
-            if (Input.GetKeyDown(KeyCode.O) && gc.letters[14])
+            if (Input.GetKeyDown(KeyCode.O) && gc.letters[14] && word.Length < 22)
             {
                 word += "O";
             }
 
-            if (Input.GetKeyDown(KeyCode.P) && gc.letters[15])
+            if (Input.GetKeyDown(KeyCode.P) && gc.letters[15] && word.Length < 22)
             {
                 word += "P";
             }
 
-            if (Input.GetKeyDown(KeyCode.Q) && gc.letters[16])
+            if (Input.GetKeyDown(KeyCode.Q) && gc.letters[16] && word.Length < 22)
             {
                 word += "Q";
             }
 
-            if (Input.GetKeyDown(KeyCode.R) && gc.letters[17])
+            if (Input.GetKeyDown(KeyCode.R) && gc.letters[17] && word.Length < 22)
             {
                 word += "R";
             }
 
-            if (Input.GetKeyDown(KeyCode.S) && gc.letters[18])
+            if (Input.GetKeyDown(KeyCode.S) && gc.letters[18] && word.Length < 22)
             {
                 word += "S";
             }
 
-            if (Input.GetKeyDown(KeyCode.T) && gc.letters[19])
+            if (Input.GetKeyDown(KeyCode.T) && gc.letters[19] && word.Length < 22)
             {
                 word += "T";
             }
 
-            if (Input.GetKeyDown(KeyCode.U) && gc.letters[20])
+            if (Input.GetKeyDown(KeyCode.U) && gc.letters[20] && word.Length < 22)
             {
                 word += "U";
             }
 
-            if (Input.GetKeyDown(KeyCode.V) && gc.letters[21])
+            if (Input.GetKeyDown(KeyCode.V) && gc.letters[21] && word.Length < 22)
             {
                 word += "V";
             }
 
-            if (Input.GetKeyDown(KeyCode.W) && gc.letters[22])
+            if (Input.GetKeyDown(KeyCode.W) && gc.letters[22] && word.Length < 22)
             {
                 word += "W";
             }
 
-            if (Input.GetKeyDown(KeyCode.X) && gc.letters[23])
+            if (Input.GetKeyDown(KeyCode.X) && gc.letters[23] && word.Length < 22)
             {
                 word += "X";
             }
 
-            if (Input.GetKeyDown(KeyCode.Y) && gc.letters[24])
+            if (Input.GetKeyDown(KeyCode.Y) && gc.letters[24] && word.Length < 22)
             {
                 word += "Y";
             }
 
-            if (Input.GetKeyDown(KeyCode.Z) && gc.letters[25])
+            if (Input.GetKeyDown(KeyCode.Z) && gc.letters[25] && word.Length < 22)
             {
                 word += "Z";
             }
@@ -380,6 +379,121 @@ public class Typing : MonoBehaviour
         if (!GameController.words.ContainsKey(word))
         {
             sfx.PlayOneShot(wordFail);
+
+            string[] letters = ToStringArray(word);
+            int[] lettersToShoot = new int[letters.Length];
+            
+            for(int i = 0; i < letters.Length; i++)
+            {
+                switch (letters[i])
+                {
+                    case "A":
+                        lettersToShoot[i] = 0;
+                        break;
+
+                    case "B":
+                        lettersToShoot[i] = 1;
+                        break;
+
+                    case "C":
+                        lettersToShoot[i] = 2;
+                        break;
+
+                    case "D":
+                        lettersToShoot[i] = 3;
+                        break;
+
+                    case "E":
+                        lettersToShoot[i] = 4;
+                        break;
+
+                    case "F":
+                        lettersToShoot[i] = 5;
+                        break;
+
+                    case "G":
+                        lettersToShoot[i] = 6;
+                        break;
+
+                    case "H":
+                        lettersToShoot[i] = 7;
+                        break;
+
+                    case "I":
+                        lettersToShoot[i] = 8;
+                        break;
+
+                    case "J":
+                        lettersToShoot[i] = 9;
+                        break;
+
+                    case "K":
+                        lettersToShoot[i] = 10;
+                        break;
+
+                    case "L":
+                        lettersToShoot[i] = 11;
+                        break;
+
+                    case "M":
+                        lettersToShoot[i] = 12;
+                        break;
+
+                    case "N":
+                        lettersToShoot[i] = 13;
+                        break;
+
+                    case "O":
+                        lettersToShoot[i] = 14;
+                        break;
+
+                    case "P":
+                        lettersToShoot[i] = 15;
+                        break;
+
+                    case "Q":
+                        lettersToShoot[i] = 16;
+                        break;
+
+                    case "R":
+                        lettersToShoot[i] = 17;
+                        break;
+
+                    case "S":
+                        lettersToShoot[i] = 18;
+                        break;
+
+                    case "T":
+                        lettersToShoot[i] = 19;
+                        break;
+
+                    case "U":
+                        lettersToShoot[i] = 20;
+                        break;
+
+                    case "V":
+                        lettersToShoot[i] = 21;
+                        break;
+
+                    case "W":
+                        lettersToShoot[i] = 22;
+                        break;
+
+                    case "X":
+                        lettersToShoot[i] = 23;
+                        break;
+
+                    case "Y":
+                        lettersToShoot[i] = 24;
+                        break;
+
+                    case "Z":
+                        lettersToShoot[i] = 25;
+                        break;
+                }
+            }
+
+            StartCoroutine("ShootLetters", lettersToShoot);
         }
         else
         {
@@ -396,6 +510,27 @@ public class Typing : MonoBehaviour
         GameObject l = Instantiate(letterPrefab, gameObject.transform.Find("letterspawn").position, Quaternion.identity);
         l.GetComponent<SpriteRenderer>().sprite = letterSprites[letter];
         Destroy(l, 2);
+    }
+
+    private IEnumerator ShootLetters(int[] letters)
+    {
+        foreach(int i in letters)
+        {
+            Shoot(i);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public string[] ToStringArray(string s)
+    {
+        string[] a = new string[s.Length];
+
+        for(int i = 0; i < a.Length; i++)
+        {
+            a[i] = s[i].ToString();
+        }
+
+        return a;
     }
 
     private void Bomb()
