@@ -314,43 +314,95 @@ public class EnemyController : MonoBehaviour
 
         if(health <= 0)
         {
-            int pickup = Mathf.FloorToInt(Random.Range(0, 10));
 
-            switch (pickup)
+            if(type == 1 || type == 2 || type == 4)
             {
-                case 0:
-                    break;
+                int pickup = Mathf.FloorToInt(Random.Range(0, 20));
 
-                case 1:
-                    break;
+                switch (pickup)
+                {
+                    case 0:
+                        break;
 
-                case 2:
-                    break;
+                    case 1:
+                        break;
 
-                case 3:
-                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                    break;
+                    case 2:
+                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                        break;
 
-                case 4:
-                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                    break;
+                    case 3:
+                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                        break;
 
-                case 5:
-                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                    break;
+                    case 4:
+                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                        break;
 
-                case 6:
-                    break;
+                    case 5:
+                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                        break;
 
-                case 7:
-                    break;
+                    case 6:
+                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                        break;
 
-                case 8:
-                    break;
+                    case 7:
+                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                        break;
 
-                case 9:
-                    Instantiate(slowCollectible, transform.position, Quaternion.identity);
-                    break;
+                    case 8:
+                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                        break;
+
+                    case 9:
+                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                        break;
+
+                    case 10:
+                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                        break;
+
+                    case 11:
+                        break;
+
+                    case 12:
+                        break;
+
+                    case 13:
+                        break;
+
+                    case 14:
+                        break;
+
+                    case 15:
+                        break;
+
+                    case 16:
+                        break;
+
+                    case 17:
+                        break;
+
+                    case 18:
+                        break;
+
+                    case 19:
+                        Instantiate(slowCollectible, transform.position, Quaternion.identity);
+                        break;
+                }
+            }
+
+            if (type == 3)
+            {
+                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                Instantiate(slowCollectible, transform.position, Quaternion.identity);
             }
             sfx.PlayOneShot(death, 0.5f);
             Destroy(gameObject);

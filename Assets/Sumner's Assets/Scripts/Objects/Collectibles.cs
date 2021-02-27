@@ -55,12 +55,13 @@ public class Collectibles : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && type == "slow")
         {
-            collision.gameObject.GetComponent<Typing>().slowDown += 0.1f * Typing.maxSlowDown;
+            collision.gameObject.GetComponent<Typing>().slowDown += 0.2f * Typing.maxSlowDown;
             Destroy(gameObject);
         }
 
         if (collision.gameObject.CompareTag("Player") && type == "keycap")
         {
+            collision.gameObject.GetComponent<Typing>().slowDown += 0.01f * Typing.maxSlowDown;
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().keycaps++;
             Destroy(gameObject);
         }
