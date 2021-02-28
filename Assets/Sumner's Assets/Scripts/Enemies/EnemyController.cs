@@ -248,6 +248,28 @@ public class EnemyController : MonoBehaviour
                     }
                 }
                 break;
+
+            case 14:
+                if(transform.position.y < 45)
+                {
+                    rb.velocity = transform.up * moveSpeed;
+                }
+                else
+                {
+                    rb.velocity = transform.right * moveSpeed;
+                }
+                break;
+
+            case 15:
+                if (transform.position.y < 45)
+                {
+                    rb.velocity = transform.up * moveSpeed;
+                }
+                else
+                {
+                    rb.velocity = -(transform.right * moveSpeed);
+                }
+                break;
         }
     }
 

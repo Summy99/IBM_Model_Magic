@@ -1118,6 +1118,10 @@ MonoBehaviour:
   tutorialStage: 0
   keycaps: 0
   message: {fileID: 1310974610}
+  tutorialMsg: {fileID: 0}
+  spawn: {fileID: 0}
+  tutorialEnemy: {fileID: 0}
+  trackball: {fileID: 0}
   letters: 0101010101010101010101010101010101010101010101010101
 --- !u!4 &257336643
 Transform:
@@ -1189,7 +1193,7 @@ MonoBehaviour:
   time: 35
   shopOptions: {fileID: 1616662570}
   prices: {fileID: 1683269228}
-  theme: {fileID: 8300000, guid: 4865ae256f024de49ab13609fe5a4009, type: 3}
+  theme: {fileID: 8300000, guid: 83c587b02b106ca45a926db7ebef9fcb, type: 3}
   message: {fileID: 1310974610}
 --- !u!114 &257336647
 MonoBehaviour:

@@ -48,7 +48,7 @@ public class Waves : MonoBehaviour
         {
             wave++;
         }
-
+        // level 1
         if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.level == 1)
         {
             switch (wave)
@@ -107,7 +107,7 @@ public class Waves : MonoBehaviour
                     break;
             }
         }
-
+        // level 2
         if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.level == 2)
         {
             switch (wave)
@@ -453,6 +453,78 @@ public class Waves : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
+        waveRunning = false;
+    }
+
+    private IEnumerator Wave22()
+    {
+        waveRunning = true;
+
+        GameObject e1 = Instantiate(enemy4Prefab, topSpawns[5].transform.position, Quaternion.identity);
+        GameObject e2 = Instantiate(enemy4Prefab, topSpawns[4].transform.position, Quaternion.identity);
+        GameObject e3 = Instantiate(enemy4Prefab, topSpawns[2].transform.position, Quaternion.identity);
+
+        e1.GetComponent<EnemyController>().pattern = 12;
+        e2.GetComponent<EnemyController>().pattern = 12;
+        e3.GetComponent<EnemyController>().pattern = 12;
+
+        yield return new WaitForSeconds(4);
+
+        GameObject e4 = Instantiate(enemy4Prefab, topSpawns[7].transform.position, Quaternion.identity);
+        GameObject e5 = Instantiate(enemy4Prefab, topSpawns[3].transform.position, Quaternion.identity);
+        GameObject e6 = Instantiate(enemy4Prefab, topSpawns[5].transform.position, Quaternion.identity);
+        GameObject e7 = Instantiate(enemy4Prefab, topSpawns[6].transform.position, Quaternion.identity);
+
+        e4.GetComponent<EnemyController>().pattern = 13;
+        e5.GetComponent<EnemyController>().pattern = 12;
+        e6.GetComponent<EnemyController>().pattern = 12;
+        e7.GetComponent<EnemyController>().pattern = 13;
+
+        yield return new WaitForSeconds(4);
+
+        GameObject e8 = Instantiate(enemy4Prefab, topSpawns[6].transform.position, Quaternion.identity);
+        GameObject e9 = Instantiate(enemy4Prefab, topSpawns[2].transform.position, Quaternion.identity);
+        GameObject e10 = Instantiate(enemy4Prefab, topSpawns[5].transform.position, Quaternion.identity);
+        GameObject e11 = Instantiate(enemy4Prefab, topSpawns[8].transform.position, Quaternion.identity);
+        GameObject e12 = Instantiate(enemy4Prefab, topSpawns[7].transform.position, Quaternion.identity);
+
+        e8.GetComponent<EnemyController>().pattern = 13;
+        e9.GetComponent<EnemyController>().pattern = 12;
+        e10.GetComponent<EnemyController>().pattern = 12;
+        e11.GetComponent<EnemyController>().pattern = 13;
+        e12.GetComponent<EnemyController>().pattern = 13;
+
+        yield return new WaitForSeconds(1);
+
+        waveRunning = false;
+    }
+
+    private IEnumerator Wave23()
+    {
+        waveRunning = true;
+
+        for(int i = 0; i < 20; i++)
+        {
+            GameObject e1 = Instantiate(enemy2Prefab, bottomSpawns[1].transform.position, Quaternion.identity);
+            GameObject e2 = Instantiate(enemy2Prefab, bottomSpawns[8].transform.position, Quaternion.identity);
+
+            e1.GetComponent<EnemyController>().pattern = 14;
+            e2.GetComponent<EnemyController>().pattern = 15;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        yield return new WaitForSeconds(1);
+        waveRunning = false;
+    }
+
+    private IEnumerator Wave24()
+    {
+        waveRunning = true;
+
+
+
+        yield return new WaitForSeconds(1);
         waveRunning = false;
     }
 
