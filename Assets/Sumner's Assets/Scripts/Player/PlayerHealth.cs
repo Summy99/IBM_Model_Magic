@@ -11,6 +11,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private AudioClip death;
 
+    [SerializeField]
+    private AudioClip[] types;
+
     public bool shield = false;
     private BulletSourceScript bml;
 

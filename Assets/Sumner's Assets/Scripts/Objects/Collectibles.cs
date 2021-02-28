@@ -6,6 +6,9 @@ public class Collectibles : MonoBehaviour
 {
     private Rigidbody2D rb;
     private GameObject player;
+   
+    [SerializeField]
+    private AudioClip[] types;
 
     public string type = "slow";
 
@@ -61,6 +64,7 @@ public class Collectibles : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player") && type == "keycap")
         {
+            collision.gameObject.GetComponent<AudioSource>().PlayOneShot(types[Mathf.FloorToInt(Random.Range(0, types.Length))]);
             collision.gameObject.GetComponent<Typing>().slowDown += 0.01f * Typing.maxSlowDown;
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().keycaps++;
             Destroy(gameObject);

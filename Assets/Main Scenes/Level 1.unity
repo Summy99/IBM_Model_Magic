@@ -1389,7 +1389,7 @@ MonoBehaviour:
   tutorialMsg: {fileID: 221840069}
   spawn: {fileID: 852930151}
   tutorialEnemy: {fileID: 1695873424102204400, guid: a2f62262d440cd74fa9e60b7b4692c73, type: 3}
-  trackball: {fileID: 0}
+  trackball: {fileID: 1322778007}
   letters: 0101010101010101010101010101010101010101010101010101
 --- !u!4 &257336643
 Transform:
@@ -5150,7 +5150,7 @@ GameObject:
   - component: {fileID: 1322778008}
   - component: {fileID: 1322778010}
   m_Layer: 0
-  m_Name: Mouse_Companion
+  m_Name: Trackball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -144,4 +144,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3a7eed21b703a40bf2fb9ff211551f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  types:
+  - {fileID: 8300000, guid: b70d129d19be9c240b34961f0ce6f950, type: 3}
+  - {fileID: 8300000, guid: 9d29c668d5e80774f852d54e24351c0f, type: 3}
+  - {fileID: 8300000, guid: 890ec367ce7865948bfb105083636670, type: 3}
+  - {fileID: 8300000, guid: 9b1982f07ab699d49884d5686c777617, type: 3}
+  - {fileID: 8300000, guid: 4f128a25fba43db4cb9fc669c9719dfb, type: 3}
+  - {fileID: 8300000, guid: e0031d76e61e30e419a02ea66f6e45ae, type: 3}
+  - {fileID: 8300000, guid: 1f9a041c6ca934d48bb40429f70ee02c, type: 3}
+  - {fileID: 8300000, guid: e1ecd78eacd96f548931737f3594f2ff, type: 3}
+  - {fileID: 8300000, guid: 5f644a94c6c14e94c811dbf72f2768c0, type: 3}
+  - {fileID: 8300000, guid: f98b5c08d0a5e0e4aaf79ad42be4f631, type: 3}
+  - {fileID: 8300000, guid: 236250f778cc33e4085fa5c25fcdd25d, type: 3}
+  - {fileID: 8300000, guid: 0031568404f29b141903f53d21fb36a2, type: 3}
   type: keycap
