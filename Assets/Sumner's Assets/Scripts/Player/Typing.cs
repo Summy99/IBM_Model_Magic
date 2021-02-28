@@ -59,14 +59,9 @@ public class Typing : MonoBehaviour
 
         if (gc.tutorial)
         {
-            if(gc.tutorialStage == 2 && slowDown <= 0)
+            if(gc.tutorialStage == 4 && slowDown <= 0)
             {
                 slowDown = maxSlowDown;
-            }
-
-            if(gc.tutorialStage == 2 && word == "AUTO")
-            {
-                gc.tutorialStage = 3;
             }
         }
 
@@ -270,11 +265,23 @@ public class Typing : MonoBehaviour
 
     private void ConfirmWord()
     {
-        if (gc.tutorial && gc.tutorialStage == 3)
+        if (gc.tutorial && gc.tutorialStage == 6)
         {
             if(word == "AUTO")
             {
-                gc.tutorialStage = 4;
+                gc.tutorialStage = 7;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        if (gc.tutorial && gc.tutorialStage == 8)
+        {
+            if (word == "SHIELD")
+            {
+                gc.tutorialStage = 9;
             }
             else
             {

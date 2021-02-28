@@ -11,11 +11,15 @@ public class GameController : MonoBehaviour
 
     public bool tutorial = false;
     private bool tutorialIncrementing = false;
+    private bool enemySpawned = false;
     public int tutorialStage = 0;
     public int keycaps = 0;
 
     private GameObject player;
     [SerializeField] private TextMeshProUGUI message;
+    [SerializeField] private TextMeshProUGUI tutorialMsg;
+    [SerializeField] private Transform spawn;
+    [SerializeField] private GameObject tutorialEnemy, trackball;
 
     public static Dictionary<string, bool> words = new Dictionary<string, bool>();
     public bool[] letters = new bool[] { 
@@ -51,7 +55,7 @@ public class GameController : MonoBehaviour
             words.Add("GIANT", false);
 
             tutorial = true;
-            message.text = "Move with arrow keys";
+            tutorialMsg.text = "Hello! I'm Trackball the mouse, welcome to IBM Model Magic!";
             Typing.maxSlowDown = 15;
             player.GetComponent<Typing>().slowDown = 15;
         }
@@ -82,15 +86,15 @@ public class GameController : MonoBehaviour
         {
             if(tutorialStage == 0)
             {
-                if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+                if(Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     tutorialStage = 1;
                 }
             }
             if(tutorialStage == 1)
             {
-                message.text = "Press Enter or Space";
-                if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+                tutorialMsg.text = "You can move with the arrow keys. Try it!";
+                if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
                 {
                     tutorialStage = 2;
                 }
@@ -98,37 +102,74 @@ public class GameController : MonoBehaviour
 
             if (tutorialStage == 2)
             {
-                message.text = "Type \"AUTO\" \n Don't worry, we've given you plenty of time.";
+                tutorialMsg.text = "Emojis are invading! You can fight back with your magical IBM Model M keyboard.";
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    tutorialStage = 3;
+                }
             }
 
             if(tutorialStage == 3)
             {
-                message.text = "Press Enter or Space to confirm";
+                tutorialMsg.text = "Here comes one now! Press space or enter to slow time and start typing.";
+                
+                if (!enemySpawned)
+                {
+                    Instantiate(tutorialEnemy, spawn.position, Quaternion.identity);
+                    enemySpawned = true;
+                }
+
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+                {
+                    tutorialStage = 4;
+                }
             }
 
-            if(tutorialStage == 4 && !tutorialIncrementing)
+            if(tutorialStage == 4)
             {
-                message.text = "You've discovered a new word!";
-                StartCoroutine("IncrementTutorial", 3);
+                tutorialMsg.text = "Type in a word here to shoot it! Press space or enter to fire when you're done.";
             }
 
-            if (tutorialStage == 5 && !tutorialIncrementing)
+            if (tutorialStage == 5)
             {
-                message.text = "Try some other words and see what happens!";
-                StartCoroutine("IncrementTutorial", 3);
+                tutorialMsg.text = "That one dropped a keycap, make sure to pick it up. You can spend them later on upgrades.";
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    tutorialStage = 6;
+                }
             }
 
-            if (tutorialStage == 6 && !tutorialIncrementing)
+            if (tutorialStage == 6)
             {
-                message.text = "Get ready! Here come the enemies.";
-                StartCoroutine("IncrementTutorial", 3);
+                tutorialMsg.text = "There are certain words of power that have special effects. Try putting in \"AUTO.\"";
             }
 
-            if (tutorialStage == 7 && !tutorialIncrementing)
+            if (tutorialStage == 7)
             {
-                message.text = "";
-                Typing.maxSlowDown = 3;
+                tutorialMsg.text = "There's plenty other words! Try to find them all!";
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    tutorialStage = 8;
+                }
+            }
+
+            if(tutorialStage == 8)
+            {
+                tutorialMsg.text = "... Okay fine, you can have one more for free. Try \"SHIELD.\"";
+            }
+
+            if(tutorialStage == 9 && !tutorialIncrementing)
+            {
+                tutorialMsg.text = "Here come more emojis, get ready!";
+                StartCoroutine("IncrementTutorial", 2);
+            }
+
+            if(tutorialStage == 10)
+            {
+                tutorialMsg.text = "";
                 tutorial = false;
+                Typing.maxSlowDown = 3;
+                trackball.SetActive(false);
             }
         }
 
