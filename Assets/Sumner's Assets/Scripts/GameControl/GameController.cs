@@ -71,6 +71,8 @@ public class GameController : MonoBehaviour
                 }
             }
 
+            player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
+
             message.text = "Level 2";
             StartCoroutine("BlankMessage");
         }
@@ -154,7 +156,7 @@ public class GameController : MonoBehaviour
 
             if (tutorialStage == 7)
             {
-                tutorialMsg.text = "There's plenty other words! Try to find them all!";
+                tutorialMsg.text = "There's plenty other words! Experiment and try to find them all!";
                 prompt.SetActive(true);
                 prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
                 if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -169,13 +171,24 @@ public class GameController : MonoBehaviour
                 prompt.SetActive(false);
             }
 
-            if(tutorialStage == 9 && !tutorialIncrementing)
+            if (tutorialStage == 9)
+            {
+                tutorialMsg.text = "Careful with that one; you can't type while it's active!";
+                prompt.SetActive(true);
+                prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    tutorialStage = 10;
+                }
+            }
+
+            if (tutorialStage == 10 && !tutorialIncrementing)
             {
                 tutorialMsg.text = "Here come more emojis, get ready!";
                 StartCoroutine("IncrementTutorial", 2);
             }
 
-            if(tutorialStage == 10)
+            if(tutorialStage == 11)
             {
                 tutorialMsg.text = "";
                 tutorial = false;

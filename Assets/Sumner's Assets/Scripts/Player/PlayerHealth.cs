@@ -41,27 +41,26 @@ public class PlayerHealth : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.name == "SlowBarUpgrade" && gc.keycaps >= 20)
+        if (collision.gameObject.name == "SlowBarUpgrade" && gc.keycaps >= 25)
         {
             collision.gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPrice").gameObject.SetActive(false);
-            gc.keycaps -= 20;
-            Typing.maxSlowDown += 2;
+            gc.keycaps -= 25;
+            Typing.maxSlowDown *= 1.1f;
         }
 
-        if (collision.gameObject.name == "Heal" && gc.keycaps >= 10 && GameController.lives < 6)
+        if (collision.gameObject.name == "Heal" && gc.keycaps >= 15 && GameController.lives < 6)
         {
-            collision.gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("HealPrice").gameObject.SetActive(false);
-            gc.keycaps -= 10;
+            gc.keycaps -= 15;
             GameController.lives++;
         }
 
-        if (collision.gameObject.name == "NewWord" && gc.keycaps >= 30)
+        if (collision.gameObject.name == "NewWord" && gc.keycaps >= 40)
         {
             collision.gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("WordPrice").gameObject.SetActive(false);
-            gc.keycaps -= 30;
+            gc.keycaps -= 40;
 
             string[] words = new string[GameController.words.Count];
             GameController.words.Keys.CopyTo(words, 0);

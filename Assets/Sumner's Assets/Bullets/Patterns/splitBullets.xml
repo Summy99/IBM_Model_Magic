@@ -8,51 +8,42 @@
       <times>999</times>
       <action>
         <fire>
-          <direction type="absolute">0</direction>
+          <direction type="absolute">($rand*90)-45</direction>
           <speed>0.5</speed>
           <bulletRef label="splitLevel1" />
         </fire>
-        <wait>($rand*30)+10</wait>
+        <wait>($rand*30)+20</wait>
       </action>
     </repeat>
   </action>
 
   <bullet label="splitLevel1">
     <action>
-      <wait>70</wait>
+      <wait>100</wait>
+      <fire>
+        <direction type="relative">($rand*90)-45</direction>
+        <speed>0.5</speed>
+        <bulletRef label="splitLevel2" />
+      </fire>
+      <fire>
+        <direction type="relative">($rand*90)-45</direction>
+        <speed>0.5</speed>
+        <bulletRef label="splitLevel2" />
+      </fire>
+      <!--
       <fire>
         <direction type="absolute">($rand*180)-90</direction>
         <speed>0.5</speed>
         <bulletRef label="splitLevel2" />
       </fire>
-      <fire>
-        <direction type="absolute">($rand*180)-90</direction>
-        <speed>0.5</speed>
-        <bulletRef label="splitLevel2" />
-      </fire>
+      -->
       <vanish />
     </action>
   </bullet>
 
   <bullet label="splitLevel2">
     <action>
-      <wait>70</wait>
-      <fire>
-        <direction type="absolute">($rand*180)-90</direction>
-        <speed>0.5</speed>
-        <bulletRef label="splitLevel3" />
-      </fire>
-      <fire>
-        <direction type="absolute">($rand*180)-90</direction>
-        <speed>0.5</speed>
-        <bulletRef label="splitLevel3" />
-      </fire>
-      <vanish />
     </action>
-  </bullet>
-
-  <bullet label="splitLevel3">
-    
   </bullet>
   
 </bulletml>

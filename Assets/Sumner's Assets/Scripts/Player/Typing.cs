@@ -90,7 +90,7 @@ public class Typing : MonoBehaviour
 
         ShootingInput();
 
-        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && mode == "shooting")
+        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && mode == "shooting" && !gameObject.GetComponent<PlayerHealth>().shield)
         {
             sfx.PlayOneShot(enterSlow);
             mode = "typing";
@@ -557,6 +557,7 @@ public class Typing : MonoBehaviour
 
     private IEnumerator Shield()
     {
+        bml.xmlFile = patterns[0];
         gameObject.transform.Find("Shield").gameObject.SetActive(true);
         gameObject.GetComponent<PlayerHealth>().shield = true;
         yield return new WaitForSeconds(2.5f);

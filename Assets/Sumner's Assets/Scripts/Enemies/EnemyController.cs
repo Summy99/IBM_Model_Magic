@@ -280,6 +280,20 @@ public class EnemyController : MonoBehaviour
 
             case 16:
                 rb.velocity = -(transform.right * moveSpeed);
+
+                if (transform.rotation.eulerAngles.z < 180)
+                {
+                    transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + 0.5f));
+                }
+                break;
+
+            case 17:
+                rb.velocity = transform.right * moveSpeed;
+
+                if (transform.rotation.eulerAngles.z > -180)
+                {
+                    transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z - 0.5f));
+                }
                 break;
         }
     }
