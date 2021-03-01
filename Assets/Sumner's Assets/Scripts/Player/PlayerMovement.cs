@@ -33,10 +33,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
+            transform.Find("hitboxMarker").GetComponent<SpriteRenderer>().enabled = true;
             curSpeed = moveSpeed / 2;
         }
         else
         {
+            transform.Find("hitboxMarker").GetComponent<SpriteRenderer>().enabled = false;
             curSpeed = moveSpeed;
         }
 

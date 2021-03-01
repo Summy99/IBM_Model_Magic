@@ -101,7 +101,7 @@ public class PlayerHealth : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<Typing>().enabled = false;
         gameObject.GetComponent<PlayerMovement>().enabled = false;
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
 
         StartCoroutine("Respawn");
     }
@@ -121,6 +121,6 @@ public class PlayerHealth : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<Typing>().enabled = true;
         gameObject.GetComponent<PlayerMovement>().enabled = true;
-        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        gameObject.GetComponent<CircleCollider2D>().enabled = true;
     }
 }

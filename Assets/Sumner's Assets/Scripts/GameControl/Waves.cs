@@ -528,7 +528,7 @@ public class Waves : MonoBehaviour
 
             e1.GetComponent<EnemyController>().pattern = 16;
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(4);
         }
 
         yield return new WaitForSeconds(1);

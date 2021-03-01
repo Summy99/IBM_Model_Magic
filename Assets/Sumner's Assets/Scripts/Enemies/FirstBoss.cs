@@ -118,7 +118,14 @@ public class FirstBoss : MonoBehaviour
     {
         switching = true;
         yield return new WaitForSeconds(1);
-        attack = Mathf.FloorToInt(Random.Range(0, 5));
+        if(attack == 0)
+        {
+            attack = Mathf.FloorToInt(Random.Range(1, 3));
+        }
+        else
+        {
+            attack = Mathf.FloorToInt(Random.Range(0, 3));
+        }
 
         switch (attack)
         {
@@ -127,9 +134,6 @@ public class FirstBoss : MonoBehaviour
                 break;
 
             case 1:
-                break;
-
-            case 2:
                 anim.SetBool("Crying", true);
                 if (Mathf.FloorToInt(Random.Range(0, 2)) == 0)
                 {
@@ -143,7 +147,7 @@ public class FirstBoss : MonoBehaviour
                 }
                 break;
 
-            case 3:
+            case 2:
                 anim.SetBool("Crying", true);
                 bml.xmlFile = patterns[0];
                 bml.Initialize();
