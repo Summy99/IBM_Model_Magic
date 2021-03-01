@@ -144,15 +144,15 @@ public class Waves : MonoBehaviour
                     break;
 
                 case 7:
-                    StartCoroutine("Wave7");
+                    StartCoroutine("Wave27");
                     break;
 
                 case 8:
-                    StartCoroutine("Wave8");
+                    StartCoroutine("Wave28");
                     break;
 
                 case 9:
-                    StartCoroutine("Wave9");
+                    StartCoroutine("Wave29");
                     break;
 
                 case 10:
@@ -576,6 +576,66 @@ public class Waves : MonoBehaviour
             e8.GetComponent<EnemyController>().pattern = 13;
 
             yield return new WaitForSeconds(4);
+        }
+
+        yield return new WaitForSeconds(1);
+        waveRunning = false;
+    }
+
+    private IEnumerator Wave27()
+    {
+        waveRunning = true;
+
+        for(int i = 0; i < 15; i++)
+        {
+            GameObject e1 = Instantiate(enemy1Prefab, topSpawns[1].transform.position, Quaternion.identity);
+            GameObject e2 = Instantiate(enemy1Prefab, topSpawns[2].transform.position, Quaternion.identity);
+            GameObject e3 = Instantiate(enemy1Prefab, topSpawns[10].transform.position, Quaternion.identity);
+            GameObject e4 = Instantiate(enemy1Prefab, topSpawns[4].transform.position, Quaternion.identity);
+            GameObject e5 = Instantiate(enemy1Prefab, topSpawns[5].transform.position, Quaternion.identity);
+            GameObject e6 = Instantiate(enemy1Prefab, topSpawns[6].transform.position, Quaternion.identity);
+            GameObject e7 = Instantiate(enemy1Prefab, topSpawns[7].transform.position, Quaternion.identity);
+            GameObject e8 = Instantiate(enemy1Prefab, topSpawns[8].transform.position, Quaternion.identity);
+            GameObject e9 = Instantiate(enemy1Prefab, topSpawns[9].transform.position, Quaternion.identity);
+
+            e1.GetComponent<EnemyController>().pattern = 18;
+            e2.GetComponent<EnemyController>().pattern = 18;
+            e3.GetComponent<EnemyController>().pattern = 18;
+            e4.GetComponent<EnemyController>().pattern = 18;
+            e5.GetComponent<EnemyController>().pattern = 18;
+            e6.GetComponent<EnemyController>().pattern = 18;
+            e7.GetComponent<EnemyController>().pattern = 18;
+            e8.GetComponent<EnemyController>().pattern = 18;
+            e9.GetComponent<EnemyController>().pattern = 18;
+
+            yield return new WaitForSeconds(1);
+        }
+
+        for (int i = 0; i < 15; i++)
+        {
+            GameObject e1 = Instantiate(enemy1Prefab, topSpawns[0].transform.position, Quaternion.identity);
+            GameObject e2 = Instantiate(enemy1Prefab, topSpawns[1].transform.position, Quaternion.identity);
+            GameObject e3 = Instantiate(enemy1Prefab, topSpawns[2].transform.position, Quaternion.identity);
+            GameObject e4 = Instantiate(enemy1Prefab, topSpawns[3].transform.position, Quaternion.identity);
+            GameObject e5 = Instantiate(enemy1Prefab, topSpawns[10].transform.position, Quaternion.identity);
+            GameObject e6 = Instantiate(enemy1Prefab, topSpawns[5].transform.position, Quaternion.identity);
+            GameObject e7 = Instantiate(enemy1Prefab, topSpawns[6].transform.position, Quaternion.identity);
+            GameObject e8 = Instantiate(enemy1Prefab, topSpawns[7].transform.position, Quaternion.identity);
+            GameObject e9 = Instantiate(enemy1Prefab, topSpawns[8].transform.position, Quaternion.identity);
+            GameObject e10 = Instantiate(enemy1Prefab, topSpawns[9].transform.position, Quaternion.identity);
+
+            e1.GetComponent<EnemyController>().pattern = 19;
+            e2.GetComponent<EnemyController>().pattern = 19;
+            e3.GetComponent<EnemyController>().pattern = 19;
+            e4.GetComponent<EnemyController>().pattern = 19;
+            e5.GetComponent<EnemyController>().pattern = 19;
+            e6.GetComponent<EnemyController>().pattern = 19;
+            e7.GetComponent<EnemyController>().pattern = 19;
+            e8.GetComponent<EnemyController>().pattern = 19;
+            e9.GetComponent<EnemyController>().pattern = 19;
+            e10.GetComponent<EnemyController>().pattern = 19;
+
+            yield return new WaitForSeconds(1);
         }
 
         yield return new WaitForSeconds(1);

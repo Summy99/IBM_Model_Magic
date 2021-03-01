@@ -265,11 +265,11 @@ public class Typing : MonoBehaviour
 
     private void ConfirmWord()
     {
-        if (gc.tutorial && gc.tutorialStage == 6)
+        if (gc.tutorial && gc.tutorialStage == 7)
         {
             if(word == "AUTO")
             {
-                gc.tutorialStage = 7;
+                gc.tutorialStage = 8;
             }
             else
             {
@@ -277,11 +277,11 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if (gc.tutorial && gc.tutorialStage == 8)
+        if (gc.tutorial && gc.tutorialStage == 9)
         {
             if (word == "SHIELD")
             {
-                gc.tutorialStage = 9;
+                gc.tutorialStage = 10;
             }
             else
             {

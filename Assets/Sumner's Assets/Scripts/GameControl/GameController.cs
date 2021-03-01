@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI message;
     [SerializeField] private TextMeshProUGUI tutorialMsg;
     [SerializeField] private Transform spawn;
-    [SerializeField] private GameObject tutorialEnemy, trackball, prompt;
+    [SerializeField] private GameObject tutorialEnemy, trackball, prompt, skipButton;
 
     public static Dictionary<string, bool> words = new Dictionary<string, bool>();
     public bool[] letters = new bool[] { 
@@ -89,7 +89,7 @@ public class GameController : MonoBehaviour
         {
             if(tutorialStage == 0)
             {
-                if(Input.GetKeyDown(KeyCode.Mouse0))
+                if(Input.GetKeyDown(KeyCode.Z))
                 {
                     tutorialStage = 1;
                 }
@@ -104,18 +104,28 @@ public class GameController : MonoBehaviour
                 }
             }
 
-            if (tutorialStage == 2)
+            if(tutorialStage == 2)
+            {
+                tutorialMsg.text = "If you hold shift, you can slow your movement and see your hitbox.";
+                prompt.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    tutorialStage = 1;
+                }
+            }
+
+            if (tutorialStage == 3)
             {
                 tutorialMsg.text = "Emojis are invading! You can fight back with your magical IBM Model M keyboard.";
                 prompt.SetActive(true);
                 prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    tutorialStage = 3;
+                    tutorialStage = 4;
                 }
             }
 
-            if(tutorialStage == 3)
+            if(tutorialStage == 4)
             {
                 tutorialMsg.text = "Here comes one now! Press space or enter to slow time and start typing.";
                 prompt.SetActive(false);
@@ -127,68 +137,69 @@ public class GameController : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
                 {
-                    tutorialStage = 4;
+                    tutorialStage = 5;
                 }
             }
 
-            if(tutorialStage == 4)
+            if(tutorialStage == 5)
             {
                 tutorialMsg.text = "Type in a word here to shoot it! Press space or enter to fire when you're done.";
                 prompt.SetActive(false);
             }
 
-            if (tutorialStage == 5)
+            if (tutorialStage == 6)
             {
                 tutorialMsg.text = "That one dropped a keycap, make sure to pick it up. You can spend them later on upgrades.";
                 prompt.SetActive(true);
                 prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    tutorialStage = 6;
+                    tutorialStage = 7;
                 }
             }
 
-            if (tutorialStage == 6)
+            if (tutorialStage == 7)
             {
                 tutorialMsg.text = "There are certain words of power that have special effects. Try putting in \"AUTO.\"";
                 prompt.SetActive(false);
             }
 
-            if (tutorialStage == 7)
+            if (tutorialStage == 8)
             {
                 tutorialMsg.text = "There's plenty other words! Experiment and try to find them all!";
                 prompt.SetActive(true);
                 prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    tutorialStage = 8;
+                    tutorialStage = 9;
                 }
             }
 
-            if(tutorialStage == 8)
+            if(tutorialStage == 9)
             {
                 tutorialMsg.text = "... Okay fine, you can have one more for free. Try \"SHIELD.\"";
                 prompt.SetActive(false);
             }
 
-            if (tutorialStage == 9)
+            if (tutorialStage == 10)
             {
                 tutorialMsg.text = "Careful with that one; you can't type while it's active!";
                 prompt.SetActive(true);
                 prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    tutorialStage = 10;
+                    tutorialStage = 11;
                 }
             }
 
-            if (tutorialStage == 10 && !tutorialIncrementing)
+            if (tutorialStage == 11 && !tutorialIncrementing)
             {
                 tutorialMsg.text = "Here come more emojis, get ready!";
+                prompt.SetActive(false);
                 StartCoroutine("IncrementTutorial", 2);
             }
 
-            if(tutorialStage == 11)
+            if(tutorialStage == 12)
             {
                 tutorialMsg.text = "";
                 tutorial = false;
@@ -210,6 +221,12 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(time);
         tutorialStage++;
         tutorialIncrementing = false;
+    }
+
+    public void SkipTutorial()
+    {
+        tutorialStage = 11;
+        skipButton.SetActive(false);
     }
 
     private IEnumerator BlankMessage()

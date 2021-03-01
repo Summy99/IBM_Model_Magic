@@ -31,7 +31,7 @@ public class TutorialEnemy : MonoBehaviour
         if (collision.gameObject.CompareTag("PlayerShot") || collision.gameObject.CompareTag("Letter"))
         {
             Instantiate(keycap, transform.position, Quaternion.identity);
-            gc.tutorialStage = 5;
+            gc.tutorialStage = 6;
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }

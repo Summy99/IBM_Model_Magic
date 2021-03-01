@@ -295,6 +295,18 @@ public class EnemyController : MonoBehaviour
                     transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z - 0.5f));
                 }
                 break;
+
+            case 18:
+                moveSpeed = 20;
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, -15));                
+                rb.velocity = -(transform.up * moveSpeed);
+                break;
+
+            case 19:
+                moveSpeed = 20;
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 15));
+                rb.velocity = -(transform.up * moveSpeed);
+                break;
         }
     }
 

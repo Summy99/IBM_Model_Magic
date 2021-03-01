@@ -25,11 +25,6 @@ public class PlayerHealth : MonoBehaviour
         ui = GameObject.FindGameObjectWithTag("GameController").GetComponent<UI>();
     }
 
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && !shield)
@@ -51,7 +46,6 @@ public class PlayerHealth : MonoBehaviour
 
         if (collision.gameObject.name == "Heal" && gc.keycaps >= 15 && GameController.lives < 6)
         {
-            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("HealPrice").gameObject.SetActive(false);
             gc.keycaps -= 15;
             GameController.lives++;
         }
@@ -89,6 +83,11 @@ public class PlayerHealth : MonoBehaviour
         bml.xmlFile = gameObject.GetComponent<Typing>().patterns[0];
 
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        if(gameObject.GetComponent<Typing>().mode == "typing")
+        {
+            gameObject.GetComponent<Typing>().mode = "shooting";
+        }
 
         if(GameController.lives <= 0)
         {
