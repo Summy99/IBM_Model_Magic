@@ -192,6 +192,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 0cd04cab02f5eee47935eaa7080ca97f, type: 3}
   - {fileID: 4900000, guid: 443cb7c32763d374a8b7f8423ce47f5b, type: 3}
   - {fileID: 4900000, guid: 0aa91e0f259a4b34289e4b40035b6041, type: 3}
+  - {fileID: 4900000, guid: 948662ffa7009934cbaaea93c3f12a74, type: 3}
   slowCollectible: {fileID: 125156313247077267, guid: 427b431d75eac9046ad54d22bb59d4ed, type: 3}
   keycapCollectible: {fileID: 6826599825272669511, guid: 8d0cbadd924bf1f4aa572378f3922316, type: 3}
   health: 27

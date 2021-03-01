@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+  <action label="top">
+    <repeat>
+      <times>999</times>
+      <action>
+        <fire>
+          <direction type="absolute">0</direction>
+          <speed>0.5</speed>
+          <bulletRef label="splitLevel1" />
+        </fire>
+        <wait>($rand*10)+30</wait>
+      </action>
+    </repeat>
+  </action>
+
+  <bullet label="splitLevel1">
+    <action>
+      <wait>60</wait>
+      <fire>
+        <direction type="absolute">30</direction>
+        <speed>0.5</speed>
+        <bulletRef label="splitLevel2" />
+      </fire>
+      <fire>
+        <direction type="absolute">-30</direction>
+        <speed>0.5</speed>
+        <bulletRef label="splitLevel2" />
+      </fire>
+      <vanish />
+    </action>
+  </bullet>
+
+  <bullet label="splitLevel2">
+    <action>
+      <wait>60</wait>
+      <fire>
+        <direction type="absolute">10</direction>
+        <speed>0.5</speed>
+        <bulletRef label="splitLevel3" />
+      </fire>
+      <fire>
+        <direction type="absolute">-10</direction>
+        <speed>0.5</speed>
+        <bulletRef label="splitLevel3" />
+      </fire>
+      <vanish />
+    </action>
+  </bullet>
+
+  <bullet label="splitLevel3">
+    
+  </bullet>
+  
+</bulletml>

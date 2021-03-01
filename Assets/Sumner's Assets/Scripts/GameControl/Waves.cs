@@ -5,7 +5,7 @@ using UnityEngine;
 public class Waves : MonoBehaviour
 {
     [SerializeField]
-    private GameObject enemy1Prefab, enemy2Prefab, enemy3Prefab, enemy4Prefab;
+    private GameObject enemy1Prefab, enemy2Prefab, enemy3Prefab, enemy4Prefab, enemy5Prefab;
 
     [SerializeField]
     private GameObject bossPrefab;
@@ -522,7 +522,14 @@ public class Waves : MonoBehaviour
     {
         waveRunning = true;
 
+        for(int i = 0; i < 5; i++)
+        {
+            GameObject e1 = Instantiate(enemy5Prefab, rightSpawns[0].transform.position, Quaternion.identity);
 
+            e1.GetComponent<EnemyController>().pattern = 16;
+
+            yield return new WaitForSeconds(1);
+        }
 
         yield return new WaitForSeconds(1);
         waveRunning = false;

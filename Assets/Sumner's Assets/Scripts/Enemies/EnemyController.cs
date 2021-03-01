@@ -71,6 +71,13 @@ public class EnemyController : MonoBehaviour
         {
             gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[0];
         }
+
+        if (type == 5 && !initialized)
+        {
+            initialized = true;
+            gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[4];
+            gameObject.GetComponent<BulletSourceScript>().Initialize();
+        }
     }
 
     void FixedUpdate()
@@ -269,6 +276,10 @@ public class EnemyController : MonoBehaviour
                 {
                     rb.velocity = -(transform.right * moveSpeed);
                 }
+                break;
+
+            case 16:
+                rb.velocity = -(transform.right * moveSpeed);
                 break;
         }
     }
