@@ -1524,6 +1524,7 @@ MonoBehaviour:
   trackball: {fileID: 1322778007}
   prompt: {fileID: 1970041930}
   skipButton: {fileID: 242519795}
+  mainTheme: {fileID: 8300000, guid: 4865ae256f024de49ab13609fe5a4009, type: 3}
   letters: 0101010101010101010101010101010101010101010101010101
 --- !u!4 &257336643
 Transform:
@@ -1575,9 +1576,12 @@ MonoBehaviour:
   enemy3Prefab: {fileID: 308204043209223941, guid: 01f0cd8328b0eae4cbc4ace4864475b5, type: 3}
   enemy4Prefab: {fileID: 4701959120157239358, guid: 9267d177329b51c4199d325d0650a69f, type: 3}
   enemy5Prefab: {fileID: 308204043209223941, guid: 6a1abbc28025d1e42b96996a4265b489, type: 3}
+  enemy6Prefab: {fileID: 0}
   bossPrefab: {fileID: 339316896376044841, guid: 1e9542dbc75ef73499519b6a4bc1e024, type: 3}
+  boss2Prefab: {fileID: 0}
   spawnerHolder: {fileID: 58844657}
   bosstheme: {fileID: 8300000, guid: 00a1e12a4f8fee348af52d5e39f02cfc, type: 3}
+  finalBossTheme: {fileID: 0}
   shoptheme: {fileID: 8300000, guid: 58e4e734d4bafe146b547893ab7ec354, type: 3}
   wave: 0
   shop: 0
@@ -8694,7 +8698,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4865ae256f024de49ab13609fe5a4009, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 58e4e734d4bafe146b547893ab7ec354, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1

@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tutorialMsg;
     [SerializeField] private Transform spawn;
     [SerializeField] private GameObject tutorialEnemy, trackball, prompt, skipButton;
+    [SerializeField] private AudioClip mainTheme;
 
     public static Dictionary<string, bool> words = new Dictionary<string, bool>();
     public bool[] letters = new bool[] { 
@@ -87,11 +88,11 @@ public class GameController : MonoBehaviour
 
         if(tutorial)
         {
-            if(tutorialStage == 0)
+            if(tutorialStage == 0 && !tutorialIncrementing)
             {
                 if(Input.GetKeyDown(KeyCode.Z))
                 {
-                    tutorialStage = 1;
+                    StartCoroutine("IncrementTutorial", 0.1f);
                 }
             }
             if(tutorialStage == 1)
@@ -104,24 +105,24 @@ public class GameController : MonoBehaviour
                 }
             }
 
-            if(tutorialStage == 2)
+            if(tutorialStage == 2 && !tutorialIncrementing)
             {
                 tutorialMsg.text = "If you hold shift, you can slow your movement and see your hitbox.";
                 prompt.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    tutorialStage = 1;
+                    StartCoroutine("IncrementTutorial", 0.1f);
                 }
             }
 
-            if (tutorialStage == 3)
+            if (tutorialStage == 3 && !tutorialIncrementing)
             {
                 tutorialMsg.text = "Emojis are invading! You can fight back with your magical IBM Model M keyboard.";
                 prompt.SetActive(true);
                 prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    tutorialStage = 4;
+                    StartCoroutine("IncrementTutorial", 0.1f);
                 }
             }
 
@@ -147,14 +148,14 @@ public class GameController : MonoBehaviour
                 prompt.SetActive(false);
             }
 
-            if (tutorialStage == 6)
+            if (tutorialStage == 6 && !tutorialIncrementing)
             {
                 tutorialMsg.text = "That one dropped a keycap, make sure to pick it up. You can spend them later on upgrades.";
                 prompt.SetActive(true);
                 prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    tutorialStage = 7;
+                    StartCoroutine("IncrementTutorial", 0.1f);
                 }
             }
 
@@ -164,14 +165,14 @@ public class GameController : MonoBehaviour
                 prompt.SetActive(false);
             }
 
-            if (tutorialStage == 8)
+            if (tutorialStage == 8 && !tutorialIncrementing)
             {
                 tutorialMsg.text = "There's plenty other words! Experiment and try to find them all!";
                 prompt.SetActive(true);
                 prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    tutorialStage = 9;
+                    StartCoroutine("IncrementTutorial", 0.1f);
                 }
             }
 
@@ -181,14 +182,14 @@ public class GameController : MonoBehaviour
                 prompt.SetActive(false);
             }
 
-            if (tutorialStage == 10)
+            if (tutorialStage == 10 && !tutorialIncrementing)
             {
                 tutorialMsg.text = "Careful with that one; you can't type while it's active!";
                 prompt.SetActive(true);
                 prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
-                    tutorialStage = 11;
+                    StartCoroutine("IncrementTutorial", 0.1f);
                 }
             }
 
@@ -201,6 +202,8 @@ public class GameController : MonoBehaviour
 
             if(tutorialStage == 12)
             {
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = mainTheme;
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
                 tutorialMsg.text = "";
                 tutorial = false;
                 Typing.maxSlowDown = 3;
