@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Pixelnest.BulletML;
 
 public class PoopBoss : MonoBehaviour
@@ -10,16 +11,22 @@ public class PoopBoss : MonoBehaviour
     [SerializeField] private GameObject spawnerHolder;
     [SerializeField] private GameObject poopWallPrefab;
     private BulletSourceScript bml;
+    private AudioSource plyrsrc;
+
+    [SerializeField]
+    private AudioClip hit;
 
     private bool activated = false;
     private bool switching = false;
     private string direction = "right";
     public float moveSpeed = 10f;
+    public float health = 500f;
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         bml = gameObject.GetComponent<BulletSourceScript>();
+        plyrsrc = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
 
         topSpawns = GetAllChildren(spawnerHolder.transform.Find("Top"));
     }
@@ -70,6 +77,43 @@ public class PoopBoss : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Letter"))
+        {
+            TakeDamage(collision.gameObject.GetComponent<ShotController>().damage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("PlayerShot"))
+        {
+            TakeDamage(collision.gameObject.GetComponent<ShotController>().damage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("PlayerShotBig"))
+        {
+            float damageToDeal = collision.gameObject.GetComponent<BigShotController>().damage;
+            collision.gameObject.GetComponent<BigShotController>().damage -= health;
+            TakeDamage(damageToDeal);
+        }
+    }
+
+    private void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        plyrsrc.PlayOneShot(hit, 0.5f);
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+            GameController.level = 3;
+            LevelTracker.LevelToLoad = 3;
+            SceneManager.LoadScene(4);
+        }
+    }
+
     private IEnumerator SwitchAttacks()
     {
         switching = true;
@@ -81,7 +125,7 @@ public class PoopBoss : MonoBehaviour
             GameObject p = Instantiate(poopWallPrefab, topSpawns[Mathf.FloorToInt(Random.Range(0, topSpawns.Length))].transform.position, Quaternion.identity);
             Destroy(p, 5f);
 
-            yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
+            yield return new WaitForSeconds(Random.Range(0.1f, 1f));
         }
 
         bml.Initialize();

@@ -6580,6 +6580,10 @@ PrefabInstance:
       propertyPath: poopWallPrefab
       value: 
       objectReference: {fileID: 7080973595436472705, guid: a667ae22a1a01d9459ead6250320a89f, type: 3}
+    - target: {fileID: 5141313433267601117, guid: 21d82418dccc5504f882de54cd68f91c, type: 3}
+      propertyPath: hit
+      value: 
+      objectReference: {fileID: 8300000, guid: 62d5980ce094ea041ae12ae09d64bb01, type: 3}
     - target: {fileID: 5141313433267601120, guid: 21d82418dccc5504f882de54cd68f91c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.3

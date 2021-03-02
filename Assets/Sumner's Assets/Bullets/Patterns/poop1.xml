@@ -5,7 +5,7 @@
 
   <action label="top">
     <repeat>
-      <times>75</times>
+      <times>($rand * 20) + 30</times>
       <action>
         <fire>
           <direction type="absolute">($rand * 180) - 90</direction>
