@@ -19,7 +19,7 @@ public class Waves : MonoBehaviour
     private GameObject player;
 
     [SerializeField]
-    private AudioClip bosstheme;
+    private AudioClip bosstheme, finalBossTheme;
 
     [SerializeField]
     private AudioClip shoptheme;
@@ -160,7 +160,7 @@ public class Waves : MonoBehaviour
                     {
                         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = bosstheme;
                         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
-                        Instantiate(bossPrefab, topSpawns[10].transform.position, Quaternion.identity);
+                        Instantiate(boss2Prefab, topSpawns[10].transform.position, Quaternion.identity);
                         bossSpawned = true;
                     }
                     break;

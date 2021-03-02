@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+  <action label="top">
+    <repeat>
+      <times>75</times>
+      <action>
+        <fire>
+          <direction type="absolute">($rand * 180) - 90</direction>
+          <speed type="absolute">0.75</speed>
+          <bulletRef label="creator" />
+        </fire>
+        <wait>30</wait>
+      </action>
+    </repeat>
+  </action>
+
+  <bullet label="creator">
+    <action>
+      <wait>30</wait>
+      <repeat>
+        <times>99</times>
+        <action>
+          <changeDirection>
+            <direction type="relative">($rand * 90) - 45</direction>
+            <term>10</term>
+          </changeDirection>
+          <wait>10</wait>
+        </action>
+      </repeat>
+      <repeat>
+        <times>999</times>
+        <action>
+          <fire>
+            <speed type="absolute">0</speed>
+            <bulletRef label="created" />
+          </fire>
+          <wait>6</wait>
+        </action>
+      </repeat>
+    </action>
+  </bullet>
+
+  <bullet label="created">
+    <action>
+      <wait>120</wait>
+      <vanish />
+    </action>
+  </bullet>
+  
+</bulletml>
