@@ -28,11 +28,15 @@ public class EnemyController : MonoBehaviour
     public int type = 0;
     public bool initialized = false;
     public float moveSpeed = 10;
+    private bool moving = false;
 
     private float distanceTraveled = 0f;
     private string direction = "down";
     [SerializeField]
-    private Vector2 initialPosition = Vector2.zero;
+    private Vector3 initialPosition = Vector3.zero;
+
+    private Vector3 playerPos;
+
     void Start()
     {
         shooting = Mathf.FloorToInt(Random.Range(0, 2));
@@ -42,6 +46,11 @@ public class EnemyController : MonoBehaviour
         lifetime = 0;
         sfx = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        if(type == 6)
+        {
+            playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        }
     }
 
     private void Update()
@@ -298,7 +307,7 @@ public class EnemyController : MonoBehaviour
 
             case 18:
                 moveSpeed = 20;
-                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, -15));                
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, -15));
                 rb.velocity = -(transform.up * moveSpeed);
                 break;
 
@@ -306,6 +315,10 @@ public class EnemyController : MonoBehaviour
                 moveSpeed = 20;
                 transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 15));
                 rb.velocity = -(transform.up * moveSpeed);
+                break;
+
+            case 20:
+                rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
                 break;
         }
     }
@@ -337,7 +350,6 @@ public class EnemyController : MonoBehaviour
         initialPosition = transform.position;
         direction = "down";
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerShot"))
