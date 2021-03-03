@@ -28,7 +28,8 @@ public class EnemyController : MonoBehaviour
     public int type = 0;
     public bool initialized = false;
     public float moveSpeed = 10;
-    private bool moving = false;
+    private bool boom = false;
+    private bool turnt = false;
 
     private float distanceTraveled = 0f;
     private string direction = "down";
@@ -47,7 +48,7 @@ public class EnemyController : MonoBehaviour
         sfx = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
 
-        if(type == 6)
+        if(type == 6 || type == 7)
         {
             playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
         }
@@ -62,10 +63,17 @@ public class EnemyController : MonoBehaviour
 
         lifetime += Time.deltaTime;
 
-        if(type == 2 && lifetime >= timeToShoot && !initialized && shooting == 1)
+        if(type == 2 && lifetime >= timeToShoot && !initialized && shooting == 1 && pattern != 22)
         {
             initialized = true;
             gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[1];
+            gameObject.GetComponent<BulletSourceScript>().Initialize();
+        }
+
+        if (type == 2 && !initialized && pattern == 22)
+        {
+            initialized = true;
+            gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[6];
             gameObject.GetComponent<BulletSourceScript>().Initialize();
         }
 
@@ -320,6 +328,48 @@ public class EnemyController : MonoBehaviour
             case 20:
                 rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
                 break;
+
+            case 21:
+                if(transform.position.y > 9)
+                {
+                    rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                }
+                else if(!boom)
+                {
+                    boom = true;
+                    rb.velocity = Vector2.zero;
+                    StartCoroutine("Skull");
+                }
+                break;
+
+            case 22:
+                rb.velocity = -(transform.right * moveSpeed);
+                break;
+
+            case 23:
+                if(transform.position.y > -15 && !turnt)
+                {
+                    rb.velocity = -(transform.up * moveSpeed);
+                }
+                else if(!turnt)
+                {
+                    if (transform.position.x < -35)
+                    {
+                        transform.rotation = Quaternion.Euler(new Vector3(0, 0, -30));
+                    }
+                    else
+                    {
+                        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+                    }
+
+                    turnt = true;
+                }
+
+                if (turnt)
+                {
+                    rb.velocity = transform.up * moveSpeed;
+                }
+                break;
         }
     }
 
@@ -350,6 +400,16 @@ public class EnemyController : MonoBehaviour
         initialPosition = transform.position;
         direction = "down";
     }
+
+    private IEnumerator Skull()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[5];
+        gameObject.GetComponent<BulletSourceScript>().Initialize();
+        yield return new WaitForSeconds(0.1f);
+        gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerShot"))

@@ -27,6 +27,7 @@ public class PoopBoss : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         bml = gameObject.GetComponent<BulletSourceScript>();
         plyrsrc = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
+        spawnerHolder = GameObject.Find("SpawnPoints");
 
         topSpawns = GetAllChildren(spawnerHolder.transform.Find("Top"));
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Waves : MonoBehaviour
 {
     [SerializeField]
-    private GameObject enemy1Prefab, enemy2Prefab, enemy3Prefab, enemy4Prefab, enemy5Prefab, enemy6Prefab;
+    private GameObject enemy1Prefab, enemy2Prefab, enemy3Prefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab;
 
     [SerializeField]
     private GameObject bossPrefab, boss2Prefab;
@@ -107,6 +107,7 @@ public class Waves : MonoBehaviour
                     break;
             }
         }
+
         // level 2
         if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.level == 2)
         {
@@ -153,6 +154,66 @@ public class Waves : MonoBehaviour
 
                 case 9:
                     StartCoroutine("Wave29");
+                    break;
+
+                case 10:
+                    if (!bossSpawned)
+                    {
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = bosstheme;
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+                        Instantiate(boss2Prefab, topSpawns[10].transform.position, Quaternion.identity);
+                        bossSpawned = true;
+                    }
+                    break;
+            }
+        }
+
+        // level 3
+        if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.level == 3)
+        {
+            switch (wave)
+            {
+                case 1:
+                    StartCoroutine("Wave31");
+                    break;
+
+                case 2:
+                    StartCoroutine("Wave32");
+                    break;
+
+                case 3:
+                    StartCoroutine("Wave33");
+                    break;
+
+                case 4:
+                    StartCoroutine("Wave34");
+                    break;
+
+                case 5:
+                    StartCoroutine("Wave35");
+                    break;
+
+                case 6:
+                    if (!shop)
+                    {
+                        player.transform.position = new Vector3(-20, -43, 0);
+                        shop = true;
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = shoptheme;
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+                        gameObject.GetComponent<Shop>().OpenShop();
+                    }
+                    break;
+
+                case 7:
+                    StartCoroutine("Wave37");
+                    break;
+
+                case 8:
+                    StartCoroutine("Wave38");
+                    break;
+
+                case 9:
+                    StartCoroutine("Wave39");
                     break;
 
                 case 10:
@@ -757,6 +818,99 @@ public class Waves : MonoBehaviour
     }
 
     // wave 30 is boss
+
+    private IEnumerator Wave31()
+    {
+        waveRunning = true;
+
+        GameObject e1 = Instantiate(enemy7Prefab, topSpawns[2].transform.position, Quaternion.identity);
+        e1.GetComponent<EnemyController>().pattern = 21;
+        yield return new WaitForSeconds(0.5f);
+        GameObject e2 = Instantiate(enemy7Prefab, topSpawns[1].transform.position, Quaternion.identity);
+        e2.GetComponent<EnemyController>().pattern = 21;
+        yield return new WaitForSeconds(0.5f);
+        GameObject e3 = Instantiate(enemy7Prefab, topSpawns[7].transform.position, Quaternion.identity);
+        e3.GetComponent<EnemyController>().pattern = 21;
+        yield return new WaitForSeconds(0.5f);
+        GameObject e4 = Instantiate(enemy7Prefab, topSpawns[4].transform.position, Quaternion.identity);
+        e4.GetComponent<EnemyController>().pattern = 21;
+        yield return new WaitForSeconds(0.5f);
+        GameObject e5 = Instantiate(enemy7Prefab, topSpawns[2].transform.position, Quaternion.identity);
+        e5.GetComponent<EnemyController>().pattern = 21;
+        yield return new WaitForSeconds(0.5f);
+        GameObject e6 = Instantiate(enemy7Prefab, topSpawns[6].transform.position, Quaternion.identity);
+        e6.GetComponent<EnemyController>().pattern = 21;
+
+        yield return new WaitForSeconds(1);
+        waveRunning = false;
+    }
+
+    private IEnumerator Wave32()
+    {
+        waveRunning = true;
+        StartCoroutine("Wave32Part2");
+
+        for(int i = 0; i <= 10; i++)
+        {
+            GameObject e1 = Instantiate(enemy8Prefab, leftSpawns[3].transform.position, Quaternion.identity);
+
+            e1.GetComponent<EnemyController>().pattern = 6;
+
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        yield return new WaitForSeconds(1);
+        waveRunning = false;
+    }
+
+    private IEnumerator Wave32Part2()
+    {
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i <= 15; i++)
+        {
+            GameObject e1 = Instantiate(enemy2Prefab, rightSpawns[1].transform.position, Quaternion.identity);
+
+            e1.GetComponent<EnemyController>().pattern = 22;
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    private IEnumerator Wave33()
+    {
+        waveRunning = true;
+        StartCoroutine("Wave33Part2");
+
+        for (int i = 0; i <= 35; i++)
+        {
+            GameObject e1 = Instantiate(enemy8Prefab, topSpawns[2].transform.position, Quaternion.identity);
+            GameObject e2 = Instantiate(enemy8Prefab, topSpawns[7].transform.position, Quaternion.identity);
+
+            e1.GetComponent<EnemyController>().pattern = 1;
+            e2.GetComponent<EnemyController>().pattern = 1;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        yield return new WaitForSeconds(1);
+        waveRunning = false;
+    }
+
+    private IEnumerator Wave33Part2()
+    {
+        yield return new WaitForSeconds(1);
+
+        for(int i = 0; i <= 15; i++)
+        {
+            GameObject e1 = Instantiate(enemy2Prefab, topSpawns[1].transform.position, Quaternion.identity);
+            GameObject e2 = Instantiate(enemy2Prefab, topSpawns[8].transform.position, Quaternion.identity);
+
+            e1.GetComponent<EnemyController>().pattern = 23;
+            e2.GetComponent<EnemyController>().pattern = 23;
+
+            yield return new WaitForSeconds(1);
+        }
+    }
 
     private GameObject[] GetAllChildren(Transform parent)
     {

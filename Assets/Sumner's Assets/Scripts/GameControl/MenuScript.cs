@@ -26,6 +26,11 @@ public class MenuScript : MonoBehaviour
         {
             StartGame(2);
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            StartGame(3);
+        }
     }
 
     public void StartGame(int level)

@@ -77,6 +77,22 @@ public class GameController : MonoBehaviour
             message.text = "Level 2";
             StartCoroutine("BlankMessage");
         }
+
+        if (level == 3)
+        {
+            foreach (KeyValuePair<string, bool> entry in words)
+            {
+                if (entry.Value)
+                {
+                    gameObject.GetComponent<UI>().AddWord(entry.Key);
+                }
+            }
+
+            player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
+
+            message.text = "Level 3";
+            StartCoroutine("BlankMessage");
+        }
     }
 
     void Update()

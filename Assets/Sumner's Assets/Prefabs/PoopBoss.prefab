@@ -228,3 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0eea9913d927c94baccb7ac2e6909da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnerHolder: {fileID: 0}
+  poopWallPrefab: {fileID: 7080973595436472705, guid: a667ae22a1a01d9459ead6250320a89f, type: 3}
+  hit: {fileID: 8300000, guid: 62d5980ce094ea041ae12ae09d64bb01, type: 3}
+  moveSpeed: 10
+  health: 500
