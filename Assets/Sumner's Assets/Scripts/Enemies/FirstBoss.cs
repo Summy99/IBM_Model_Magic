@@ -79,19 +79,19 @@ public class FirstBoss : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Letter"))
+        if (collision.gameObject.CompareTag("Letter") && activated)
+        {
+            TakeDamage(collision.gameObject.GetComponent<LetterController>().damage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("PlayerShot") && activated)
         {
             TakeDamage(collision.gameObject.GetComponent<ShotController>().damage);
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.CompareTag("PlayerShot"))
-        {
-            TakeDamage(collision.gameObject.GetComponent<ShotController>().damage);
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("PlayerShotBig"))
+        if (collision.gameObject.CompareTag("PlayerShotBig") && activated)
         {
             float damageToDeal = collision.gameObject.GetComponent<BigShotController>().damage;
             collision.gameObject.GetComponent<BigShotController>().damage -= health;

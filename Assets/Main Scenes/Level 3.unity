@@ -931,7 +931,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 12.8, y: 12.8}
+    oldSize: {x: 20.48, y: 20.48}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -980,7 +980,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0b297f0486b45a744938fb13fdfb8407, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae07dbc62d74aea4c9569c9fe083b0e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1390,7 +1390,7 @@ MonoBehaviour:
   enemy9Prefab: {fileID: 266395017511755280, guid: af172fc1624d1214d92a1deecccdb998, type: 3}
   bossPrefab: {fileID: 339316896376044841, guid: 1e9542dbc75ef73499519b6a4bc1e024, type: 3}
   boss2Prefab: {fileID: 5141313433267601122, guid: 21d82418dccc5504f882de54cd68f91c, type: 3}
-  finalBossPrefab: {fileID: 0}
+  finalBossPrefab: {fileID: 5689279825668667677, guid: 5402cf01d67807b479478f8f7ac255b8, type: 3}
   spawnerHolder: {fileID: 58844657}
   bosstheme: {fileID: 8300000, guid: 00a1e12a4f8fee348af52d5e39f02cfc, type: 3}
   finalBossTheme: {fileID: 8300000, guid: 960f5c67128715049b2565647e4680f8, type: 3}
@@ -8032,7 +8032,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 12.8, y: 12.8}
+    oldSize: {x: 20.48, y: 20.48}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8081,7 +8081,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0e6094b52859cfe4fa70aa84684061ca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6fbac0a749da67645911832be9f4cd66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8520,7 +8520,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 12.8, y: 12.8}
+    oldSize: {x: 20.48, y: 20.48}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8569,7 +8569,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 17e2a6ce5c2a48f478de23759ff17143, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bdd900c57b938f746a025ffdd7ea1ade, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

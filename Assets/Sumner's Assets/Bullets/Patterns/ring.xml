@@ -5,7 +5,7 @@
   
   <action label="top">
     <repeat>
-      <times>16</times>
+      <times>32</times>
       <action>
         <fire>
           <direction type="sequence">22.5</direction>

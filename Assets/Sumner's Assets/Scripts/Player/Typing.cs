@@ -58,6 +58,15 @@ public class Typing : MonoBehaviour
             slowDown += 0.1f * maxSlowDown;
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject g in enemies)
+            {
+                Destroy(g);
+            }
+        }
+
         if (gc.tutorial)
         {
             if(gc.tutorialStage == 4 && slowDown <= 0)

@@ -26,6 +26,7 @@ public class EnemyController : MonoBehaviour
     public float lifetime = 0;
     public float timeToShoot = 0;
     public int type = 0;
+    public bool type2Shoot = false;
     public bool initialized = false;
     public float moveSpeed = 10;
     private bool boom = false;
@@ -72,7 +73,7 @@ public class EnemyController : MonoBehaviour
             gameObject.GetComponent<BulletSourceScript>().Initialize();
         }
 
-        if (type == 2 && !initialized && pattern == 22)
+        if (type == 2 && !initialized && (pattern == 22 || type2Shoot))
         {
             initialized = true;
             gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[6];
@@ -389,6 +390,67 @@ public class EnemyController : MonoBehaviour
                     rb.velocity = transform.up * moveSpeed;
                 }
                 break;
+
+            case 25:
+                moveSpeed = 25;
+                rb.velocity = transform.up * moveSpeed;
+                break;
+
+            case 26:
+                rb.velocity = transform.up * moveSpeed;
+                break;
+
+            case 27:
+                if (transform.position.x > 5)
+                {
+                    rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                }
+                else if (!boom)
+                {
+                    boom = true;
+                    rb.velocity = Vector2.zero;
+                    StartCoroutine("Skull");
+                }
+                break;
+
+            case 28:
+                if (transform.position.y < -25)
+                {
+                    rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                }
+                else if (!boom)
+                {
+                    boom = true;
+                    rb.velocity = Vector2.zero;
+                    StartCoroutine("Skull");
+                }
+                break;
+
+            case 29:
+                if (transform.position.x < -45)
+                {
+                    rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                }
+                else if (!boom)
+                {
+                    boom = true;
+                    rb.velocity = Vector2.zero;
+                    StartCoroutine("Skull");
+                }
+                break;
+
+            case 30:
+                if (transform.position.y > 25)
+                {
+                    rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                }
+                else if (!boom)
+                {
+                    boom = true;
+                    rb.velocity = Vector2.zero;
+                    StartCoroutine("Skull");
+                }
+                break;
         }
     }
 
@@ -474,7 +536,7 @@ public class EnemyController : MonoBehaviour
         if(health <= 0)
         {
 
-            if(type == 1 || type == 2 || type == 4)
+            if(type == 1 || type == 2 || type == 4 || type == 6 || type == 7 || type == 8 || type == 9)
             {
                 int pickup = Mathf.FloorToInt(Random.Range(0, 20));
 
@@ -553,7 +615,7 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
-            if (type == 3)
+            if (type == 3 || type == 5)
             {
                 Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                 Instantiate(keycapCollectible, transform.position, Quaternion.identity);

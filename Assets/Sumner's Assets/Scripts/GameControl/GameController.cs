@@ -258,6 +258,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        SceneManager.LoadScene(0);
+        lives = 6;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -14,11 +14,6 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private GameObject settings, main;
     [SerializeField] private AudioSource musicSrc;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         musicSrc.volume = 0.5f * MusicVolume * MasterVolume;

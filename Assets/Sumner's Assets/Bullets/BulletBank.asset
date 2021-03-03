@@ -78,3 +78,13 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 07ac88dd91882224082674c3dc9193cc, type: 3}
     TimeToLiveInSeconds: 10
     DestroyWhenOutOfScreen: 1
+  - name: ringRight
+    prefab: {fileID: 1294520606847368362, guid: 3f432fb5aaa91734694b684ad19c877d, type: 3}
+    sprite: {fileID: 21300000, guid: 9e0de4cf16006874484f6dec5c4795b0, type: 3}
+    TimeToLiveInSeconds: 10
+    DestroyWhenOutOfScreen: 1
+  - name: ringLeft
+    prefab: {fileID: 1294520606847368362, guid: 3f432fb5aaa91734694b684ad19c877d, type: 3}
+    sprite: {fileID: 21300000, guid: 07ac88dd91882224082674c3dc9193cc, type: 3}
+    TimeToLiveInSeconds: 10
+    DestroyWhenOutOfScreen: 1

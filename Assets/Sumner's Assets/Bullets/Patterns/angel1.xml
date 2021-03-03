@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+  <action label="top">
+    <repeat>
+      <times>15</times>
+      <action>
+        <actionRef label="rings"/>
+        <actionRef label="line" />
+      </action>
+    </repeat>
+  </action>
+
+  <action label="rings">
+    <repeat>
+      <times>16</times>
+      <action>
+        <fire>
+          <direction type="sequence">22.5</direction>
+          <speed>0.8</speed>
+          <bulletRef label="ringRight" />
+        </fire>
+      </action>
+    </repeat>
+    <wait>20</wait>
+    <repeat>
+      <times>16</times>
+      <action>
+        <fire>
+          <direction type="sequence">22.5</direction>
+          <speed>0.5</speed>
+          <bulletRef label="ringLeft" />
+        </fire>
+      </action>
+    </repeat>
+    <wait>20</wait>
+  </action>
+
+  <action label="line">
+    <fire>
+      <direction type="aim">0</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+    <wait>1</wait>
+    <fire>
+      <direction type="aim">1</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+    <fire>
+      <direction type="aim">-1</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+    <wait>2</wait>
+    <fire>
+      <direction type="aim">2</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+    <fire>
+      <direction type="aim">-2</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+    <wait>3</wait>
+    <fire>
+      <direction type="aim">3</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+    <fire>
+      <direction type="aim">-3</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+    <wait>4</wait>
+    <fire>
+      <direction type="aim">4</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+    <fire>
+      <direction type="aim">-4</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+    <wait>5</wait>
+    <fire>
+      <direction type="aim">5</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+    <fire>
+      <direction type="aim">-5</direction>
+      <speed>1</speed>
+      <bullet />
+    </fire>
+  </action>
+  
+  <bullet label="ringRight">
+    <action>
+      <repeat>
+        <times>999</times>
+        <action>
+          <changeDirection>
+            <direction type="relative">5</direction>
+            <term>7.5</term>
+          </changeDirection>
+        </action>
+      </repeat>
+    </action>
+  </bullet>
+
+  <bullet label="ringLeft">
+    <action>
+      <repeat>
+        <times>999</times>
+        <action>
+          <changeDirection>
+            <direction type="relative">-5</direction>
+            <term>10</term>
+          </changeDirection>
+        </action>
+      </repeat>
+    </action>
+  </bullet>
+  
+</bulletml>
