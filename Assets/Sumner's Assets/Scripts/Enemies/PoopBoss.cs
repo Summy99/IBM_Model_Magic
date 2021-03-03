@@ -108,11 +108,17 @@ public class PoopBoss : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
-            GameController.level = 3;
-            LevelTracker.LevelToLoad = 3;
-            SceneManager.LoadScene(4);
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            StartCoroutine("Die");
         }
+    }
+
+    private IEnumerator Die()
+    {
+        yield return new WaitForSeconds(1);
+        GameController.level = 3;
+        LevelTracker.LevelToLoad = 3;
+        SceneManager.LoadScene(4);
     }
 
     private IEnumerator SwitchAttacks()

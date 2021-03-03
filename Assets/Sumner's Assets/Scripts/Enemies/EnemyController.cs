@@ -536,7 +536,7 @@ public class EnemyController : MonoBehaviour
         if(health <= 0)
         {
 
-            if(type == 1 || type == 2 || type == 4 || type == 6 || type == 7 || type == 8 || type == 9)
+            if(type == 1 || type == 2 || type == 4 || type == 6 || type == 7 || type == 8)
             {
                 int pickup = Mathf.FloorToInt(Random.Range(0, 20));
 
@@ -615,7 +615,7 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
-            if (type == 3 || type == 5)
+            if (type == 3 || type == 5 || type == 9)
             {
                 Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                 Instantiate(keycapCollectible, transform.position, Quaternion.identity);

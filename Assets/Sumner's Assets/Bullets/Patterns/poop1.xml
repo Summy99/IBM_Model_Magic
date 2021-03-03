@@ -21,31 +21,28 @@
     <action>
       <wait>30</wait>
       <repeat>
-        <times>99</times>
-        <action>
-          <changeDirection>
-            <direction type="relative">($rand * 90) - 45</direction>
-            <term>10</term>
-          </changeDirection>
-          <wait>10</wait>
-        </action>
-      </repeat>
-      <repeat>
         <times>999</times>
         <action>
-          <fire>
-            <speed type="absolute">0</speed>
-            <bulletRef label="created" />
-          </fire>
-          <wait>6</wait>
+          <actionRef label="direction" />
         </action>
       </repeat>
     </action>
   </bullet>
 
+  <action label="direction">
+    <fire>
+      <speed type="absolute">0</speed>
+      <bulletRef label="created" />
+    </fire>
+    <changeDirection>
+      <direction type="relative">($rand * 60) - 30</direction>
+      <term>4</term>
+    </changeDirection>
+  </action>
+  
   <bullet label="created">
     <action>
-      <wait>120</wait>
+      <wait>240</wait>
       <vanish />
     </action>
   </bullet>

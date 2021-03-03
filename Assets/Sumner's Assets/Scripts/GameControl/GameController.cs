@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     private bool tutorialIncrementing = false;
     private bool enemySpawned = false;
     public int tutorialStage = 0;
-    public int keycaps = 0;
+    public static int keycaps = 0;
 
     private GameObject player;
     [SerializeField] private TextMeshProUGUI message;
@@ -35,31 +35,48 @@ public class GameController : MonoBehaviour
 
         if(level == 1)
         {
-            words.Add("BOMB", false);
-            words.Add("SHIELD", false);
-            words.Add("ERASE", false);
-            words.Add("CLEAR", false);
-            words.Add("BOOM", false);
-            words.Add("AUTO", false);
-            words.Add("SPREAD", false);
-            words.Add("SHOTGUN", false);
-            words.Add("BLOCK", false);
-            words.Add("RAPID", false);
-            words.Add("SPEED", false);
-            words.Add("FAST", false);
-            words.Add("OTHER", false);
-            words.Add("SOMETHING", false);
-            words.Add("RANDOM", false);
-            words.Add("ANYTHING", false);
-            words.Add("EXPLOSION", false);
-            words.Add("BIG", false);
-            words.Add("GIANT", false);
+            if (!UI.started)
+            {
+                UI.started = true;
 
-            tutorial = true;
-            tutorialMsg.text = "Hello! I'm Trackball the mouse, welcome to IBM Model Magic!";
-            prompt.SetActive(true);
-            Typing.maxSlowDown = 15;
-            player.GetComponent<Typing>().slowDown = 15;
+                words.Add("BOMB", false);
+                words.Add("SHIELD", false);
+                words.Add("ERASE", false);
+                words.Add("CLEAR", false);
+                words.Add("BOOM", false);
+                words.Add("AUTO", false);
+                words.Add("SPREAD", false);
+                words.Add("SHOTGUN", false);
+                words.Add("BLOCK", false);
+                words.Add("RAPID", false);
+                words.Add("SPEED", false);
+                words.Add("FAST", false);
+                words.Add("OTHER", false);
+                words.Add("SOMETHING", false);
+                words.Add("RANDOM", false);
+                words.Add("ANYTHING", false);
+                words.Add("EXPLOSION", false);
+                words.Add("BIG", false);
+                words.Add("GIANT", false);
+
+                tutorial = true;
+                tutorialMsg.text = "Hello! I'm Trackball the mouse, welcome to IBM Model Magic!";
+                prompt.SetActive(true);
+                Typing.maxSlowDown = 15;
+                player.GetComponent<Typing>().slowDown = 15;
+            }
+            else
+            {
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = mainTheme;
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+                tutorialMsg.text = "";
+                tutorial = false;
+                Typing.maxSlowDown = 3;
+                player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
+                trackball.SetActive(false);
+                prompt.SetActive(false);
+                skipButton.SetActive(false);
+            }
         }
 
         if(level == 2)
@@ -127,6 +144,7 @@ public class GameController : MonoBehaviour
             {
                 tutorialMsg.text = "If you hold shift, you can slow your movement and see your hitbox.";
                 prompt.SetActive(true);
+                prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
                 if (Input.GetKeyDown(KeyCode.Z))
                 {
                     StartCoroutine("IncrementTutorial", 0.1f);
@@ -227,6 +245,7 @@ public class GameController : MonoBehaviour
                 Typing.maxSlowDown = 3;
                 trackball.SetActive(false);
                 prompt.SetActive(false);
+                skipButton.SetActive(false);
             }
         }
 
@@ -259,6 +278,7 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         lives = 6;
+        keycaps = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

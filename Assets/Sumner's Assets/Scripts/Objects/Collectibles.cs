@@ -68,7 +68,7 @@ public class Collectibles : MonoBehaviour
         {
             collision.gameObject.GetComponent<AudioSource>().PlayOneShot(types[Mathf.FloorToInt(Random.Range(0, types.Length))]);
             collision.gameObject.GetComponent<Typing>().slowDown += 0.01f * Typing.maxSlowDown;
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().keycaps++;
+            GameController.keycaps++;
             Destroy(gameObject);
         }
     }

@@ -5,7 +5,7 @@
 
   <action label="top">
     <repeat>
-      <times>15</times>
+      <times>10</times>
       <action>
         <actionRef label="rings"/>
         <actionRef label="line" />

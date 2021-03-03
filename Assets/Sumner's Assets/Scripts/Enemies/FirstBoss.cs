@@ -107,11 +107,18 @@ public class FirstBoss : MonoBehaviour
 
         if(health <= 0)
         {
-            Destroy(gameObject);
-            GameController.level = 2;
-            LevelTracker.LevelToLoad = 2;
-            SceneManager.LoadScene(4);
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            bml.enabled = false;
+            StartCoroutine("Die");
         }
+    }
+
+    private IEnumerator Die()
+    {
+        yield return new WaitForSeconds(1);
+        GameController.level = 2;
+        LevelTracker.LevelToLoad = 2;
+        SceneManager.LoadScene(4);
     }
 
     private IEnumerator SwitchAttacks()

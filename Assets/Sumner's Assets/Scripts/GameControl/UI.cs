@@ -8,6 +8,7 @@ public class UI : MonoBehaviour
 {
     private GameController gc;
     private GameObject player;
+    public static bool started = false;
 
     [SerializeField]
     private Sprite[] lifeBarStates;
@@ -68,7 +69,7 @@ public class UI : MonoBehaviour
 
         type.transform.Find("PendingWord").GetComponent<TextMeshProUGUI>().text = player.GetComponent<Typing>().word;
 
-        keycapCounter.text = " x" + gc.keycaps;
+        keycapCounter.text = " x" + GameController.keycaps;
     }
 
     public void AddWord(string word)

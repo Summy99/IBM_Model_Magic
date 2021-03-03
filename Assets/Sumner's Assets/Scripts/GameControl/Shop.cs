@@ -57,7 +57,7 @@ public class Shop : MonoBehaviour
             prices.transform.GetChild(i).gameObject.SetActive(true);
         }
 
-        time = 20f;
+        time = 30f;
     }
 
     public void CloseShop()

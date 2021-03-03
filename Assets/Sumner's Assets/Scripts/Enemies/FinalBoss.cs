@@ -20,6 +20,7 @@ public class FinalBoss : MonoBehaviour
     private int attack = 0;
     private bool switching = false;
     private bool activated = false;
+    private bool started = false;
     private string direction = "right";
     void Start()
     {
@@ -27,48 +28,53 @@ public class FinalBoss : MonoBehaviour
         bml = gameObject.GetComponent<BulletSourceScript>();
         anim = gameObject.GetComponent<Animator>();
         plyrsrc = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+
+        StartCoroutine("Enter");
     }
 
     void Update()
     {
-        if (activated)
+        if (started)
         {
-            switch (direction)
+            if (activated)
             {
-                case "right":
-                    rb.velocity = transform.right * moveSpeed;
-                    break;
+                switch (direction)
+                {
+                    case "right":
+                        rb.velocity = transform.right * moveSpeed;
+                        break;
 
-                case "left":
-                    rb.velocity = -(transform.right * moveSpeed);
-                    break;
+                    case "left":
+                        rb.velocity = -(transform.right * moveSpeed);
+                        break;
 
-                case "stop":
-                    rb.velocity = Vector2.zero;
-                    break;
+                    case "stop":
+                        rb.velocity = Vector2.zero;
+                        break;
+                }
+
+                if (transform.position.x >= 13 && direction == "right")
+                {
+                    direction = "left";
+                }
+
+                if (transform.position.x <= -56 && direction == "left")
+                {
+                    direction = "right";
+                }
+
+                if (bml.IsEnded && !switching)
+                {
+                    StartCoroutine("SwitchAttacksPhase1");
+                }
             }
-
-            if (transform.position.x >= 13 && direction == "right")
+            else
             {
-                direction = "left";
-            }
-
-            if (transform.position.x <= -56 && direction == "left")
-            {
-                direction = "right";
-            }
-
-            if (bml.IsEnded && !switching)
-            {
-                StartCoroutine("SwitchAttacksPhase1");
-            }
-        }
-        else
-        {
-            rb.velocity = -(transform.up * moveSpeed);
-            if(transform.position.y <= 11)
-            {
-                activated = true;
+                rb.velocity = -(transform.up * moveSpeed);
+                if (transform.position.y <= 11)
+                {
+                    activated = true;
+                }
             }
         }
     }
@@ -107,6 +113,12 @@ public class FinalBoss : MonoBehaviour
         switching = false;
     }
 
+    private IEnumerator Enter()
+    {
+        yield return new WaitForSeconds(3);
+        started = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Letter") && activated)
@@ -137,8 +149,14 @@ public class FinalBoss : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
-            SceneManager.LoadScene(5);
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            StartCoroutine("Die");
         }
+    }
+
+    private IEnumerator Die()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(5);
     }
 }
