@@ -18,6 +18,8 @@ public class Collectibles : MonoBehaviour
     {
         activated = false;
 
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
+
         float x = 0;
 
         rb = gameObject.GetComponent<Rigidbody2D>();

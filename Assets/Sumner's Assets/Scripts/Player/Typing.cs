@@ -42,6 +42,7 @@ public class Typing : MonoBehaviour
 
     void Update()
     {
+        sfx.volume = 0.5f * MenuScript.MasterVolume * MenuScript.SFXVolume;
         if (Input.GetKeyDown(KeyCode.Minus))
         {
             maxSlowDown -= 0.5f;

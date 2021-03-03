@@ -5,10 +5,10 @@ using UnityEngine;
 public class Waves : MonoBehaviour
 {
     [SerializeField]
-    private GameObject enemy1Prefab, enemy2Prefab, enemy3Prefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab;
+    private GameObject enemy1Prefab, enemy2Prefab, enemy3Prefab, enemy4Prefab, enemy5Prefab, enemy6Prefab, enemy7Prefab, enemy8Prefab, enemy9Prefab;
 
     [SerializeField]
-    private GameObject bossPrefab, boss2Prefab;
+    private GameObject bossPrefab, boss2Prefab, finalBossPrefab;
 
     [SerializeField]
     private GameObject spawnerHolder;
@@ -910,6 +910,23 @@ public class Waves : MonoBehaviour
 
             yield return new WaitForSeconds(1);
         }
+    }
+
+    private IEnumerator Wave34()
+    {
+        waveRunning = true;
+
+        for(int i = 0; i <= 10; i++)
+        {
+            GameObject e1 = Instantiate(enemy9Prefab, topSpawns[Mathf.FloorToInt(Random.Range(1, 9))].transform.position, Quaternion.identity);
+
+            e1.GetComponent<EnemyController>().pattern = 24;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        yield return new WaitForSeconds(1);
+        waveRunning = false;
     }
 
     private GameObject[] GetAllChildren(Transform parent)

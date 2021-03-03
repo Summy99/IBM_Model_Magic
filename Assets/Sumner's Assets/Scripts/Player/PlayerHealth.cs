@@ -40,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPrice").gameObject.SetActive(false);
+            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPriceIcon").gameObject.SetActive(false);
             gc.keycaps -= 25;
             Typing.maxSlowDown *= 1.1f;
         }
@@ -54,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("WordPrice").gameObject.SetActive(false);
+            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("WordPriceIcon").gameObject.SetActive(false);
             gc.keycaps -= 40;
 
             string[] words = new string[GameController.words.Count];

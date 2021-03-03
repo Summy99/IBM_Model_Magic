@@ -97,7 +97,9 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if(lives > 6)
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().volume = 0.5f * MenuScript.MasterVolume * MenuScript.MusicVolume;
+
+        if (lives > 6)
         {
             lives = 6;
         }

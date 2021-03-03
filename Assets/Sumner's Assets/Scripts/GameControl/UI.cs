@@ -68,7 +68,7 @@ public class UI : MonoBehaviour
 
         type.transform.Find("PendingWord").GetComponent<TextMeshProUGUI>().text = player.GetComponent<Typing>().word;
 
-        keycapCounter.text = "Keycaps: " + gc.keycaps;
+        keycapCounter.text = " x" + gc.keycaps;
     }
 
     public void AddWord(string word)

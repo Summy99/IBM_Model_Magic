@@ -30,6 +30,8 @@ public class EnemyController : MonoBehaviour
     public float moveSpeed = 10;
     private bool boom = false;
     private bool turnt = false;
+    private bool ringed = false;
+    private bool rung = false;
 
     private float distanceTraveled = 0f;
     private string direction = "down";
@@ -370,6 +372,23 @@ public class EnemyController : MonoBehaviour
                     rb.velocity = transform.up * moveSpeed;
                 }
                 break;
+
+            case 24:
+                if(transform.position.y > 12 && !rung)
+                {
+                    rb.velocity = -(transform.up * moveSpeed);
+                }
+                else if (!ringed)
+                {
+                    rb.velocity = Vector2.zero;
+                    ringed = true;
+                    StartCoroutine("RingFire");
+                }
+                if (rung)
+                {
+                    rb.velocity = transform.up * moveSpeed;
+                }
+                break;
         }
     }
 
@@ -408,6 +427,15 @@ public class EnemyController : MonoBehaviour
         gameObject.GetComponent<BulletSourceScript>().Initialize();
         yield return new WaitForSeconds(0.1f);
         gameObject.SetActive(false);
+    }
+
+    private IEnumerator RingFire()
+    {
+        gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[6];
+        gameObject.GetComponent<BulletSourceScript>().Initialize();
+        yield return new WaitForSeconds(1);
+        rung = true;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
