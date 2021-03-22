@@ -20,6 +20,10 @@ public class UI : MonoBehaviour
     private TextMeshProUGUI keycapCounter;
 
     [SerializeField]
+    private GameObject unlockWord;
+    private GameObject[] uLetters;
+
+    [SerializeField]
     private GameObject wordBankL;
 
     [SerializeField]
@@ -30,7 +34,6 @@ public class UI : MonoBehaviour
 
     [SerializeField]
     private GameObject lifeBar;
-    private GameObject[] letterUI;
 
     [SerializeField]
     private GameObject slowBar;
@@ -44,24 +47,11 @@ public class UI : MonoBehaviour
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         player = GameObject.FindGameObjectWithTag("Player");
-        letterUI = GetAllChildren(letterHolder.transform);
+        uLetters = GetAllChildren(unlockWord.transform);
     }
 
     void Update()
     {
-        lifeBar.GetComponent<Image>().sprite = lifeBarStates[GameController.lives];
-
-        for(int i = 0; i < letterUI.Length; i++)
-        {
-            if (gc.letters[i])
-            {
-                letterUI[i].SetActive(true);
-            }
-            else
-            {
-                letterUI[i].SetActive(false);
-            }
-        }
 
         slowBar.GetComponent<Image>().fillAmount = player.GetComponent<Typing>().slowDown / Typing.maxSlowDown;
 
@@ -91,6 +81,35 @@ public class UI : MonoBehaviour
                 column = 1;
                 break;
         }
+    }
+
+    public void UpdateWordUnlock()
+    {
+        for(int i = 0; i < uLetters.Length; i++)
+        {
+            if(i < player.GetComponent<Typing>().wordToBeUnlocked.Length)
+            {
+                uLetters[i].GetComponent<TextMeshProUGUI>().text = "_";
+            }
+            else
+            {
+                uLetters[i].GetComponent<TextMeshProUGUI>().text = "";
+            }
+        }
+    }
+
+    public void AddLetter()
+    {
+        int iLetter = Mathf.FloorToInt(Random.Range(0, player.GetComponent<Typing>().wordToBeUnlocked.Length));
+
+        while(uLetters[iLetter].GetComponent<TextMeshProUGUI>().text != "_")
+        {
+            iLetter = Mathf.FloorToInt(Random.Range(0, player.GetComponent<Typing>().wordToBeUnlocked.Length));
+        }
+
+        print(iLetter);
+
+        uLetters[iLetter].GetComponent<TextMeshProUGUI>().text = player.GetComponent<Typing>().wordToBeUnlocked.ToCharArray()[iLetter].ToString();
     }
 
     private GameObject[] GetAllChildren(Transform parent)

@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public static int level = 1;
 
     public bool tutorial = false;
+    public bool paused = false;
     private bool tutorialIncrementing = false;
     private bool enemySpawned = false;
     public int tutorialStage = 0;
@@ -19,6 +20,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI message;
     [SerializeField] private TextMeshProUGUI tutorialMsg;
     [SerializeField] private Transform spawn;
+    [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject tutorialEnemy, trackball, prompt, skipButton;
     [SerializeField] private AudioClip mainTheme;
 
@@ -40,11 +42,11 @@ public class GameController : MonoBehaviour
                 UI.started = true;
 
                 words.Add("BOMB", false);
-                words.Add("SHIELD", false);
+                words.Add("SHIELD", true);
                 words.Add("ERASE", false);
                 words.Add("CLEAR", false);
                 words.Add("BOOM", false);
-                words.Add("AUTO", false);
+                words.Add("AUTO", true);
                 words.Add("SPREAD", false);
                 words.Add("SHOTGUN", false);
                 words.Add("BLOCK", false);
@@ -110,6 +112,8 @@ public class GameController : MonoBehaviour
             message.text = "Level 3";
             StartCoroutine("BlankMessage");
         }
+
+        player.GetComponent<Typing>().PickNewWord();
     }
 
     void Update()
@@ -249,10 +253,48 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && player.GetComponent<Typing>().mode == "shooting")
         {
-            Application.Quit();
+            if (paused)
+            {
+                paused = false;
+                Time.timeScale = 1;
+                pauseMenu.SetActive(false);
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+            }
+            else
+            {
+                paused = true;
+                Time.timeScale = 0;
+                pauseMenu.SetActive(true);
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Pause();
+            }
         }
+    }
+
+    public void Resume()
+    {
+        paused = false;
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+    }
+
+    public void Settings()
+    {
+
+    }
+
+    public void Quit()
+    {
+        level = 1;
+        LevelTracker.LevelToLoad = 0;
+        SceneManager.LoadScene(4);
+    }
+
+    public void QTD()
+    {
+        Application.Quit();
     }
 
     private IEnumerator IncrementTutorial(float time)

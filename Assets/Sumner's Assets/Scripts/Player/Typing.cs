@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Pixelnest.BulletML;
 
@@ -31,6 +32,7 @@ public class Typing : MonoBehaviour
     public float slowDown = 5;
     public static float maxSlowDown = 3;
     public string word = "";
+    public string wordToBeUnlocked = "";
 
     void Start()
     {
@@ -93,40 +95,40 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if(slowDown < maxSlowDown && mode == "shooting")
+        if(slowDown < maxSlowDown && mode == "shooting" && !gc.paused)
         {
             slowDown += Time.deltaTime * slowRecoveryRate * maxSlowDown;
         }
 
         ShootingInput();
 
-        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && mode == "shooting" && !gameObject.GetComponent<PlayerHealth>().shield)
+        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && mode == "shooting" && !gameObject.GetComponent<PlayerHealth>().shield && !gc.paused)
         {
             sfx.PlayOneShot(enterSlow);
             mode = "typing";
         }
 
-        else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && mode == "typing")
+        else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && mode == "typing" && !gc.paused)
         {
             ConfirmWord();
         }
 
-        if (mode == "typing")
+        if (mode == "typing" && !gc.paused)
         {
             Time.timeScale = 0.2f;
         }
 
-        if (mode == "shooting")
+        if (mode == "shooting" && !gc.paused)
         {
             Time.timeScale = 1f;
         }
 
-        if (mode == "typing" && slowDown > 0)
+        if (mode == "typing" && slowDown > 0 && !gc.paused)
         {
             slowDown -= Time.unscaledDeltaTime;
         }
 
-        if(curShootCooldown > 0)
+        if(curShootCooldown > 0 && !gc.paused)
         {
             curShootCooldown -= Time.deltaTime;
         }
@@ -279,6 +281,8 @@ public class Typing : MonoBehaviour
         {
             if(word == "AUTO")
             {
+                GameController.words[word] = true;
+                ui.AddWord(word);
                 gc.tutorialStage = 8;
             }
             else
@@ -291,6 +295,8 @@ public class Typing : MonoBehaviour
         {
             if (word == "SHIELD")
             {
+                GameController.words[word] = true;
+                ui.AddWord(word);
                 gc.tutorialStage = 10;
             }
             else
@@ -299,101 +305,103 @@ public class Typing : MonoBehaviour
             }
         }
 
-        switch (word)
+        if (GameController.words.ContainsKey(word) && (GameController.words[word] || word == wordToBeUnlocked))
         {
-            case "BOMB":
-                Bomb();
-                break;
+            switch (word)
+            {
+                case "BOMB":
+                    Bomb();
+                    break;
 
-            case "BOOM":
-                Bomb();
-                break;
+                case "BOOM":
+                    Bomb();
+                    break;
 
-            case "BLOCK":
-                StartCoroutine("Shield");
-                break;
+                case "BLOCK":
+                    StartCoroutine("Shield");
+                    break;
 
-            case "SHIELD":
-                StartCoroutine("Shield");
-                break;
+                case "SHIELD":
+                    StartCoroutine("Shield");
+                    break;
 
-            case "ERASE":
-                Erase();
-                break;
+                case "ERASE":
+                    Erase();
+                    break;
 
-            case "CLEAR":
-                Erase();
-                break;
+                case "CLEAR":
+                    Erase();
+                    break;
 
-            case "AUTO":
-                if (true)
-                {
-                    AutoFire();
-                }
-                break;
+                case "AUTO":
+                    if (true)
+                    {
+                        AutoFire();
+                    }
+                    break;
 
-            case "SPREAD":
-                if (true)
-                {
-                    SpreadShot();
-                }
-                break;
+                case "SPREAD":
+                    if (true)
+                    {
+                        SpreadShot();
+                    }
+                    break;
 
-            case "SHOTGUN":
-                if (true)
-                {
-                    SpreadShot();
-                }
-                break;
+                case "SHOTGUN":
+                    if (true)
+                    {
+                        SpreadShot();
+                    }
+                    break;
 
-            case "RAPID":
-                StartCoroutine("Speed");
-                break;
+                case "RAPID":
+                    StartCoroutine("Speed");
+                    break;
 
-            case "SPEED":
-                StartCoroutine("Speed");
-                break;
+                case "SPEED":
+                    StartCoroutine("Speed");
+                    break;
 
-            case "FAST":
-                StartCoroutine("Speed");
-                break;
+                case "FAST":
+                    StartCoroutine("Speed");
+                    break;
 
-            case "OTHER":
-                RandomWord();
-                break;
+                case "OTHER":
+                    RandomWord();
+                    break;
 
-            case "SOMETHING":
-                RandomWord();
-                break;
+                case "SOMETHING":
+                    RandomWord();
+                    break;
 
-            case "RANDOM":
-                RandomWord();
-                break;
+                case "RANDOM":
+                    RandomWord();
+                    break;
 
-            case "ANYTHING":
-                RandomWord();
-                break;
+                case "ANYTHING":
+                    RandomWord();
+                    break;
 
-            case "EXPLOSION":
-                ExplosionWord();
-                break;
+                case "EXPLOSION":
+                    ExplosionWord();
+                    break;
 
-            case "BIG":
-                BigShot();
-                break;
+                case "BIG":
+                    BigShot();
+                    break;
 
-            case "GIANT":
-                BigShot();
-                break;
+                case "GIANT":
+                    BigShot();
+                    break;
+            }
+
+            if(word == wordToBeUnlocked)
+            {
+                UnlockWord(word);
+            }
         }
 
-        if (GameController.words.ContainsKey(word) && !GameController.words[word])
-        {
-            GameController.words[word] = true;
-            ui.AddWord(word);
-        }
-
-        if (!GameController.words.ContainsKey(word))
+        if (!GameController.words.ContainsKey(word) || !GameController.words[word])
         {
             sfx.PlayOneShot(wordFail);
 
@@ -519,6 +527,36 @@ public class Typing : MonoBehaviour
 
         mode = "shooting";
         word = "";
+    }
+
+    public void UnlockWord(string uWord)
+    {
+        GameController.words[uWord] = true;
+        ui.AddWord(uWord);
+
+        PickNewWord();
+    }
+
+    public void PickNewWord()
+    {
+        string[] keys = GameController.words.Keys.ToArray();
+        int newWord = Mathf.FloorToInt(Random.Range(0, GameController.words.Keys.Count));
+        
+        while (GameController.words[keys[newWord]])
+        {
+            newWord = Mathf.FloorToInt(Random.Range(0, GameController.words.Count));
+        }
+
+        print(newWord);
+        print(keys[newWord]);
+
+        if (!GameController.words[keys[newWord]])
+        {
+            print(true);
+            wordToBeUnlocked = keys[newWord];
+            print(wordToBeUnlocked);
+            ui.UpdateWordUnlock();
+        }
     }
 
     private void Shoot(int letter)

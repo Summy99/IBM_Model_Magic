@@ -6,6 +6,7 @@ public class Collectibles : MonoBehaviour
 {
     private Rigidbody2D rb;
     private GameObject player;
+    private GameObject gc;
    
     [SerializeField]
     private AudioClip[] types;
@@ -23,6 +24,7 @@ public class Collectibles : MonoBehaviour
         float x = 0;
 
         rb = gameObject.GetComponent<Rigidbody2D>();
+        gc = GameObject.FindGameObjectWithTag("GameController");
         player = GameObject.FindGameObjectWithTag("Player");
 
         if(Mathf.FloorToInt(Random.Range(0, 2)) == 0)
@@ -69,6 +71,12 @@ public class Collectibles : MonoBehaviour
             collision.gameObject.GetComponent<AudioSource>().PlayOneShot(types[Mathf.FloorToInt(Random.Range(0, types.Length))]);
             collision.gameObject.GetComponent<Typing>().slowDown += 0.01f * Typing.maxSlowDown;
             GameController.keycaps++;
+            
+            if(Mathf.FloorToInt(Random.Range(0, 4)) == 0)
+            {
+                gc.GetComponent<UI>().AddLetter();
+            }
+
             Destroy(gameObject);
         }
     }
