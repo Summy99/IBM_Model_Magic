@@ -7949,6 +7949,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: bigBomb
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c09bb8241dc7a44e8de72a4b1d86ae0, type: 3}
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: bomb
+      value: 
+      objectReference: {fileID: 8300000, guid: 6fc46ce066dd5c549ac34461bb1a53eb, type: 3}
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: wordUnlocked
+      value: 
+      objectReference: {fileID: 8300000, guid: 89f81dba9081fca458368333aee25e74, type: 3}
     - target: {fileID: 4632542713897860138, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_Name
       value: Player

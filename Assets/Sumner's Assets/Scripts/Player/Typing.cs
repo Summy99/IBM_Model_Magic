@@ -15,7 +15,7 @@ public class Typing : MonoBehaviour
     private UI ui;
 
     [SerializeField]
-    private AudioClip shot, wordSuccess, wordFail, enterSlow;
+    private AudioClip shot, wordSuccess, wordFail, enterSlow, bomb, bigBomb, wordUnlocked;
 
     [SerializeField]
     private GameObject letterPrefab, explosionPrefab;
@@ -531,6 +531,8 @@ public class Typing : MonoBehaviour
 
     public void UnlockWord(string uWord)
     {
+        sfx.PlayOneShot(wordUnlocked);
+
         GameController.words[uWord] = true;
         ui.AddWord(uWord);
 
@@ -590,6 +592,7 @@ public class Typing : MonoBehaviour
 
     private void Bomb()
     {
+        sfx.PlayOneShot(bomb);
         Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
     }
 
@@ -644,6 +647,8 @@ public class Typing : MonoBehaviour
 
     private void ExplosionWord()
     {
+        sfx.PlayOneShot(bigBomb);
+
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach(GameObject e in enemies)
