@@ -56,6 +56,11 @@ public class Collectibles : MonoBehaviour
         {
             activated = true;
         }
+
+        if(transform.position.y < -50)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

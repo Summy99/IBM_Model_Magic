@@ -69,4 +69,16 @@ public class MenuScript : MonoBehaviour
         SFXVolume = SFX.value;
         MusicVolume = music.value;
     }
+
+    public void ToggleFullscreen()
+    {
+        if (Screen.fullScreen)
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
+        else
+        {
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        }
+    }
 }

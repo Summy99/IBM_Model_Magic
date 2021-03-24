@@ -117,8 +117,6 @@ public class GameController : MonoBehaviour
             message.text = "Level 3";
             StartCoroutine("BlankMessage");
         }
-
-        player.GetComponent<Typing>().PickNewWord();
     }
 
     void Update()
@@ -312,6 +310,17 @@ public class GameController : MonoBehaviour
 
     public void SkipTutorial()
     {
+        if (tutorialStage <= 7)
+        {
+            gameObject.GetComponent<UI>().AddWord("AUTO");
+            gameObject.GetComponent<UI>().AddWord("SHIELD");
+        }
+
+        else if (tutorialStage <= 9)
+        {
+            gameObject.GetComponent<UI>().AddWord("SHIELD");
+        }
+
         tutorialStage = 11;
         skipButton.SetActive(false);
     }

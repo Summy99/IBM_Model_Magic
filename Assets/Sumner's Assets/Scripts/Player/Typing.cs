@@ -40,6 +40,8 @@ public class Typing : MonoBehaviour
         ui = GameObject.FindWithTag("GameController").GetComponent<UI>();
         bml = gameObject.GetComponent<BulletSourceScript>();
         sfx = gameObject.GetComponent<AudioSource>();
+
+        PickNewWord();
     }
 
     void Update()
