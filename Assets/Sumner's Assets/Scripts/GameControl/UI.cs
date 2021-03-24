@@ -102,16 +102,31 @@ public class UI : MonoBehaviour
 
     public void AddLetter()
     {
-        int iLetter = Mathf.FloorToInt(Random.Range(0, player.GetComponent<Typing>().wordToBeUnlocked.Length));
+        string word = player.GetComponent<Typing>().wordToBeUnlocked;
+        bool finished = true;
+        int iLetter = Mathf.FloorToInt(Random.Range(0, word.Length));
 
-        while(uLetters[iLetter].GetComponent<TextMeshProUGUI>().text != "_")
+        foreach(GameObject g in uLetters)
         {
-            iLetter = Mathf.FloorToInt(Random.Range(0, player.GetComponent<Typing>().wordToBeUnlocked.Length));
+            if(g.GetComponent<TextMeshProUGUI>().text == "_")
+            {
+                finished = false;
+            }
         }
 
-        print(iLetter);
+        if (!finished)
+        {
+            while (uLetters[iLetter].GetComponent<TextMeshProUGUI>().text != "_")
+            {
+                iLetter = Mathf.FloorToInt(Random.Range(0, word.Length));
+            }
+        }
+        else
+        {
+            return;
+        }
 
-        uLetters[iLetter].GetComponent<TextMeshProUGUI>().text = player.GetComponent<Typing>().wordToBeUnlocked.ToCharArray()[iLetter].ToString();
+        uLetters[iLetter].GetComponent<TextMeshProUGUI>().text = word.ToCharArray()[iLetter].ToString();
     }
 
     private GameObject[] GetAllChildren(Transform parent)
