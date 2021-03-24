@@ -594,39 +594,30 @@ public class EnemyController : MonoBehaviour
                         break;
 
                     case 11:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 12:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 13:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 14:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 15:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 16:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 17:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 18:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 19:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(slowCollectible, transform.position, Quaternion.identity);
                         break;
                 }
