@@ -74,14 +74,6 @@ public class Waves : MonoBehaviour
                     break;
 
                 case 6:
-                    if (!shop)
-                    {
-                        player.transform.position = new Vector3(-20, -43, 0);
-                        shop = true;
-                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = shoptheme;
-                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
-                        gameObject.GetComponent<Shop>().OpenShop();
-                    }
                     break;
 
                 case 7:
@@ -134,14 +126,6 @@ public class Waves : MonoBehaviour
                     break;
 
                 case 6:
-                    if (!shop)
-                    {
-                        player.transform.position = new Vector3(-20, -43, 0);
-                        shop = true;
-                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = shoptheme;
-                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
-                        gameObject.GetComponent<Shop>().OpenShop();
-                    }
                     break;
 
                 case 7:
@@ -194,14 +178,6 @@ public class Waves : MonoBehaviour
                     break;
 
                 case 6:
-                    if (!shop)
-                    {
-                        player.transform.position = new Vector3(-20, -43, 0);
-                        shop = true;
-                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = shoptheme;
-                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
-                        gameObject.GetComponent<Shop>().OpenShop();
-                    }
                     break;
 
                 case 7:
