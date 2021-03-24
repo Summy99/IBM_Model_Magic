@@ -540,11 +540,9 @@ public class EnemyController : MonoBehaviour
                 switch (pickup)
                 {
                     case 0:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 1:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 2:
@@ -568,28 +566,23 @@ public class EnemyController : MonoBehaviour
                         break;
 
                     case 6:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 7:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 8:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 9:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 10:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
