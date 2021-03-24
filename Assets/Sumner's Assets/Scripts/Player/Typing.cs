@@ -522,7 +522,7 @@ public class Typing : MonoBehaviour
         }
         else
         {
-            sfx.PlayOneShot(wordSuccess);
+            sfx.PlayOneShot(wordSuccess, 0.5f);
         }
 
         mode = "shooting";

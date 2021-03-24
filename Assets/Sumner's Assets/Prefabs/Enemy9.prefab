@@ -179,6 +179,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 13c9cde408b3b7b47acc289a633590ac, type: 3}
   slowCollectible: {fileID: 125156313247077267, guid: 427b431d75eac9046ad54d22bb59d4ed, type: 3}
   keycapCollectible: {fileID: 6826599825272669511, guid: 8d0cbadd924bf1f4aa572378f3922316, type: 3}
+  healthCollectible: {fileID: 3484071113238819380, guid: f3c7fbbd7376b634daf8b39dca3ba645, type: 3}
   health: 35
   shooting: 0
   pattern: 0

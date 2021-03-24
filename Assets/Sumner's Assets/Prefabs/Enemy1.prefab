@@ -137,15 +137,17 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 948662ffa7009934cbaaea93c3f12a74, type: 3}
   slowCollectible: {fileID: 125156313247077267, guid: 427b431d75eac9046ad54d22bb59d4ed, type: 3}
   keycapCollectible: {fileID: 6826599825272669511, guid: 8d0cbadd924bf1f4aa572378f3922316, type: 3}
+  healthCollectible: {fileID: 3484071113238819380, guid: f3c7fbbd7376b634daf8b39dca3ba645, type: 3}
   health: 3
   shooting: 0
   pattern: 0
   lifetime: 0
   timeToShoot: 0
   type: 1
+  type2Shoot: 0
   initialized: 0
   moveSpeed: 10
-  initialPosition: {x: 0, y: 0}
+  initialPosition: {x: 0, y: 0, z: 0}
 --- !u!50 &621043435091661713
 Rigidbody2D:
   serializedVersion: 4

@@ -66,6 +66,16 @@ public class Collectibles : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (collision.gameObject.CompareTag("Player") && type == "heal")
+        {
+            if(GameController.lives < 6)
+            {
+                collision.gameObject.GetComponent<PlayerHealth>().heal++;
+            }
+
+            Destroy(gameObject);
+        }
+
         if (collision.gameObject.CompareTag("Player") && type == "keycap")
         {
             collision.gameObject.GetComponent<AudioSource>().PlayOneShot(types[Mathf.FloorToInt(Random.Range(0, types.Length))]);

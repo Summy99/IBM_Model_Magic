@@ -60,6 +60,8 @@ public class UI : MonoBehaviour
         type.transform.Find("PendingWord").GetComponent<TextMeshProUGUI>().text = player.GetComponent<Typing>().word;
 
         keycapCounter.text = " x" + GameController.keycaps;
+
+        lifeBar.GetComponent<Image>().sprite = lifeBarStates[GameController.lives];
     }
 
     public void AddWord(string word)

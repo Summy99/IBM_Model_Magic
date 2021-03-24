@@ -14,10 +14,7 @@ public class EnemyController : MonoBehaviour
     private TextAsset[] bulletmlScripts;
 
     [SerializeField]
-    private GameObject slowCollectible;
-
-    [SerializeField]
-    private GameObject keycapCollectible;
+    private GameObject slowCollectible, keycapCollectible, healthCollectible;
 
     public float health = 3;
 
@@ -543,73 +540,93 @@ public class EnemyController : MonoBehaviour
                 switch (pickup)
                 {
                     case 0:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 1:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 2:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 3:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 4:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 5:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 6:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 7:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 8:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 9:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 10:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 11:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 12:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 13:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 14:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 15:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 16:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 17:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 18:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 19:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(slowCollectible, transform.position, Quaternion.identity);
                         break;
                 }
@@ -617,6 +634,7 @@ public class EnemyController : MonoBehaviour
 
             if (type == 3 || type == 5 || type == 9)
             {
+                Instantiate(healthCollectible, transform.position, Quaternion.identity);
                 Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                 Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                 Instantiate(keycapCollectible, transform.position, Quaternion.identity);

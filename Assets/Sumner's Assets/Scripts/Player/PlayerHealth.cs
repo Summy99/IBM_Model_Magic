@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     private AudioClip[] types;
 
     public bool shield = false;
+    public int heal = 0;
     private BulletSourceScript bml;
 
     void Start()
@@ -23,6 +24,15 @@ public class PlayerHealth : MonoBehaviour
         sfx = gameObject.GetComponent<AudioSource>();
         bml = gameObject.GetComponent<BulletSourceScript>();
         ui = GameObject.FindGameObjectWithTag("GameController").GetComponent<UI>();
+    }
+
+    private void Update()
+    {
+        if(heal >= 8)
+        {
+            heal = 0;
+            GameController.lives++;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
