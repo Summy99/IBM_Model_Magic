@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6826599825272669514}
   m_Layer: 0
   m_Name: Keycap
-  m_TagString: Untagged
+  m_TagString: Collectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +102,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20.48, y: 20.48}
+    oldSize: {x: 1.024, y: 1.024}
     newSize: {x: 0.6, y: 0.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -158,3 +158,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 236250f778cc33e4085fa5c25fcdd25d, type: 3}
   - {fileID: 8300000, guid: 0031568404f29b141903f53d21fb36a2, type: 3}
   type: keycap
+  activated: 0

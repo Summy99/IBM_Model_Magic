@@ -13,7 +13,7 @@ public class Collectibles : MonoBehaviour
 
     public string type = "slow";
 
-    private bool activated = false;
+    public bool activated = false;
 
     void Start()
     {

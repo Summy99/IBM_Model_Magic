@@ -47,7 +47,10 @@ public class GameController : MonoBehaviour
                 words.Add("CLEAR", false);
                 words.Add("BOOM", false);
                 words.Add("AUTO", true);
+                words.Add("SHOOT", true);
+                words.Add("FIRE", true);
                 words.Add("SPREAD", false);
+                words.Add("SCATTER", true);
                 words.Add("SHOTGUN", false);
                 words.Add("BLOCK", false);
                 words.Add("RAPID", false);
@@ -60,6 +63,8 @@ public class GameController : MonoBehaviour
                 words.Add("EXPLOSION", false);
                 words.Add("BIG", false);
                 words.Add("GIANT", false);
+                words.Add("GRAB", false);
+                words.Add("COLLECT", false);
 
                 tutorial = true;
                 tutorialMsg.text = "Hello! I'm Trackball the mouse, welcome to IBM Model Magic!";

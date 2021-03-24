@@ -340,6 +340,20 @@ public class Typing : MonoBehaviour
                     }
                     break;
 
+                case "SHOOT":
+                    if (true)
+                    {
+                        AutoFire();
+                    }
+                    break;
+
+                case "FIRE":
+                    if (true)
+                    {
+                        AutoFire();
+                    }
+                    break;
+
                 case "SPREAD":
                     if (true)
                     {
@@ -348,6 +362,13 @@ public class Typing : MonoBehaviour
                     break;
 
                 case "SHOTGUN":
+                    if (true)
+                    {
+                        SpreadShot();
+                    }
+                    break;
+
+                case "SCATTER":
                     if (true)
                     {
                         SpreadShot();
@@ -392,6 +413,14 @@ public class Typing : MonoBehaviour
 
                 case "GIANT":
                     BigShot();
+                    break;
+
+                case "GRAB":
+                    Collect();
+                    break;
+
+                case "COLLECT":
+                    Collect();
                     break;
             }
 
@@ -664,6 +693,16 @@ public class Typing : MonoBehaviour
         bml.Initialize();
     }
 
+    private void Collect()
+    {
+        GameObject[] collectibles = GameObject.FindGameObjectsWithTag("Collectible");
+
+        foreach(GameObject c in collectibles)
+        {
+            c.GetComponent<Collectibles>().activated = true;
+        }
+    }
+
     private void RandomWord()
     {
         int effect = Mathf.FloorToInt(Random.Range(0, 8));
@@ -700,6 +739,10 @@ public class Typing : MonoBehaviour
 
             case 7:
                 BigShot();
+                break;
+
+            case 8:
+                Collect();
                 break;
         }
     }

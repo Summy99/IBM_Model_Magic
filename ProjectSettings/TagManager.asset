@@ -10,6 +10,7 @@ TagManager:
   - Letter
   - Canvas
   - PlayerShotBig
+  - Collectible
   layers:
   - Default
   - TransparentFX
