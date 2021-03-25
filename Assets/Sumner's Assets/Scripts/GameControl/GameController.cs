@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tutorialMsg;
     [SerializeField] private Transform spawn;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject meme;
     [SerializeField] private GameObject tutorialEnemy, trackball, prompt, skipButton;
     [SerializeField] private AudioClip mainTheme;
 
@@ -263,7 +264,10 @@ public class GameController : MonoBehaviour
                 paused = false;
                 Time.timeScale = 1;
                 pauseMenu.SetActive(false);
-                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+                if (!meme.activeSelf)
+                {
+                    GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+                }
             }
             else
             {
@@ -280,7 +284,11 @@ public class GameController : MonoBehaviour
         paused = false;
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+
+        if (!meme.activeSelf)
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+        }      
     }
 
     public void Settings()

@@ -49,12 +49,14 @@ public class Typing : MonoBehaviour
         ui = GameObject.FindWithTag("GameController").GetComponent<UI>();
         bml = gameObject.GetComponent<BulletSourceScript>();
         sfx = gameObject.GetComponent<AudioSource>();
-
-        PickNewWord();
     }
 
     void Update()
     {
+        if(wordToBeUnlocked == "")
+        {
+            PickNewWord();
+        }
         sfx.volume = 0.5f * MenuScript.MasterVolume * MenuScript.SFXVolume;
         if (Input.GetKeyDown(KeyCode.Minus))
         {

@@ -11,6 +11,7 @@ TagManager:
   - Canvas
   - PlayerShotBig
   - Collectible
+  - Meme
   layers:
   - Default
   - TransparentFX
