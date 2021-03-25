@@ -24,6 +24,9 @@ public class Typing : MonoBehaviour
     private GameObject letterPrefab, explosionPrefab;
 
     [SerializeField]
+    private GameObject mema;
+
+    [SerializeField]
     public Sprite[] letterSprites;
 
     [SerializeField]
@@ -313,7 +316,7 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if ((GameController.words.ContainsKey(word) && (GameController.words[word] || word == wordToBeUnlocked)) || word == "TOUHOU")
+        if ((GameController.words.ContainsKey(word) && (GameController.words[word] || word == wordToBeUnlocked)) || word == "TOUHOU" || word == "MIMA")
         {
             switch (word)
             {
@@ -433,6 +436,10 @@ public class Typing : MonoBehaviour
 
                 case "TOUHOU":
                     TouhouMeme();
+                    break;
+
+                case "MIMA":
+                    Memea();
                     break;
             }
 
@@ -636,6 +643,12 @@ public class Typing : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().sprite = yukkuriReimu;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = badAppleEarrape;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+    }
+
+    private void Memea()
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Pause();
+        mema.SetActive(true);
     }
 
     private void Bomb()
