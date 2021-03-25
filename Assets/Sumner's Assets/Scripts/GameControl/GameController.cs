@@ -47,8 +47,8 @@ public class GameController : MonoBehaviour
                 words.Add("CLEAR", false);
                 words.Add("BOOM", false);
                 words.Add("AUTO", true);
-                words.Add("SHOOT", true);
-                words.Add("FIRE", true);
+                words.Add("SHOOT", false);
+                words.Add("FIRE", false);
                 words.Add("SPREAD", false);
                 words.Add("SCATTER", true);
                 words.Add("SHOTGUN", false);

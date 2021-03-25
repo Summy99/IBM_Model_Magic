@@ -18,10 +18,16 @@ public class Typing : MonoBehaviour
     private AudioClip shot, wordSuccess, wordFail, enterSlow, bomb, bigBomb, wordUnlocked;
 
     [SerializeField]
+    private AudioClip badAppleEarrape;
+
+    [SerializeField]
     private GameObject letterPrefab, explosionPrefab;
 
     [SerializeField]
     public Sprite[] letterSprites;
+
+    [SerializeField]
+    private Sprite yukkuriReimu;
 
     public float shootCooldown = 0.1f;
     private float curShootCooldown = 0;
@@ -307,7 +313,7 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if (GameController.words.ContainsKey(word) && (GameController.words[word] || word == wordToBeUnlocked))
+        if ((GameController.words.ContainsKey(word) && (GameController.words[word] || word == wordToBeUnlocked)) || word == "TOUHOU")
         {
             switch (word)
             {
@@ -423,6 +429,10 @@ public class Typing : MonoBehaviour
 
                 case "COLLECT":
                     Collect();
+                    break;
+
+                case "TOUHOU":
+                    TouhouMeme();
                     break;
             }
 
@@ -619,6 +629,13 @@ public class Typing : MonoBehaviour
         }
 
         return a;
+    }
+
+    private void TouhouMeme()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = yukkuriReimu;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = badAppleEarrape;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
     }
 
     private void Bomb()

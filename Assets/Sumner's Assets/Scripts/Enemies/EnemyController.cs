@@ -543,6 +543,7 @@ public class EnemyController : MonoBehaviour
                         break;
 
                     case 1:
+                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 2:
@@ -551,17 +552,14 @@ public class EnemyController : MonoBehaviour
                         break;
 
                     case 3:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 4:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 5:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
                         Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
