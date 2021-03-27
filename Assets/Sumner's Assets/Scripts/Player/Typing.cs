@@ -39,7 +39,7 @@ public class Typing : MonoBehaviour
 
     public string mode = "shooting";
     public float slowDown = 5;
-    public static float maxSlowDown = 3;
+    public static float maxSlowDown = 2.25f;
     public string word = "";
     public string wordToBeUnlocked = "";
 

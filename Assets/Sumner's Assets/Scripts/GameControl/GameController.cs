@@ -79,7 +79,7 @@ public class GameController : MonoBehaviour
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
                 tutorialMsg.text = "";
                 tutorial = false;
-                Typing.maxSlowDown = 3;
+                Typing.maxSlowDown = 2.25f;
                 player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
                 trackball.SetActive(false);
                 prompt.SetActive(false);
@@ -250,7 +250,7 @@ public class GameController : MonoBehaviour
                 GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
                 tutorialMsg.text = "";
                 tutorial = false;
-                Typing.maxSlowDown = 3;
+                Typing.maxSlowDown = 2.25f;
                 trackball.SetActive(false);
                 prompt.SetActive(false);
                 skipButton.SetActive(false);
