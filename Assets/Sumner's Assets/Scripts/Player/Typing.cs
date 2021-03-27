@@ -290,11 +290,13 @@ public class Typing : MonoBehaviour
 
     private void ConfirmWord()
     {
+        int wordIndex = GetWordIndex(word);
+
         if (gc.tutorial && gc.tutorialStage == 7)
         {
             if(word == "AUTO")
             {
-                GameController.words[word] = true;
+                //GameController.words[word] = true;
                 ui.AddWord(word);
                 gc.tutorialStage = 8;
             }
@@ -308,7 +310,7 @@ public class Typing : MonoBehaviour
         {
             if (word == "SHIELD")
             {
-                GameController.words[word] = true;
+                //GameController.words[word] = true;
                 ui.AddWord(word);
                 gc.tutorialStage = 10;
             }
@@ -318,7 +320,7 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if ((GameController.words.ContainsKey(word) && (GameController.words[word] || word == wordToBeUnlocked)) || word == "TOUHOU" || word == "MIMA")
+        if ((wordIndex != 0 && (GameController.Words[wordIndex].Unlocked || word == wordToBeUnlocked) && GameController.Words[wordIndex].CurCool <= 0) || word == "TOUHOU" || word == "MIMA")
         {
             switch (word)
             {
@@ -449,9 +451,13 @@ public class Typing : MonoBehaviour
             {
                 UnlockWord(word);
             }
+            else if(word != "MIMA" && word != "TOUHOU")
+            {
+                GameController.Words[wordIndex].CurCool = GameController.Words[wordIndex].MaxCool;
+            }
         }
 
-        if (!GameController.words.ContainsKey(word) || !GameController.words[word])
+        if (wordIndex == 0 || !GameController.Words[wordIndex].Unlocked || GameController.Words[wordIndex].CurCool >= 0)
         {
             sfx.PlayOneShot(wordFail);
 
@@ -583,7 +589,7 @@ public class Typing : MonoBehaviour
     {
         sfx.PlayOneShot(wordUnlocked);
 
-        GameController.words[uWord] = true;
+        GameController.Words[GetWordIndex(uWord)].Unlocked = true;
         ui.AddWord(uWord);
 
         PickNewWord();
@@ -591,22 +597,17 @@ public class Typing : MonoBehaviour
 
     public void PickNewWord()
     {
-        string[] keys = GameController.words.Keys.ToArray();
-        int newWord = Mathf.FloorToInt(Random.Range(0, GameController.words.Keys.Count));
-        
-        while (GameController.words[keys[newWord]])
+        int newWord = Mathf.FloorToInt(Random.Range(1, GameController.Words.Count));
+
+        while (GameController.Words[newWord].Unlocked)
         {
-            newWord = Mathf.FloorToInt(Random.Range(0, GameController.words.Count));
+            newWord = Mathf.FloorToInt(Random.Range(1, GameController.Words.Count));
         }
 
-        print(newWord);
-        print(keys[newWord]);
-
-        if (!GameController.words[keys[newWord]])
+        if (!GameController.Words[newWord].Unlocked)
         {
-            print(true);
-            wordToBeUnlocked = keys[newWord];
-            print(wordToBeUnlocked);
+            print(GameController.Words[newWord].Name);
+            wordToBeUnlocked = GameController.Words[newWord].Name;
             ui.UpdateWordUnlock();
         }
     }
@@ -638,6 +639,32 @@ public class Typing : MonoBehaviour
         }
 
         return a;
+    }
+
+    public int GetWordIndex(string word)
+    {
+        for(int i = 0; i < GameController.Words.Count; i++)
+        {
+            if(GameController.Words[i].Name == word)
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    public bool ContainsWord(List<Word> l, string word)
+    {
+        foreach(Word w in l)
+        {
+            if(w.Name == word)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void TouhouMeme()

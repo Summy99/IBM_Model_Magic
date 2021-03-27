@@ -116,7 +116,7 @@ public class FirstBoss : MonoBehaviour
     private IEnumerator Die()
     {
         yield return new WaitForSeconds(1);
-        GameController.level = 2;
+        GameController.Level = 2;
         LevelTracker.LevelToLoad = 2;
         SceneManager.LoadScene(4);
     }

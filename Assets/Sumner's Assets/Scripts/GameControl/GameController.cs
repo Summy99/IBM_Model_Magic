@@ -4,10 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+public class Word
+{
+    public string Name { get; set; }
+    public bool Unlocked { get; set; }
+    public float CurCool { get; set; }
+    public float MaxCool { get; set; }
+}
+
 public class GameController : MonoBehaviour
 {
     public static int lives = 6;
-    public static int level = 1;
+    public static int Level = 1;
 
     public bool tutorial = false;
     public bool paused = false;
@@ -25,7 +33,180 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject tutorialEnemy, trackball, prompt, skipButton;
     [SerializeField] private AudioClip mainTheme;
 
-    public static Dictionary<string, bool> words = new Dictionary<string, bool>();
+    public static List<Word> Words = new List<Word>() {
+        new Word() {
+                    Name = "TEST",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+        new Word() {
+                    Name = "BOMB",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "SHIELD",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "CLEAR",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 5f
+                   },
+
+        new Word() {
+                    Name = "ERASE",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 5f
+                   },
+
+        new Word() {
+                    Name = "BOOM",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "AUTO",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "SHOOT",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "FIRE",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "SPREAD",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "SCATTER",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "SHOTGUN",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "BLOCK",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+        new Word() {
+                    Name = "RAPID",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "SPEED",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "FAST",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "OTHER",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "SOMETHING",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "RANDOM",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "ANYTHING",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "EXPLOSION",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "BIG",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "GIANT",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "GRAB",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "COLLECT",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   }};
+
     public bool[] letters = new bool[] { 
         /*A*/true, /*B*/true, /*C*/true, /*D*/true, /*E*/true, /*F*/true, /*G*/true, 
         /*H*/true, /*I*/true, /*J*/true, /*K*/true, /*L*/true, /*M*/true, /*N*/true,  
@@ -36,14 +217,28 @@ public class GameController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        if(level == 1)
+        if(Level == 1)
         {
             if (!UI.started)
             {
                 UI.started = true;
 
-                words.Add("BOMB", false);
-                words.Add("SHIELD", true);
+                /*
+                words.Add(new Word()
+                {
+                    Name = "BOMB",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                });
+
+                words.Add(new Word()
+                {
+                    Name = "SHIELD",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                });
                 words.Add("ERASE", false);
                 words.Add("CLEAR", false);
                 words.Add("BOOM", false);
@@ -66,6 +261,7 @@ public class GameController : MonoBehaviour
                 words.Add("GIANT", false);
                 words.Add("GRAB", false);
                 words.Add("COLLECT", false);
+                */
 
                 tutorial = true;
                 tutorialMsg.text = "Hello! I'm Trackball the mouse, welcome to IBM Model Magic!";
@@ -87,32 +283,16 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if(level == 2)
+        if(Level == 2)
         {
-            foreach(KeyValuePair<string, bool> entry in words)
-            {
-                if (entry.Value)
-                {
-                    gameObject.GetComponent<UI>().AddWord(entry.Key);
-                }
-            }
-
             player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
 
             message.text = "Level 2";
             StartCoroutine("BlankMessage");
         }
 
-        if (level == 3)
+        if (Level == 3)
         {
-            foreach (KeyValuePair<string, bool> entry in words)
-            {
-                if (entry.Value)
-                {
-                    gameObject.GetComponent<UI>().AddWord(entry.Key);
-                }
-            }
-
             player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
 
             message.text = "Level 3";
@@ -126,136 +306,15 @@ public class GameController : MonoBehaviour
 
         if (lives > 6)
         {
-            lives = 6;
+                lives = 6;
         }
 
         if(tutorial)
         {
-            if(tutorialStage == 0 && !tutorialIncrementing)
-            {
-                if(Input.GetKeyDown(KeyCode.Z))
-                {
-                    StartCoroutine("IncrementTutorial", 0.1f);
-                }
-            }
-            if(tutorialStage == 1)
-            {
-                tutorialMsg.text = "You can move with the arrow keys. Try it!";
-                prompt.SetActive(false);
-                if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    tutorialStage = 2;
-                }
-            }
-
-            if(tutorialStage == 2 && !tutorialIncrementing)
-            {
-                tutorialMsg.text = "If you hold shift, you can slow your movement and see your hitbox.";
-                prompt.SetActive(true);
-                prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    StartCoroutine("IncrementTutorial", 0.1f);
-                }
-            }
-
-            if (tutorialStage == 3 && !tutorialIncrementing)
-            {
-                tutorialMsg.text = "Emojis are invading! You can fight back with your magical IBM Model M keyboard.";
-                prompt.SetActive(true);
-                prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    StartCoroutine("IncrementTutorial", 0.1f);
-                }
-            }
-
-            if(tutorialStage == 4)
-            {
-                tutorialMsg.text = "Here comes one now! Press space or enter to slow time and start typing.";
-                prompt.SetActive(false);
-                if (!enemySpawned)
-                {
-                    Instantiate(tutorialEnemy, spawn.position, Quaternion.identity);
-                    enemySpawned = true;
-                }
-
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
-                {
-                    tutorialStage = 5;
-                }
-            }
-
-            if(tutorialStage == 5)
-            {
-                tutorialMsg.text = "Type in a word here to shoot it! Press space or enter to fire when you're done.";
-                prompt.SetActive(false);
-            }
-
-            if (tutorialStage == 6 && !tutorialIncrementing)
-            {
-                tutorialMsg.text = "That one dropped a keycap, make sure to pick it up. You can spend them later on upgrades.";
-                prompt.SetActive(true);
-                prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    StartCoroutine("IncrementTutorial", 0.1f);
-                }
-            }
-
-            if (tutorialStage == 7)
-            {
-                tutorialMsg.text = "There are certain words of power that have special effects. Try putting in \"AUTO.\"";
-                prompt.SetActive(false);
-            }
-
-            if (tutorialStage == 8 && !tutorialIncrementing)
-            {
-                tutorialMsg.text = "There's plenty other words! Experiment and try to find them all!";
-                prompt.SetActive(true);
-                prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    StartCoroutine("IncrementTutorial", 0.1f);
-                }
-            }
-
-            if(tutorialStage == 9)
-            {
-                tutorialMsg.text = "... Okay fine, you can have one more for free. Try \"SHIELD.\"";
-                prompt.SetActive(false);
-            }
-
-            if (tutorialStage == 10 && !tutorialIncrementing)
-            {
-                tutorialMsg.text = "Careful with that one; you can't type while it's active!";
-                prompt.SetActive(true);
-                prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
-                if (Input.GetKeyDown(KeyCode.Z))
-                {
-                    StartCoroutine("IncrementTutorial", 0.1f);
-                }
-            }
-
-            if (tutorialStage == 11 && !tutorialIncrementing)
-            {
-                tutorialMsg.text = "Here come more emojis, get ready!";
-                prompt.SetActive(false);
-                StartCoroutine("IncrementTutorial", 2);
-            }
-
-            if(tutorialStage == 12)
-            {
-                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = mainTheme;
-                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
-                tutorialMsg.text = "";
-                tutorial = false;
-                Typing.maxSlowDown = 2.25f;
-                trackball.SetActive(false);
-                prompt.SetActive(false);
-                skipButton.SetActive(false);
-            }
+            Tutorial();
         }
+
+        ManageCooldowns();
 
         if (Input.GetKeyDown(KeyCode.Escape) && player.GetComponent<Typing>().mode == "shooting")
         {
@@ -279,6 +338,145 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void Tutorial()
+    {
+        if (tutorialStage == 0 && !tutorialIncrementing)
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                StartCoroutine("IncrementTutorial", 0.1f);
+            }
+        }
+        if (tutorialStage == 1)
+        {
+            tutorialMsg.text = "You can move with the arrow keys. Try it!";
+            prompt.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                tutorialStage = 2;
+            }
+        }
+
+        if (tutorialStage == 2 && !tutorialIncrementing)
+        {
+            tutorialMsg.text = "If you hold shift, you can slow your movement and see your hitbox.";
+            prompt.SetActive(true);
+            prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                StartCoroutine("IncrementTutorial", 0.1f);
+            }
+        }
+
+        if (tutorialStage == 3 && !tutorialIncrementing)
+        {
+            tutorialMsg.text = "Emojis are invading! You can fight back with your magical IBM Model M keyboard.";
+            prompt.SetActive(true);
+            prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                StartCoroutine("IncrementTutorial", 0.1f);
+            }
+        }
+
+        if (tutorialStage == 4)
+        {
+            tutorialMsg.text = "Here comes one now! Press space or enter to slow time and start typing.";
+            prompt.SetActive(false);
+            if (!enemySpawned)
+            {
+                Instantiate(tutorialEnemy, spawn.position, Quaternion.identity);
+                enemySpawned = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+            {
+                tutorialStage = 5;
+            }
+        }
+
+        if (tutorialStage == 5)
+        {
+            tutorialMsg.text = "Type in a word here to shoot it! Press space or enter to fire when you're done.";
+            prompt.SetActive(false);
+        }
+
+        if (tutorialStage == 6 && !tutorialIncrementing)
+        {
+            tutorialMsg.text = "That one dropped a keycap, make sure to pick it up. You can spend them later on upgrades.";
+            prompt.SetActive(true);
+            prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                StartCoroutine("IncrementTutorial", 0.1f);
+            }
+        }
+
+        if (tutorialStage == 7)
+        {
+            tutorialMsg.text = "There are certain words of power that have special effects. Try putting in \"AUTO.\"";
+            prompt.SetActive(false);
+        }
+
+        if (tutorialStage == 8 && !tutorialIncrementing)
+        {
+            tutorialMsg.text = "There's plenty other words! Experiment and try to find them all!";
+            prompt.SetActive(true);
+            prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                StartCoroutine("IncrementTutorial", 0.1f);
+            }
+        }
+
+        if (tutorialStage == 9)
+        {
+            tutorialMsg.text = "... Okay fine, you can have one more for free. Try \"SHIELD.\"";
+            prompt.SetActive(false);
+        }
+
+        if (tutorialStage == 10 && !tutorialIncrementing)
+        {
+            tutorialMsg.text = "Careful with that one; you can't type while it's active!";
+            prompt.SetActive(true);
+            prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                StartCoroutine("IncrementTutorial", 0.1f);
+            }
+        }
+
+        if (tutorialStage == 11 && !tutorialIncrementing)
+        {
+            tutorialMsg.text = "Here come more emojis, get ready!";
+            prompt.SetActive(false);
+            StartCoroutine("IncrementTutorial", 2);
+        }
+
+        if (tutorialStage == 12)
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = mainTheme;
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+            tutorialMsg.text = "";
+            tutorial = false;
+            Typing.maxSlowDown = 2.25f;
+            trackball.SetActive(false);
+            prompt.SetActive(false);
+            skipButton.SetActive(false);
+        }
+    }
+
+    public void ManageCooldowns()
+    {
+        foreach(Word w in Words)
+        {
+            if(w.CurCool > 0)
+            {
+                w.CurCool -= Time.deltaTime;
+            }
+        }
+    }
+
     public void Resume()
     {
         paused = false;
@@ -298,7 +496,7 @@ public class GameController : MonoBehaviour
 
     public void Quit()
     {
-        level = 1;
+        Level = 1;
         LevelTracker.LevelToLoad = 0;
         SceneManager.LoadScene(4);
     }

@@ -41,7 +41,7 @@ public class MenuScript : MonoBehaviour
 
     public void StartGame(int level)
     {
-        GameController.level = level;
+        GameController.Level = level;
         LevelTracker.LevelToLoad = level;
         SceneManager.LoadScene(4);
     }

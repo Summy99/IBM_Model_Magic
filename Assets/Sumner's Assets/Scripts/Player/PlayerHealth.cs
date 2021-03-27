@@ -60,30 +60,6 @@ public class PlayerHealth : MonoBehaviour
             GameController.keycaps -= 15;
             GameController.lives++;
         }
-
-        if (collision.gameObject.name == "NewWord" && GameController.keycaps >= 40)
-        {
-            collision.gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("WordPrice").gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("WordPriceIcon").gameObject.SetActive(false);
-            GameController.keycaps -= 40;
-
-            string[] words = new string[GameController.words.Count];
-            GameController.words.Keys.CopyTo(words, 0);
-
-            string wordToUnlock = "AUTO";
-
-            while (GameController.words[wordToUnlock])
-            {
-                wordToUnlock = words[Mathf.FloorToInt(Random.Range(0, words.Length))];
-            }
-
-            if (!GameController.words[wordToUnlock])
-            {
-                GameController.words[wordToUnlock] = true;
-                ui.AddWord(wordToUnlock);
-            }
-        }
     }
 
     public void Die()

@@ -116,7 +116,7 @@ public class PoopBoss : MonoBehaviour
     private IEnumerator Die()
     {
         yield return new WaitForSeconds(1);
-        GameController.level = 3;
+        GameController.Level = 3;
         LevelTracker.LevelToLoad = 3;
         SceneManager.LoadScene(4);
     }

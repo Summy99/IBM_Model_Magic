@@ -49,7 +49,7 @@ public class Waves : MonoBehaviour
             wave++;
         }
         // level 1
-        if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.level == 1)
+        if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.Level == 1)
         {
             switch (wave)
             {
@@ -101,7 +101,7 @@ public class Waves : MonoBehaviour
         }
 
         // level 2
-        if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.level == 2)
+        if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.Level == 2)
         {
             switch (wave)
             {
@@ -153,7 +153,7 @@ public class Waves : MonoBehaviour
         }
 
         // level 3
-        if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.level == 3)
+        if (!waveRunning && GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameController.Level == 3)
         {
             switch (wave)
             {
