@@ -86,9 +86,12 @@ public class Collectibles : MonoBehaviour
             collision.gameObject.GetComponent<AudioSource>().PlayOneShot(types[Mathf.FloorToInt(Random.Range(0, types.Length))]);
             collision.gameObject.GetComponent<Typing>().slowDown += 0.01f * Typing.maxSlowDown;
             GameController.keycaps++;
-            
-            if(Mathf.FloorToInt(Random.Range(0, 4)) == 0)
+
+            collision.gameObject.GetComponent<Typing>().letterProgress++;
+
+            if(collision.gameObject.GetComponent<Typing>().letterProgress == 6)
             {
+                collision.gameObject.GetComponent<Typing>().letterProgress = 0;
                 gc.GetComponent<UI>().AddLetter();
             }
 

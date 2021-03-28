@@ -38,6 +38,7 @@ public class Typing : MonoBehaviour
     private bool patternRunning = false;
 
     public string mode = "shooting";
+    public int letterProgress = 0;
     public float slowDown = 5;
     public static float maxSlowDown = 2.25f;
     public string word = "";

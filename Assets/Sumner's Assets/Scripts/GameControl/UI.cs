@@ -63,7 +63,7 @@ public class UI : MonoBehaviour
 
         type.transform.Find("PendingWord").GetComponent<TextMeshProUGUI>().text = player.GetComponent<Typing>().word;
 
-        keycapCounter.text = " x" + GameController.keycaps;
+        keycapCounter.text = "  " + player.GetComponent<Typing>().letterProgress + "/6";
 
         lifeBar.GetComponent<Image>().sprite = lifeBarStates[GameController.lives];
     }
