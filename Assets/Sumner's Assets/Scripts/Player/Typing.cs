@@ -30,7 +30,7 @@ public class Typing : MonoBehaviour
     public Sprite[] letterSprites;
 
     [SerializeField]
-    private Sprite yukkuriReimu;
+    public Sprite yukkuriReimu, yukkuriFlan;
 
     public float shootCooldown = 0.1f;
     private float curShootCooldown = 0;
@@ -42,6 +42,7 @@ public class Typing : MonoBehaviour
     public static float maxSlowDown = 2.25f;
     public string word = "";
     public string wordToBeUnlocked = "";
+    public bool touhou = false;
 
     void Start()
     {
@@ -55,9 +56,16 @@ public class Typing : MonoBehaviour
     {
         if(wordToBeUnlocked == "")
         {
-            PickNewWord();
+            PickFirstWord();
+            
+            if(GameController.Level != 1)
+            {
+                UnlockWord(wordToBeUnlocked);
+            }
         }
+
         sfx.volume = 0.5f * MenuScript.MasterVolume * MenuScript.SFXVolume;
+
         if (Input.GetKeyDown(KeyCode.Minus))
         {
             maxSlowDown -= 0.5f;
@@ -610,6 +618,27 @@ public class Typing : MonoBehaviour
         }
     }
 
+    public void PickFirstWord()
+    {
+        int newWord = Mathf.FloorToInt(Random.Range(1, GameController.Words.Count));
+
+        while(GameController.Words[newWord].Name == "COLLECT" ||
+              GameController.Words[newWord].Name == "GRAB" ||
+              GameController.Words[newWord].Name == "FAST" ||
+              GameController.Words[newWord].Name == "RAPID" ||
+              GameController.Words[newWord].Name == "SPEED" ||
+              GameController.Words[newWord].Name == "SHIELD" ||
+              GameController.Words[newWord].Name == "BLOCK" ||
+              GameController.Words[newWord].Name == "CLEAR" ||
+              GameController.Words[newWord].Name == "ERASE")
+        {
+            newWord = Mathf.FloorToInt(Random.Range(1, GameController.Words.Count));
+        }
+
+        wordToBeUnlocked = GameController.Words[newWord].Name;
+        ui.UpdateWordUnlock();
+    }
+
     private void Shoot(int letter)
     {
         sfx.PlayOneShot(shot);
@@ -668,6 +697,22 @@ public class Typing : MonoBehaviour
     private void TouhouMeme()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = yukkuriReimu;
+        touhou = true;
+
+        GameObject[] e = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(GameObject g in e)
+        {
+            if (g.GetComponent<SpriteRenderer>())
+            {
+                g.GetComponent<SpriteRenderer>().sprite = yukkuriFlan;
+            }
+            else
+            {
+                g.transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = yukkuriFlan;
+            }
+        }
+
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = badAppleEarrape;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
     }

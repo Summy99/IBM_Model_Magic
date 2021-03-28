@@ -9417,6 +9417,10 @@ PrefabInstance:
       propertyPath: slowRecoveryRate
       value: 0.35
       objectReference: {fileID: 0}
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: yukkuriFlan
+      value: 
+      objectReference: {fileID: 21300000, guid: 830143b7242e2464db862635ffb7bbf0, type: 3}
     - target: {fileID: 4632542713897860138, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_Name
       value: Player

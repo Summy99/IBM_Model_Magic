@@ -52,6 +52,27 @@ public class EnemyController : MonoBehaviour
         {
             playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
         }
+
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().touhou)
+        {
+            if (gameObject.GetComponent<Animator>())
+            {
+                gameObject.GetComponent<Animator>().enabled = false;
+            }
+            else if (gameObject.transform.Find("Sprite").GetComponent<Animator>())
+            {
+                gameObject.transform.Find("Sprite").GetComponent<Animator>().enabled = false;
+            }
+
+            if (gameObject.GetComponent<SpriteRenderer>())
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().yukkuriFlan;
+            }
+            else
+            {
+                gameObject.transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().yukkuriFlan;
+            }
+        }
     }
 
     private void Update()

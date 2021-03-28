@@ -223,7 +223,7 @@ public class GameController : MonoBehaviour
             {
                 UI.started = true;
 
-                /*
+                /* obsolete code
                 words.Add(new Word()
                 {
                     Name = "BOMB",
@@ -286,6 +286,7 @@ public class GameController : MonoBehaviour
         if(Level == 2)
         {
             player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
+            RemoveWords();
 
             message.text = "Level 2";
             StartCoroutine("BlankMessage");
@@ -294,6 +295,7 @@ public class GameController : MonoBehaviour
         if (Level == 3)
         {
             player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
+            RemoveWords();
 
             message.text = "Level 3";
             StartCoroutine("BlankMessage");
@@ -477,6 +479,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void RemoveWords()
+    {
+        foreach(Word w in Words)
+        {
+            w.Unlocked = false;
+        }
+    }
+
     public void Resume()
     {
         paused = false;
@@ -516,17 +526,7 @@ public class GameController : MonoBehaviour
 
     public void SkipTutorial()
     {
-        if (tutorialStage <= 7)
-        {
-            gameObject.GetComponent<UI>().AddWord("AUTO");
-            gameObject.GetComponent<UI>().AddWord("SHIELD");
-        }
-
-        else if (tutorialStage <= 9)
-        {
-            gameObject.GetComponent<UI>().AddWord("SHIELD");
-        }
-
+        player.GetComponent<Typing>().UnlockWord(player.GetComponent<Typing>().wordToBeUnlocked);
         tutorialStage = 11;
         skipButton.SetActive(false);
     }
