@@ -590,8 +590,6 @@ public class EnemyController : MonoBehaviour
                         break;
 
                     case 2:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                         break;
 
                     case 3:
@@ -652,7 +650,6 @@ public class EnemyController : MonoBehaviour
                         break;
 
                     case 19:
-                        Instantiate(slowCollectible, transform.position, Quaternion.identity);
                         break;
                 }
             }
@@ -666,7 +663,6 @@ public class EnemyController : MonoBehaviour
                 Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                 Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                 Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(slowCollectible, transform.position, Quaternion.identity);
             }
             sfx.PlayOneShot(death, 0.5f);
             Destroy(gameObject);
