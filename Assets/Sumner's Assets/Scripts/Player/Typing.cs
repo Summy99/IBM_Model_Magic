@@ -322,6 +322,8 @@ public class Typing : MonoBehaviour
 
         if ((wordIndex != 0 && (GameController.Words[wordIndex].Unlocked || word == wordToBeUnlocked) && GameController.Words[wordIndex].CurCool <= 0) || word == "TOUHOU" || word == "MIMA")
         {
+            sfx.PlayOneShot(wordSuccess, 0.5f);
+
             switch (word)
             {
                 case "BOMB":
@@ -457,14 +459,14 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if (wordIndex == 0 || !GameController.Words[wordIndex].Unlocked || GameController.Words[wordIndex].CurCool >= 0)
+        else if (wordIndex == 0 || !GameController.Words[wordIndex].Unlocked || GameController.Words[wordIndex].CurCool > 0)
         {
             sfx.PlayOneShot(wordFail);
 
             string[] letters = ToStringArray(word);
             int[] lettersToShoot = new int[letters.Length];
-            
-            for(int i = 0; i < letters.Length; i++)
+
+            for (int i = 0; i < letters.Length; i++)
             {
                 switch (letters[i])
                 {
@@ -575,10 +577,6 @@ public class Typing : MonoBehaviour
             }
 
             StartCoroutine("ShootLetters", lettersToShoot);
-        }
-        else
-        {
-            sfx.PlayOneShot(wordSuccess, 0.5f);
         }
 
         mode = "shooting";

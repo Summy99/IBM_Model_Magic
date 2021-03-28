@@ -39,9 +39,13 @@ public class UI : MonoBehaviour
     private GameObject slowBar;
 
     [SerializeField]
+    private GameObject coolBarPrefab;
+
+    [SerializeField]
     private GameObject type;
 
-    private int column = 1;
+    private int column = 0;
+    private int row = 1;
 
     void Start()
     {
@@ -66,21 +70,26 @@ public class UI : MonoBehaviour
 
     public void AddWord(string word)
     {
+        GameObject bar = Instantiate(coolBarPrefab, GameObject.FindWithTag("Canvas").transform.Find("WordBars"));
+        bar.GetComponent<WordCooldownUI>().wordIndex = player.GetComponent<Typing>().GetWordIndex(word);
+        bar.GetComponent<RectTransform>().anchoredPosition = new Vector2(180 + (column * 81), 61 - (row * 30.5f));
+
         switch (column)
         {
-            case 1:
+            case 0:
                 wordBankL.GetComponent<TextMeshProUGUI>().text += "\n\n" + word;
                 column++;
                 break;
 
-            case 2:
+            case 1:
                 wordBankC.GetComponent<TextMeshProUGUI>().text += "\n\n" + word;
                 column++;
                 break;
 
-            case 3:
+            case 2:
                 wordBankR.GetComponent<TextMeshProUGUI>().text += "\n\n" + word;
-                column = 1;
+                column = 0;
+                row++;
                 break;
         }
     }
