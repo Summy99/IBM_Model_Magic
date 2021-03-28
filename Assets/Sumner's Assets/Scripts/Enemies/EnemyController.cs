@@ -16,6 +16,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private GameObject slowCollectible, keycapCollectible, healthCollectible;
 
+    [SerializeField]
+    private GameObject yParticles;
+
     public float health = 3;
 
     public int shooting = 0;
@@ -31,6 +34,7 @@ public class EnemyController : MonoBehaviour
     private bool ringed = false;
     private bool rung = false;
 
+    private bool flashing = false;
     private float distanceTraveled = 0f;
     private string direction = "down";
     [SerializeField]
@@ -77,7 +81,16 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if(gameObject.transform.position.y > 56 || gameObject.transform.position.y < -56 || gameObject.transform.position.x > 26 || gameObject.transform.position.x < -66)
+        if (gameObject.GetComponent<SpriteRenderer>())
+        {
+            transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+        }
+        else
+        {
+            transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite;
+        }
+
+        if (gameObject.transform.position.y > 56 || gameObject.transform.position.y < -56 || gameObject.transform.position.x > 26 || gameObject.transform.position.x < -66)
         {
             Destroy(gameObject);
         }
@@ -547,12 +560,18 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        GameObject col;
+        if (!flashing)
+        {
+            StartCoroutine("Flash");
+        }
 
         health -= damage;
 
         if(health <= 0)
         {
+            GameObject p = Instantiate(yParticles, transform.position, Quaternion.identity);
+
+            Destroy(p, 1f);
 
             if(type == 1 || type == 2 || type == 4 || type == 6 || type == 7 || type == 8)
             {
@@ -649,5 +668,14 @@ public class EnemyController : MonoBehaviour
             sfx.PlayOneShot(death, 0.5f);
             Destroy(gameObject);
         }
+    }
+
+    public IEnumerator Flash()
+    {
+        flashing = true;
+        transform.Find("Flash").gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        transform.Find("Flash").gameObject.SetActive(false);
+        flashing = false;
     }
 }

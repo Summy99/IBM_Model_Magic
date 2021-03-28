@@ -25,6 +25,7 @@ public class FinalBoss : MonoBehaviour
     private bool activated = false;
     private bool positioned = false;
     private bool started = false;
+    private bool flashing = false;
     private string direction = "right";
     void Start()
     {
@@ -39,6 +40,8 @@ public class FinalBoss : MonoBehaviour
 
     void Update()
     {
+        transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+
         if (started)
         {
             healthBar.fillAmount = health / 1000;
@@ -171,6 +174,11 @@ public class FinalBoss : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
+        if (!flashing)
+        {
+            StartCoroutine("Flash");
+        }
+
         health -= damage;
 
         plyrsrc.PlayOneShot(hit, 0.5f);
@@ -186,5 +194,14 @@ public class FinalBoss : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(5);
+    }
+
+    public IEnumerator Flash()
+    {
+        flashing = true;
+        transform.Find("Flash").gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        transform.Find("Flash").gameObject.SetActive(false);
+        flashing = false;
     }
 }

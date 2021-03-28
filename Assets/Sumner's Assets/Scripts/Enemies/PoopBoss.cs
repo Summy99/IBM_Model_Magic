@@ -25,6 +25,7 @@ public class PoopBoss : MonoBehaviour
     private bool activated = false;
     private bool positioned = false;
     private bool switching = false;
+    private bool flashing = false;
     private string direction = "right";
     public float moveSpeed = 10f;
     public float health = 400f;
@@ -42,6 +43,8 @@ public class PoopBoss : MonoBehaviour
 
     void Update()
     {
+        transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+
         if (Input.GetKeyDown(KeyCode.Home))
         {
             health = 2;
@@ -133,6 +136,11 @@ public class PoopBoss : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
+        if (!flashing)
+        {
+            StartCoroutine("Flash");
+        }
+
         health -= damage;
 
         plyrsrc.PlayOneShot(hit, 0.5f);
@@ -189,5 +197,14 @@ public class PoopBoss : MonoBehaviour
         }
 
         return children;
+    }
+
+    public IEnumerator Flash()
+    {
+        flashing = true;
+        transform.Find("Flash").gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        transform.Find("Flash").gameObject.SetActive(false);
+        flashing = false;
     }
 }

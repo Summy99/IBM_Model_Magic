@@ -28,6 +28,7 @@ public class FirstBoss : MonoBehaviour
     private bool positioned = false;
     private string direction = "right";
 
+    private bool flashing = false;
     private bool walkFinished = true;
     private bool switching = false;
     void Start()
@@ -43,6 +44,8 @@ public class FirstBoss : MonoBehaviour
 
     void Update()
     {
+        transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+
         if (Input.GetKeyDown(KeyCode.Home))
         {
             health = 2;
@@ -127,6 +130,11 @@ public class FirstBoss : MonoBehaviour
 
     private void TakeDamage(float damage)
     {
+        if (!flashing)
+        {
+            StartCoroutine("Flash");
+        }
+
         health -= damage;
 
         plyrsrc.PlayOneShot(hit, 0.5f);
@@ -219,5 +227,14 @@ public class FirstBoss : MonoBehaviour
         walkFinished = true;
         anim.SetBool("Stopped", true);
         rb.velocity = Vector2.zero;
+    }
+
+    public IEnumerator Flash()
+    {
+        flashing = true;
+        transform.Find("Flash").gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        transform.Find("Flash").gameObject.SetActive(false);
+        flashing = false;
     }
 }
