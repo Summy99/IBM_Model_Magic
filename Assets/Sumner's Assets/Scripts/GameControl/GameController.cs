@@ -123,12 +123,6 @@ public class GameController : MonoBehaviour
                     CurCool = 0f,
                     MaxCool = 1f
                    },
-        new Word() {
-                    Name = "RAPID",
-                    Unlocked = false,
-                    CurCool = 0f,
-                    MaxCool = 1f
-                   },
 
         new Word() {
                     Name = "SPEED",
@@ -145,13 +139,6 @@ public class GameController : MonoBehaviour
                    },
 
         new Word() {
-                    Name = "OTHER",
-                    Unlocked = false,
-                    CurCool = 0f,
-                    MaxCool = 1f
-                   },
-
-        new Word() {
                     Name = "SOMETHING",
                     Unlocked = false,
                     CurCool = 0f,
@@ -160,13 +147,6 @@ public class GameController : MonoBehaviour
 
         new Word() {
                     Name = "RANDOM",
-                    Unlocked = false,
-                    CurCool = 0f,
-                    MaxCool = 1f
-                   },
-
-        new Word() {
-                    Name = "ANYTHING",
                     Unlocked = false,
                     CurCool = 0f,
                     MaxCool = 1f

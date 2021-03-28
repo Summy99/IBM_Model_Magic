@@ -81,13 +81,16 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (gameObject.GetComponent<SpriteRenderer>())
+        if(type != 7 && type != 8)
         {
-            transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
-        }
-        else
-        {
-            transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite;
+            if (gameObject.GetComponent<SpriteRenderer>())
+            {
+                transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+            }
+            else
+            {
+                transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite;
+            }
         }
 
         if (gameObject.transform.position.y > 56 || gameObject.transform.position.y < -56 || gameObject.transform.position.x > 26 || gameObject.transform.position.x < -66)
@@ -560,7 +563,7 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!flashing)
+        if (!flashing && type != 7 && type != 8)
         {
             StartCoroutine("Flash");
         }

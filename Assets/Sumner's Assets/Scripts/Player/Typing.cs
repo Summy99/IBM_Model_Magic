@@ -401,10 +401,6 @@ public class Typing : MonoBehaviour
                     }
                     break;
 
-                case "RAPID":
-                    StartCoroutine("Speed");
-                    break;
-
                 case "SPEED":
                     StartCoroutine("Speed");
                     break;
@@ -413,19 +409,11 @@ public class Typing : MonoBehaviour
                     StartCoroutine("Speed");
                     break;
 
-                case "OTHER":
-                    RandomWord();
-                    break;
-
                 case "SOMETHING":
                     RandomWord();
                     break;
 
                 case "RANDOM":
-                    RandomWord();
-                    break;
-
-                case "ANYTHING":
                     RandomWord();
                     break;
 
