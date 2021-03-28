@@ -132,6 +132,7 @@ public class UI : MonoBehaviour
         }
         else
         {
+            player.GetComponent<Typing>().UnlockWord(word);
             return;
         }
 
