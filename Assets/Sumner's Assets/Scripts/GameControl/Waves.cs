@@ -44,6 +44,11 @@ public class Waves : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Insert))
+        {
+            wave = 9;
+        }
+
         if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && !waveIncrementing && !waveRunning && !gc.tutorial && !shop && !bossSpawned)
         {
             wave++;

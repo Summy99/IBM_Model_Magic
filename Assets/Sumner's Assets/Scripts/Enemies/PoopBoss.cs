@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Pixelnest.BulletML;
+using UnityEngine.UI;
 
 public class PoopBoss : MonoBehaviour
 {
     private Rigidbody2D rb;
     private GameObject[] topSpawns;
+    private Image healthBar;
+
     [SerializeField] private GameObject spawnerHolder;
     [SerializeField] private GameObject poopWallPrefab;
     private BulletSourceScript bml;
@@ -16,16 +19,21 @@ public class PoopBoss : MonoBehaviour
     [SerializeField]
     private AudioClip hit;
 
+    [SerializeField]
+    private TextAsset pattern;
+
     private bool activated = false;
+    private bool positioned = false;
     private bool switching = false;
     private string direction = "right";
     public float moveSpeed = 10f;
-    public float health = 500f;
+    public float health = 400f;
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         bml = gameObject.GetComponent<BulletSourceScript>();
+        healthBar = gameObject.transform.Find("Canvas").Find("HealthBar").GetComponent<Image>();
         plyrsrc = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
         spawnerHolder = GameObject.Find("SpawnPoints");
 
@@ -34,14 +42,22 @@ public class PoopBoss : MonoBehaviour
 
     void Update()
     {
-        if (!activated)
+        if (Input.GetKeyDown(KeyCode.Home))
         {
+            health = 2;
+        }
+
+        healthBar.fillAmount = health / 400;
+
+        if (!activated && !positioned)
+        {
+            health = 0;
             rb.velocity = -(transform.up * moveSpeed);
 
             if(transform.position.y <= 24)
             {
-                activated = true;
                 rb.velocity = Vector2.zero;
+                positioned = true;
             }
         }
         else
@@ -78,21 +94,36 @@ public class PoopBoss : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (!activated && positioned && health < 400)
+        {
+            health += 5;
+        }
+
+        if (!activated && positioned && health >= 400)
+        {
+            health = 400;
+            activated = true;
+            bml.xmlFile = pattern;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Letter"))
+        if (collision.gameObject.CompareTag("Letter") && activated && health > 0)
+        {
+            TakeDamage(collision.gameObject.GetComponent<LetterController>().damage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("PlayerShot") && activated && health > 0)
         {
             TakeDamage(collision.gameObject.GetComponent<ShotController>().damage);
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.CompareTag("PlayerShot"))
-        {
-            TakeDamage(collision.gameObject.GetComponent<ShotController>().damage);
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.CompareTag("PlayerShotBig"))
+        if (collision.gameObject.CompareTag("PlayerShotBig") && activated && health > 0)
         {
             float damageToDeal = collision.gameObject.GetComponent<BigShotController>().damage;
             collision.gameObject.GetComponent<BigShotController>().damage -= health;
@@ -108,6 +139,14 @@ public class PoopBoss : MonoBehaviour
 
         if (health <= 0)
         {
+            bml.xmlFile = null;
+
+            GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+            foreach (GameObject b in bullets)
+            {
+                Destroy(b);
+            }
+
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             StartCoroutine("Die");
         }
