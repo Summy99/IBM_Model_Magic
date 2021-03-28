@@ -43,7 +43,7 @@ public class Collectibles : MonoBehaviour
     {
         if (!activated)
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -10f, 999));
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -20f, 999));
         }
 
         if (activated)
