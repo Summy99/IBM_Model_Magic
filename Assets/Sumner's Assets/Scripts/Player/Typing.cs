@@ -21,7 +21,7 @@ public class Typing : MonoBehaviour
     private AudioClip badAppleEarrape;
 
     [SerializeField]
-    private GameObject letterPrefab, explosionPrefab;
+    private GameObject letterPrefab, explosionPrefab, homingShot;
 
     [SerializeField]
     private GameObject mema;
@@ -437,6 +437,18 @@ public class Typing : MonoBehaviour
                     Collect();
                     break;
 
+                case "HOMING":
+                    StartCoroutine("HomingShot");
+                    break;
+
+                case "SEARCH":
+                    StartCoroutine("HomingShot");
+                    break;
+
+                case "TRACKING":
+                    StartCoroutine("HomingShot");
+                    break;
+
                 case "TOUHOU":
                     TouhouMeme();
                     break;
@@ -796,9 +808,24 @@ public class Typing : MonoBehaviour
         }
     }
 
+    private IEnumerator HomingShot()
+    {
+        bml.xmlFile = patterns[0];
+
+        for (int i = 0; i < 300; i++)
+        {
+            GameObject h1 = Instantiate(homingShot, gameObject.transform.Find("letterspawnLeft").position, Quaternion.identity);
+            GameObject h2 = Instantiate(homingShot, gameObject.transform.Find("letterspawnRight").position, Quaternion.identity);
+
+            Destroy(h1, 2);
+            Destroy(h2, 2);
+            yield return new WaitForSeconds(0.15f);
+        }
+    }
+
     private void RandomWord()
     {
-        int effect = Mathf.FloorToInt(Random.Range(0, 8));
+        int effect = Mathf.FloorToInt(Random.Range(0, 10));
 
         switch (effect)
         {
@@ -836,6 +863,10 @@ public class Typing : MonoBehaviour
 
             case 8:
                 Collect();
+                break;
+
+            case 9:
+                StartCoroutine("HomingShot");
                 break;
         }
     }

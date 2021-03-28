@@ -542,6 +542,12 @@ public class EnemyController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        if (collision.gameObject.CompareTag("HomingShot"))
+        {
+            TakeDamage(collision.gameObject.GetComponent<HomingShotController>().damage);
+            Destroy(collision.gameObject);
+        }
+
         if (collision.gameObject.CompareTag("PlayerShotBig"))
         {
             float damageToDeal = collision.gameObject.GetComponent<BigShotController>().damage;

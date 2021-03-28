@@ -164,6 +164,12 @@ public class FinalBoss : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        if (collision.gameObject.CompareTag("HomingShot") && activated && health > 0)
+        {
+            TakeDamage(collision.gameObject.GetComponent<HomingShotController>().damage);
+            Destroy(collision.gameObject);
+        }
+
         if (collision.gameObject.CompareTag("PlayerShotBig") && activated)
         {
             float damageToDeal = collision.gameObject.GetComponent<BigShotController>().damage;

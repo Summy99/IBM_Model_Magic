@@ -174,6 +174,27 @@ public class GameController : MonoBehaviour
                    },
 
         new Word() {
+                    Name = "HOMING",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "SEARCH",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "TRACKING",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
                     Name = "GRAB",
                     Unlocked = false,
                     CurCool = 0f,

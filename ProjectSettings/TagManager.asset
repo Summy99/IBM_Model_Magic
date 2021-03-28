@@ -12,6 +12,7 @@ TagManager:
   - PlayerShotBig
   - Collectible
   - Meme
+  - HomingShot
   layers:
   - Default
   - TransparentFX

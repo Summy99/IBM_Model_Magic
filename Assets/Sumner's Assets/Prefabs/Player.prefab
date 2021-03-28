@@ -112,6 +112,66 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2906408507558638741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8986818841379586091}
+  m_Layer: 0
+  m_Name: letterspawnLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8986818841379586091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2906408507558638741}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.93, y: 4.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6085271676269471991}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3327825083009570277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3923171322128023314}
+  m_Layer: 0
+  m_Name: letterspawnRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3923171322128023314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3327825083009570277}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.29, y: 4.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6085271676269471991}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4499780077026788920
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +292,8 @@ Transform:
   - {fileID: 3177210329702417675}
   - {fileID: 3603148619814634770}
   - {fileID: 3125836409525815391}
+  - {fileID: 8986818841379586091}
+  - {fileID: 3923171322128023314}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -341,8 +403,14 @@ MonoBehaviour:
   wordSuccess: {fileID: 8300000, guid: 4d4da9a424a48d542a3554bf08578453, type: 3}
   wordFail: {fileID: 8300000, guid: 8ffde8d4d0babbe4faf59a5479f1e9ef, type: 3}
   enterSlow: {fileID: 8300000, guid: f61b9f96b930c4843bf4c0f7ba9ba897, type: 3}
+  bomb: {fileID: 0}
+  bigBomb: {fileID: 0}
+  wordUnlocked: {fileID: 0}
+  badAppleEarrape: {fileID: 0}
   letterPrefab: {fileID: 7320721367101697214, guid: 9c38c69c845a3bf458d13eec4404e755, type: 3}
   explosionPrefab: {fileID: 1917196599572790266, guid: e1c16e244342db24d9a931e4a9e6f860, type: 3}
+  homingShot: {fileID: 0}
+  mema: {fileID: 0}
   letterSprites:
   - {fileID: 21300000, guid: 627ea1799212a6c4080de7429d26b782, type: 3}
   - {fileID: 21300000, guid: efb67e5223663e24e95d0090b0f7fe44, type: 3}
@@ -370,11 +438,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5e8f2f097c8ff0c4f890ec60a0a13b46, type: 3}
   - {fileID: 21300000, guid: 9af429810ea084e4cbdff9c1f36efc06, type: 3}
   - {fileID: 21300000, guid: 2d6aabdf8de63c24fa40638f26cc8f45, type: 3}
+  yukkuriReimu: {fileID: 0}
+  yukkuriFlan: {fileID: 0}
   shootCooldown: 0.1
   slowRecoveryRate: 0.05
   mode: shooting
+  letterProgress: 0
   slowDown: 1
   word: 
+  wordToBeUnlocked: 
+  touhou: 0
 --- !u!82 &4588334743085117519
 AudioSource:
   m_ObjectHideFlags: 0
@@ -486,6 +559,7 @@ MonoBehaviour:
   death: {fileID: 8300000, guid: 6091a76955a60c74e85e6d4137eaf453, type: 3}
   types: []
   shield: 0
+  heal: 0
 --- !u!114 &6129938679178597477
 MonoBehaviour:
   m_ObjectHideFlags: 0
