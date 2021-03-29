@@ -330,7 +330,7 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if ((wordIndex != 0 && (GameController.Words[wordIndex].Unlocked || word == wordToBeUnlocked) && GameController.Words[wordIndex].CurCool <= 0) || word == "TOUHOU" || word == "MIMA" || word == "LASER")
+        if ((wordIndex != 0 && (GameController.Words[wordIndex].Unlocked || word == wordToBeUnlocked) && GameController.Words[wordIndex].CurCool <= 0) || word == "TOUHOU" || word == "MIMA")
         {
             sfx.PlayOneShot(wordSuccess, 0.5f);
 
