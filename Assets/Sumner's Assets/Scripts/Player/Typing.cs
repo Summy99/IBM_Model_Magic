@@ -379,14 +379,6 @@ public class Typing : MonoBehaviour
                     }
                     break;
 
-                case "SPEED":
-                    StartCoroutine("Speed");
-                    break;
-
-                case "FAST":
-                    StartCoroutine("Speed");
-                    break;
-
                 case "SOMETHING":
                     RandomWord();
                     break;
@@ -618,7 +610,9 @@ public class Typing : MonoBehaviour
               GameController.Words[newWord].Name == "BLOCK" ||
               GameController.Words[newWord].Name == "CLEAR" ||
               GameController.Words[newWord].Name == "ERASE" ||
-              GameController.Words[newWord].Name == "EXPLOSION")
+              GameController.Words[newWord].Name == "EXPLOSION" ||
+              GameController.Words[newWord].Name == "LASER" ||
+              GameController.Words[newWord].Name == "BEAM")
         {
             newWord = Mathf.FloorToInt(Random.Range(1, GameController.Words.Count));
         }
@@ -765,13 +759,6 @@ public class Typing : MonoBehaviour
         bml.Initialize();
     }
 
-    private IEnumerator Speed()
-    {
-        gameObject.GetComponent<PlayerMovement>().moveSpeed = 100f;
-        yield return new WaitForSeconds(5);
-        gameObject.GetComponent<PlayerMovement>().moveSpeed = 50f;
-    }
-
     private void ExplosionWord()
     {
         sfx.PlayOneShot(bigBomb);
@@ -855,26 +842,22 @@ public class Typing : MonoBehaviour
                 break;
 
             case 5:
-                StartCoroutine("Speed");
-                break;
-
-            case 6:
                 ExplosionWord();
                 break;
 
-            case 7:
+            case 6:
                 BigShot();
                 break;
 
-            case 8:
+            case 7:
                 Collect();
                 break;
 
-            case 9:
+            case 8:
                 StartCoroutine("HomingShot");
                 break;
 
-            case 10:
+            case 9:
                 StartCoroutine("Laser");
                 break;
         }
