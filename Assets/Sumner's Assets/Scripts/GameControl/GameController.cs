@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 public class Word
@@ -28,10 +29,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI message;
     [SerializeField] private TextMeshProUGUI tutorialMsg;
     [SerializeField] private Transform spawn;
-    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject pauseMenu, settingsMenu;
     [SerializeField] private GameObject meme;
     [SerializeField] private GameObject tutorialEnemy, trackball, prompt, skipButton, arrow, arrow2;
     [SerializeField] private AudioClip mainTheme;
+    [SerializeField] private Slider master, music, sfx;
 
     public static List<Word> Words = new List<Word>() {
         new Word() {
@@ -324,12 +326,19 @@ public class GameController : MonoBehaviour
         {
             if (paused)
             {
-                paused = false;
-                Time.timeScale = 1;
-                pauseMenu.SetActive(false);
-                if (!meme.activeSelf)
+                if (!settingsMenu.activeSelf)
                 {
-                    GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+                    paused = false;
+                    Time.timeScale = 1;
+                    pauseMenu.SetActive(false);
+                    if (!meme.activeSelf)
+                    {
+                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+                    }
+                }
+                else
+                {
+                    settingsMenu.SetActive(false);
                 }
             }
             else
@@ -511,7 +520,7 @@ public class GameController : MonoBehaviour
 
     public void Settings()
     {
-
+        settingsMenu.SetActive(true);
     }
 
     public void Quit()
@@ -524,6 +533,30 @@ public class GameController : MonoBehaviour
     public void QTD()
     {
         Application.Quit();
+    }
+
+    public void Back()
+    {
+        settingsMenu.SetActive(false);
+    }
+
+    public void FullscreenToggle()
+    {
+        if (Screen.fullScreen)
+        {
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+        }
+        else
+        {
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        }
+    }
+
+    public void UpdateVolume()
+    {
+        MenuScript.MasterVolume = master.value;
+        MenuScript.SFXVolume = sfx.value;
+        MenuScript.MusicVolume = music.value;
     }
 
     private IEnumerator IncrementTutorial(float time)
