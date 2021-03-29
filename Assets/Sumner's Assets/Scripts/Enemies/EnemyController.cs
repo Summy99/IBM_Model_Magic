@@ -614,94 +614,201 @@ public class EnemyController : MonoBehaviour
 
             Destroy(p, 1f);
 
-            if(type == 1 || type == 2 || type == 4 || type == 6 || type == 7 || type == 8)
+            if(GameController.Level != 3)
             {
-                int pickup = Mathf.FloorToInt(Random.Range(0, 20));
-
-                switch (pickup)
+                if (type == 1 || type == 2 || type == 4 || type == 6 || type == 7 || type == 8)
                 {
-                    case 0:
-                        break;
+                    int pickup = Mathf.FloorToInt(Random.Range(0, 20));
 
-                    case 1:
-                        Instantiate(healthCollectible, transform.position, Quaternion.identity);
-                        break;
+                    switch (pickup)
+                    {
+                        case 0:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 2:
-                        break;
+                        case 1:
+                            Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 3:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 2:
+                            Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 4:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 3:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 5:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 4:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 6:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 5:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 7:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 6:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 8:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 7:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 9:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 8:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 10:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 9:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 11:
-                        break;
+                        case 10:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 12:
-                        break;
+                        case 11:
+                            break;
 
-                    case 13:
-                        break;
+                        case 12:
+                            break;
 
-                    case 14:
-                        break;
+                        case 13:
+                            break;
 
-                    case 15:
-                        break;
+                        case 14:
+                            break;
 
-                    case 16:
-                        break;
+                        case 15:
+                            break;
 
-                    case 17:
-                        break;
+                        case 16:
+                            break;
 
-                    case 18:
-                        break;
+                        case 17:
+                            break;
 
-                    case 19:
-                        break;
+                        case 18:
+                            break;
+
+                        case 19:
+                            break;
+                    }
+                }
+
+                if (type == 3 || type == 5 || type == 9)
+                {
+                    Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                }
+            }
+            else
+            {
+                if (type == 1 || type == 2 || type == 4 || type == 6 || type == 7 || type == 8)
+                {
+                    int pickup = Mathf.FloorToInt(Random.Range(0, 20));
+
+                    switch (pickup)
+                    {
+                        case 0:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 1:
+                            Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 2:
+                            Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 3:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 4:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 5:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 6:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 7:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 8:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 9:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 10:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 11:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 12:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 13:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 14:
+                            break;
+
+                        case 15:
+                            break;
+
+                        case 16:
+                            break;
+
+                        case 17:
+                            break;
+
+                        case 18:
+                            break;
+
+                        case 19:
+                            break;
+                    }
+                }
+
+                if (type == 3 || type == 5 || type == 9)
+                {
+                    Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                 }
             }
 
-            if (type == 3 || type == 5 || type == 9)
-            {
-                Instantiate(healthCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-            }
             sfx.PlayOneShot(death, 0.5f);
             Destroy(gameObject);
         }

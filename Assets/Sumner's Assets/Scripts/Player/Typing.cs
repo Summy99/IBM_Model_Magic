@@ -617,7 +617,8 @@ public class Typing : MonoBehaviour
               GameController.Words[newWord].Name == "SHIELD" ||
               GameController.Words[newWord].Name == "BLOCK" ||
               GameController.Words[newWord].Name == "CLEAR" ||
-              GameController.Words[newWord].Name == "ERASE")
+              GameController.Words[newWord].Name == "ERASE" ||
+              GameController.Words[newWord].Name == "EXPLOSION")
         {
             newWord = Mathf.FloorToInt(Random.Range(1, GameController.Words.Count));
         }
@@ -807,7 +808,7 @@ public class Typing : MonoBehaviour
         bml.xmlFile = patterns[0];
         StopCoroutine("Laser");
 
-        for (int i = 0; i < 300; i++)
+        for (int i = 0; i < 200; i++)
         {
             GameObject h1 = Instantiate(homingShot, gameObject.transform.Find("letterspawnLeft").position, Quaternion.identity);
             GameObject h2 = Instantiate(homingShot, gameObject.transform.Find("letterspawnRight").position, Quaternion.identity);

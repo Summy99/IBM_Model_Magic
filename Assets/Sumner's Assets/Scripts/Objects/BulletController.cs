@@ -13,7 +13,7 @@ public class BulletController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player") && collision.GetComponent<PlayerHealth>().shield && collision == GameObject.FindGameObjectWithTag("Player").GetComponent<CircleCollider2D>())
         {
-            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }

@@ -44,154 +44,154 @@ public class GameController : MonoBehaviour
                     Name = "BOMB",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 5f
                    },
 
         new Word() {
                     Name = "SHIELD",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 5f
                    },
 
         new Word() {
                     Name = "CLEAR",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 5f
+                    MaxCool = 20f
                    },
 
         new Word() {
                     Name = "ERASE",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 5f
+                    MaxCool = 20f
                    },
 
         new Word() {
                     Name = "BOOM",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 5f
                    },
 
         new Word() {
                     Name = "AUTO",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 15f
                    },
 
         new Word() {
                     Name = "SHOOT",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 15f
                    },
 
         new Word() {
                     Name = "FIRE",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 15f
                    },
 
         new Word() {
                     Name = "SPREAD",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 10f
                    },
 
         new Word() {
                     Name = "SCATTER",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 10f
                    },
 
         new Word() {
                     Name = "SHOTGUN",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 10f
                    },
 
         new Word() {
                     Name = "BLOCK",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 5f
                    },
 
         new Word() {
                     Name = "SPEED",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 3f
                    },
 
         new Word() {
                     Name = "FAST",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 3f
                    },
 
         new Word() {
                     Name = "SOMETHING",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 5f
                    },
 
         new Word() {
                     Name = "RANDOM",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 5f
                    },
 
         new Word() {
                     Name = "EXPLOSION",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 15f
                    },
 
         new Word() {
                     Name = "BIG",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 15f
                    },
 
         new Word() {
                     Name = "GIANT",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 15f
                    },
 
         new Word() {
                     Name = "HOMING",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 15f
                    },
 
         new Word() {
                     Name = "SEARCH",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 15f
                    },
 
         new Word() {
                     Name = "TRACKING",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 15f
                    },
 
         new Word() {
@@ -292,6 +292,7 @@ public class GameController : MonoBehaviour
                 tutorial = false;
                 Typing.maxSlowDown = 2.25f;
                 player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
+                player.GetComponent<Typing>().UnlockWord(player.GetComponent<Typing>().wordToBeUnlocked);
                 trackball.SetActive(false);
                 prompt.SetActive(false);
                 skipButton.SetActive(false);
