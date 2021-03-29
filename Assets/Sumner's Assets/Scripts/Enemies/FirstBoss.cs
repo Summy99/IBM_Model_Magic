@@ -24,6 +24,7 @@ public class FirstBoss : MonoBehaviour
     [SerializeField]
     private int attack = 0;
     public float health = 0;
+    private float laserDamageCool;
     private bool activated = false;
     private bool positioned = false;
     private string direction = "right";
@@ -45,6 +46,11 @@ public class FirstBoss : MonoBehaviour
     void Update()
     {
         transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+
+        if (laserDamageCool > 0)
+        {
+            laserDamageCool -= Time.deltaTime;
+        }
 
         if (Input.GetKeyDown(KeyCode.Home))
         {
@@ -134,6 +140,18 @@ public class FirstBoss : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("laser") && activated && health > 0)
+        {
+            if (laserDamageCool <= 0)
+            {
+                TakeDamage(0.4f);
+                laserDamageCool = 0.001f;
+            }
+        }
+    }
+
     private void TakeDamage(float damage)
     {
         if (!flashing)
@@ -143,7 +161,7 @@ public class FirstBoss : MonoBehaviour
 
         health -= damage;
 
-        plyrsrc.PlayOneShot(hit, 0.5f);
+        plyrsrc.PlayOneShot(hit, 0.15f);
 
         if(health <= 0)
         {

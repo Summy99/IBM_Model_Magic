@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
 
     public int shooting = 0;
     public int pattern = 0;
+    private float laserDamageCool = 0;
     public float lifetime = 0;
     public float timeToShoot = 0;
     public int type = 0;
@@ -81,6 +82,11 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        if(laserDamageCool > 0)
+        {
+            laserDamageCool -= Time.deltaTime;
+        }
+
         if(type != 7 && type != 8)
         {
             if (gameObject.GetComponent<SpriteRenderer>())
@@ -559,6 +565,18 @@ public class EnemyController : MonoBehaviour
         {
             TakeDamage(collision.gameObject.GetComponent<LetterController>().damage);
             Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("laser"))
+        {
+            if(laserDamageCool <= 0)
+            {
+                TakeDamage(0.25f);
+                laserDamageCool = 0.01f;
+            }
         }
     }
 

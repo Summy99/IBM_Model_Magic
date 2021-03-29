@@ -195,6 +195,20 @@ public class GameController : MonoBehaviour
                    },
 
         new Word() {
+                    Name = "LASER",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 1f
+                   },
+
+        new Word() {
+                    Name = "BEAM",
+                    Unlocked = false,
+                    CurCool = 0f,
+                    MaxCool = 15f
+                   },
+
+        new Word() {
                     Name = "GRAB",
                     Unlocked = false,
                     CurCool = 0f,

@@ -9390,41 +9390,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: bomb
-      value: 
-      objectReference: {fileID: 8300000, guid: 6fc46ce066dd5c549ac34461bb1a53eb, type: 3}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: bigBomb
-      value: 
-      objectReference: {fileID: 8300000, guid: 6c09bb8241dc7a44e8de72a4b1d86ae0, type: 3}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: wordUnlocked
-      value: 
-      objectReference: {fileID: 8300000, guid: 89f81dba9081fca458368333aee25e74, type: 3}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: yukkuriReimu
-      value: 
-      objectReference: {fileID: 21300000, guid: aea32cd31ac07d143884790dc838dced, type: 3}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: badAppleEarrape
-      value: 
-      objectReference: {fileID: 8300000, guid: 814fb8e5d2ab5b344b3d10c2157231cd, type: 3}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: mema
       value: 
       objectReference: {fileID: 93655504}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: slowRecoveryRate
-      value: 0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: yukkuriFlan
-      value: 
-      objectReference: {fileID: 21300000, guid: 830143b7242e2464db862635ffb7bbf0, type: 3}
-    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
-      propertyPath: homingShot
-      value: 
-      objectReference: {fileID: 8843435949093901512, guid: f88600cecac1c71458467341ecb654a2, type: 3}
     - target: {fileID: 4632542713897860138, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_Name
       value: Player
@@ -9472,6 +9440,14 @@ PrefabInstance:
     - target: {fileID: 6085271676269471991, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8505276554475281090, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8505276554475281090, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: m_TagString
+      value: laser
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95875ed250946544bb5769cbf2194101, type: 3}

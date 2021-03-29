@@ -15,7 +15,7 @@ public class Typing : MonoBehaviour
     private UI ui;
 
     [SerializeField]
-    private AudioClip shot, wordSuccess, wordFail, enterSlow, bomb, bigBomb, wordUnlocked;
+    private AudioClip shot, wordSuccess, wordFail, enterSlow, bomb, bigBomb, wordUnlocked, laser;
 
     [SerializeField]
     private AudioClip badAppleEarrape;
@@ -66,6 +66,7 @@ public class Typing : MonoBehaviour
         }
 
         sfx.volume = 0.5f * MenuScript.MasterVolume * MenuScript.SFXVolume;
+        gameObject.transform.Find("laser").GetComponent<AudioSource>().volume = 0.5f * MenuScript.MasterVolume * MenuScript.SFXVolume;
 
         if (Input.GetKeyDown(KeyCode.Minus))
         {
@@ -329,7 +330,7 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if ((wordIndex != 0 && (GameController.Words[wordIndex].Unlocked || word == wordToBeUnlocked) && GameController.Words[wordIndex].CurCool <= 0) || word == "TOUHOU" || word == "MIMA")
+        if ((wordIndex != 0 && (GameController.Words[wordIndex].Unlocked || word == wordToBeUnlocked) && GameController.Words[wordIndex].CurCool <= 0) || word == "TOUHOU" || word == "MIMA" || word == "LASER")
         {
             sfx.PlayOneShot(wordSuccess, 0.5f);
 
@@ -447,6 +448,14 @@ public class Typing : MonoBehaviour
 
                 case "TRACKING":
                     StartCoroutine("HomingShot");
+                    break;
+
+                case "LASER":
+                    StartCoroutine("Laser");
+                    break;
+
+                case "BEAM":
+                    StartCoroutine("Laser");
                     break;
 
                 case "TOUHOU":
@@ -761,6 +770,7 @@ public class Typing : MonoBehaviour
     private void AutoFire()
     {
         patternRunning = true;
+        StopCoroutine("HomingShot");
         bml.xmlFile = patterns[1];
         bml.Initialize();
     }
@@ -768,6 +778,7 @@ public class Typing : MonoBehaviour
     private void SpreadShot()
     {
         patternRunning = true;
+        StopCoroutine("HomingShot");
         bml.xmlFile = patterns[2];
         bml.Initialize();
     }
@@ -794,6 +805,7 @@ public class Typing : MonoBehaviour
     private void BigShot()
     {
         patternRunning = true;
+        StopCoroutine("HomingShot");
         bml.xmlFile = patterns[3];
         bml.Initialize();
     }
@@ -821,6 +833,15 @@ public class Typing : MonoBehaviour
             Destroy(h2, 2);
             yield return new WaitForSeconds(0.15f);
         }
+    }
+
+    private IEnumerator Laser()
+    {
+        StopCoroutine("HomingShot");
+        bml.xmlFile = patterns[0];
+        gameObject.transform.Find("laser").gameObject.SetActive(true);
+        yield return new WaitForSeconds(5);
+        gameObject.transform.Find("laser").gameObject.SetActive(false);
     }
 
     private void RandomWord()
@@ -867,6 +888,10 @@ public class Typing : MonoBehaviour
 
             case 9:
                 StartCoroutine("HomingShot");
+                break;
+
+            case 10:
+                StartCoroutine("Laser");
                 break;
         }
     }

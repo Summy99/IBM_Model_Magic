@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
 
     public bool shield = false;
     public int heal = 0;
+    public BoxCollider2D colliderPlayer;
     private BulletSourceScript bml;
 
     void Start()
@@ -37,28 +38,32 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && !shield)
+        if(collision == colliderPlayer)
         {
-            Die();
-        }
-        else if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && shield)
-        {
-            Destroy(collision.gameObject);
-        }
+            if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && !shield)
+            {
+                print(collision.gameObject.name);
+                Die();
+            }
+            else if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && shield)
+            {
+                Destroy(collision.gameObject);
+            }
 
-        if (collision.gameObject.name == "SlowBarUpgrade" && GameController.keycaps >= 25)
-        {
-            collision.gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPrice").gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPriceIcon").gameObject.SetActive(false);
-            GameController.keycaps -= 25;
-            Typing.maxSlowDown *= 1.1f;
-        }
+            if (collision.gameObject.name == "SlowBarUpgrade" && GameController.keycaps >= 25)
+            {
+                collision.gameObject.SetActive(false);
+                GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPrice").gameObject.SetActive(false);
+                GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPriceIcon").gameObject.SetActive(false);
+                GameController.keycaps -= 25;
+                Typing.maxSlowDown *= 1.1f;
+            }
 
-        if (collision.gameObject.name == "Heal" && GameController.keycaps >= 15 && GameController.lives < 6)
-        {
-            GameController.keycaps -= 15;
-            GameController.lives++;
+            if (collision.gameObject.name == "Heal" && GameController.keycaps >= 15 && GameController.lives < 6)
+            {
+                GameController.keycaps -= 15;
+                GameController.lives++;
+            }
         }
     }
 
