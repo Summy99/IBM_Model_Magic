@@ -161,7 +161,7 @@ public class FirstBoss : MonoBehaviour
 
         health -= damage;
 
-        plyrsrc.PlayOneShot(hit, 0.15f);
+        plyrsrc.PlayOneShot(hit, 0.2f);
 
         if(health <= 0)
         {

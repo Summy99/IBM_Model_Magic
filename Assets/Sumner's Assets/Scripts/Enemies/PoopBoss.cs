@@ -28,6 +28,7 @@ public class PoopBoss : MonoBehaviour
     private bool flashing = false;
     private string direction = "right";
     public float moveSpeed = 10f;
+    private float laserDamageCool;
     public float health = 400f;
 
     void Start()
@@ -44,6 +45,11 @@ public class PoopBoss : MonoBehaviour
     void Update()
     {
         transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+
+        if (laserDamageCool > 0)
+        {
+            laserDamageCool -= Time.deltaTime;
+        }
 
         if (Input.GetKeyDown(KeyCode.Home))
         {
@@ -140,6 +146,18 @@ public class PoopBoss : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("laser") && activated && health > 0)
+        {
+            if (laserDamageCool <= 0)
+            {
+                TakeDamage(0.4f);
+                laserDamageCool = 0.001f;
+            }
+        }
+    }
+
     private void TakeDamage(float damage)
     {
         if (!flashing)
@@ -149,7 +167,7 @@ public class PoopBoss : MonoBehaviour
 
         health -= damage;
 
-        plyrsrc.PlayOneShot(hit, 0.5f);
+        plyrsrc.PlayOneShot(hit, 0.2f);
 
         if (health <= 0)
         {

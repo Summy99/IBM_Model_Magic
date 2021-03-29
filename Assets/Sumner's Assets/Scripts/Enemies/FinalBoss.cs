@@ -26,6 +26,7 @@ public class FinalBoss : MonoBehaviour
     private bool positioned = false;
     private bool started = false;
     private bool flashing = false;
+    private float laserDamageCool = 0;
     private string direction = "right";
     void Start()
     {
@@ -49,6 +50,11 @@ public class FinalBoss : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Home))
             {
                 health = 2;
+            }
+
+            if (laserDamageCool > 0)
+            {
+                laserDamageCool -= Time.deltaTime;
             }
 
             if (activated && positioned)
@@ -178,6 +184,18 @@ public class FinalBoss : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("laser") && activated && health > 0)
+        {
+            if (laserDamageCool <= 0)
+            {
+                TakeDamage(0.4f);
+                laserDamageCool = 0.001f;
+            }
+        }
+    }
+
     private void TakeDamage(float damage)
     {
         if (!flashing)
@@ -187,7 +205,7 @@ public class FinalBoss : MonoBehaviour
 
         health -= damage;
 
-        plyrsrc.PlayOneShot(hit, 0.5f);
+        plyrsrc.PlayOneShot(hit, 0.2f);
 
         if (health <= 0)
         {
