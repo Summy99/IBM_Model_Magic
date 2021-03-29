@@ -732,6 +732,8 @@ MonoBehaviour:
   trackball: {fileID: 0}
   prompt: {fileID: 0}
   skipButton: {fileID: 0}
+  arrow: {fileID: 0}
+  arrow2: {fileID: 0}
   mainTheme: {fileID: 0}
   letters: 0101010101010101010101010101010101010101010101010101
 --- !u!4 &257336643
@@ -8764,6 +8766,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 884545956710923145, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: colliderPlayer
+      value: 
+      objectReference: {fileID: 884545956710923145}
     - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: bigBomb
       value: 
@@ -8849,6 +8855,11 @@ PrefabInstance:
 --- !u!1 &884545956710923144 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4632542713897860138, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+  m_PrefabInstance: {fileID: 884545956710923143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &884545956710923145 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 275078878607382363, guid: 95875ed250946544bb5769cbf2194101, type: 3}
   m_PrefabInstance: {fileID: 884545956710923143}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6704602090388122865

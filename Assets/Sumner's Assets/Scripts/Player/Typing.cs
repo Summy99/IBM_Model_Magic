@@ -302,32 +302,9 @@ public class Typing : MonoBehaviour
     {
         int wordIndex = GetWordIndex(word);
 
-        if (gc.tutorial && gc.tutorialStage == 7)
+        if(gc.tutorialStage == 9 && word == wordToBeUnlocked)
         {
-            if(word == "AUTO")
-            {
-                //GameController.words[word] = true;
-                ui.AddWord(word);
-                gc.tutorialStage = 8;
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        if (gc.tutorial && gc.tutorialStage == 9)
-        {
-            if (word == "SHIELD")
-            {
-                //GameController.words[word] = true;
-                ui.AddWord(word);
-                gc.tutorialStage = 10;
-            }
-            else
-            {
-                return;
-            }
+            gc.tutorialStage = 11;
         }
 
         if ((wordIndex != 0 && (GameController.Words[wordIndex].Unlocked || word == wordToBeUnlocked) && GameController.Words[wordIndex].CurCool <= 0) || word == "TOUHOU" || word == "MIMA")
@@ -753,6 +730,7 @@ public class Typing : MonoBehaviour
     {
         bml.xmlFile = patterns[0];
         StopCoroutine("Laser");
+        StopCoroutine("HomingShot");
         gameObject.transform.Find("Shield").gameObject.SetActive(true);
         gameObject.GetComponent<PlayerHealth>().shield = true;
         yield return new WaitForSeconds(2.5f);
@@ -772,6 +750,7 @@ public class Typing : MonoBehaviour
     {
         patternRunning = true;
         StopCoroutine("HomingShot");
+        StopCoroutine("Laser");
         bml.xmlFile = patterns[1];
         bml.Initialize();
     }
@@ -780,6 +759,7 @@ public class Typing : MonoBehaviour
     {
         patternRunning = true;
         StopCoroutine("HomingShot");
+        StopCoroutine("Laser");
         bml.xmlFile = patterns[2];
         bml.Initialize();
     }
@@ -807,6 +787,7 @@ public class Typing : MonoBehaviour
     {
         patternRunning = true;
         StopCoroutine("HomingShot");
+        StopCoroutine("Laser");
         bml.xmlFile = patterns[3];
         bml.Initialize();
     }
@@ -824,6 +805,7 @@ public class Typing : MonoBehaviour
     private IEnumerator HomingShot()
     {
         bml.xmlFile = patterns[0];
+        StopCoroutine("Laser");
 
         for (int i = 0; i < 300; i++)
         {

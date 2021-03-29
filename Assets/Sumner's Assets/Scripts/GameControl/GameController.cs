@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Transform spawn;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject meme;
-    [SerializeField] private GameObject tutorialEnemy, trackball, prompt, skipButton;
+    [SerializeField] private GameObject tutorialEnemy, trackball, prompt, skipButton, arrow, arrow2;
     [SerializeField] private AudioClip mainTheme;
 
     public static List<Word> Words = new List<Word>() {
@@ -198,7 +198,7 @@ public class GameController : MonoBehaviour
                     Name = "LASER",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 1f
+                    MaxCool = 15f
                    },
 
         new Word() {
@@ -377,11 +377,10 @@ public class GameController : MonoBehaviour
         if (tutorialStage == 2 && !tutorialIncrementing)
         {
             tutorialMsg.text = "If you hold shift, you can slow your movement and see your hitbox.";
-            prompt.SetActive(true);
-            prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
-            if (Input.GetKeyDown(KeyCode.Z))
+            prompt.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                StartCoroutine("IncrementTutorial", 0.1f);
+                StartCoroutine("IncrementTutorial", 1f);
             }
         }
 
@@ -420,7 +419,7 @@ public class GameController : MonoBehaviour
 
         if (tutorialStage == 6 && !tutorialIncrementing)
         {
-            tutorialMsg.text = "That one dropped a keycap, make sure to pick it up. You can spend them later on upgrades.";
+            tutorialMsg.text = "That one dropped a keycap, make sure to pick it up. You can unlock special abilities with them!";
             prompt.SetActive(true);
             prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
             if (Input.GetKeyDown(KeyCode.Z))
@@ -429,15 +428,23 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (tutorialStage == 7)
+        if (tutorialStage == 7 && !tutorialIncrementing)
         {
-            tutorialMsg.text = "There are certain words of power that have special effects. Try putting in \"AUTO.\"";
-            prompt.SetActive(false);
+            tutorialMsg.text = "There are certain words of power that have special effects. The word you are currently learning is displayed here.";
+            arrow.SetActive(true);
+            prompt.SetActive(true);
+            prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                StartCoroutine("IncrementTutorial", 0.1f);
+            }
         }
 
         if (tutorialStage == 8 && !tutorialIncrementing)
         {
-            tutorialMsg.text = "There's plenty other words! Experiment and try to find them all!";
+            tutorialMsg.text = "Every 6 keycaps you collect will reveal another letter; you may attempt to solve it at any time by entering what you think the word is.";
+            arrow.SetActive(false);
+            arrow2.SetActive(true);
             prompt.SetActive(true);
             prompt.GetComponent<PromptFlash>().StartCoroutine("Flash");
             if (Input.GetKeyDown(KeyCode.Z))
@@ -448,7 +455,8 @@ public class GameController : MonoBehaviour
 
         if (tutorialStage == 9)
         {
-            tutorialMsg.text = "... Okay fine, you can have one more for free. Try \"SHIELD.\"";
+            tutorialMsg.text = "... Okay fine, I'll give you this first one. It's \"" + player.GetComponent<Typing>().wordToBeUnlocked + "\"";
+            arrow2.SetActive(false);
             prompt.SetActive(false);
         }
 
