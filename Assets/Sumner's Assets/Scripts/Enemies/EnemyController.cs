@@ -576,7 +576,7 @@ public class EnemyController : MonoBehaviour
             print(collision.gameObject.name);
             collision.GetComponent<PlayerHealth>().Die();
         }
-        else if (collision.gameObject.CompareTag("Player") && collision.GetComponent<PlayerHealth>().shield)
+        else if (collision.gameObject.CompareTag("Player") && collision.GetComponent<PlayerHealth>().shield && collision == playerCol)
         {
             Destroy(collision.gameObject);
         }

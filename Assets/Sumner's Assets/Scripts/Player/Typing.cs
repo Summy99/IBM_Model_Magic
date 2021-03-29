@@ -752,6 +752,7 @@ public class Typing : MonoBehaviour
     private IEnumerator Shield()
     {
         bml.xmlFile = patterns[0];
+        StopCoroutine("Laser");
         gameObject.transform.Find("Shield").gameObject.SetActive(true);
         gameObject.GetComponent<PlayerHealth>().shield = true;
         yield return new WaitForSeconds(2.5f);

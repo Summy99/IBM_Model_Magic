@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1294520606847368361}
   - component: {fileID: 5092615430179107312}
   - component: {fileID: 789589760296126451}
+  - component: {fileID: 82858020351826043}
   m_Layer: 0
   m_Name: DefaultBullet
   m_TagString: Bullet
@@ -124,3 +125,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoRotation: 1
   autoRotationAngleBonus: 0
+--- !u!114 &82858020351826043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294520606847368362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612072bd10f96004988f81ce7b043ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

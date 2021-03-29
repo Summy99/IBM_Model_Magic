@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 398087840592554450}
   - component: {fileID: 398087840592554453}
   - component: {fileID: 398087840592554448}
+  - component: {fileID: -6222984281318415485}
   m_Layer: 0
   m_Name: VomitBullet
   m_TagString: Bullet
@@ -114,3 +115,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoRotation: 0
   autoRotationAngleBonus: 0
+--- !u!114 &-6222984281318415485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398087840592554452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612072bd10f96004988f81ce7b043ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
