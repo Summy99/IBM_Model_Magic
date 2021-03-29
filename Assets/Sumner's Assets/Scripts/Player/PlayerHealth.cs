@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     private AudioSource sfx;
     private UI ui;
     [SerializeField]
-    private AudioClip death;
+    private AudioClip death, healed;
 
     [SerializeField]
     private AudioClip[] types;
@@ -33,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
         {
             heal = 0;
             GameController.lives++;
+            sfx.PlayOneShot(healed);
         }
     }
 

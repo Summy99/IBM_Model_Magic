@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3a7eed21b703a40bf2fb9ff211551f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthDrop: {fileID: 8300000, guid: 352bf7ebb714b0d4682648e4f5a7f140, type: 3}
   types:
   - {fileID: 8300000, guid: b70d129d19be9c240b34961f0ce6f950, type: 3}
   - {fileID: 8300000, guid: 9d29c668d5e80774f852d54e24351c0f, type: 3}

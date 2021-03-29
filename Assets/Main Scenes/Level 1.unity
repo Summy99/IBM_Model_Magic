@@ -11931,10 +11931,26 @@ PrefabInstance:
       propertyPath: colliderPlayer
       value: 
       objectReference: {fileID: 884545956710923145}
+    - target: {fileID: 884545956710923145, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: healed
+      value: 
+      objectReference: {fileID: 8300000, guid: c7a23b50338072e4db06395471f493e1, type: 3}
     - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: mema
       value: 
       objectReference: {fileID: 93655504}
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: wordOnCD
+      value: 
+      objectReference: {fileID: 8300000, guid: fd0ce3a0b1d6d4647a38b90a5148c336, type: 3}
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: wordReady
+      value: 
+      objectReference: {fileID: 8300000, guid: 3e65b65ff1bb0594fb0aeb6bc0f1dfe9, type: 3}
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: laser
+      value: 
+      objectReference: {fileID: 8300000, guid: e3eebf6e36661414883389c40302276c, type: 3}
     - target: {fileID: 4632542713897860138, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_Name
       value: Player

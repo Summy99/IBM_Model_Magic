@@ -7,7 +7,9 @@ public class Collectibles : MonoBehaviour
     private Rigidbody2D rb;
     private GameObject player;
     private GameObject gc;
-   
+
+    [SerializeField]
+    private AudioClip healthDrop;
     [SerializeField]
     private AudioClip[] types;
 
@@ -75,6 +77,7 @@ public class Collectibles : MonoBehaviour
         {
             if(GameController.lives < 6)
             {
+                collision.gameObject.GetComponent<AudioSource>().PlayOneShot(healthDrop);
                 collision.gameObject.GetComponent<PlayerHealth>().heal++;
             }
 
