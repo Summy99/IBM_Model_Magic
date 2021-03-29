@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private GameObject yParticles;
 
+    private CircleCollider2D playerCol;
+
     public float health = 3;
 
     public int shooting = 0;
@@ -45,6 +47,8 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        playerCol = GameObject.FindGameObjectWithTag("Player").GetComponent<CircleCollider2D>();
+
         shooting = Mathf.FloorToInt(Random.Range(0, 2));
         initialPosition = transform.position;
 
@@ -564,6 +568,16 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("Letter"))
         {
             TakeDamage(collision.gameObject.GetComponent<LetterController>().damage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Player") && !collision.GetComponent<PlayerHealth>().shield && collision == playerCol)
+        {
+            print(collision.gameObject.name);
+            collision.GetComponent<PlayerHealth>().Die();
+        }
+        else if (collision.gameObject.CompareTag("Player") && collision.GetComponent<PlayerHealth>().shield)
+        {
             Destroy(collision.gameObject);
         }
     }

@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
 
     public bool shield = false;
     public int heal = 0;
-    public BoxCollider2D colliderPlayer;
+    public CircleCollider2D colliderPlayer;
     private BulletSourceScript bml;
 
     void Start()
