@@ -82,7 +82,7 @@
 	
 	<action label="impl:12">
 		<repeat>
-			<times>9999</times>
+			<times>99</times>
 			<action>
 				<wait>2</wait>
 				<fire>

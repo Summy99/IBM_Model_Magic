@@ -4,7 +4,7 @@
   <action label="top">
     <repeat>
       <!-- The main loop, until the boss is destroyed -->
-      <times>99999</times>
+      <times>1</times>
       <action>
         <actionRef label="pattern1"></actionRef>
         <actionRef label="pause">
@@ -119,6 +119,21 @@
         <actionRef label="pattern3_part">
           <param>2.75</param>
         </actionRef>
+        <actionRef label="pattern3_part">
+          <param>3.25</param>
+        </actionRef>
+        <actionRef label="pattern3_part">
+          <param>3.75</param>
+        </actionRef>
+        <actionRef label="pattern3_part">
+          <param>4.25</param>
+        </actionRef>
+        <actionRef label="pattern3_part">
+          <param>4.75</param>
+        </actionRef>
+        <actionRef label="pattern3_part">
+          <param>5.25</param>
+        </actionRef>
         <wait>180</wait>
       </action>
     </repeat>
@@ -199,9 +214,9 @@
         <speed>0</speed>
         <term>0</term>
       </changeSpeed>
-      <wait>20</wait>
+      <wait>60</wait>
       <repeat>
-        <times>20</times>
+        <times>30</times>
         <action>
           <fire>
             <direction type="absolute">180</direction>
@@ -213,10 +228,10 @@
             <speed>0.5 + $rank</speed>
             <bulletRef label="boss4_bullet"></bulletRef>
           </fire>
-          <wait>5</wait>
+          <wait>($rand * 20)+20</wait>
         </action>
       </repeat>
-      <wait>20</wait>
+      <wait>5</wait>
       <vanish />
     </action>
   </bullet>

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 125156313247077276}
   m_Layer: 0
   m_Name: SlowCollectible
-  m_TagString: Untagged
+  m_TagString: Collectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,4 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3a7eed21b703a40bf2fb9ff211551f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  types: []
   type: slow
+  activated: 0

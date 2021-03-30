@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Pixelnest.BulletML;
 
@@ -14,13 +15,22 @@ public class Typing : MonoBehaviour
     private UI ui;
 
     [SerializeField]
-    private AudioClip shot, wordSuccess, wordFail, enterSlow;
+    private AudioClip shot, wordSuccess, wordFail, enterSlow, bomb, bigBomb, wordUnlocked, laser, wordOnCD, wordReady;
 
     [SerializeField]
-    private GameObject letterPrefab, explosionPrefab;
+    private AudioClip badAppleEarrape;
+
+    [SerializeField]
+    private GameObject letterPrefab, explosionPrefab, homingShot;
+
+    [SerializeField]
+    private GameObject mema;
 
     [SerializeField]
     public Sprite[] letterSprites;
+
+    [SerializeField]
+    public Sprite yukkuriReimu, yukkuriFlan;
 
     public float shootCooldown = 0.1f;
     private float curShootCooldown = 0;
@@ -28,9 +38,12 @@ public class Typing : MonoBehaviour
     private bool patternRunning = false;
 
     public string mode = "shooting";
+    public int letterProgress = 0;
     public float slowDown = 5;
-    public static float maxSlowDown = 3;
+    public static float maxSlowDown = 2.25f;
     public string word = "";
+    public string wordToBeUnlocked = "";
+    public bool touhou = false;
 
     void Start()
     {
@@ -42,6 +55,19 @@ public class Typing : MonoBehaviour
 
     void Update()
     {
+        if(wordToBeUnlocked == "")
+        {
+            PickFirstWord();
+            
+            if(GameController.Level != 1)
+            {
+                UnlockWord(wordToBeUnlocked);
+            }
+        }
+
+        sfx.volume = 0.5f * MenuScript.MasterVolume * MenuScript.SFXVolume;
+        gameObject.transform.Find("laser").GetComponent<AudioSource>().volume = 0.5f * MenuScript.MasterVolume * MenuScript.SFXVolume;
+
         if (Input.GetKeyDown(KeyCode.Minus))
         {
             maxSlowDown -= 0.5f;
@@ -55,6 +81,15 @@ public class Typing : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             slowDown += 0.1f * maxSlowDown;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject g in enemies)
+            {
+                Destroy(g);
+            }
         }
 
         if (gc.tutorial)
@@ -83,40 +118,40 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if(slowDown < maxSlowDown && mode == "shooting")
+        if(slowDown < maxSlowDown && mode == "shooting" && !gc.paused)
         {
             slowDown += Time.deltaTime * slowRecoveryRate * maxSlowDown;
         }
 
         ShootingInput();
 
-        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && mode == "shooting" && !gameObject.GetComponent<PlayerHealth>().shield)
+        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && mode == "shooting" && !gameObject.GetComponent<PlayerHealth>().shield && !gc.paused)
         {
             sfx.PlayOneShot(enterSlow);
             mode = "typing";
         }
 
-        else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && mode == "typing")
+        else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && mode == "typing" && !gc.paused)
         {
             ConfirmWord();
         }
 
-        if (mode == "typing")
+        if (mode == "typing" && !gc.paused)
         {
             Time.timeScale = 0.2f;
         }
 
-        if (mode == "shooting")
+        if (mode == "shooting" && !gc.paused)
         {
             Time.timeScale = 1f;
         }
 
-        if (mode == "typing" && slowDown > 0)
+        if (mode == "typing" && slowDown > 0 && !gc.paused)
         {
             slowDown -= Time.unscaledDeltaTime;
         }
 
-        if(curShootCooldown > 0)
+        if(curShootCooldown > 0 && !gc.paused)
         {
             curShootCooldown -= Time.deltaTime;
         }
@@ -265,132 +300,167 @@ public class Typing : MonoBehaviour
 
     private void ConfirmWord()
     {
-        if (gc.tutorial && gc.tutorialStage == 7)
+        int wordIndex = GetWordIndex(word);
+
+        if(gc.tutorialStage == 9 && word == wordToBeUnlocked)
         {
-            if(word == "AUTO")
+            gc.tutorialStage = 11;
+        }
+
+        if ((wordIndex != 0 && (GameController.Words[wordIndex].Unlocked || word == wordToBeUnlocked) && GameController.Words[wordIndex].CurCool <= 0) || word == "TOUHOU" || word == "MIMA")
+        {
+            sfx.PlayOneShot(wordSuccess, 0.5f);
+
+            switch (word)
             {
-                gc.tutorialStage = 8;
+                case "BOMB":
+                    Bomb();
+                    break;
+
+                case "BOOM":
+                    Bomb();
+                    break;
+
+                case "BLOCK":
+                    StartCoroutine("Shield");
+                    break;
+
+                case "SHIELD":
+                    StartCoroutine("Shield");
+                    break;
+
+                case "ERASE":
+                    Erase();
+                    break;
+
+                case "CLEAR":
+                    Erase();
+                    break;
+
+                case "AUTO":
+                    if (true)
+                    {
+                        AutoFire();
+                    }
+                    break;
+
+                case "SHOOT":
+                    if (true)
+                    {
+                        AutoFire();
+                    }
+                    break;
+
+                case "FIRE":
+                    if (true)
+                    {
+                        AutoFire();
+                    }
+                    break;
+
+                case "SPREAD":
+                    if (true)
+                    {
+                        SpreadShot();
+                    }
+                    break;
+
+                case "SHOTGUN":
+                    if (true)
+                    {
+                        SpreadShot();
+                    }
+                    break;
+
+                case "SCATTER":
+                    if (true)
+                    {
+                        SpreadShot();
+                    }
+                    break;
+
+                case "SOMETHING":
+                    RandomWord();
+                    break;
+
+                case "RANDOM":
+                    RandomWord();
+                    break;
+
+                case "EXPLOSION":
+                    ExplosionWord();
+                    break;
+
+                case "BIG":
+                    BigShot();
+                    break;
+
+                case "GIANT":
+                    BigShot();
+                    break;
+
+                case "GRAB":
+                    Collect();
+                    break;
+
+                case "COLLECT":
+                    Collect();
+                    break;
+
+                case "HOMING":
+                    StartCoroutine("HomingShot");
+                    break;
+
+                case "SEARCH":
+                    StartCoroutine("HomingShot");
+                    break;
+
+                case "TRACKING":
+                    StartCoroutine("HomingShot");
+                    break;
+
+                case "LASER":
+                    StartCoroutine("Laser");
+                    break;
+
+                case "BEAM":
+                    StartCoroutine("Laser");
+                    break;
+
+                case "TOUHOU":
+                    TouhouMeme();
+                    break;
+
+                case "MIMA":
+                    Memea();
+                    break;
+            }
+
+            if(word == wordToBeUnlocked)
+            {
+                UnlockWord(word);
+            }
+            else if(word != "MIMA" && word != "TOUHOU")
+            {
+                GameController.Words[wordIndex].CurCool = GameController.Words[wordIndex].MaxCool;
+            }
+        }
+
+        else if (wordIndex == 0 || !GameController.Words[wordIndex].Unlocked || GameController.Words[wordIndex].CurCool > 0)
+        {
+            if(GameController.Words[wordIndex].CurCool > 0)
+            {
+                sfx.PlayOneShot(wordOnCD);
             }
             else
             {
-                return;
+                sfx.PlayOneShot(wordFail);
             }
-        }
-
-        if (gc.tutorial && gc.tutorialStage == 9)
-        {
-            if (word == "SHIELD")
-            {
-                gc.tutorialStage = 10;
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        switch (word)
-        {
-            case "BOMB":
-                Bomb();
-                break;
-
-            case "BOOM":
-                Bomb();
-                break;
-
-            case "BLOCK":
-                StartCoroutine("Shield");
-                break;
-
-            case "SHIELD":
-                StartCoroutine("Shield");
-                break;
-
-            case "ERASE":
-                Erase();
-                break;
-
-            case "CLEAR":
-                Erase();
-                break;
-
-            case "AUTO":
-                if (true)
-                {
-                    AutoFire();
-                }
-                break;
-
-            case "SPREAD":
-                if (true)
-                {
-                    SpreadShot();
-                }
-                break;
-
-            case "SHOTGUN":
-                if (true)
-                {
-                    SpreadShot();
-                }
-                break;
-
-            case "RAPID":
-                StartCoroutine("Speed");
-                break;
-
-            case "SPEED":
-                StartCoroutine("Speed");
-                break;
-
-            case "FAST":
-                StartCoroutine("Speed");
-                break;
-
-            case "OTHER":
-                RandomWord();
-                break;
-
-            case "SOMETHING":
-                RandomWord();
-                break;
-
-            case "RANDOM":
-                RandomWord();
-                break;
-
-            case "ANYTHING":
-                RandomWord();
-                break;
-
-            case "EXPLOSION":
-                ExplosionWord();
-                break;
-
-            case "BIG":
-                BigShot();
-                break;
-
-            case "GIANT":
-                BigShot();
-                break;
-        }
-
-        if (GameController.words.ContainsKey(word) && !GameController.words[word])
-        {
-            GameController.words[word] = true;
-            ui.AddWord(word);
-        }
-
-        if (!GameController.words.ContainsKey(word))
-        {
-            sfx.PlayOneShot(wordFail);
 
             string[] letters = ToStringArray(word);
             int[] lettersToShoot = new int[letters.Length];
-            
-            for(int i = 0; i < letters.Length; i++)
+
+            for (int i = 0; i < letters.Length; i++)
             {
                 switch (letters[i])
                 {
@@ -502,13 +572,60 @@ public class Typing : MonoBehaviour
 
             StartCoroutine("ShootLetters", lettersToShoot);
         }
-        else
-        {
-            sfx.PlayOneShot(wordSuccess);
-        }
 
         mode = "shooting";
         word = "";
+    }
+
+    public void UnlockWord(string uWord)
+    {
+        sfx.PlayOneShot(wordUnlocked);
+
+        GameController.Words[GetWordIndex(uWord)].Unlocked = true;
+        ui.AddWord(uWord);
+
+        PickNewWord();
+    }
+
+    public void PickNewWord()
+    {
+        int newWord = Mathf.FloorToInt(Random.Range(1, GameController.Words.Count));
+
+        while (GameController.Words[newWord].Unlocked)
+        {
+            newWord = Mathf.FloorToInt(Random.Range(1, GameController.Words.Count));
+        }
+
+        if (!GameController.Words[newWord].Unlocked)
+        {
+            print(GameController.Words[newWord].Name);
+            wordToBeUnlocked = GameController.Words[newWord].Name;
+            ui.UpdateWordUnlock();
+        }
+    }
+
+    public void PickFirstWord()
+    {
+        int newWord = Mathf.FloorToInt(Random.Range(1, GameController.Words.Count));
+
+        while(GameController.Words[newWord].Name == "COLLECT" ||
+              GameController.Words[newWord].Name == "GRAB" ||
+              GameController.Words[newWord].Name == "FAST" ||
+              GameController.Words[newWord].Name == "RAPID" ||
+              GameController.Words[newWord].Name == "SPEED" ||
+              GameController.Words[newWord].Name == "SHIELD" ||
+              GameController.Words[newWord].Name == "BLOCK" ||
+              GameController.Words[newWord].Name == "CLEAR" ||
+              GameController.Words[newWord].Name == "ERASE" ||
+              GameController.Words[newWord].Name == "EXPLOSION" ||
+              GameController.Words[newWord].Name == "LASER" ||
+              GameController.Words[newWord].Name == "BEAM")
+        {
+            newWord = Mathf.FloorToInt(Random.Range(1, GameController.Words.Count));
+        }
+
+        wordToBeUnlocked = GameController.Words[newWord].Name;
+        ui.UpdateWordUnlock();
     }
 
     private void Shoot(int letter)
@@ -540,8 +657,64 @@ public class Typing : MonoBehaviour
         return a;
     }
 
+    public int GetWordIndex(string word)
+    {
+        for(int i = 0; i < GameController.Words.Count; i++)
+        {
+            if(GameController.Words[i].Name == word)
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    public bool ContainsWord(List<Word> l, string word)
+    {
+        foreach(Word w in l)
+        {
+            if(w.Name == word)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void TouhouMeme()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = yukkuriReimu;
+        touhou = true;
+
+        GameObject[] e = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(GameObject g in e)
+        {
+            if (g.GetComponent<SpriteRenderer>())
+            {
+                g.GetComponent<SpriteRenderer>().sprite = yukkuriFlan;
+            }
+            else
+            {
+                g.transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = yukkuriFlan;
+            }
+        }
+
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = badAppleEarrape;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
+    }
+
+    private void Memea()
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Pause();
+        mema.SetActive(true);
+    }
+
     private void Bomb()
     {
+        sfx.PlayOneShot(bomb);
         Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
     }
 
@@ -558,6 +731,9 @@ public class Typing : MonoBehaviour
     private IEnumerator Shield()
     {
         bml.xmlFile = patterns[0];
+        StopCoroutine("Laser");
+        StopCoroutine("HomingShot");
+        gameObject.transform.Find("laser").gameObject.SetActive(false);
         gameObject.transform.Find("Shield").gameObject.SetActive(true);
         gameObject.GetComponent<PlayerHealth>().shield = true;
         yield return new WaitForSeconds(2.5f);
@@ -576,6 +752,9 @@ public class Typing : MonoBehaviour
     private void AutoFire()
     {
         patternRunning = true;
+        StopCoroutine("HomingShot");
+        StopCoroutine("Laser");
+        gameObject.transform.Find("laser").gameObject.SetActive(false);
         bml.xmlFile = patterns[1];
         bml.Initialize();
     }
@@ -583,19 +762,17 @@ public class Typing : MonoBehaviour
     private void SpreadShot()
     {
         patternRunning = true;
+        StopCoroutine("HomingShot");
+        StopCoroutine("Laser");
+        gameObject.transform.Find("laser").gameObject.SetActive(false);
         bml.xmlFile = patterns[2];
         bml.Initialize();
     }
 
-    private IEnumerator Speed()
-    {
-        gameObject.GetComponent<PlayerMovement>().moveSpeed = 100f;
-        yield return new WaitForSeconds(5);
-        gameObject.GetComponent<PlayerMovement>().moveSpeed = 50f;
-    }
-
     private void ExplosionWord()
     {
+        sfx.PlayOneShot(bigBomb);
+
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach(GameObject e in enemies)
@@ -607,13 +784,52 @@ public class Typing : MonoBehaviour
     private void BigShot()
     {
         patternRunning = true;
+        StopCoroutine("HomingShot");
+        StopCoroutine("Laser");
+        gameObject.transform.Find("laser").gameObject.SetActive(false);
         bml.xmlFile = patterns[3];
         bml.Initialize();
     }
 
+    private void Collect()
+    {
+        GameObject[] collectibles = GameObject.FindGameObjectsWithTag("Collectible");
+
+        foreach(GameObject c in collectibles)
+        {
+            c.GetComponent<Collectibles>().activated = true;
+        }
+    }
+
+    private IEnumerator HomingShot()
+    {
+        bml.xmlFile = patterns[0];
+        StopCoroutine("Laser");
+        gameObject.transform.Find("laser").gameObject.SetActive(false);
+
+        for (int i = 0; i < 200; i++)
+        {
+            GameObject h1 = Instantiate(homingShot, gameObject.transform.Find("letterspawnLeft").position, Quaternion.identity);
+            GameObject h2 = Instantiate(homingShot, gameObject.transform.Find("letterspawnRight").position, Quaternion.identity);
+
+            Destroy(h1, 2);
+            Destroy(h2, 2);
+            yield return new WaitForSeconds(0.15f);
+        }
+    }
+
+    private IEnumerator Laser()
+    {
+        StopCoroutine("HomingShot");
+        bml.xmlFile = patterns[0];
+        gameObject.transform.Find("laser").gameObject.SetActive(true);
+        yield return new WaitForSeconds(5);
+        gameObject.transform.Find("laser").gameObject.SetActive(false);
+    }
+
     private void RandomWord()
     {
-        int effect = Mathf.FloorToInt(Random.Range(0, 8));
+        int effect = Mathf.FloorToInt(Random.Range(0, 10));
 
         switch (effect)
         {
@@ -638,15 +854,23 @@ public class Typing : MonoBehaviour
                 break;
 
             case 5:
-                StartCoroutine("Speed");
-                break;
-
-            case 6:
                 ExplosionWord();
                 break;
 
-            case 7:
+            case 6:
                 BigShot();
+                break;
+
+            case 7:
+                Collect();
+                break;
+
+            case 8:
+                StartCoroutine("HomingShot");
+                break;
+
+            case 9:
+                StartCoroutine("Laser");
                 break;
         }
     }

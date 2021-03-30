@@ -17,6 +17,11 @@ public class ShotController : MonoBehaviour
             damage = 1.5f;
         }
 
+        if (player.GetComponent<BulletSourceScript>().xmlFile.name == "Spread")
+        {
+            damage = 0.65f;
+        }
+
         gameObject.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Typing>().letterSprites[Mathf.FloorToInt(Random.Range(0, player.GetComponent<Typing>().letterSprites.Length))];
     }
 

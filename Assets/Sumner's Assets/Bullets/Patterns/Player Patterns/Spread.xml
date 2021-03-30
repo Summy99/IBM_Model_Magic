@@ -5,25 +5,25 @@
 
   <action label="top">
     <repeat>
-      <times>9</times>
+      <times>200</times>
       <action>
         <repeat>
           <times>4</times>
           <action>
             <fire>
-              <direction type="sequence">-15</direction>
-              <speed>2</speed>
+              <direction type="sequence">-10</direction>
+              <speed>2.5</speed>
               <bulletRef label="PlayerShot" />
             </fire>
           </action>
         </repeat>
-        <wait>30</wait>
+        <wait>15</wait>
       </action>
     </repeat>  
   </action>
 
   <bullet label="PlayerShot">
-    <direction type="absolute">202.5</direction>
+    <direction type="absolute">198</direction>
   </bullet>
   
 </bulletml>

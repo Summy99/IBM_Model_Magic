@@ -6,21 +6,29 @@ public class Collectibles : MonoBehaviour
 {
     private Rigidbody2D rb;
     private GameObject player;
-   
+    private GameObject gc;
+
+    [SerializeField]
+    private AudioClip healthDrop;
     [SerializeField]
     private AudioClip[] types;
 
     public string type = "slow";
 
-    private bool activated = false;
+    private float speed = 1f;
+    private bool moving = false;
+    public bool activated = false;
 
     void Start()
     {
         activated = false;
 
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
+
         float x = 0;
 
         rb = gameObject.GetComponent<Rigidbody2D>();
+        gc = GameObject.FindGameObjectWithTag("GameController");
         player = GameObject.FindGameObjectWithTag("Player");
 
         if(Mathf.FloorToInt(Random.Range(0, 2)) == 0)
@@ -39,18 +47,41 @@ public class Collectibles : MonoBehaviour
     {
         if (!activated)
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -10f, 999));
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -20f, 999));
         }
 
         if (activated)
         {
             rb.gravityScale = 0;
-            rb.AddForce((player.transform.position - transform.position).normalized * 500);
+
+            if (!moving)
+            {
+                speed = rb.velocity.magnitude * 3;
+                StartCoroutine("Realign");
+            }
+
+            speed *= 1 + (Time.deltaTime * 2);
         }
 
         if(Vector2.Distance(transform.position, player.transform.position) <= 10)
         {
             activated = true;
+        }
+
+        if(transform.position.y < -50 && !activated)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator Realign()
+    {
+        moving = true;
+        while (true)
+        {
+            rb.velocity = Vector2.zero;
+            rb.velocity = (player.transform.position - transform.position).normalized * speed;
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
@@ -62,11 +93,31 @@ public class Collectibles : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (collision.gameObject.CompareTag("Player") && type == "heal")
+        {
+            if(GameController.lives < 6)
+            {
+                collision.gameObject.GetComponent<AudioSource>().PlayOneShot(healthDrop);
+                collision.gameObject.GetComponent<PlayerHealth>().heal++;
+            }
+
+            Destroy(gameObject);
+        }
+
         if (collision.gameObject.CompareTag("Player") && type == "keycap")
         {
             collision.gameObject.GetComponent<AudioSource>().PlayOneShot(types[Mathf.FloorToInt(Random.Range(0, types.Length))]);
             collision.gameObject.GetComponent<Typing>().slowDown += 0.01f * Typing.maxSlowDown;
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().keycaps++;
+            GameController.keycaps++;
+
+            collision.gameObject.GetComponent<Typing>().letterProgress++;
+
+            if(collision.gameObject.GetComponent<Typing>().letterProgress == 6)
+            {
+                collision.gameObject.GetComponent<Typing>().letterProgress = 0;
+                gc.GetComponent<UI>().AddLetter();
+            }
+
             Destroy(gameObject);
         }
     }

@@ -9,12 +9,14 @@ public class PlayerHealth : MonoBehaviour
     private AudioSource sfx;
     private UI ui;
     [SerializeField]
-    private AudioClip death;
+    private AudioClip death, healed;
 
     [SerializeField]
     private AudioClip[] types;
 
     public bool shield = false;
+    public int heal = 0;
+    public CircleCollider2D colliderPlayer;
     private BulletSourceScript bml;
 
     void Start()
@@ -25,51 +27,43 @@ public class PlayerHealth : MonoBehaviour
         ui = GameObject.FindGameObjectWithTag("GameController").GetComponent<UI>();
     }
 
+    private void Update()
+    {
+        if(heal >= 8)
+        {
+            heal = 0;
+            GameController.lives++;
+            sfx.PlayOneShot(healed);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && !shield)
+        if(collision == colliderPlayer)
         {
-            Die();
-        }
-        else if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && shield)
-        {
-            Destroy(collision.gameObject);
-        }
-
-        if (collision.gameObject.name == "SlowBarUpgrade" && gc.keycaps >= 25)
-        {
-            collision.gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPrice").gameObject.SetActive(false);
-            gc.keycaps -= 25;
-            Typing.maxSlowDown *= 1.1f;
-        }
-
-        if (collision.gameObject.name == "Heal" && gc.keycaps >= 15 && GameController.lives < 6)
-        {
-            gc.keycaps -= 15;
-            GameController.lives++;
-        }
-
-        if (collision.gameObject.name == "NewWord" && gc.keycaps >= 40)
-        {
-            collision.gameObject.SetActive(false);
-            GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("WordPrice").gameObject.SetActive(false);
-            gc.keycaps -= 40;
-
-            string[] words = new string[GameController.words.Count];
-            GameController.words.Keys.CopyTo(words, 0);
-
-            string wordToUnlock = "AUTO";
-
-            while (GameController.words[wordToUnlock])
+            if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && !shield)
             {
-                wordToUnlock = words[Mathf.FloorToInt(Random.Range(0, words.Length))];
+                print(collision.gameObject.name);
+                Die();
+            }
+            else if ((collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Bullet")) && shield)
+            {
+                Destroy(collision.gameObject);
             }
 
-            if (!GameController.words[wordToUnlock])
+            if (collision.gameObject.name == "SlowBarUpgrade" && GameController.keycaps >= 25)
             {
-                GameController.words[wordToUnlock] = true;
-                ui.AddWord(wordToUnlock);
+                collision.gameObject.SetActive(false);
+                GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPrice").gameObject.SetActive(false);
+                GameObject.FindGameObjectWithTag("Canvas").transform.Find("Prices").Find("SlowBarPriceIcon").gameObject.SetActive(false);
+                GameController.keycaps -= 25;
+                Typing.maxSlowDown *= 1.1f;
+            }
+
+            if (collision.gameObject.name == "Heal" && GameController.keycaps >= 15 && GameController.lives < 6)
+            {
+                GameController.keycaps -= 15;
+                GameController.lives++;
             }
         }
     }
@@ -81,6 +75,8 @@ public class PlayerHealth : MonoBehaviour
         sfx.PlayOneShot(death);
 
         bml.xmlFile = gameObject.GetComponent<Typing>().patterns[0];
+        gameObject.GetComponent<Typing>().StopCoroutine("HomingShot");
+        gameObject.GetComponent<Typing>().StopCoroutine("Laser");
 
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 

@@ -14,27 +14,41 @@ public class EnemyController : MonoBehaviour
     private TextAsset[] bulletmlScripts;
 
     [SerializeField]
-    private GameObject slowCollectible;
+    private GameObject slowCollectible, keycapCollectible, healthCollectible;
 
     [SerializeField]
-    private GameObject keycapCollectible;
+    private GameObject yParticles;
+
+    private CircleCollider2D playerCol;
 
     public float health = 3;
 
     public int shooting = 0;
     public int pattern = 0;
+    private float laserDamageCool = 0;
     public float lifetime = 0;
     public float timeToShoot = 0;
     public int type = 0;
+    public bool type2Shoot = false;
     public bool initialized = false;
     public float moveSpeed = 10;
+    private bool boom = false;
+    private bool turnt = false;
+    private bool ringed = false;
+    private bool rung = false;
 
+    private bool flashing = false;
     private float distanceTraveled = 0f;
     private string direction = "down";
     [SerializeField]
-    private Vector2 initialPosition = Vector2.zero;
+    private Vector3 initialPosition = Vector3.zero;
+
+    private Vector3 playerPos;
+
     void Start()
     {
+        playerCol = GameObject.FindGameObjectWithTag("Player").GetComponent<CircleCollider2D>();
+
         shooting = Mathf.FloorToInt(Random.Range(0, 2));
         initialPosition = transform.position;
 
@@ -42,21 +56,71 @@ public class EnemyController : MonoBehaviour
         lifetime = 0;
         sfx = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        if(type == 6 || type == 7)
+        {
+            playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        }
+
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().touhou)
+        {
+            if (gameObject.GetComponent<Animator>())
+            {
+                gameObject.GetComponent<Animator>().enabled = false;
+            }
+            else if (gameObject.transform.Find("Sprite").GetComponent<Animator>())
+            {
+                gameObject.transform.Find("Sprite").GetComponent<Animator>().enabled = false;
+            }
+
+            if (gameObject.GetComponent<SpriteRenderer>())
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().yukkuriFlan;
+            }
+            else
+            {
+                gameObject.transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().yukkuriFlan;
+            }
+        }
     }
 
     private void Update()
     {
-        if(gameObject.transform.position.y > 56 || gameObject.transform.position.y < -56 || gameObject.transform.position.x > 26 || gameObject.transform.position.x < -66)
+        if(laserDamageCool > 0)
+        {
+            laserDamageCool -= Time.deltaTime;
+        }
+
+        if(type != 7 && type != 8)
+        {
+            if (gameObject.GetComponent<SpriteRenderer>())
+            {
+                transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+            }
+            else
+            {
+                transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite;
+            }
+        }
+
+        if (gameObject.transform.position.y > 56 || gameObject.transform.position.y < -56 || gameObject.transform.position.x > 26 || gameObject.transform.position.x < -66)
         {
             Destroy(gameObject);
         }
 
         lifetime += Time.deltaTime;
 
-        if(type == 2 && lifetime >= timeToShoot && !initialized && shooting == 1)
+        if(type == 2 && lifetime >= timeToShoot && !initialized && shooting == 1 && pattern != 22)
         {
             initialized = true;
             gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[1];
+            gameObject.GetComponent<BulletSourceScript>().Initialize();
+        }
+
+        if (type == 2 && !initialized && (pattern == 22 || type2Shoot))
+        {
+            initialized = true;
+            gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[6];
             gameObject.GetComponent<BulletSourceScript>().Initialize();
         }
 
@@ -298,7 +362,7 @@ public class EnemyController : MonoBehaviour
 
             case 18:
                 moveSpeed = 20;
-                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, -15));                
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, -15));
                 rb.velocity = -(transform.up * moveSpeed);
                 break;
 
@@ -306,6 +370,130 @@ public class EnemyController : MonoBehaviour
                 moveSpeed = 20;
                 transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 15));
                 rb.velocity = -(transform.up * moveSpeed);
+                break;
+
+            case 20:
+                rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                break;
+
+            case 21:
+                if(transform.position.y > 9)
+                {
+                    rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                }
+                else if(!boom)
+                {
+                    boom = true;
+                    rb.velocity = Vector2.zero;
+                    StartCoroutine("Skull");
+                }
+                break;
+
+            case 22:
+                rb.velocity = -(transform.right * moveSpeed);
+                break;
+
+            case 23:
+                if(transform.position.y > -15 && !turnt)
+                {
+                    rb.velocity = -(transform.up * moveSpeed);
+                }
+                else if(!turnt)
+                {
+                    if (transform.position.x < -35)
+                    {
+                        transform.rotation = Quaternion.Euler(new Vector3(0, 0, -30));
+                    }
+                    else
+                    {
+                        transform.rotation = Quaternion.Euler(new Vector3(0, 0, 30));
+                    }
+
+                    turnt = true;
+                }
+
+                if (turnt)
+                {
+                    rb.velocity = transform.up * moveSpeed;
+                }
+                break;
+
+            case 24:
+                if(transform.position.y > 12 && !rung)
+                {
+                    rb.velocity = -(transform.up * moveSpeed);
+                }
+                else if (!ringed)
+                {
+                    rb.velocity = Vector2.zero;
+                    ringed = true;
+                    StartCoroutine("RingFire");
+                }
+                if (rung)
+                {
+                    rb.velocity = transform.up * moveSpeed;
+                }
+                break;
+
+            case 25:
+                moveSpeed = 25;
+                rb.velocity = transform.up * moveSpeed;
+                break;
+
+            case 26:
+                rb.velocity = transform.up * moveSpeed;
+                break;
+
+            case 27:
+                if (transform.position.x > 5)
+                {
+                    rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                }
+                else if (!boom)
+                {
+                    boom = true;
+                    rb.velocity = Vector2.zero;
+                    StartCoroutine("Skull");
+                }
+                break;
+
+            case 28:
+                if (transform.position.y < -25)
+                {
+                    rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                }
+                else if (!boom)
+                {
+                    boom = true;
+                    rb.velocity = Vector2.zero;
+                    StartCoroutine("Skull");
+                }
+                break;
+
+            case 29:
+                if (transform.position.x < -45)
+                {
+                    rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                }
+                else if (!boom)
+                {
+                    boom = true;
+                    rb.velocity = Vector2.zero;
+                    StartCoroutine("Skull");
+                }
+                break;
+
+            case 30:
+                if (transform.position.y > 25)
+                {
+                    rb.velocity = -((initialPosition - playerPos).normalized * moveSpeed);
+                }
+                else if (!boom)
+                {
+                    boom = true;
+                    rb.velocity = Vector2.zero;
+                    StartCoroutine("Skull");
+                }
                 break;
         }
     }
@@ -338,11 +526,35 @@ public class EnemyController : MonoBehaviour
         direction = "down";
     }
 
+    private IEnumerator Skull()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[5];
+        gameObject.GetComponent<BulletSourceScript>().Initialize();
+        yield return new WaitForSeconds(0.1f);
+        gameObject.SetActive(false);
+    }
+
+    private IEnumerator RingFire()
+    {
+        gameObject.GetComponent<BulletSourceScript>().xmlFile = bulletmlScripts[6];
+        gameObject.GetComponent<BulletSourceScript>().Initialize();
+        yield return new WaitForSeconds(1);
+        rung = true;
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerShot"))
         {
             TakeDamage(collision.gameObject.GetComponent<ShotController>().damage);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("HomingShot"))
+        {
+            TakeDamage(collision.gameObject.GetComponent<HomingShotController>().damage);
             Destroy(collision.gameObject);
         }
 
@@ -358,6 +570,28 @@ public class EnemyController : MonoBehaviour
             TakeDamage(collision.gameObject.GetComponent<LetterController>().damage);
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("Player") && !collision.GetComponent<PlayerHealth>().shield && collision == playerCol)
+        {
+            print(collision.gameObject.name);
+            collision.GetComponent<PlayerHealth>().Die();
+        }
+        else if (collision.gameObject.CompareTag("Player") && collision.GetComponent<PlayerHealth>().shield && collision == playerCol)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("laser"))
+        {
+            if(laserDamageCool <= 0)
+            {
+                TakeDamage(0.25f);
+                laserDamageCool = 0.01f;
+            }
+        }
     }
 
     //private IEnumerator TurnUp()
@@ -367,104 +601,225 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        GameObject col;
+        if (!flashing && type != 7 && type != 8)
+        {
+            StartCoroutine("Flash");
+        }
 
         health -= damage;
 
         if(health <= 0)
         {
+            GameObject p = Instantiate(yParticles, transform.position, Quaternion.identity);
 
-            if(type == 1 || type == 2 || type == 4)
+            Destroy(p, 1f);
+
+            if(GameController.Level != 3)
             {
-                int pickup = Mathf.FloorToInt(Random.Range(0, 20));
-
-                switch (pickup)
+                if (type == 1 || type == 2 || type == 4 || type == 6 || type == 7 || type == 8)
                 {
-                    case 0:
-                        break;
+                    int pickup = Mathf.FloorToInt(Random.Range(0, 20));
 
-                    case 1:
-                        break;
+                    switch (pickup)
+                    {
+                        case 0:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 2:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 1:
+                            Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 3:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 2:
+                            Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 4:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 3:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 5:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 4:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 6:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 5:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 7:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 6:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 8:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 7:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 9:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 8:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 10:
-                        Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 9:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 11:
-                        break;
+                        case 10:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
 
-                    case 12:
-                        break;
+                        case 11:
+                            break;
 
-                    case 13:
-                        break;
+                        case 12:
+                            break;
 
-                    case 14:
-                        break;
+                        case 13:
+                            break;
 
-                    case 15:
-                        break;
+                        case 14:
+                            break;
 
-                    case 16:
-                        break;
+                        case 15:
+                            break;
 
-                    case 17:
-                        break;
+                        case 16:
+                            break;
 
-                    case 18:
-                        break;
+                        case 17:
+                            break;
 
-                    case 19:
-                        Instantiate(slowCollectible, transform.position, Quaternion.identity);
-                        break;
+                        case 18:
+                            break;
+
+                        case 19:
+                            break;
+                    }
+                }
+
+                if (type == 3 || type == 5 || type == 9)
+                {
+                    Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                }
+            }
+            else
+            {
+                if (type == 1 || type == 2 || type == 4 || type == 6 || type == 7 || type == 8)
+                {
+                    int pickup = Mathf.FloorToInt(Random.Range(0, 20));
+
+                    switch (pickup)
+                    {
+                        case 0:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 1:
+                            Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 2:
+                            Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 3:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 4:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 5:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 6:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 7:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 8:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 9:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 10:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 11:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 12:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 13:
+                            Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                            break;
+
+                        case 14:
+                            break;
+
+                        case 15:
+                            break;
+
+                        case 16:
+                            break;
+
+                        case 17:
+                            break;
+
+                        case 18:
+                            break;
+
+                        case 19:
+                            break;
+                    }
+                }
+
+                if (type == 3 || type == 5 || type == 9)
+                {
+                    Instantiate(healthCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
+                    Instantiate(keycapCollectible, transform.position, Quaternion.identity);
                 }
             }
 
-            if (type == 3)
-            {
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(keycapCollectible, transform.position, Quaternion.identity);
-                Instantiate(slowCollectible, transform.position, Quaternion.identity);
-            }
             sfx.PlayOneShot(death, 0.5f);
             Destroy(gameObject);
         }
+    }
+
+    public IEnumerator Flash()
+    {
+        flashing = true;
+        transform.Find("Flash").gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        transform.Find("Flash").gameObject.SetActive(false);
+        flashing = false;
     }
 }

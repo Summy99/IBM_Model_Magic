@@ -10,6 +10,10 @@ TagManager:
   - Letter
   - Canvas
   - PlayerShotBig
+  - Collectible
+  - Meme
+  - HomingShot
+  - laser
   layers:
   - Default
   - TransparentFX
