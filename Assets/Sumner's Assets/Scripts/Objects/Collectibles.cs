@@ -12,16 +12,41 @@ public class Collectibles : MonoBehaviour
     private AudioClip healthDrop;
     [SerializeField]
     private AudioClip[] types;
+    [SerializeField]
+    private Sprite[] shards;
+
+    private PolygonCollider2D[] cols;
 
     public string type = "slow";
 
     private float speed = 1f;
+    private int shard = 0;
     private bool moving = false;
     public bool activated = false;
 
     void Start()
     {
         activated = false;
+
+        if(type == "heal")
+        {
+            cols = gameObject.GetComponents<PolygonCollider2D>();
+
+            shard = Mathf.FloorToInt(Random.Range(0, shards.Length));
+            gameObject.GetComponent<SpriteRenderer>().sprite = shards[shard];
+
+            for(int i = 0; i < cols.Length; i++)
+            {
+                if(i == shard)
+                {
+                    cols[i].enabled = true;
+                }
+                else
+                {
+                    cols[i].enabled = false;
+                }
+            }
+        }
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
 
