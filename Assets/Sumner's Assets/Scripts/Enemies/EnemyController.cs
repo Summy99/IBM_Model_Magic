@@ -578,7 +578,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player") && collision.GetComponent<PlayerHealth>().shield && collision == playerCol)
         {
-            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 
