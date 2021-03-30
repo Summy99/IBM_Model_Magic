@@ -15,6 +15,8 @@ public class Collectibles : MonoBehaviour
 
     public string type = "slow";
 
+    private float speed = 1f;
+    private bool moving = false;
     public bool activated = false;
 
     void Start()
@@ -51,7 +53,14 @@ public class Collectibles : MonoBehaviour
         if (activated)
         {
             rb.gravityScale = 0;
-            rb.AddForce((player.transform.position - transform.position).normalized * 500);
+
+            if (!moving)
+            {
+                speed = rb.velocity.magnitude * 3;
+                StartCoroutine("Realign");
+            }
+
+            speed *= 1 + (Time.deltaTime * 2);
         }
 
         if(Vector2.Distance(transform.position, player.transform.position) <= 10)
@@ -59,9 +68,20 @@ public class Collectibles : MonoBehaviour
             activated = true;
         }
 
-        if(transform.position.y < -50)
+        if(transform.position.y < -50 && !activated)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator Realign()
+    {
+        moving = true;
+        while (true)
+        {
+            rb.velocity = Vector2.zero;
+            rb.velocity = (player.transform.position - transform.position).normalized * speed;
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
