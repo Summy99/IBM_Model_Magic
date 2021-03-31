@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class PoopBoss : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private AnimationManager anim;
     private GameObject[] topSpawns;
     private Image healthBar;
 
@@ -21,6 +22,11 @@ public class PoopBoss : MonoBehaviour
 
     [SerializeField]
     private TextAsset pattern;
+
+    public Animation[] animations;
+    public string[] names;
+
+    [SerializeField] Sprite[] enterFrames, idleFrames, yellFrames, deathFrames;
 
     private bool activated = false;
     private bool positioned = false;

@@ -98,11 +98,11 @@ GameObject:
   m_Component:
   - component: {fileID: 339316896376044847}
   - component: {fileID: 339316896376044840}
-  - component: {fileID: 339316896376044846}
   - component: {fileID: 339316896376044844}
   - component: {fileID: 339316896376044845}
   - component: {fileID: 339316896376044835}
   - component: {fileID: 339316896376044834}
+  - component: {fileID: 2457728497458094192}
   m_Layer: 0
   m_Name: FirstBoss
   m_TagString: Enemy
@@ -168,7 +168,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b745be583c194794d874234516a43c4f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 98ef2a7fa7c529d448251d251e7dc46a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -179,25 +179,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &339316896376044846
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 339316896376044841}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0eac8f1ca33c5524d9fe9992a4abcebf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &339316896376044844
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -211,18 +192,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.6036892, y: -3.019516}
+  m_Offset: {x: 0.6036892, y: -1.6153412}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 33.28, y: 33.28}
+    oldSize: {x: 25.6, y: 25.6}
     newSize: {x: 8.32, y: 8.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 13.237524, y: 20.960358}
+  m_Size: {x: 13.237524, y: 20.25827}
   m_EdgeRadius: 0
 --- !u!50 &339316896376044845
 Rigidbody2D:
@@ -274,8 +255,45 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 5729fdac79d745c48adfe4ecddf9cc23, type: 3}
   - {fileID: 4900000, guid: 28892f8710709bb48a5196ffa6a1ffab, type: 3}
   hit: {fileID: 8300000, guid: 62d5980ce094ea041ae12ae09d64bb01, type: 3}
+  names: []
+  enterFrames:
+  - {fileID: 21300000, guid: 160d9391d071fb14eb74633e08a09d85, type: 3}
+  - {fileID: 21300000, guid: 21e65a716e11b8447bc6f115bdb154b5, type: 3}
+  walkLeftFrames:
+  - {fileID: 21300000, guid: 3b0be8e79df8dfb42ad57f7a41de5bea, type: 3}
+  - {fileID: 21300000, guid: e1b1e3a6716e4934f934d77c98e2ddb3, type: 3}
+  walkRightFrames:
+  - {fileID: 21300000, guid: 93bca4641ffa7eb40a1848de5f583b2e, type: 3}
+  - {fileID: 21300000, guid: c51b6035bf98fec45b23f2aba585de71, type: 3}
+  cryFrames:
+  - {fileID: 21300000, guid: 98ef2a7fa7c529d448251d251e7dc46a, type: 3}
+  - {fileID: 21300000, guid: 8f0bc7abd9f4c1f44a998ec0ef79119f, type: 3}
+  - {fileID: 21300000, guid: 057193152a0748543bf6eb6f5f66ace8, type: 3}
+  mojyaFrames:
+  - {fileID: 21300000, guid: 5e240650e61a23e468bcea3f0600b00b, type: 3}
+  - {fileID: 21300000, guid: 782965bb490cf10428b2abe575e6fede, type: 3}
+  deathFrames:
+  - {fileID: 21300000, guid: 98ef2a7fa7c529d448251d251e7dc46a, type: 3}
+  - {fileID: 21300000, guid: 8f0bc7abd9f4c1f44a998ec0ef79119f, type: 3}
+  - {fileID: 21300000, guid: 057193152a0748543bf6eb6f5f66ace8, type: 3}
+  - {fileID: 21300000, guid: 11ac66c5aeea6484886b5026469e97be, type: 3}
+  - {fileID: 21300000, guid: 68278c38377ea6346b911bd21471b514, type: 3}
   attack: 0
   health: 0
+--- !u!114 &2457728497458094192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339316896376044841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75858c33d00a2d543b1a9fa8bae2c1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAnimating: 0
+  spriteR: {fileID: 339316896376044840}
 --- !u!1 &7277184803116807047
 GameObject:
   m_ObjectHideFlags: 0
