@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Pixelnest.BulletML;
+using TMPro;
 
 public class Typing : MonoBehaviour
 {
@@ -21,7 +22,10 @@ public class Typing : MonoBehaviour
     private AudioClip badAppleEarrape;
 
     [SerializeField]
-    private GameObject letterPrefab, explosionPrefab, homingShot;
+    private GameObject letterPrefab, explosionPrefab, homingShot, newWordMessage;
+
+    [SerializeField]
+    private ParticleSystem confetti;
 
     [SerializeField]
     private GameObject mema;
@@ -61,7 +65,7 @@ public class Typing : MonoBehaviour
             
             if(GameController.Level != 1)
             {
-                UnlockWord(wordToBeUnlocked);
+                UnlockWord(wordToBeUnlocked, false);
             }
         }
 
@@ -118,7 +122,7 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if(slowDown < maxSlowDown && mode == "shooting" && !gc.paused)
+        if(slowDown < maxSlowDown && mode == "shooting" && !gc.paused && !gc.dead)
         {
             slowDown += Time.deltaTime * slowRecoveryRate * maxSlowDown;
         }
@@ -136,22 +140,22 @@ public class Typing : MonoBehaviour
             ConfirmWord();
         }
 
-        if (mode == "typing" && !gc.paused)
+        if (mode == "typing" && !gc.paused && !gc.dead)
         {
             Time.timeScale = 0.2f;
         }
 
-        if (mode == "shooting" && !gc.paused)
+        if (mode == "shooting" && !gc.paused && !gc.dead)
         {
             Time.timeScale = 1f;
         }
 
-        if (mode == "typing" && slowDown > 0 && !gc.paused)
+        if (mode == "typing" && slowDown > 0 && !gc.paused && !gc.dead)
         {
             slowDown -= Time.unscaledDeltaTime;
         }
 
-        if(curShootCooldown > 0 && !gc.paused)
+        if(curShootCooldown > 0 && !gc.paused && !gc.dead)
         {
             curShootCooldown -= Time.deltaTime;
         }
@@ -159,7 +163,7 @@ public class Typing : MonoBehaviour
 
     private void ShootingInput()
     {
-        if(mode == "typing")
+        if(mode == "typing" && !gc.dead)
         {
             if (Input.GetKeyDown(KeyCode.Backspace) && word.Length >= 1)
             {
@@ -438,7 +442,7 @@ public class Typing : MonoBehaviour
 
             if(word == wordToBeUnlocked)
             {
-                UnlockWord(word);
+                UnlockWord(word, true);
             }
             else if(word != "MIMA" && word != "TOUHOU")
             {
@@ -577,14 +581,30 @@ public class Typing : MonoBehaviour
         word = "";
     }
 
-    public void UnlockWord(string uWord)
+    public void UnlockWord(string uWord, bool doMessage)
     {
         sfx.PlayOneShot(wordUnlocked);
+
+        if (doMessage)
+        {
+            StartCoroutine("NewWordAlert", uWord);
+        }
 
         GameController.Words[GetWordIndex(uWord)].Unlocked = true;
         ui.AddWord(uWord);
 
         PickNewWord();
+    }
+
+    private IEnumerator NewWordAlert(string word)
+    {
+        confetti.Play();
+        newWordMessage.SetActive(true);
+        newWordMessage.transform.Find("New Word").GetComponent<TextMeshProUGUI>().text = word;
+        yield return new WaitForSeconds(2);
+        newWordMessage.SetActive(false);
+        yield return new WaitForSeconds(1);
+        confetti.Stop();
     }
 
     public void PickNewWord()

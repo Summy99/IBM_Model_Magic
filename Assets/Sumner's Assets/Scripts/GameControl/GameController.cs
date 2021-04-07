@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour
     public bool paused = false;
     private bool tutorialIncrementing = false;
     private bool enemySpawned = false;
+    public bool dead = false;
+    private bool starterWord = true;
     public int tutorialStage = 0;
     public static int keycaps = 0;
 
@@ -29,10 +31,10 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI message;
     [SerializeField] private TextMeshProUGUI tutorialMsg;
     [SerializeField] private Transform spawn;
-    [SerializeField] private GameObject pauseMenu, settingsMenu;
+    [SerializeField] private GameObject pauseMenu, settingsMenu, gameOver;
     [SerializeField] private GameObject meme;
     [SerializeField] private GameObject tutorialEnemy, trackball, prompt, skipButton, arrow, arrow2;
-    [SerializeField] private AudioClip mainTheme;
+    [SerializeField] private AudioClip mainTheme, death;
     [SerializeField] private Slider master, music, sfx;
 
     public static List<Word> Words = new List<Word>() {
@@ -280,10 +282,10 @@ public class GameController : MonoBehaviour
                 tutorial = false;
                 Typing.maxSlowDown = 2.25f;
                 player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
-                player.GetComponent<Typing>().UnlockWord(player.GetComponent<Typing>().wordToBeUnlocked);
                 trackball.SetActive(false);
                 prompt.SetActive(false);
                 skipButton.SetActive(false);
+                starterWord = false;
             }
         }
 
@@ -312,7 +314,13 @@ public class GameController : MonoBehaviour
 
         if (lives > 6)
         {
-                lives = 6;
+            lives = 6;
+        }
+
+        if (!starterWord && Level == 1 && player.GetComponent<Typing>().wordToBeUnlocked != "")
+        {
+            player.GetComponent<Typing>().UnlockWord(player.GetComponent<Typing>().wordToBeUnlocked, false);
+            starterWord = true;
         }
 
         if(tutorial)
@@ -322,7 +330,12 @@ public class GameController : MonoBehaviour
 
         ManageCooldowns();
 
-        if (Input.GetKeyDown(KeyCode.Escape) && player.GetComponent<Typing>().mode == "shooting")
+        if(Input.GetKeyDown(KeyCode.Return) && dead)
+        {
+            Restart();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && player.GetComponent<Typing>().mode == "shooting" && !dead)
         {
             if (paused)
             {
@@ -526,6 +539,10 @@ public class GameController : MonoBehaviour
     public void Quit()
     {
         Level = 1;
+        lives = 6;
+        keycaps = 0;
+        RemoveWords();
+        UI.started = false;
         LevelTracker.LevelToLoad = 0;
         SceneManager.LoadScene(4);
     }
@@ -569,7 +586,7 @@ public class GameController : MonoBehaviour
 
     public void SkipTutorial()
     {
-        player.GetComponent<Typing>().UnlockWord(player.GetComponent<Typing>().wordToBeUnlocked);
+        player.GetComponent<Typing>().UnlockWord(player.GetComponent<Typing>().wordToBeUnlocked, false);
         tutorialStage = 11;
         skipButton.SetActive(false);
     }
@@ -582,6 +599,18 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        dead = true;
+        Destroy(player);
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Stop();
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().PlayOneShot(death);
+        gameOver.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        RemoveWords();
+        dead = false;
+        gameOver.SetActive(false);
         lives = 6;
         keycaps = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

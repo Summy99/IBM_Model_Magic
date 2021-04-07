@@ -12,6 +12,9 @@ public class PlayerHealth : MonoBehaviour
     private AudioClip death, healed;
 
     [SerializeField]
+    private GameObject keycap;
+
+    [SerializeField]
     private AudioClip[] types;
 
     public bool shield = false;
@@ -72,7 +75,23 @@ public class PlayerHealth : MonoBehaviour
     {
         GameController.lives--;
 
+        int lp = gameObject.GetComponent<Typing>().letterProgress;
+
+        for (int i = 0; i < lp; i++)
+        {
+            gameObject.GetComponent<Typing>().letterProgress--;
+            Instantiate(keycap, transform.position, Quaternion.identity);
+        }
+
         sfx.PlayOneShot(death);
+
+        GameObject.FindGameObjectWithTag("Canvas").transform.Find("Margins").GetComponent<ScreenShake>().StartCoroutine("Shake", 0.5);
+
+        GameObject[] collectibles = GameObject.FindGameObjectsWithTag("Collectible");
+        foreach (GameObject c in collectibles)
+        {
+            c.GetComponent<Collectibles>().activated = false;
+        }
 
         bml.xmlFile = gameObject.GetComponent<Typing>().patterns[0];
         gameObject.GetComponent<Typing>().StopCoroutine("HomingShot");

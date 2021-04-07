@@ -26,12 +26,13 @@ public class PoopBoss : MonoBehaviour
     public Animation[] animations;
     public string[] names;
 
-    [SerializeField] Sprite[] enterFrames, idleFrames, yellFrames, deathFrames;
+    [SerializeField] Sprite[] idleSmallFrames, enterFrames, idleFrames, yellFrames, deathFrames;
 
     private bool activated = false;
     private bool positioned = false;
     private bool switching = false;
     private bool flashing = false;
+    private bool animStarted = false;
     private string direction = "right";
     public float moveSpeed = 10f;
     private float laserDamageCool;
@@ -41,11 +42,52 @@ public class PoopBoss : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         bml = gameObject.GetComponent<BulletSourceScript>();
+        anim = gameObject.GetComponent<AnimationManager>();
         healthBar = gameObject.transform.Find("Canvas").Find("HealthBar").GetComponent<Image>();
         plyrsrc = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
         spawnerHolder = GameObject.Find("SpawnPoints");
 
         topSpawns = GetAllChildren(spawnerHolder.transform.Find("Top"));
+
+        animations = new Animation[]
+{
+            new Animation()
+            {
+                Frames = idleSmallFrames,
+                Speed = 0.2f,
+                Looping = true
+            },
+            new Animation()
+            {
+                Frames = enterFrames,
+                Speed = 0.2f,
+                Looping = false
+            },
+            new Animation()
+            {
+                Frames = idleFrames,
+                Speed = 0.2f,
+                Looping = true
+            },
+            new Animation()
+            {
+                Frames = yellFrames,
+                Speed = 0.2f,
+                Looping = true
+            },
+            new Animation()
+            {
+                Frames = deathFrames,
+                Speed = 0.2f,
+                Looping = false
+            }
+};
+
+        names = new string[] { "idleSmall", "enter", "idle", "yell", "death" };
+
+        anim.PopulateDictionary(names, animations);
+
+        anim.PlayAnimation("idleSmall");
     }
 
     void Update()
@@ -75,7 +117,7 @@ public class PoopBoss : MonoBehaviour
                 positioned = true;
             }
         }
-        else
+        else if (activated)
         {
             switch (direction)
             {
@@ -111,14 +153,21 @@ public class PoopBoss : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!activated && positioned && health < 400)
+        if (!activated && positioned && health < 1000)
         {
             health += 5;
+            
+            if (!animStarted)
+            {
+                anim.PlayAnimation("enter");
+                animStarted = true;
+            }
         }
 
-        if (!activated && positioned && health >= 400)
+        if (!activated && positioned && health >= 1000)
         {
             health = 400;
+            anim.PlayAnimation("idle");
             activated = true;
             bml.xmlFile = pattern;
         }
@@ -185,14 +234,16 @@ public class PoopBoss : MonoBehaviour
                 Destroy(b);
             }
 
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
             StartCoroutine("Die");
         }
     }
 
     private IEnumerator Die()
     {
+        direction = "stop";
         yield return new WaitForSeconds(1);
+        anim.PlayAnimation("death");
+        yield return new WaitForSeconds(3);
         GameController.Level = 3;
         LevelTracker.LevelToLoad = 3;
         SceneManager.LoadScene(4);
@@ -201,6 +252,8 @@ public class PoopBoss : MonoBehaviour
     private IEnumerator SwitchAttacks()
     {
         switching = true;
+
+        anim.PlayAnimation("yell");
 
         direction = "stop";
 
@@ -214,6 +267,7 @@ public class PoopBoss : MonoBehaviour
 
         bml.Initialize();
         direction = "right";
+        anim.PlayAnimation("idle");
         switching = false;
     }
 

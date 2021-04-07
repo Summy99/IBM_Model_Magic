@@ -19,7 +19,7 @@ public class FirstBoss : MonoBehaviour
     private TextAsset[] patterns;
 
     [SerializeField]
-    private AudioClip hit;
+    private AudioClip hit, death;
 
     public Animation[] animations;
     public string[] names;
@@ -226,17 +226,19 @@ public class FirstBoss : MonoBehaviour
                 Destroy(b);
             }
 
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Stop();
             anim.PlayAnimation("cry");
             bml.enabled = false;
+            plyrsrc.PlayOneShot(death, 0.5f);
             StartCoroutine("Die");
         }
     }
 
     private IEnumerator Die()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         anim.PlayAnimation("death");
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3f);
         GameController.Level = 2;
         LevelTracker.LevelToLoad = 2;
         SceneManager.LoadScene(4);

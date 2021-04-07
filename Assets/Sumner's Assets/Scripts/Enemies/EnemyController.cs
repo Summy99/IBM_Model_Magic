@@ -49,6 +49,11 @@ public class EnemyController : MonoBehaviour
     {
         playerCol = GameObject.FindGameObjectWithTag("Player").GetComponent<CircleCollider2D>();
 
+        if (GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().dead)
+        {
+            gameObject.SetActive(false);
+        }
+
         shooting = Mathf.FloorToInt(Random.Range(0, 2));
         initialPosition = transform.position;
 
@@ -573,7 +578,7 @@ public class EnemyController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player") && !collision.GetComponent<PlayerHealth>().shield && collision == playerCol)
         {
-            print(collision.gameObject.name);
+            collision.GetComponent<CircleCollider2D>().enabled = false;
             collision.GetComponent<PlayerHealth>().Die();
         }
         else if (collision.gameObject.CompareTag("Player") && collision.GetComponent<PlayerHealth>().shield && collision == playerCol)

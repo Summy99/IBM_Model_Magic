@@ -407,11 +407,14 @@ MonoBehaviour:
   bomb: {fileID: 8300000, guid: 6fc46ce066dd5c549ac34461bb1a53eb, type: 3}
   bigBomb: {fileID: 8300000, guid: 6c09bb8241dc7a44e8de72a4b1d86ae0, type: 3}
   wordUnlocked: {fileID: 8300000, guid: 89f81dba9081fca458368333aee25e74, type: 3}
-  laser: {fileID: 0}
+  laser: {fileID: 8300000, guid: e3eebf6e36661414883389c40302276c, type: 3}
+  wordOnCD: {fileID: 8300000, guid: fd0ce3a0b1d6d4647a38b90a5148c336, type: 3}
+  wordReady: {fileID: 8300000, guid: 3e65b65ff1bb0594fb0aeb6bc0f1dfe9, type: 3}
   badAppleEarrape: {fileID: 8300000, guid: 814fb8e5d2ab5b344b3d10c2157231cd, type: 3}
   letterPrefab: {fileID: 7320721367101697214, guid: 9c38c69c845a3bf458d13eec4404e755, type: 3}
   explosionPrefab: {fileID: 1917196599572790266, guid: e1c16e244342db24d9a931e4a9e6f860, type: 3}
   homingShot: {fileID: 8843435949093901512, guid: f88600cecac1c71458467341ecb654a2, type: 3}
+  newWordMessage: {fileID: 0}
   mema: {fileID: 0}
   letterSprites:
   - {fileID: 21300000, guid: 627ea1799212a6c4080de7429d26b782, type: 3}
@@ -559,9 +562,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   death: {fileID: 8300000, guid: 6091a76955a60c74e85e6d4137eaf453, type: 3}
+  healed: {fileID: 8300000, guid: c7a23b50338072e4db06395471f493e1, type: 3}
+  keycap: {fileID: 6826599825272669511, guid: 8d0cbadd924bf1f4aa572378f3922316, type: 3}
   types: []
   shield: 0
   heal: 0
+  colliderPlayer: {fileID: 275078878607382363}
 --- !u!114 &6129938679178597477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -606,11 +612,11 @@ GameObject:
   - component: {fileID: 883582026}
   m_Layer: 0
   m_Name: laser
-  m_TagString: Untagged
+  m_TagString: laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3029585691742268506
 Transform:
   m_ObjectHideFlags: 0

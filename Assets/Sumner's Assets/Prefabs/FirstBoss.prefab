@@ -255,6 +255,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 5729fdac79d745c48adfe4ecddf9cc23, type: 3}
   - {fileID: 4900000, guid: 28892f8710709bb48a5196ffa6a1ffab, type: 3}
   hit: {fileID: 8300000, guid: 62d5980ce094ea041ae12ae09d64bb01, type: 3}
+  death: {fileID: 8300000, guid: b4574d33f37a45a4285302ef4dd3fab0, type: 3}
   names: []
   enterFrames:
   - {fileID: 21300000, guid: 160d9391d071fb14eb74633e08a09d85, type: 3}

@@ -16,7 +16,12 @@ public class BackgroundScroll : MonoBehaviour
 
     private void Update()
     {
-        if(background1.transform.position.y <= -140)
+        if (gameObject.GetComponent<GameController>().dead)
+        {
+            this.enabled = false;
+        }
+
+        if (background1.transform.position.y <= -140)
         {
             background1.transform.position = new Vector2(background1.transform.position.x, 224f);
         }

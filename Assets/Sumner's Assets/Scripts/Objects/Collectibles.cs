@@ -79,6 +79,8 @@ public class Collectibles : MonoBehaviour
         {
             rb.gravityScale = 0;
 
+            rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.y, -50, 50), Mathf.Clamp(rb.velocity.y, -50, 50));
+
             if (!moving)
             {
                 speed = rb.velocity.magnitude * 3;
@@ -88,7 +90,7 @@ public class Collectibles : MonoBehaviour
             speed *= 1 + (Time.deltaTime * 2);
         }
 
-        if(Vector2.Distance(transform.position, player.transform.position) <= 10)
+        if(Vector2.Distance(transform.position, player.transform.position) <= 10 && !activated && player.GetComponent<Typing>().enabled)
         {
             activated = true;
         }
