@@ -222,7 +222,11 @@ public class GameController : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        if(Level == 1)
+        master.value = MenuScript.MasterVolume;
+        sfx.value = MenuScript.SFXVolume;
+        music.value = MenuScript.MusicVolume;
+
+        if (Level == 1)
         {
             if (!UI.started)
             {

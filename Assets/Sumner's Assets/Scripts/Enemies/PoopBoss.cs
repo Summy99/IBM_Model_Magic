@@ -18,7 +18,7 @@ public class PoopBoss : MonoBehaviour
     private AudioSource plyrsrc;
 
     [SerializeField]
-    private AudioClip hit;
+    private AudioClip hit, roar, death;
 
     [SerializeField]
     private TextAsset pattern;
@@ -160,6 +160,7 @@ public class PoopBoss : MonoBehaviour
             if (!animStarted)
             {
                 anim.PlayAnimation("enter");
+                StartCoroutine("Roar");
                 animStarted = true;
             }
         }
@@ -213,6 +214,12 @@ public class PoopBoss : MonoBehaviour
         }
     }
 
+    private IEnumerator Roar()
+    {
+        yield return new WaitForSeconds(1f);
+        plyrsrc.PlayOneShot(roar);
+    }
+
     private void TakeDamage(float damage)
     {
         if (!flashing)
@@ -234,6 +241,8 @@ public class PoopBoss : MonoBehaviour
                 Destroy(b);
             }
 
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Stop();
+            plyrsrc.PlayOneShot(death, 0.5f);
             StartCoroutine("Die");
         }
     }
@@ -241,7 +250,7 @@ public class PoopBoss : MonoBehaviour
     private IEnumerator Die()
     {
         direction = "stop";
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         anim.PlayAnimation("death");
         yield return new WaitForSeconds(3);
         GameController.Level = 3;
@@ -253,6 +262,7 @@ public class PoopBoss : MonoBehaviour
     {
         switching = true;
 
+        plyrsrc.PlayOneShot(roar);
         anim.PlayAnimation("yell");
 
         direction = "stop";

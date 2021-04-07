@@ -19,7 +19,7 @@ public class FirstBoss : MonoBehaviour
     private TextAsset[] patterns;
 
     [SerializeField]
-    private AudioClip hit, death;
+    private AudioClip hit, laugh, shoot, death;
 
     public Animation[] animations;
     public string[] names;
@@ -269,12 +269,14 @@ public class FirstBoss : MonoBehaviour
                 {
                     bmll.xmlFile = patterns[1];
                     anim.PlayAnimation("cry");
+                    plyrsrc.PlayOneShot(laugh);
                     bmll.Initialize();
                 }
                 else
                 {
                     bmlr.xmlFile = patterns[1];
                     anim.PlayAnimation("cry");
+                    plyrsrc.PlayOneShot(laugh);
                     bmlr.Initialize();
                 }
                 break;
@@ -282,6 +284,7 @@ public class FirstBoss : MonoBehaviour
             case 2:
                 bml.xmlFile = patterns[0];
                 anim.PlayAnimation("cry");
+                plyrsrc.PlayOneShot(shoot);
                 bml.Initialize();
                 break;
         }

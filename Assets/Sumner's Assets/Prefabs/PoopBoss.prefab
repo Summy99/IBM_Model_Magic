@@ -319,6 +319,8 @@ MonoBehaviour:
   spawnerHolder: {fileID: 0}
   poopWallPrefab: {fileID: 7080973595436472705, guid: a667ae22a1a01d9459ead6250320a89f, type: 3}
   hit: {fileID: 8300000, guid: 62d5980ce094ea041ae12ae09d64bb01, type: 3}
+  roar: {fileID: 8300000, guid: ea6d71b61cd233640936f9a578f84ba1, type: 3}
+  death: {fileID: 8300000, guid: b4574d33f37a45a4285302ef4dd3fab0, type: 3}
   pattern: {fileID: 4900000, guid: 5f36b30d613aa4743a4b4751d203c470, type: 3}
   names: []
   idleSmallFrames:
