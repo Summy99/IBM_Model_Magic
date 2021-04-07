@@ -239,6 +239,7 @@ public class FirstBoss : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         anim.PlayAnimation("death");
         yield return new WaitForSeconds(3f);
+
         GameController.Level = 2;
         LevelTracker.LevelToLoad = 2;
         SceneManager.LoadScene(4);

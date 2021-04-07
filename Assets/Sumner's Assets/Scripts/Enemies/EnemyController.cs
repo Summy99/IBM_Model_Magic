@@ -62,7 +62,7 @@ public class EnemyController : MonoBehaviour
         sfx = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
 
-        if(type == 6 || type == 7)
+        if(type == 6 || type == 7 || type == 10)
         {
             playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
         }
