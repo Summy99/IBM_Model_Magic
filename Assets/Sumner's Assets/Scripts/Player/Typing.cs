@@ -73,30 +73,6 @@ public class Typing : MonoBehaviour
         sfx.volume = 0.5f * MenuScript.MasterVolume * MenuScript.SFXVolume;
         gameObject.transform.Find("laser").GetComponent<AudioSource>().volume = 0.5f * MenuScript.MasterVolume * MenuScript.SFXVolume;
 
-        if (Input.GetKeyDown(KeyCode.Minus))
-        {
-            maxSlowDown -= 0.5f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Equals))
-        {
-            maxSlowDown += 0.5f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            slowDown += 0.1f * maxSlowDown;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach(GameObject g in enemies)
-            {
-                Destroy(g);
-            }
-        }
-
         if (gc.tutorial)
         {
             if(gc.tutorialStage == 4 && slowDown <= 0)

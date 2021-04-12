@@ -104,11 +104,6 @@ public class FirstBoss : MonoBehaviour
             laserDamageCool -= Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Home))
-        {
-            health = 2;
-        }
-
         healthBar.fillAmount = health / 600;
 
         if(!activated && !positioned && gameObject.transform.position.y > 37)

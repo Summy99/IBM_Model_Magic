@@ -99,11 +99,6 @@ public class PoopBoss : MonoBehaviour
             laserDamageCool -= Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Home))
-        {
-            health = 2;
-        }
-
         healthBar.fillAmount = health / 400;
 
         if (!activated && !positioned)
