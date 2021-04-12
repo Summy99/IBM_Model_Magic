@@ -1870,7 +1870,7 @@ MonoBehaviour:
   arrow: {fileID: 2124688110}
   arrow2: {fileID: 853221358}
   mainTheme: {fileID: 8300000, guid: 4865ae256f024de49ab13609fe5a4009, type: 3}
-  death: {fileID: 8300000, guid: 216bcddfdd18c6c4ca109ebd2fd88a38, type: 3}
+  death: {fileID: 8300000, guid: 3d4d4c77ca5bf32428e8d5ac8ae4fdc3, type: 3}
   master: {fileID: 72218215}
   music: {fileID: 2116571681}
   sfx: {fileID: 1418776235}

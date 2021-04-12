@@ -2323,7 +2323,7 @@ MonoBehaviour:
   arrow: {fileID: 0}
   arrow2: {fileID: 0}
   mainTheme: {fileID: 8300000, guid: 4865ae256f024de49ab13609fe5a4009, type: 3}
-  death: {fileID: 8300000, guid: 216bcddfdd18c6c4ca109ebd2fd88a38, type: 3}
+  death: {fileID: 8300000, guid: 3d4d4c77ca5bf32428e8d5ac8ae4fdc3, type: 3}
   master: {fileID: 1686278657}
   music: {fileID: 2145363702}
   sfx: {fileID: 1292524343}

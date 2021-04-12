@@ -1249,7 +1249,7 @@ MonoBehaviour:
   arrow: {fileID: 0}
   arrow2: {fileID: 0}
   mainTheme: {fileID: 0}
-  death: {fileID: 8300000, guid: 216bcddfdd18c6c4ca109ebd2fd88a38, type: 3}
+  death: {fileID: 8300000, guid: 3d4d4c77ca5bf32428e8d5ac8ae4fdc3, type: 3}
   master: {fileID: 0}
   music: {fileID: 0}
   sfx: {fileID: 0}
