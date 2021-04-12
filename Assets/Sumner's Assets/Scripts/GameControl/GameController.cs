@@ -232,46 +232,6 @@ public class GameController : MonoBehaviour
             {
                 UI.started = true;
 
-                /* obsolete code
-                words.Add(new Word()
-                {
-                    Name = "BOMB",
-                    Unlocked = false,
-                    CurCool = 0f,
-                    MaxCool = 1f
-                });
-
-                words.Add(new Word()
-                {
-                    Name = "SHIELD",
-                    Unlocked = false,
-                    CurCool = 0f,
-                    MaxCool = 1f
-                });
-                words.Add("ERASE", false);
-                words.Add("CLEAR", false);
-                words.Add("BOOM", false);
-                words.Add("AUTO", true);
-                words.Add("SHOOT", false);
-                words.Add("FIRE", false);
-                words.Add("SPREAD", false);
-                words.Add("SCATTER", true);
-                words.Add("SHOTGUN", false);
-                words.Add("BLOCK", false);
-                words.Add("RAPID", false);
-                words.Add("SPEED", false);
-                words.Add("FAST", false);
-                words.Add("OTHER", false);
-                words.Add("SOMETHING", false);
-                words.Add("RANDOM", false);
-                words.Add("ANYTHING", false);
-                words.Add("EXPLOSION", false);
-                words.Add("BIG", false);
-                words.Add("GIANT", false);
-                words.Add("GRAB", false);
-                words.Add("COLLECT", false);
-                */
-
                 tutorial = true;
                 tutorialMsg.text = "Hello! I'm Trackball the mouse, welcome to IBM Model Magic!";
                 prompt.SetActive(true);

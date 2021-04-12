@@ -200,9 +200,7 @@ public class Waves : MonoBehaviour
                 case 10:
                     if (!bossSpawned)
                     {
-                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = finalBossTheme;
-                        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Play();
-                        Instantiate(finalBossPrefab, topSpawns[10].transform.position, Quaternion.identity);
+                        Instantiate(finalBossPrefab, new Vector3(-20, 56, 0), Quaternion.identity);
                         bossSpawned = true;
                     }
                     break;

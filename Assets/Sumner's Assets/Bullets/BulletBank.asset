@@ -88,3 +88,18 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 07ac88dd91882224082674c3dc9193cc, type: 3}
     TimeToLiveInSeconds: 10
     DestroyWhenOutOfScreen: 1
+  - name: spawner
+    prefab: {fileID: 1294520606847368362, guid: 8b80b8fbb694809458447e44adc8b8ec, type: 3}
+    sprite: {fileID: 21300000, guid: aee6969f2136eda4da46b43215daab2b, type: 3}
+    TimeToLiveInSeconds: 30
+    DestroyWhenOutOfScreen: 0
+  - name: drip
+    prefab: {fileID: 1294520606847368362, guid: 96f773f49952d0d4e8729600eefd2c6d, type: 3}
+    sprite: {fileID: 21300000, guid: 635bc04b574b5014a8dee8d4d6f12e96, type: 3}
+    TimeToLiveInSeconds: 10
+    DestroyWhenOutOfScreen: 0
+  - name: rod
+    prefab: {fileID: 1294520606847368362, guid: 3f432fb5aaa91734694b684ad19c877d, type: 3}
+    sprite: {fileID: 21300000, guid: 635bc04b574b5014a8dee8d4d6f12e96, type: 3}
+    TimeToLiveInSeconds: 30
+    DestroyWhenOutOfScreen: 0

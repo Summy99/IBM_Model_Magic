@@ -40,6 +40,7 @@ public class Typing : MonoBehaviour
     private float curShootCooldown = 0;
     public float slowRecoveryRate = 0.1f;
     private bool patternRunning = false;
+    public bool finalBossAttacking = false;
 
     public string mode = "shooting";
     public int letterProgress = 0;
@@ -304,277 +305,407 @@ public class Typing : MonoBehaviour
 
     private void ConfirmWord()
     {
-        int wordIndex = GetWordIndex(word);
-
-        if(gc.tutorialStage == 9 && word == wordToBeUnlocked)
+        if (!finalBossAttacking)
         {
-            gc.tutorialStage = 11;
+            int wordIndex = GetWordIndex(word);
+
+            if (gc.tutorialStage == 9 && word == wordToBeUnlocked)
+            {
+                gc.tutorialStage = 11;
+            }
+
+            if ((wordIndex != 0 && (GameController.Words[wordIndex].Unlocked || word == wordToBeUnlocked) && GameController.Words[wordIndex].CurCool <= 0) || word == "TOUHOU" || word == "MIMA")
+            {
+                sfx.PlayOneShot(wordSuccess, 0.5f);
+
+                switch (word)
+                {
+                    case "BOMB":
+                        Bomb();
+                        break;
+
+                    case "BOOM":
+                        Bomb();
+                        break;
+
+                    case "BLOCK":
+                        StartCoroutine("Shield");
+                        break;
+
+                    case "SHIELD":
+                        StartCoroutine("Shield");
+                        break;
+
+                    case "ERASE":
+                        Erase();
+                        break;
+
+                    case "CLEAR":
+                        Erase();
+                        break;
+
+                    case "AUTO":
+                        if (true)
+                        {
+                            AutoFire();
+                        }
+                        break;
+
+                    case "SHOOT":
+                        if (true)
+                        {
+                            AutoFire();
+                        }
+                        break;
+
+                    case "FIRE":
+                        if (true)
+                        {
+                            AutoFire();
+                        }
+                        break;
+
+                    case "SPREAD":
+                        if (true)
+                        {
+                            SpreadShot();
+                        }
+                        break;
+
+                    case "SHOTGUN":
+                        if (true)
+                        {
+                            SpreadShot();
+                        }
+                        break;
+
+                    case "SCATTER":
+                        if (true)
+                        {
+                            SpreadShot();
+                        }
+                        break;
+
+                    case "SOMETHING":
+                        RandomWord();
+                        break;
+
+                    case "RANDOM":
+                        RandomWord();
+                        break;
+
+                    case "EXPLOSION":
+                        ExplosionWord();
+                        break;
+
+                    case "BIG":
+                        BigShot();
+                        break;
+
+                    case "GIANT":
+                        BigShot();
+                        break;
+
+                    case "GRAB":
+                        Collect();
+                        break;
+
+                    case "COLLECT":
+                        Collect();
+                        break;
+
+                    case "HOMING":
+                        StartCoroutine("HomingShot");
+                        break;
+
+                    case "SEARCH":
+                        StartCoroutine("HomingShot");
+                        break;
+
+                    case "TRACKING":
+                        StartCoroutine("HomingShot");
+                        break;
+
+                    case "LASER":
+                        StartCoroutine("Laser");
+                        break;
+
+                    case "BEAM":
+                        StartCoroutine("Laser");
+                        break;
+
+                    case "TOUHOU":
+                        TouhouMeme();
+                        break;
+
+                    case "MIMA":
+                        Memea();
+                        break;
+                }
+
+                if (word == wordToBeUnlocked)
+                {
+                    UnlockWord(word, true);
+                }
+                else if (word != "MIMA" && word != "TOUHOU")
+                {
+                    GameController.Words[wordIndex].CurCool = GameController.Words[wordIndex].MaxCool;
+                }
+            }
+
+            else if (wordIndex == 0 || !GameController.Words[wordIndex].Unlocked || GameController.Words[wordIndex].CurCool > 0)
+            {
+                if (GameController.Words[wordIndex].CurCool > 0)
+                {
+                    sfx.PlayOneShot(wordOnCD);
+                }
+                else
+                {
+                    sfx.PlayOneShot(wordFail);
+                }
+
+                string[] letters = ToStringArray(word);
+                int[] lettersToShoot = new int[letters.Length];
+
+                for (int i = 0; i < letters.Length; i++)
+                {
+                    switch (letters[i])
+                    {
+                        case "A":
+                            lettersToShoot[i] = 0;
+                            break;
+
+                        case "B":
+                            lettersToShoot[i] = 1;
+                            break;
+
+                        case "C":
+                            lettersToShoot[i] = 2;
+                            break;
+
+                        case "D":
+                            lettersToShoot[i] = 3;
+                            break;
+
+                        case "E":
+                            lettersToShoot[i] = 4;
+                            break;
+
+                        case "F":
+                            lettersToShoot[i] = 5;
+                            break;
+
+                        case "G":
+                            lettersToShoot[i] = 6;
+                            break;
+
+                        case "H":
+                            lettersToShoot[i] = 7;
+                            break;
+
+                        case "I":
+                            lettersToShoot[i] = 8;
+                            break;
+
+                        case "J":
+                            lettersToShoot[i] = 9;
+                            break;
+
+                        case "K":
+                            lettersToShoot[i] = 10;
+                            break;
+
+                        case "L":
+                            lettersToShoot[i] = 11;
+                            break;
+
+                        case "M":
+                            lettersToShoot[i] = 12;
+                            break;
+
+                        case "N":
+                            lettersToShoot[i] = 13;
+                            break;
+
+                        case "O":
+                            lettersToShoot[i] = 14;
+                            break;
+
+                        case "P":
+                            lettersToShoot[i] = 15;
+                            break;
+
+                        case "Q":
+                            lettersToShoot[i] = 16;
+                            break;
+
+                        case "R":
+                            lettersToShoot[i] = 17;
+                            break;
+
+                        case "S":
+                            lettersToShoot[i] = 18;
+                            break;
+
+                        case "T":
+                            lettersToShoot[i] = 19;
+                            break;
+
+                        case "U":
+                            lettersToShoot[i] = 20;
+                            break;
+
+                        case "V":
+                            lettersToShoot[i] = 21;
+                            break;
+
+                        case "W":
+                            lettersToShoot[i] = 22;
+                            break;
+
+                        case "X":
+                            lettersToShoot[i] = 23;
+                            break;
+
+                        case "Y":
+                            lettersToShoot[i] = 24;
+                            break;
+
+                        case "Z":
+                            lettersToShoot[i] = 25;
+                            break;
+                    }
+                }
+
+                StartCoroutine("ShootLetters", lettersToShoot);
+            }
         }
-
-        if ((wordIndex != 0 && (GameController.Words[wordIndex].Unlocked || word == wordToBeUnlocked) && GameController.Words[wordIndex].CurCool <= 0) || word == "TOUHOU" || word == "MIMA")
+        else
         {
-            sfx.PlayOneShot(wordSuccess, 0.5f);
-
-            switch (word)
+            if(word == GameObject.FindGameObjectWithTag("FinalBoss").GetComponent<GlassesBoss>().attackWord && word != "")
             {
-                case "BOMB":
-                    Bomb();
-                    break;
-
-                case "BOOM":
-                    Bomb();
-                    break;
-
-                case "BLOCK":
-                    StartCoroutine("Shield");
-                    break;
-
-                case "SHIELD":
-                    StartCoroutine("Shield");
-                    break;
-
-                case "ERASE":
-                    Erase();
-                    break;
-
-                case "CLEAR":
-                    Erase();
-                    break;
-
-                case "AUTO":
-                    if (true)
-                    {
-                        AutoFire();
-                    }
-                    break;
-
-                case "SHOOT":
-                    if (true)
-                    {
-                        AutoFire();
-                    }
-                    break;
-
-                case "FIRE":
-                    if (true)
-                    {
-                        AutoFire();
-                    }
-                    break;
-
-                case "SPREAD":
-                    if (true)
-                    {
-                        SpreadShot();
-                    }
-                    break;
-
-                case "SHOTGUN":
-                    if (true)
-                    {
-                        SpreadShot();
-                    }
-                    break;
-
-                case "SCATTER":
-                    if (true)
-                    {
-                        SpreadShot();
-                    }
-                    break;
-
-                case "SOMETHING":
-                    RandomWord();
-                    break;
-
-                case "RANDOM":
-                    RandomWord();
-                    break;
-
-                case "EXPLOSION":
-                    ExplosionWord();
-                    break;
-
-                case "BIG":
-                    BigShot();
-                    break;
-
-                case "GIANT":
-                    BigShot();
-                    break;
-
-                case "GRAB":
-                    Collect();
-                    break;
-
-                case "COLLECT":
-                    Collect();
-                    break;
-
-                case "HOMING":
-                    StartCoroutine("HomingShot");
-                    break;
-
-                case "SEARCH":
-                    StartCoroutine("HomingShot");
-                    break;
-
-                case "TRACKING":
-                    StartCoroutine("HomingShot");
-                    break;
-
-                case "LASER":
-                    StartCoroutine("Laser");
-                    break;
-
-                case "BEAM":
-                    StartCoroutine("Laser");
-                    break;
-
-                case "TOUHOU":
-                    TouhouMeme();
-                    break;
-
-                case "MIMA":
-                    Memea();
-                    break;
-            }
-
-            if(word == wordToBeUnlocked)
-            {
-                UnlockWord(word, true);
-            }
-            else if(word != "MIMA" && word != "TOUHOU")
-            {
-                GameController.Words[wordIndex].CurCool = GameController.Words[wordIndex].MaxCool;
-            }
-        }
-
-        else if (wordIndex == 0 || !GameController.Words[wordIndex].Unlocked || GameController.Words[wordIndex].CurCool > 0)
-        {
-            if(GameController.Words[wordIndex].CurCool > 0)
-            {
-                sfx.PlayOneShot(wordOnCD);
+                GameObject.FindGameObjectWithTag("FinalBoss").GetComponent<GlassesBoss>().StartCoroutine("DamageHead");
+                sfx.PlayOneShot(wordSuccess, 0.5f);
             }
             else
             {
                 sfx.PlayOneShot(wordFail);
-            }
 
-            string[] letters = ToStringArray(word);
-            int[] lettersToShoot = new int[letters.Length];
+                string[] letters = ToStringArray(word);
+                int[] lettersToShoot = new int[letters.Length];
 
-            for (int i = 0; i < letters.Length; i++)
-            {
-                switch (letters[i])
+                for (int i = 0; i < letters.Length; i++)
                 {
-                    case "A":
-                        lettersToShoot[i] = 0;
-                        break;
+                    switch (letters[i])
+                    {
+                        case "A":
+                            lettersToShoot[i] = 0;
+                            break;
 
-                    case "B":
-                        lettersToShoot[i] = 1;
-                        break;
+                        case "B":
+                            lettersToShoot[i] = 1;
+                            break;
 
-                    case "C":
-                        lettersToShoot[i] = 2;
-                        break;
+                        case "C":
+                            lettersToShoot[i] = 2;
+                            break;
 
-                    case "D":
-                        lettersToShoot[i] = 3;
-                        break;
+                        case "D":
+                            lettersToShoot[i] = 3;
+                            break;
 
-                    case "E":
-                        lettersToShoot[i] = 4;
-                        break;
+                        case "E":
+                            lettersToShoot[i] = 4;
+                            break;
 
-                    case "F":
-                        lettersToShoot[i] = 5;
-                        break;
+                        case "F":
+                            lettersToShoot[i] = 5;
+                            break;
 
-                    case "G":
-                        lettersToShoot[i] = 6;
-                        break;
+                        case "G":
+                            lettersToShoot[i] = 6;
+                            break;
 
-                    case "H":
-                        lettersToShoot[i] = 7;
-                        break;
+                        case "H":
+                            lettersToShoot[i] = 7;
+                            break;
 
-                    case "I":
-                        lettersToShoot[i] = 8;
-                        break;
+                        case "I":
+                            lettersToShoot[i] = 8;
+                            break;
 
-                    case "J":
-                        lettersToShoot[i] = 9;
-                        break;
+                        case "J":
+                            lettersToShoot[i] = 9;
+                            break;
 
-                    case "K":
-                        lettersToShoot[i] = 10;
-                        break;
+                        case "K":
+                            lettersToShoot[i] = 10;
+                            break;
 
-                    case "L":
-                        lettersToShoot[i] = 11;
-                        break;
+                        case "L":
+                            lettersToShoot[i] = 11;
+                            break;
 
-                    case "M":
-                        lettersToShoot[i] = 12;
-                        break;
+                        case "M":
+                            lettersToShoot[i] = 12;
+                            break;
 
-                    case "N":
-                        lettersToShoot[i] = 13;
-                        break;
+                        case "N":
+                            lettersToShoot[i] = 13;
+                            break;
 
-                    case "O":
-                        lettersToShoot[i] = 14;
-                        break;
+                        case "O":
+                            lettersToShoot[i] = 14;
+                            break;
 
-                    case "P":
-                        lettersToShoot[i] = 15;
-                        break;
+                        case "P":
+                            lettersToShoot[i] = 15;
+                            break;
 
-                    case "Q":
-                        lettersToShoot[i] = 16;
-                        break;
+                        case "Q":
+                            lettersToShoot[i] = 16;
+                            break;
 
-                    case "R":
-                        lettersToShoot[i] = 17;
-                        break;
+                        case "R":
+                            lettersToShoot[i] = 17;
+                            break;
 
-                    case "S":
-                        lettersToShoot[i] = 18;
-                        break;
+                        case "S":
+                            lettersToShoot[i] = 18;
+                            break;
 
-                    case "T":
-                        lettersToShoot[i] = 19;
-                        break;
+                        case "T":
+                            lettersToShoot[i] = 19;
+                            break;
 
-                    case "U":
-                        lettersToShoot[i] = 20;
-                        break;
+                        case "U":
+                            lettersToShoot[i] = 20;
+                            break;
 
-                    case "V":
-                        lettersToShoot[i] = 21;
-                        break;
+                        case "V":
+                            lettersToShoot[i] = 21;
+                            break;
 
-                    case "W":
-                        lettersToShoot[i] = 22;
-                        break;
+                        case "W":
+                            lettersToShoot[i] = 22;
+                            break;
 
-                    case "X":
-                        lettersToShoot[i] = 23;
-                        break;
+                        case "X":
+                            lettersToShoot[i] = 23;
+                            break;
 
-                    case "Y":
-                        lettersToShoot[i] = 24;
-                        break;
+                        case "Y":
+                            lettersToShoot[i] = 24;
+                            break;
 
-                    case "Z":
-                        lettersToShoot[i] = 25;
-                        break;
+                        case "Z":
+                            lettersToShoot[i] = 25;
+                            break;
+                    }
                 }
-            }
 
-            StartCoroutine("ShootLetters", lettersToShoot);
+                StartCoroutine("ShootLetters", lettersToShoot);
+            }
         }
 
         mode = "shooting";

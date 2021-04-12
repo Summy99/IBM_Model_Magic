@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+
+<bulletml type="vertical" xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+  <action label="top">
+    <repeat>
+      <times>20</times>
+      <action>
+        <fire>
+          <direction type="sequence">9</direction>
+          <speed>0.8</speed>
+          <bulletRef label="default" />
+        </fire>
+      </action>
+    </repeat>
+    <wait>45</wait>
+    <repeat>
+      <times>18</times>
+      <action>
+        <fire>
+          <direction type="sequence">9</direction>
+          <speed>0.8</speed>
+          <bulletRef label="spiral" />
+        </fire>
+      </action>
+    </repeat>
+    <wait>45</wait>
+    <repeat>
+      <times>20</times>
+      <action>
+        <fire>
+          <direction type="sequence">9</direction>
+          <speed>0.8</speed>
+          <bulletRef label="default" />
+        </fire>
+      </action>
+    </repeat>
+    <wait>45</wait>
+    <repeat>
+      <times>18</times>
+      <action>
+        <fire>
+          <direction type="sequence">9</direction>
+          <speed>0.8</speed>
+          <bulletRef label="spiral" />
+        </fire>
+      </action>
+    </repeat>
+  </action>
+
+  <bullet label="default">
+    <direction type ="absolute">270</direction>
+  </bullet>
+
+  <bullet label="spiral">
+    <direction type="absolute">279</direction>
+  </bullet>
+</bulletml>
