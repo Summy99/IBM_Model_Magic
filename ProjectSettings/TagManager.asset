@@ -15,6 +15,7 @@ TagManager:
   - HomingShot
   - laser
   - FinalBoss
+  - InvulnEnemy
   layers:
   - Default
   - TransparentFX

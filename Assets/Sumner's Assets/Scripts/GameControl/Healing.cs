@@ -29,23 +29,23 @@ public class Healing : MonoBehaviour
                 break;
 
             case 5:
-                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(366, 260);
+                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(374.6f, 259.5f);
                 break;
 
             case 4:
-                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(323, 260);
+                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(332.1f, 259.5f);
                 break;
 
             case 3:
-                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(280, 260);
+                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(289.6f, 259.5f);
                 break;
 
             case 2:
-                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(237, 260);
+                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(247.1f, 259.5f);
                 break;
 
             case 1:
-                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(194, 260);
+                gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(204.6f, 259.5f);
                 break;
         }
     }
