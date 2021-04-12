@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MenuScript : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private Slider master, SFX, music;
     [SerializeField] private GameObject settings, main;
     [SerializeField] private AudioSource musicSrc;
+    [SerializeField] private TMP_Dropdown resolutionDrop;
+
+    private void Awake()
+    {
+        resolutionDrop.value = 3;
+    }
 
     void Update()
     {
@@ -79,6 +86,52 @@ public class MenuScript : MonoBehaviour
         else
         {
             Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+        }
+    }
+
+    public void UpdateResolution()
+    {
+        switch (resolutionDrop.value)
+        {
+            case 0:
+                Screen.SetResolution(640, 480, Screen.fullScreenMode);
+                break;
+
+            case 1:
+                Screen.SetResolution(800, 600, Screen.fullScreenMode);
+                break;
+
+            case 2:
+                Screen.SetResolution(960, 720, Screen.fullScreenMode);
+                break;
+
+            case 3:
+                Screen.SetResolution(1024, 768, Screen.fullScreenMode);
+                break;
+
+            case 4:
+                Screen.SetResolution(1280, 960, Screen.fullScreenMode);
+                break;
+
+            case 5:
+                Screen.SetResolution(1400, 1050, Screen.fullScreenMode);
+                break;
+
+            case 6:
+                Screen.SetResolution(1600, 1200, Screen.fullScreenMode);
+                break;
+
+            case 7:
+                Screen.SetResolution(1856, 1392, Screen.fullScreenMode);
+                break;
+
+            case 8:
+                Screen.SetResolution(1920, 1440, Screen.fullScreenMode);
+                break;
+
+            case 9:
+                Screen.SetResolution(2048, 1536, Screen.fullScreenMode);
+                break;
         }
     }
 }

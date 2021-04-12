@@ -473,7 +473,7 @@ public class GlassesBoss : MonoBehaviour
         headVulnearble = true;
         GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().finalBossAttacking = true;
         headAnim.PlayAnimation("headVuln");
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(15);
         StopCoroutine("DamageHead");
         headVulnearble = false;
         print("yo");

@@ -104,7 +104,7 @@ public class FirstBoss : MonoBehaviour
             laserDamageCool -= Time.deltaTime;
         }
 
-        healthBar.fillAmount = health / 600;
+        healthBar.fillAmount = health / 450;
 
         if(!activated && !positioned && gameObject.transform.position.y > 37)
         {
@@ -148,14 +148,14 @@ public class FirstBoss : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!activated && positioned && health < 600)
+        if (!activated && positioned && health < 450)
         {
             health += 5;
         }
 
-        if(!activated && positioned && health >= 600)
+        if(!activated && positioned && health >= 450)
         {
-            health = 600;
+            health = 450;
             activated = true;
         }
     }

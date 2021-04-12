@@ -106,9 +106,10 @@ public class Typing : MonoBehaviour
 
         ShootingInput();
 
-        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && mode == "shooting" && !gameObject.GetComponent<PlayerHealth>().shield && !gc.paused)
+        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && mode == "shooting" && !gameObject.GetComponent<PlayerHealth>().shield && !gc.paused && slowDown >= 0.75f)
         {
             sfx.PlayOneShot(enterSlow);
+            slowDown -= 0.1f;
             mode = "typing";
         }
 

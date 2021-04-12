@@ -11936,7 +11936,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 814fb8e5d2ab5b344b3d10c2157231cd, type: 3}
     - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: slowRecoveryRate
-      value: 0.35
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: yukkuriFlan

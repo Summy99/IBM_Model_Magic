@@ -96,6 +96,7 @@ public class PlayerHealth : MonoBehaviour
         bml.xmlFile = gameObject.GetComponent<Typing>().patterns[0];
         gameObject.GetComponent<Typing>().StopCoroutine("HomingShot");
         gameObject.GetComponent<Typing>().StopCoroutine("Laser");
+        gameObject.transform.Find("laser").gameObject.SetActive(false);
 
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 

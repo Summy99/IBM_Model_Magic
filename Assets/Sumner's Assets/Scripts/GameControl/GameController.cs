@@ -525,11 +525,11 @@ public class GameController : MonoBehaviour
     {
         if (Screen.fullScreen)
         {
-            Screen.fullScreenMode = FullScreenMode.Windowed;
+            Screen.SetResolution(1024, 768, FullScreenMode.Windowed);
         }
         else
         {
-            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+            Screen.SetResolution(1920, 1440, FullScreenMode.FullScreenWindow);
         }
     }
 

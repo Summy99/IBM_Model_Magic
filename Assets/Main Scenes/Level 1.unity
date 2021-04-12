@@ -12683,6 +12683,10 @@ PrefabInstance:
       propertyPath: confetti
       value: 
       objectReference: {fileID: 1024333658}
+    - target: {fileID: 2173959675554073044, guid: 95875ed250946544bb5769cbf2194101, type: 3}
+      propertyPath: slowRecoveryRate
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4632542713897860138, guid: 95875ed250946544bb5769cbf2194101, type: 3}
       propertyPath: m_Name
       value: Player
