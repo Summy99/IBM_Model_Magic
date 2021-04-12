@@ -557,7 +557,7 @@ public class EnemyController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.CompareTag("HomingShot"))
+        if (collision.gameObject.CompareTag("HomingShot") && type != 8 && type != 7)
         {
             TakeDamage(collision.gameObject.GetComponent<HomingShotController>().damage);
             Destroy(collision.gameObject);
