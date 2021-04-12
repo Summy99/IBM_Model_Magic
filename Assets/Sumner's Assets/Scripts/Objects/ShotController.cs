@@ -19,7 +19,7 @@ public class ShotController : MonoBehaviour
 
         if (player.GetComponent<BulletSourceScript>().xmlFile.name == "Spread")
         {
-            damage = 0.65f;
+            damage = 0.85f;
         }
 
         gameObject.GetComponent<SpriteRenderer>().sprite = player.GetComponent<Typing>().letterSprites[Mathf.FloorToInt(Random.Range(0, player.GetComponent<Typing>().letterSprites.Length))];
