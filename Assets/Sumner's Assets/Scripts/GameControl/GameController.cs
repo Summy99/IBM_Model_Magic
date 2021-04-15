@@ -502,6 +502,7 @@ public class GameController : MonoBehaviour
 
     public void Quit()
     {
+        Time.timeScale = 1;
         Level = 1;
         lives = 6;
         keycaps = 0;
@@ -525,11 +526,11 @@ public class GameController : MonoBehaviour
     {
         if (Screen.fullScreen)
         {
-            Screen.SetResolution(1024, 768, FullScreenMode.Windowed);
+            Screen.fullScreenMode = FullScreenMode.Windowed;
         }
         else
         {
-            Screen.SetResolution(1920, 1440, FullScreenMode.FullScreenWindow);
+            Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
         }
     }
 

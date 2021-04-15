@@ -75,6 +75,8 @@ public class PlayerHealth : MonoBehaviour
     {
         GameController.lives--;
 
+        Time.timeScale = 1;
+
         int lp = gameObject.GetComponent<Typing>().letterProgress;
 
         for (int i = 0; i < lp; i++)

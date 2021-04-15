@@ -26,6 +26,8 @@ public class LevelTracker : MonoBehaviour
             loadMessage.text = "";
             StartCoroutine("LoadAnim");
         }
+
+        print(animRunning);
     }
 
     private IEnumerator LoadAnim()

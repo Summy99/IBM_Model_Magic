@@ -23,12 +23,12 @@ public class BackgroundScroll : MonoBehaviour
 
         if (background1.transform.position.y <= -140)
         {
-            background1.transform.position = new Vector2(background1.transform.position.x, 224f);
+            background1.transform.position = new Vector2(background1.transform.position.x, background2.transform.position.y + 182.5908f);
         }
 
         if (background2.transform.position.y <= -140)
         {
-            background2.transform.position = new Vector2(background2.transform.position.x, 224f);
+            background2.transform.position = new Vector2(background2.transform.position.x, background1.transform.position.y + 182.5908f);
         }
 
         background1.transform.position = new Vector2(background1.transform.position.x, background1.transform.position.y - scrollSpeed * Time.timeScale);

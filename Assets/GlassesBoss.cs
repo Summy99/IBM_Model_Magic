@@ -755,12 +755,12 @@ public class GlassesBoss : MonoBehaviour
 
         if (!curtain)
         {
-            attack = Mathf.FloorToInt(Random.Range(0, 4));
+            attack = Mathf.FloorToInt(Random.Range(1, 4));
 
         }
         else
         {
-            attack = Mathf.FloorToInt(Random.Range(0, 3));
+            attack = Mathf.FloorToInt(Random.Range(1, 3));
         }
 
         switch (attack)
