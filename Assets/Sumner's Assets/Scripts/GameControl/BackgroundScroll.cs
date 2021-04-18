@@ -11,7 +11,7 @@ public class BackgroundScroll : MonoBehaviour
 
     void Start()
     {
-        
+        StartCoroutine(Scroll());
     }
 
     private void Update()
@@ -30,13 +30,16 @@ public class BackgroundScroll : MonoBehaviour
         {
             background2.transform.position = new Vector2(background2.transform.position.x, background1.transform.position.y + 182.5908f);
         }
-
-        background1.transform.position = new Vector2(background1.transform.position.x, background1.transform.position.y - scrollSpeed * Time.timeScale);
-        background2.transform.position = new Vector2(background2.transform.position.x, background2.transform.position.y - scrollSpeed * Time.timeScale);
     }
 
-    void FixedUpdate()
+    private IEnumerator Scroll()
     {
+        while (true)
+        {
+            background1.transform.position = new Vector2(background1.transform.position.x, background1.transform.position.y - scrollSpeed * Time.timeScale);
+            background2.transform.position = new Vector2(background2.transform.position.x, background2.transform.position.y - scrollSpeed * Time.timeScale);
 
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 }
