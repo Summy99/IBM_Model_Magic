@@ -202,7 +202,7 @@ MonoBehaviour:
   keycapCollectible: {fileID: 6826599825272669511, guid: 8d0cbadd924bf1f4aa572378f3922316, type: 3}
   healthCollectible: {fileID: 3484071113238819380, guid: f3c7fbbd7376b634daf8b39dca3ba645, type: 3}
   yParticles: {fileID: 7544636697587430006, guid: 4ba79a8178bf18941b3add510cf4979c, type: 3}
-  health: 5
+  health: 3
   shooting: 0
   pattern: 0
   lifetime: 0
