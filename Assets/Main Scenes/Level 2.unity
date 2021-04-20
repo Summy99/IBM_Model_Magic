@@ -1313,7 +1313,7 @@ MonoBehaviour:
   boss2Prefab: {fileID: 5141313433267601122, guid: 21d82418dccc5504f882de54cd68f91c, type: 3}
   finalBossPrefab: {fileID: 0}
   spawnerHolder: {fileID: 58844657}
-  bosstheme: {fileID: 8300000, guid: 960f5c67128715049b2565647e4680f8, type: 3}
+  bosstheme: {fileID: 8300000, guid: ab56c0f0582bd2c4a9ebe219511c936d, type: 3}
   finalBossTheme: {fileID: 8300000, guid: f2fca0e23b331834684b22b2438baf50, type: 3}
   shoptheme: {fileID: 8300000, guid: 58e4e734d4bafe146b547893ab7ec354, type: 3}
   wave: 0
@@ -10909,7 +10909,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 83c587b02b106ca45a926db7ebef9fcb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b73a0a1daf28b474c9c999ae28a8e393, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1

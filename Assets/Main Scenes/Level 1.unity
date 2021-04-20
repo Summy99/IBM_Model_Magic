@@ -1869,7 +1869,7 @@ MonoBehaviour:
   skipButton: {fileID: 242519795}
   arrow: {fileID: 2124688110}
   arrow2: {fileID: 853221358}
-  mainTheme: {fileID: 8300000, guid: 4865ae256f024de49ab13609fe5a4009, type: 3}
+  mainTheme: {fileID: 8300000, guid: 7004e0fb344b95848a774d07db736cd1, type: 3}
   death: {fileID: 8300000, guid: 3d4d4c77ca5bf32428e8d5ac8ae4fdc3, type: 3}
   master: {fileID: 72218215}
   music: {fileID: 2116571681}
@@ -1934,7 +1934,7 @@ MonoBehaviour:
   boss2Prefab: {fileID: 0}
   finalBossPrefab: {fileID: 0}
   spawnerHolder: {fileID: 58844657}
-  bosstheme: {fileID: 8300000, guid: 00a1e12a4f8fee348af52d5e39f02cfc, type: 3}
+  bosstheme: {fileID: 8300000, guid: 2ecc781e1e519c844a134da6bc5ad4fa, type: 3}
   finalBossTheme: {fileID: 0}
   shoptheme: {fileID: 8300000, guid: 58e4e734d4bafe146b547893ab7ec354, type: 3}
   wave: 0
