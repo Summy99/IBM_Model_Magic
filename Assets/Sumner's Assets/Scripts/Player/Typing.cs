@@ -14,6 +14,7 @@ public class Typing : MonoBehaviour
     private GameController gc;
     private AudioSource sfx;
     private UI ui;
+    private AnimationManager anim;
 
     [SerializeField]
     private AudioClip shot, wordSuccess, wordFail, enterSlow, bomb, bigBomb, wordUnlocked, laser, wordOnCD, wordReady;
@@ -30,8 +31,11 @@ public class Typing : MonoBehaviour
     [SerializeField]
     private GameObject mema;
 
+    public Animation[] animations;
+    public string[] names;
+
     [SerializeField]
-    public Sprite[] letterSprites;
+    public Sprite[] letterSprites, idleFrames, deathFrames, typingFrames;
 
     [SerializeField]
     public Sprite yukkuriReimu, yukkuriFlan;
@@ -56,6 +60,34 @@ public class Typing : MonoBehaviour
         ui = GameObject.FindWithTag("GameController").GetComponent<UI>();
         bml = gameObject.GetComponent<BulletSourceScript>();
         sfx = gameObject.GetComponent<AudioSource>();
+        anim = gameObject.GetComponent<AnimationManager>();
+
+        animations = new Animation[]
+        {
+            new Animation
+            {
+                Frames = idleFrames,
+                Speed = 0.2f,
+                Looping = true
+            },
+            new Animation
+            {
+                Frames = deathFrames,
+                Speed = 0.2f,
+                Looping = false
+            },
+            new Animation
+            {
+                Frames = typingFrames,
+                Speed = 0.2f,
+                Looping = true
+            }
+        };
+        names = new string[] { "idle", "death", "typing" };
+
+        anim.PopulateDictionary(names, animations);
+
+        anim.PlayAnimation("idle");
     }
 
     void Update()
@@ -111,10 +143,12 @@ public class Typing : MonoBehaviour
             sfx.PlayOneShot(enterSlow);
             slowDown -= 0.1f;
             mode = "typing";
+            anim.PlayAnimationUnscaled("typing");
         }
 
         else if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)) && mode == "typing" && !gc.paused)
         {
+            anim.PlayAnimation("idle");
             ConfirmWord();
         }
 
@@ -766,11 +800,13 @@ public class Typing : MonoBehaviour
 
     private IEnumerator ShootLetters(int[] letters)
     {
+        anim.PlayAnimation("typing");
         foreach(int i in letters)
         {
             Shoot(i);
             yield return new WaitForSeconds(0.1f);
         }
+        anim.PlayAnimation("idle");
     }
 
     public string[] ToStringArray(string s)

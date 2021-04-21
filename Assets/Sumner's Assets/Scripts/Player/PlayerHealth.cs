@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     private GameController gc;
     private AudioSource sfx;
     private UI ui;
+    private AnimationManager anim;
+    private Typing typing;
     [SerializeField]
     private AudioClip death, healed;
 
@@ -27,6 +29,8 @@ public class PlayerHealth : MonoBehaviour
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         sfx = gameObject.GetComponent<AudioSource>();
         bml = gameObject.GetComponent<BulletSourceScript>();
+        anim = gameObject.GetComponent<AnimationManager>();
+        typing = gameObject.GetComponent<Typing>();
         ui = GameObject.FindGameObjectWithTag("GameController").GetComponent<UI>();
     }
 
@@ -74,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
     public void Die()
     {
         GameController.lives--;
-
+        anim.PlayAnimation("death");
         Time.timeScale = 1;
 
         int lp = gameObject.GetComponent<Typing>().letterProgress;
@@ -101,8 +105,10 @@ public class PlayerHealth : MonoBehaviour
         gameObject.transform.Find("laser").gameObject.SetActive(false);
 
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
+        gameObject.GetComponent<Rigidbody2D>().angularVelocity = Random.Range(-500, -300);
 
-        if(gameObject.GetComponent<Typing>().mode == "typing")
+        if (gameObject.GetComponent<Typing>().mode == "typing")
         {
             gameObject.GetComponent<Typing>().mode = "shooting";
         }
@@ -112,9 +118,6 @@ public class PlayerHealth : MonoBehaviour
             gc.GameOver();
         }
 
-        gameObject.transform.position = new Vector3(-20, -43, 0);
-
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<Typing>().enabled = false;
         gameObject.GetComponent<PlayerMovement>().enabled = false;
         gameObject.GetComponent<CircleCollider2D>().enabled = false;
@@ -125,7 +128,11 @@ public class PlayerHealth : MonoBehaviour
     public IEnumerator Respawn()
     {
         yield return new WaitForSeconds(1);
+        gameObject.transform.rotation = Quaternion.identity;
+        gameObject.GetComponent<Rigidbody2D>().freezeRotation = true;
+        gameObject.transform.position = new Vector3(-20, -43, 0);
         gameObject.GetComponent<PlayerMovement>().enabled = true;
+        anim.PlayAnimation("idle");
         for (int i = 0; i < 5; i++)
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
@@ -134,7 +141,6 @@ public class PlayerHealth : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<Typing>().enabled = true;
         gameObject.GetComponent<PlayerMovement>().enabled = true;
         gameObject.GetComponent<CircleCollider2D>().enabled = true;

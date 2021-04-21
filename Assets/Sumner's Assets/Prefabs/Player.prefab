@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 884545956710923145}
   - component: {fileID: 6129938679178597477}
   - component: {fileID: 275078878607382363}
+  - component: {fileID: 2753030918391797276}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -376,7 +377,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 1
@@ -417,6 +418,7 @@ MonoBehaviour:
   newWordMessage: {fileID: 0}
   confetti: {fileID: 0}
   mema: {fileID: 0}
+  names: []
   letterSprites:
   - {fileID: 21300000, guid: 627ea1799212a6c4080de7429d26b782, type: 3}
   - {fileID: 21300000, guid: efb67e5223663e24e95d0090b0f7fe44, type: 3}
@@ -444,10 +446,23 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5e8f2f097c8ff0c4f890ec60a0a13b46, type: 3}
   - {fileID: 21300000, guid: 9af429810ea084e4cbdff9c1f36efc06, type: 3}
   - {fileID: 21300000, guid: 2d6aabdf8de63c24fa40638f26cc8f45, type: 3}
+  idleFrames:
+  - {fileID: 21300000, guid: 397beb9b8b49eae40b2e8b0357d581af, type: 3}
+  - {fileID: 21300000, guid: 345d6a657c231f045b43fcb4f1683427, type: 3}
+  deathFrames:
+  - {fileID: 21300000, guid: 3b287d364407ffb4da0d7e35638de7ed, type: 3}
+  - {fileID: 21300000, guid: 872b2cfcce05efb459bdf4fe0e0ed7e4, type: 3}
+  - {fileID: 21300000, guid: 2ad105d6bdac2c94c83a30521dbd6a6c, type: 3}
+  - {fileID: 21300000, guid: bf336883ec806ac48bd5a7f0296309cc, type: 3}
+  - {fileID: 21300000, guid: 18f7c202bdfbe0841b97d1c021e5b1fe, type: 3}
+  typingFrames:
+  - {fileID: 21300000, guid: 5b873ac278ba71e4cafece15091b1091, type: 3}
+  - {fileID: 21300000, guid: 25c0b94d611c0714b85d8017f1b3469e, type: 3}
   yukkuriReimu: {fileID: 21300000, guid: aea32cd31ac07d143884790dc838dced, type: 3}
   yukkuriFlan: {fileID: 21300000, guid: 830143b7242e2464db862635ffb7bbf0, type: 3}
   shootCooldown: 0.1
   slowRecoveryRate: 0.35
+  finalBossAttacking: 0
   mode: shooting
   letterProgress: 0
   slowDown: 1
@@ -595,9 +610,23 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.30928087, y: -1.0258644}
+  m_Offset: {x: 0.30928087, y: -0.9987943}
   serializedVersion: 2
-  m_Radius: 0.80919504
+  m_Radius: 0.5655494
+--- !u!114 &2753030918391797276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4632542713897860138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75858c33d00a2d543b1a9fa8bae2c1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAnimating: 0
+  spriteR: {fileID: 2439646645743251535}
 --- !u!1 &8505276554475281090
 GameObject:
   m_ObjectHideFlags: 0

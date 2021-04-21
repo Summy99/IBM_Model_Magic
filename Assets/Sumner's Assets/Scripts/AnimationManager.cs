@@ -31,10 +31,23 @@ public class AnimationManager : MonoBehaviour
         if (isAnimating)
         {
             StopCoroutine("AnimationInternal");
+            StopCoroutine("AnimationInternalUnscaled");
             isAnimating = false;
         }
 
         StartCoroutine("AnimationInternal", animations[name]);
+    }
+
+    public void PlayAnimationUnscaled(string name)
+    {
+        if (isAnimating)
+        {
+            StopCoroutine("AnimationInternal");
+            StopCoroutine("AnimationInternalUnscaled");
+            isAnimating = false;
+        }
+
+        StartCoroutine("AnimationInternalUnscaled", animations[name]);
     }
 
     public IEnumerator AnimationInternal(Animation anim)
@@ -53,6 +66,27 @@ public class AnimationManager : MonoBehaviour
             {
                 spriteR.sprite = anim.Frames[i];
                 yield return new WaitForSeconds(anim.Speed);
+            }
+        }
+        isAnimating = false;
+    }
+
+    public IEnumerator AnimationInternalUnscaled(Animation anim)
+    {
+        isAnimating = true;
+        curAnim = anim;
+        for (int i = 0; i < anim.Frames.Length; i++)
+        {
+            spriteR.sprite = anim.Frames[i];
+            yield return new WaitForSecondsRealtime(anim.Speed);
+        }
+
+        while (anim.Looping)
+        {
+            for (int i = 0; i < anim.Frames.Length; i++)
+            {
+                spriteR.sprite = anim.Frames[i];
+                yield return new WaitForSecondsRealtime(anim.Speed);
             }
         }
         isAnimating = false;
