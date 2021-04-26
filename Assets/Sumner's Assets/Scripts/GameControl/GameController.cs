@@ -257,6 +257,7 @@ public class GameController : MonoBehaviour
         {
             player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
             RemoveWords();
+            ClearCooldowns();
 
             message.text = "Level 2";
             StartCoroutine("BlankMessage");
@@ -266,6 +267,7 @@ public class GameController : MonoBehaviour
         {
             player.GetComponent<Typing>().slowDown = Typing.maxSlowDown;
             RemoveWords();
+            ClearCooldowns();
 
             message.text = "Level 3";
             StartCoroutine("BlankMessage");
@@ -483,6 +485,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void ClearCooldowns()
+    {
+        foreach(Word w in Words)
+        {
+            w.CurCool = 0;
+        }
+    }
+
     public void Resume()
     {
         paused = false;
@@ -507,6 +517,7 @@ public class GameController : MonoBehaviour
         lives = 6;
         keycaps = 0;
         RemoveWords();
+        ClearCooldowns();
         UI.started = false;
         LevelTracker.LevelToLoad = 0;
         SceneManager.LoadScene(4);
