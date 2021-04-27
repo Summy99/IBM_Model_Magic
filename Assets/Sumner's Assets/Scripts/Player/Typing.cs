@@ -49,6 +49,7 @@ public class Typing : MonoBehaviour
     public string mode = "shooting";
     public int letterProgress = 0;
     public float slowDown = 5;
+    public float slowdDownRecoveryCool = 0;
     public static float maxSlowDown = 2.25f;
     public string word = "";
     public string wordToBeUnlocked = "";
@@ -131,14 +132,14 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if(slowDown < maxSlowDown && mode == "shooting" && !gc.paused && !gc.dead)
+        if(slowDown < maxSlowDown && mode == "shooting" && !gc.paused && !gc.dead && slowdDownRecoveryCool <= 0)
         {
             slowDown += Time.deltaTime * slowRecoveryRate * maxSlowDown;
         }
 
         ShootingInput();
 
-        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && mode == "shooting" && !gameObject.GetComponent<PlayerHealth>().shield && !gc.paused && slowDown >= 0.75f)
+        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && slowdDownRecoveryCool <= 0 && mode == "shooting" && !gameObject.GetComponent<PlayerHealth>().shield && !gc.paused && slowDown >= 0.75f)
         {
             sfx.PlayOneShot(enterSlow);
             slowDown -= 0.1f;
@@ -170,6 +171,11 @@ public class Typing : MonoBehaviour
         if(curShootCooldown > 0 && !gc.paused && !gc.dead)
         {
             curShootCooldown -= Time.deltaTime;
+        }
+
+        if(slowdDownRecoveryCool > 0)
+        {
+            slowdDownRecoveryCool -= Time.deltaTime;
         }
     }
 
@@ -720,6 +726,7 @@ public class Typing : MonoBehaviour
         }
 
         mode = "shooting";
+        slowdDownRecoveryCool = 0.5f;
         word = "";
     }
 

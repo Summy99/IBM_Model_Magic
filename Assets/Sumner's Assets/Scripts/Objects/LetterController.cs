@@ -6,7 +6,7 @@ public class LetterController : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    public int damage = 3;
+    public int damage = 1;
 
     void Start()
     {

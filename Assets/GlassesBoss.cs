@@ -14,7 +14,7 @@ public class GlassesBoss : MonoBehaviour
     private AnimationManager headAnim, rHandAnim, lHandAnim;
     private BulletSourceScript headSource, rHandSource, lHandSource;
     private AudioSource sfx;
-    private Image healthBarR, healthBarL, healthBarMain;
+    private Image healthBarR, healthBarL, healthBarMain, vulnWindow;
     private TextMeshProUGUI attackWordUI;
 
     private CircleCollider2D playerCol;
@@ -88,6 +88,7 @@ public class GlassesBoss : MonoBehaviour
         attackWordUI = head.transform.Find("Canvas").Find("word").GetComponent<TextMeshProUGUI>();
 
         healthBarMain = head.transform.Find("Canvas").Find("hp").GetComponent<Image>();
+        vulnWindow = head.transform.Find("Canvas").Find("Vuln Window").GetComponent<Image>();
         healthBarR = rHand.transform.Find("Canvas").Find("HealthBar").GetComponent<Image>();
         healthBarL = lHand.transform.Find("Canvas").Find("HealthBar").GetComponent<Image>();
 
@@ -194,8 +195,8 @@ public class GlassesBoss : MonoBehaviour
 
         attackWordUI.text = attackWord;
 
-        healthBarR.fillAmount = rHandHP / 125;
-        healthBarL.fillAmount = lHandHP / 125;
+        healthBarR.fillAmount = rHandHP / 150;
+        healthBarL.fillAmount = lHandHP / 150;
         healthBarMain.sprite = mainHealthBarSprites[headHP];
 
         if (transform.position.y < 27.5 && !entered)
@@ -471,9 +472,19 @@ public class GlassesBoss : MonoBehaviour
     {
         activated = false;
         headVulnearble = true;
+        vulnWindow.fillAmount = 1;
         GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().finalBossAttacking = true;
         headAnim.PlayAnimation("headVuln");
-        yield return new WaitForSeconds(15);
+        
+        float wait = 15;
+        
+        while(wait > 0)
+        {
+            vulnWindow.fillAmount = wait / 15;
+            wait -= Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
         StopCoroutine("DamageHead");
         headVulnearble = false;
         print("yo");
@@ -605,15 +616,15 @@ public class GlassesBoss : MonoBehaviour
         StartCoroutine(RotateHand(lHand, -360, 1f));
         yield return new WaitForSeconds(1);
         headAnim.PlayAnimation("idle");
-        while(rHandHP < 125)
+        while(rHandHP < 150)
         {
             rHandHP += 2;
             lHandHP += 2;
             yield return new WaitForSeconds(0.02f);
         }
 
-        rHandHP = 125;
-        lHandHP = 125;
+        rHandHP = 150;
+        lHandHP = 150;
         activated = true;
 
         StartCoroutine(SwitchAttacks("r"));
