@@ -35,7 +35,7 @@ public class Typing : MonoBehaviour
     public string[] names;
 
     [SerializeField]
-    public Sprite[] letterSprites, idleFrames, deathFrames, typingFrames;
+    public Sprite[] letterSprites, idleFrames, deathFrames, typingFrames, upFrames, downFrames, leftFrames, rightFrames;
 
     [SerializeField]
     public Sprite yukkuriReimu, yukkuriFlan;
@@ -82,9 +82,33 @@ public class Typing : MonoBehaviour
                 Frames = typingFrames,
                 Speed = 0.2f,
                 Looping = true
+            },
+            new Animation
+            {
+                Frames = upFrames,
+                Speed = 0.2f,
+                Looping = true
+            },
+            new Animation
+            {
+                Frames = downFrames,
+                Speed = 0.2f,
+                Looping = true
+            },
+            new Animation
+            {
+                Frames = leftFrames,
+                Speed = 0.2f,
+                Looping = true
+            },
+            new Animation
+            {
+                Frames = rightFrames,
+                Speed = 0.2f,
+                Looping = false
             }
         };
-        names = new string[] { "idle", "death", "typing" };
+        names = new string[] { "idle", "death", "typing", "up", "down", "left", "right" };
 
         anim.PopulateDictionary(names, animations);
 

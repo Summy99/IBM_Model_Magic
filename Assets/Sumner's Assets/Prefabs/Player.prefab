@@ -447,8 +447,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9af429810ea084e4cbdff9c1f36efc06, type: 3}
   - {fileID: 21300000, guid: 2d6aabdf8de63c24fa40638f26cc8f45, type: 3}
   idleFrames:
-  - {fileID: 21300000, guid: 397beb9b8b49eae40b2e8b0357d581af, type: 3}
-  - {fileID: 21300000, guid: 345d6a657c231f045b43fcb4f1683427, type: 3}
+  - {fileID: 21300000, guid: 3b287d364407ffb4da0d7e35638de7ed, type: 3}
   deathFrames:
   - {fileID: 21300000, guid: 3b287d364407ffb4da0d7e35638de7ed, type: 3}
   - {fileID: 21300000, guid: 872b2cfcce05efb459bdf4fe0e0ed7e4, type: 3}
@@ -458,6 +457,14 @@ MonoBehaviour:
   typingFrames:
   - {fileID: 21300000, guid: 5b873ac278ba71e4cafece15091b1091, type: 3}
   - {fileID: 21300000, guid: 25c0b94d611c0714b85d8017f1b3469e, type: 3}
+  upFrames:
+  - {fileID: 21300000, guid: 21113840836637d4ab93f20736c04d18, type: 3}
+  downFrames:
+  - {fileID: 21300000, guid: 9ee3c6f2d7c0c4f4696f8b1b1dfe4424, type: 3}
+  leftFrames:
+  - {fileID: 21300000, guid: 444b17676e64a1a4e9c07fdca4b5be46, type: 3}
+  rightFrames:
+  - {fileID: 21300000, guid: db1bae30d89857145996bb3a654a12a1, type: 3}
   yukkuriReimu: {fileID: 21300000, guid: aea32cd31ac07d143884790dc838dced, type: 3}
   yukkuriFlan: {fileID: 21300000, guid: 830143b7242e2464db862635ffb7bbf0, type: 3}
   shootCooldown: 0.1
@@ -466,6 +473,7 @@ MonoBehaviour:
   mode: shooting
   letterProgress: 0
   slowDown: 1
+  slowdDownRecoveryCool: 0
   word: 
   wordToBeUnlocked: 
   touhou: 0
