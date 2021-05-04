@@ -7,6 +7,7 @@ using TMPro;
 
 public class Typing : MonoBehaviour
 {
+    [Space(20)]
     [SerializeField]
     public TextAsset[] patterns;
 
@@ -750,7 +751,7 @@ public class Typing : MonoBehaviour
         }
 
         mode = "shooting";
-        slowdDownRecoveryCool = 0.5f;
+        slowdDownRecoveryCool = 0.1f;
         word = "";
     }
 

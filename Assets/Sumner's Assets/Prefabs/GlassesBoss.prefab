@@ -1438,8 +1438,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 475f9161d0a7b684d976c7b284eec808, type: 3}
   - {fileID: 4900000, guid: 6db575ed321b8f046b6e866ba088b729, type: 3}
   - {fileID: 4900000, guid: bd9d5f6548056ca4ba3eeab1c5e892b8, type: 3}
-  intro: {fileID: 8300000, guid: f4205f4f95027df45b95c1b9fcdfc6de, type: 3}
-  loop: {fileID: 8300000, guid: 48b9b10b8274a114687ab0ad26728f45, type: 3}
+  intro: {fileID: 8300000, guid: 4b1acc187b2d9224db1daf58cd9d4ac9, type: 3}
+  loop: {fileID: 8300000, guid: 83537fb97311cea409eedce3a51bc15f, type: 3}
   hit: {fileID: 8300000, guid: 62d5980ce094ea041ae12ae09d64bb01, type: 3}
   headHit: {fileID: 8300000, guid: 6f0b3ba028a18964d90a011e3b1b6b8c, type: 3}
   death: {fileID: 8300000, guid: 4bedfff2339839f47ac6138ec9260326, type: 3}
