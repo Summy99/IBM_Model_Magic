@@ -7,7 +7,6 @@ using TMPro;
 
 public class Typing : MonoBehaviour
 {
-    [Space(20)]
     [SerializeField]
     public TextAsset[] patterns;
 
@@ -50,7 +49,8 @@ public class Typing : MonoBehaviour
     public string mode = "shooting";
     public int letterProgress = 0;
     public float slowDown = 5;
-    public float slowdDownRecoveryCool = 0;
+    public float slowDownRecoveryCool = 0;
+    public float modeSwitchCool = 0;
     public static float maxSlowDown = 2.25f;
     public string word = "";
     public string wordToBeUnlocked = "";
@@ -157,14 +157,14 @@ public class Typing : MonoBehaviour
             }
         }
 
-        if(slowDown < maxSlowDown && mode == "shooting" && !gc.paused && !gc.dead && slowdDownRecoveryCool <= 0)
+        if(slowDown < maxSlowDown && mode == "shooting" && !gc.paused && !gc.dead && slowDownRecoveryCool <= 0)
         {
             slowDown += Time.deltaTime * slowRecoveryRate * maxSlowDown;
         }
 
         ShootingInput();
 
-        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && slowdDownRecoveryCool <= 0 && mode == "shooting" && !gameObject.GetComponent<PlayerHealth>().shield && !gc.paused && slowDown >= 0.75f)
+        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Tab)) && modeSwitchCool <= 0 && mode == "shooting" && !gc.paused && slowDown >= 0.75f)
         {
             sfx.PlayOneShot(enterSlow);
             slowDown -= 0.1f;
@@ -198,9 +198,14 @@ public class Typing : MonoBehaviour
             curShootCooldown -= Time.deltaTime;
         }
 
-        if(slowdDownRecoveryCool > 0)
+        if(slowDownRecoveryCool > 0)
         {
-            slowdDownRecoveryCool -= Time.deltaTime;
+            slowDownRecoveryCool -= Time.deltaTime;
+        }
+
+        if (modeSwitchCool > 0)
+        {
+            modeSwitchCool -= Time.deltaTime;
         }
     }
 
@@ -619,6 +624,7 @@ public class Typing : MonoBehaviour
                     }
                 }
 
+                StopCoroutine("ShootLetters");
                 StartCoroutine("ShootLetters", lettersToShoot);
             }
         }
@@ -746,12 +752,14 @@ public class Typing : MonoBehaviour
                     }
                 }
 
+                StopCoroutine("ShootLetters");
                 StartCoroutine("ShootLetters", lettersToShoot);
             }
         }
 
         mode = "shooting";
-        slowdDownRecoveryCool = 0.1f;
+        slowDownRecoveryCool = 0.5f;
+        modeSwitchCool = 0.2f;
         word = "";
     }
 
@@ -832,11 +840,15 @@ public class Typing : MonoBehaviour
 
     private IEnumerator ShootLetters(int[] letters)
     {
+        bml.xmlFile = patterns[0];
+        StopCoroutine("Laser");
+        StopCoroutine("HomingShot");
+        gameObject.transform.Find("laser").gameObject.SetActive(false);
         anim.PlayAnimation("typing");
         foreach(int i in letters)
         {
             Shoot(i);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.15f);
         }
         anim.PlayAnimation("idle");
     }
@@ -926,13 +938,9 @@ public class Typing : MonoBehaviour
 
     private IEnumerator Shield()
     {
-        bml.xmlFile = patterns[0];
-        StopCoroutine("Laser");
-        StopCoroutine("HomingShot");
-        gameObject.transform.Find("laser").gameObject.SetActive(false);
         gameObject.transform.Find("Shield").gameObject.SetActive(true);
         gameObject.GetComponent<PlayerHealth>().shield = true;
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(5f);
         gameObject.transform.Find("Shield").gameObject.SetActive(false);
         yield return new WaitForSeconds(0.1f);
         gameObject.transform.Find("Shield").gameObject.SetActive(true);

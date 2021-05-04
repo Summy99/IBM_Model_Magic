@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
                     Name = "SHIELD",
                     Unlocked = false,
                     CurCool = 0f,
-                    MaxCool = 5f
+                    MaxCool = 20f
                    },
 
         new Word() {

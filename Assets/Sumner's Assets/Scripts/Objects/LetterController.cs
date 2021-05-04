@@ -12,7 +12,7 @@ public class LetterController : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
 
-        rb.velocity = Vector2.up * 50;
+        rb.velocity = Vector2.up * 75;
     }
 
     
