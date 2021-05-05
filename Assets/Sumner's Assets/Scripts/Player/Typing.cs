@@ -843,10 +843,6 @@ public class Typing : MonoBehaviour
 
     private IEnumerator ShootLetters(int[] letters)
     {
-        bml.xmlFile = patterns[0];
-        StopCoroutine("Laser");
-        StopCoroutine("HomingShot");
-        gameObject.transform.Find("laser").gameObject.SetActive(false);
         anim.PlayAnimation("typing");
         foreach(int i in letters)
         {

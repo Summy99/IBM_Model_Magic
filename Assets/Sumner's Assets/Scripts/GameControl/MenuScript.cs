@@ -24,6 +24,10 @@ public class MenuScript : MonoBehaviour
     void Update()
     {
         musicSrc.volume = 0.5f * MusicVolume * MasterVolume;
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            StartGame(3);
+        }
     }
 
     public void StartGame(int level)

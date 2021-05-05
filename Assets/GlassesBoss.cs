@@ -193,6 +193,11 @@ public class GlassesBoss : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Home))
+        {
+            headHP--;
+        }
+
         rHand.transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = rHand.GetComponent<SpriteRenderer>().sprite;
         lHand.transform.Find("Flash").GetComponent<SpriteRenderer>().sprite = lHand.GetComponent<SpriteRenderer>().sprite;
 
@@ -522,6 +527,7 @@ public class GlassesBoss : MonoBehaviour
 
     private void KillBoss()
     {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Typing>().finalBossAttacking = false;
         StopAllCoroutines();
         StartCoroutine(TheEnd());
     }
