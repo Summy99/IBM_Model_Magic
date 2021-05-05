@@ -379,6 +379,7 @@ public class GlassesBoss : MonoBehaviour
 
         if (hand == "r")
         {
+            rHand.tag = "hand";
             deadR = true;
 
             foreach (Coroutine c in coroutinesR)
@@ -422,6 +423,7 @@ public class GlassesBoss : MonoBehaviour
         }
         else
         {
+            rHand.tag = "hand";
             deadL = true;
 
             foreach (Coroutine c in coroutinesL)
@@ -632,6 +634,9 @@ public class GlassesBoss : MonoBehaviour
         rHandHP = 150;
         lHandHP = 150;
         activated = true;
+
+        rHand.tag = "Enemy";
+        lHand.tag = "Enemy";
 
         StartCoroutine(SwitchAttacks("r"));
         switchingR = true;

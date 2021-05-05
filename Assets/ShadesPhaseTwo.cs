@@ -11,9 +11,9 @@ public class ShadesPhaseTwo : MonoBehaviour
     private AnimationManager anim;
     private BulletSourceScript bml;
     private AudioSource sfx;
-    private Image healthBar;
     private CircleCollider2D playerCol;
 
+    [SerializeField] private Image healthBar;
     [SerializeField] private Sprite brokenClock;
     [SerializeField] private Sprite[] introFrames, idleFrames, deathFrames, spawnFrames, predeathFrames;
     [SerializeField] private TextAsset[] patterns;
@@ -49,7 +49,6 @@ public class ShadesPhaseTwo : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<AnimationManager>();
         bml = gameObject.GetComponent<BulletSourceScript>();
-        healthBar = transform.Find("Canvas").Find("HealthBar").GetComponent<Image>();
         sfx = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
 
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().clip = music;
@@ -115,8 +114,6 @@ public class ShadesPhaseTwo : MonoBehaviour
         }
 
         healthBar.fillAmount = health / 200;
-
-        print(rb.velocity.ToString());
     }
 
     private IEnumerator Initiate()

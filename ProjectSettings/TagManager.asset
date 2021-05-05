@@ -17,6 +17,8 @@ TagManager:
   - FinalBoss
   - InvulnEnemy
   - sBullet
+  - walls
+  - hand
   layers:
   - Default
   - TransparentFX

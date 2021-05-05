@@ -462,14 +462,17 @@ public class Typing : MonoBehaviour
                         break;
 
                     case "HOMING":
+                        StopCoroutine("HomingShot");
                         StartCoroutine("HomingShot");
                         break;
 
                     case "SEARCH":
+                        StopCoroutine("HomingShot");
                         StartCoroutine("HomingShot");
                         break;
 
                     case "TRACKING":
+                        StopCoroutine("HomingShot");
                         StartCoroutine("HomingShot");
                         break;
 
@@ -1070,6 +1073,7 @@ public class Typing : MonoBehaviour
                 break;
 
             case 8:
+                StopCoroutine("HomingShot");
                 StartCoroutine("HomingShot");
                 break;
 

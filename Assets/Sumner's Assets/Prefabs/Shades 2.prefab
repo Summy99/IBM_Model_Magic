@@ -250,6 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5e225af00e0914eb4f99036b27b773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 5047578823486304171}
   brokenClock: {fileID: 21300000, guid: 63fb8a755ef7bb44597e318b5c6c703c, type: 3}
   introFrames:
   - {fileID: 21300000, guid: acab70e4b66206f4ab060da966344991, type: 3}
@@ -371,7 +372,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
