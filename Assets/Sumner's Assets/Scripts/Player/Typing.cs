@@ -1018,7 +1018,7 @@ public class Typing : MonoBehaviour
 
             Destroy(h1, 2);
             Destroy(h2, 2);
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 

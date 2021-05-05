@@ -44,11 +44,6 @@ public class Waves : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Insert))
-        {
-            wave = 9;
-        }
-
         if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0 && GameObject.FindGameObjectsWithTag("InvulnEnemy").Length <= 0 && !waveIncrementing && !waveRunning && !gc.tutorial && !shop && !bossSpawned)
         {
             wave++;
@@ -1179,6 +1174,24 @@ public class Waves : MonoBehaviour
         }
         yield return new WaitForSeconds(1);
         waveRunning = false;
+    }
+
+    private IEnumerator Ice()
+    {
+        for (int i = 0; i <= 15; i++)
+        {
+            GameObject e1 = Instantiate(enemy8Prefab, topSpawns[3].transform.position, Quaternion.identity);
+            GameObject e2 = Instantiate(enemy8Prefab, bottomSpawns[6].transform.position, Quaternion.identity);
+            GameObject e3 = Instantiate(enemy8Prefab, rightSpawns[3].transform.position, Quaternion.identity);
+            GameObject e4 = Instantiate(enemy8Prefab, leftSpawns[6].transform.position, Quaternion.identity);
+
+            e1.GetComponent<EnemyController>().pattern = 1;
+            e2.GetComponent<EnemyController>().pattern = 26;
+            e3.GetComponent<EnemyController>().pattern = 7;
+            e4.GetComponent<EnemyController>().pattern = 6;
+
+            yield return new WaitForSeconds(0.75f);
+        }
     }
 
     private GameObject[] GetAllChildren(Transform parent)

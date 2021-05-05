@@ -39,7 +39,7 @@ public class HandCollisions : MonoBehaviour
 
             if (collision.gameObject.CompareTag("HomingShot") && transform.parent.parent.GetComponent<GlassesBoss>().activated && transform.parent.parent.GetComponent<GlassesBoss>().rHandHP > 0)
             {
-                transform.parent.parent.GetComponent<GlassesBoss>().TakeDamage(side, collision.GetComponent<HomingShotController>().damage);
+                transform.parent.parent.GetComponent<GlassesBoss>().TakeDamage(side, collision.GetComponent<HomingShotController>().damage + 0.25f);
                 Destroy(collision.gameObject);
             }
 
@@ -65,7 +65,7 @@ public class HandCollisions : MonoBehaviour
 
             if (collision.gameObject.CompareTag("HomingShot") && transform.parent.parent.GetComponent<GlassesBoss>().activated && transform.parent.parent.GetComponent<GlassesBoss>().lHandHP > 0)
             {
-                transform.parent.parent.GetComponent<GlassesBoss>().TakeDamage(side, collision.GetComponent<HomingShotController>().damage);
+                transform.parent.parent.GetComponent<GlassesBoss>().TakeDamage(side, collision.GetComponent<HomingShotController>().damage + 0.25f);
                 Destroy(collision.gameObject);
             }
 
@@ -76,14 +76,10 @@ public class HandCollisions : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.CompareTag("Player") && !collision.GetComponent<PlayerHealth>().shield && collision == playerCol)
+        if (collision.gameObject.CompareTag("Player") && !collision.GetComponent<PlayerHealth>().shield && collision == playerCol && collision.GetComponent<Typing>().modeSwitchCool <= 0)
         {
             collision.GetComponent<CircleCollider2D>().enabled = false;
             collision.GetComponent<PlayerHealth>().Die();
-        }
-        else if (collision.gameObject.CompareTag("Player") && collision.GetComponent<PlayerHealth>().shield && collision == playerCol)
-        {
-            Destroy(gameObject);
         }
     }
 

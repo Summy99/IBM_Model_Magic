@@ -14,6 +14,7 @@ public class FirstBoss : MonoBehaviour
     private BulletSourceScript bml;
     private AudioSource plyrsrc;
     private Image healthBar;
+    private CircleCollider2D playerCol;
 
     [SerializeField]
     private TextAsset[] patterns;
@@ -46,6 +47,7 @@ public class FirstBoss : MonoBehaviour
         bmll = gameObject.transform.Find("left").GetComponent<BulletSourceScript>();
         bmlr = gameObject.transform.Find("right").GetComponent<BulletSourceScript>();
         plyrsrc = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
+        playerCol = GameObject.FindWithTag("Player").GetComponent<CircleCollider2D>();
 
         animations = new Animation[]
         {
@@ -176,7 +178,7 @@ public class FirstBoss : MonoBehaviour
 
         if (collision.gameObject.CompareTag("HomingShot") && activated && health > 0)
         {
-            TakeDamage(collision.gameObject.GetComponent<HomingShotController>().damage);
+            TakeDamage(collision.gameObject.GetComponent<HomingShotController>().damage + 0.25f);
             Destroy(collision.gameObject);
         }
 
@@ -185,6 +187,12 @@ public class FirstBoss : MonoBehaviour
             float damageToDeal = collision.gameObject.GetComponent<BigShotController>().damage;
             collision.gameObject.GetComponent<BigShotController>().damage -= health;
             TakeDamage(damageToDeal);
+        }
+
+        if (collision.gameObject.CompareTag("Player") && !collision.GetComponent<PlayerHealth>().shield && collision == playerCol && collision.GetComponent<Typing>().modeSwitchCool <= 0)
+        {
+            collision.GetComponent<CircleCollider2D>().enabled = false;
+            collision.GetComponent<PlayerHealth>().Die();
         }
     }
 

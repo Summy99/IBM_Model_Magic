@@ -26,6 +26,9 @@ public class GlassesBoss : MonoBehaviour
     [SerializeField]
     private AudioClip intro, loop, hit, headHit, death;
 
+    [SerializeField]
+    private GameObject phaseTwo;
+
     public Animation[] animations;
     public string[] names;
     private List<Coroutine> coroutinesR = new List<Coroutine>();
@@ -47,7 +50,7 @@ public class GlassesBoss : MonoBehaviour
     public float rHandHP = 0, lHandHP = 0;
     private float handsRate = 0.01f;
     public string attackWord = "";
-    public readonly string[] attackWords = new string[] {"IDENTICAL", "CHOCOLATE", "BEAUTIFUL",  "HAPPINESS", "WEDNESDAY", "CHALLENGE", "CELEBRATE", "ADVENTURE",
+    public readonly string[] attackWords = new string[] {   "IDENTICAL", "CHOCOLATE", "BEAUTIFUL", "HAPPINESS", "WEDNESDAY", "CHALLENGE", "CELEBRATE", "ADVENTURE",
         "IMPORTANT", "CONSONANT", "DANGEROUS", "KNOWLEDGE", "POLLUTION", "PINEAPPLE", "ADJECTIVE", "UNDEFINED", "AFFECTION", "CONGRUENT", "ALLIGATOR", "AMBULANCE",
         "COMMUNITY", "DIFFERENT", "VEGETABLE", "INFLUENCE", "STRUCTURE", "INVISIBLE", "WONDERFUL", "PACKAGING", "PROVOKING", "NUTRITION", "CROCODILE", "EDUCATION",
         "ABOUNDING", "BEGINNING", "BOULEVARD", "WITHERING", "BREATHING", "SOPHOMORE", "SEPTEMBER", "WORTHLESS", "IMPERFECT", "BREAKFAST", "XYLOPHONE", "HAMBURGER",
@@ -60,7 +63,7 @@ public class GlassesBoss : MonoBehaviour
         "SCIENTIST", "ASTRONAUT", "ACCORDION", "BRILLIANT", "EMPTINESS", "FANTASTIC", "AWAKENING", "CLEVELAND", "TANGERINE", "LEGENDARY", "WATERFALL", "DEDICATED",
         "INJUSTICE", "ADMIRABLE", "JELLYFISH", "BALLISTIC", "BUTTERFLY", "FORGOTTEN", "SLEEPOVER", "TREASURER", "SANCTUARY", "SIGNATURE", "SHRIEKING", "FAIRYTALE",
         "MECHANISM", "SENSATION", "DESPERATE", "HOUSEWIFE", "PENINSULA", "HALITOSIS", "APHRODITE", "SAXOPHONE", "ADVERTISE", "YOUNGSTER", "CLOSENESS", "MARGARITA",
-        "DISCOVERY", "ABANDONED", "SUFFOCATE", "TINKERING", "CARABINER", "COUNTDOWN", "CHAMPLAIN", "DEMOCRACY", "REARRANGE", "ELEVATION", "ABORIGINE", "ANIMATION"};
+        "DISCOVERY", "ABANDONED", "SUFFOCATE", "TINKERING", "CARABINER", "COUNTDOWN", "CHAMPLAIN", "DEMOCRACY", "REARRANGE", "ELEVATION", "ABORIGINE", "ANIMATION" };
 
     private Transform rHandStart;
 
@@ -252,18 +255,12 @@ public class GlassesBoss : MonoBehaviour
                 switchingL = true;
                 coroutinesL.Add(StartCoroutine(SwitchAttacks("l")));
             }
-            //if(rHandSource.xmlFile == patterns[2])
         }
 
         if (attackWord == "" && headVulnearble)
         {
             PickAttackWord();
         }
-
-        //if (Input.GetKeyDown(KeyCode.PageDown))
-        //{
-            //StartCoroutine(DamageHead());
-        //}
     }
 
     private void FixedUpdate()
@@ -532,6 +529,16 @@ public class GlassesBoss : MonoBehaviour
         Destroy(rHand);
         Destroy(lHand);
         Destroy(healthBarMain);
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject b in bullets)
+        {
+            Destroy(b);
+        }
+        GameObject[] sbullets = GameObject.FindGameObjectsWithTag("sBullet");
+        foreach (GameObject b in sbullets)
+        {
+            Destroy(b);
+        }
         attackWordUI.text = "";
         headAnim.PlayAnimation("headDamage");
 
@@ -555,8 +562,7 @@ public class GlassesBoss : MonoBehaviour
             yield return new WaitForSeconds(0.02f);
         }
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(5);
-        Destroy(gameObject);
+        Instantiate(phaseTwo, transform.position, Quaternion.identity);
     }
 
     private IEnumerator DeathSounds()

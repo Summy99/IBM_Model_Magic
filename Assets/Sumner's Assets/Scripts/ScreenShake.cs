@@ -31,4 +31,16 @@ public class ScreenShake : MonoBehaviour
 
         rect.anchoredPosition = new Vector2(0, 0);
     }
+
+    private IEnumerator ShakeContinuous(float duration)
+    {
+        while (duration > 0)
+        {
+            duration -= Time.deltaTime;
+            rect.anchoredPosition = new Vector2(Random.Range(-25, 25), Random.Range(-25, 25));
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        rect.anchoredPosition = new Vector2(0, 0);
+    }
 }

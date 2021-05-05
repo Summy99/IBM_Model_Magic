@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class win : MonoBehaviour
 {
+    private void Start()
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().volume = 0.5f * MenuScript.MasterVolume * MenuScript.MusicVolume;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

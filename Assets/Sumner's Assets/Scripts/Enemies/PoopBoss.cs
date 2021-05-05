@@ -16,6 +16,7 @@ public class PoopBoss : MonoBehaviour
     [SerializeField] private GameObject poopWallPrefab;
     private BulletSourceScript bml;
     private AudioSource plyrsrc;
+    private CircleCollider2D playerCol;
 
     [SerializeField]
     private AudioClip hit, roar, death;
@@ -46,6 +47,7 @@ public class PoopBoss : MonoBehaviour
         healthBar = gameObject.transform.Find("Canvas").Find("HealthBar").GetComponent<Image>();
         plyrsrc = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
         spawnerHolder = GameObject.Find("SpawnPoints");
+        playerCol = GameObject.FindWithTag("Player").GetComponent<CircleCollider2D>();
 
         topSpawns = GetAllChildren(spawnerHolder.transform.Find("Top"));
 
@@ -185,7 +187,7 @@ public class PoopBoss : MonoBehaviour
 
         if (collision.gameObject.CompareTag("HomingShot") && activated && health > 0)
         {
-            TakeDamage(collision.gameObject.GetComponent<HomingShotController>().damage);
+            TakeDamage(collision.gameObject.GetComponent<HomingShotController>().damage + 0.25f);
             Destroy(collision.gameObject);
         }
 
@@ -194,6 +196,12 @@ public class PoopBoss : MonoBehaviour
             float damageToDeal = collision.gameObject.GetComponent<BigShotController>().damage;
             collision.gameObject.GetComponent<BigShotController>().damage -= health;
             TakeDamage(damageToDeal);
+        }
+
+        if (collision.gameObject.CompareTag("Player") && !collision.GetComponent<PlayerHealth>().shield && collision == playerCol && collision.GetComponent<Typing>().modeSwitchCool <= 0)
+        {
+            collision.GetComponent<CircleCollider2D>().enabled = false;
+            collision.GetComponent<PlayerHealth>().Die();
         }
     }
 
